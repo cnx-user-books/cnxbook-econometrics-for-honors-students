@@ -1,0 +1,2679 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML">
+  <title>Panel Data Models</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m34551</md:content-id>
+  <md:title>Panel Data Models</md:title>
+  <md:abstract>This module offers a short introduction to the techniques used to estimate panel data models; it is designed for use by advanced undergraduates.</md:abstract>
+  <md:uuid>4e17d659-8d12-4cfb-b938-4b5282ed72b2</md:uuid>
+</metadata>
+<featured-links>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit below.
+       Changes to the links section in the source will not be saved. -->
+    <link-group type="supplemental">
+      <link url="http://www.forces.org/evidence/oecd/6ban.htm" strength="3">Smoking ban data</link>
+    </link-group>
+    <link-group type="prerequisite">
+      <link url="http://cnx.org/content/m34535/latest/" strength="3">Statistical terminology</link>
+      <link url="http://cnx.org/content/m34539/latest/" strength="3">The maximum likelihood estimation method</link>
+    </link-group>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit above.
+       Changes to the links section in the source will not be saved. -->
+</featured-links>
+<content>
+    <section id="id1172342061034">
+      <title>Equation Chapter 1 Section 1Notes on Panel Data Models</title>
+      <section id="id1172363648054">
+        <title>Introduction</title>
+        <para id="id1172353422012">Panel data methods are appropriate when the researcher has available observations that are both cross-sectional and time series. For example, one could form a panel data set with observations on the per capita consumption of tobacco for a set of OECD countries over the period 1960 to 2005. Usually the data is “stacked”—that is, all of the observations for country A is listed together in order of year before the data for country B, etc. It is also possible to stack the data by year—countries A to Z for 1960, countries A to Z for 1961, and so on through 2005.</para>
+        <para id="id1172359627180">Let <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWGPbGaamiDaaqabaaaaa@3905@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ be the per capita consumption of tobacco for country <emphasis effect="italics">i</emphasis> in year <emphasis effect="italics">t</emphasis>. We wish to model the per capita consumption of tobacco as a function of a set of observable independent variables like the price of tobacco, income, restrictions on tobacco advertising, and restrictions on tobacco consumption. Of course there are several sources of unobserved heterogeneity in that data set. In particular, we might expect that systematic differences in consumption patterns would exist due to differences in the customs and mores of the various countries in the sample. It also would be reasonable to assume that these country-level differences are be relatively stable over time. Additionally, we might expect that there would be differences the per capita consumption of tobacco over time due to changes in our understanding of the long run health effects of tobacco consumption. These changes might affect both (1) the level of consumption and (2) the responsiveness of the consumption of tobacco to changes in the explanatory variables.</para>
+        <para id="id8221852">In these notes we describe some of the ways of modeling panel data sets and discuss some of the issues associated with the estimation of these models. We also discuss how to use <emphasis effect="italics">Stata</emphasis> to analyze panel data sets. We begin by considering some of the types of panel data model specifications.</para>
+      </section>
+      <section id="id1172342978320">
+        <title>Model specification</title>
+        <para id="id1172348672856">There are four general specifications of the panel data model available. The differences in these models reflect differing assumptions one might make and are listed below.</para>
+        <section id="id1172362436213">
+          <title>1. Slope coefficients are constant and the intercept varies over the individuals:</title>
+          <equation id="eip-223"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>α</m:mi>
+    <m:mi>i</m:mi>
+   </m:msub>
+   <m:mo>+</m:mo><m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>j</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+     <m:mi>k</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:msub>
+      <m:mi>β</m:mi>
+      <m:mi>j</m:mi>
+     </m:msub>
+     <m:msub>
+      <m:mi>x</m:mi>
+      <m:mrow>
+       <m:mi>j</m:mi><m:mi>i</m:mi><m:mi>t</m:mi>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   </m:mstyle><m:mo>+</m:mo><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>,</m:mo><m:mtext> </m:mtext><m:mi>i</m:mi><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>,</m:mo><m:mo>…</m:mo><m:mo>,</m:mo><m:mi>N</m:mi><m:mo>,</m:mo><m:mtext> </m:mtext><m:mi>i</m:mi><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>,</m:mo><m:mo>…</m:mo><m:mo>,</m:mo><m:mi>N</m:mi><m:mo>,</m:mo><m:mtext> and </m:mtext><m:mi>t</m:mi><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>,</m:mo><m:mo>…</m:mo><m:mo>,</m:mo><m:mi>T</m:mi><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWGPbGaamiDaaqabaGccqGH9aqpcqaHXoqydaWgaaWcbaGaamyAaaqabaGccqGHRaWkdaaeWbqaaiabek7aInaaBaaaleaacaWGQbaabeaakiaadIhadaWgaaWcbaGaamOAaiaadMgacaWG0baabeaaaeaacaWGQbGaeyypa0JaaGymaaqaaiaadUgaa0GaeyyeIuoakiabgUcaRiabew7aLnaaBaaaleaacaWGPbGaamiDaaqabaGccaGGSaGaaeiiaiaadMgacqGH9aqpcaaIXaGaaiilaiablAciljaacYcacaWGobGaaiilaiaabccacaWGPbGaeyypa0JaaGymaiaacYcacqWIMaYscaGGSaGaamOtaiaacYcacaqGGaGaaeyyaiaab6gacaqGKbGaaeiiaiaadshacqGH9aqpcaaIXaGaaiilaiablAciljaacYcacaWGubGaaiOlaaaa@692C@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation>
+        </section>
+        <section id="id1172344490717">
+          <title>2. Slope coefficients are constant and the intercept varies over the individuals and over time:</title>
+          <equation id="eip-73"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>α</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>j</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+     <m:mi>k</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:msub>
+      <m:mi>β</m:mi>
+      <m:mi>j</m:mi>
+     </m:msub>
+     <m:msub>
+      <m:mi>x</m:mi>
+      <m:mrow>
+       <m:mi>j</m:mi><m:mi>i</m:mi><m:mi>t</m:mi>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   </m:mstyle><m:mo>+</m:mo><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>,</m:mo><m:mtext> </m:mtext><m:mi>i</m:mi><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>,</m:mo><m:mo>…</m:mo><m:mo>,</m:mo><m:mi>N</m:mi><m:mo>,</m:mo><m:mtext> and </m:mtext><m:mi>t</m:mi><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>,</m:mo><m:mo>…</m:mo><m:mo>,</m:mo><m:mi>T</m:mi><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWGPbGaamiDaaqabaGccqGH9aqpcqaHXoqydaWgaaWcbaGaamyAaiaadshaaeqaaOGaey4kaSYaaabCaeaacqaHYoGydaWgaaWcbaGaamOAaaqabaGccaWG4bWaaSbaaSqaaiaadQgacaWGPbGaamiDaaqabaaabaGaamOAaiabg2da9iaaigdaaeaacaWGRbaaniabggHiLdGccqGHRaWkcqaH1oqzdaWgaaWcbaGaamyAaiaadshaaeqaaOGaaiilaiaabccacaWGPbGaeyypa0JaaGymaiaacYcacqWIMaYscaGGSaGaamOtaiaacYcacaqGGaGaaeyyaiaab6gacaqGKbGaaeiiaiaadshacqGH9aqpcaaIXaGaaiilaiablAciljaacYcacaWGubGaaiOlaaaa@62CE@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation>
+        </section>
+        <section id="id1172343414872">
+          <title>3. All coefficients vary over individuals:</title>
+          <equation id="eip-195"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>α</m:mi>
+    <m:mi>i</m:mi>
+   </m:msub>
+   <m:mo>+</m:mo><m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>j</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+     <m:mi>k</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:msub>
+      <m:mi>β</m:mi>
+      <m:mrow>
+       <m:mi>j</m:mi><m:mi>i</m:mi>
+      </m:mrow>
+     </m:msub>
+     <m:msub>
+      <m:mi>x</m:mi>
+      <m:mrow>
+       <m:mi>j</m:mi><m:mi>i</m:mi><m:mi>t</m:mi>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   </m:mstyle><m:mo>+</m:mo><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>,</m:mo><m:mtext> </m:mtext><m:mi>i</m:mi><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>,</m:mo><m:mo>…</m:mo><m:mo>,</m:mo><m:mi>N</m:mi><m:mo>,</m:mo><m:mtext> and </m:mtext><m:mi>t</m:mi><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>,</m:mo><m:mo>…</m:mo><m:mo>,</m:mo><m:mi>T</m:mi><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWGPbGaamiDaaqabaGccqGH9aqpcqaHXoqydaWgaaWcbaGaamyAaaqabaGccqGHRaWkdaaeWbqaaiabek7aInaaBaaaleaacaWGQbGaamyAaaqabaGccaWG4bWaaSbaaSqaaiaadQgacaWGPbGaamiDaaqabaaabaGaamOAaiabg2da9iaaigdaaeaacaWGRbaaniabggHiLdGccqGHRaWkcqaH1oqzdaWgaaWcbaGaamyAaiaadshaaeqaaOGaaiilaiaabccacaWGPbGaeyypa0JaaGymaiaacYcacqWIMaYscaGGSaGaamOtaiaacYcacaqGGaGaaeyyaiaab6gacaqGKbGaaeiiaiaadshacqGH9aqpcaaIXaGaaiilaiablAciljaacYcacaWGubGaaiOlaaaa@62C3@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation>
+        </section>
+        <section id="id1172361201830">
+          <title>4. All coefficients vary over time and individuals:</title>
+          <equation id="eip-532"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>α</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>j</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+     <m:mi>k</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:msub>
+      <m:mi>β</m:mi>
+      <m:mrow>
+       <m:mi>j</m:mi><m:mi>i</m:mi><m:mi>t</m:mi>
+      </m:mrow>
+     </m:msub>
+     <m:msub>
+      <m:mi>x</m:mi>
+      <m:mrow>
+       <m:mi>j</m:mi><m:mi>i</m:mi><m:mi>t</m:mi>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   </m:mstyle><m:mo>+</m:mo><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>,</m:mo><m:mtext> </m:mtext><m:mi>i</m:mi><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>,</m:mo><m:mo>…</m:mo><m:mo>,</m:mo><m:mi>N</m:mi><m:mo>,</m:mo><m:mtext> and </m:mtext><m:mi>t</m:mi><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>,</m:mo><m:mo>…</m:mo><m:mo>,</m:mo><m:mi>T</m:mi><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWGPbGaamiDaaqabaGccqGH9aqpcqaHXoqydaWgaaWcbaGaamyAaiaadshaaeqaaOGaey4kaSYaaabCaeaacqaHYoGydaWgaaWcbaGaamOAaiaadMgacaWG0baabeaakiaadIhadaWgaaWcbaGaamOAaiaadMgacaWG0baabeaaaeaacaWGQbGaeyypa0JaaGymaaqaaiaadUgaa0GaeyyeIuoakiabgUcaRiabew7aLnaaBaaaleaacaWGPbGaamiDaaqabaGccaGGSaGaaeiiaiaadMgacqGH9aqpcaaIXaGaaiilaiablAciljaacYcacaWGobGaaiilaiaabccacaqGHbGaaeOBaiaabsgacaqGGaGaamiDaiabg2da9iaaigdacaGGSaGaeSOjGSKaaiilaiaadsfacaGGUaaaaa@64B5@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation>
+          
+          
+        </section><para id="eip-883">These four models can be classified further, depending on whether the researcher assumes that the coefficients of the model are fixed or random. However, most research in economics is restricted to estimation of (1) and (2) because they strike a reasonable balance between being general enough without introducing unnecessary assumptions that can render estimation extremely difficult.</para>
+      </section>
+      <section id="id1172343584678">
+        <title>Estimation issues</title>
+        <para id="id1172370784560">Hsiao (2003: 27-30) discusses a convenient example of a panel data model that illustrates many of the important issues that arise with panel data. We make use of this example in what follows. Assume that we want to estimate a production function for farm production in order to determine if the farm industry exhibits increasing returns to scale. Assume the sample consists of observations for <emphasis effect="italics">N</emphasis> farms over <emphasis effect="italics">T</emphasis> years, giving a total sample size of <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>N</m:mi><m:mi>T</m:mi>
+        <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamOtaiaadsfaaaa@37A0@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --> 
+ For simplicity, we assume that the Cobb-Douglas production is an adequate description of the production process. The general form of the Cobb-Douglas production function is:</para>
+        
+        <equation id="eip-886"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>q</m:mi><m:mo>=</m:mo><m:msub>
+    <m:mi>α</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   <m:msubsup>
+    <m:mi>I</m:mi>
+    <m:mn>1</m:mn>
+    <m:mrow>
+     <m:msub>
+      <m:mi>β</m:mi>
+      <m:mn>1</m:mn>
+     </m:msub>
+     
+    </m:mrow>
+   </m:msubsup>
+   <m:mo>⋯</m:mo><m:msubsup>
+    <m:mi>I</m:mi>
+    <m:mi>k</m:mi>
+    <m:mrow>
+     <m:msub>
+      <m:mi>β</m:mi>
+      <m:mi>k</m:mi>
+     </m:msub>
+     
+    </m:mrow>
+   </m:msubsup>
+   <m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyCaiabg2da9iabeg7aHnaaBaaaleaacaaIWaaabeaakiaadMeadaqhaaWcbaGaaGymaaqaaiabek7aInaaBaaameaacaaIXaaabeaaaaGccqWIVlctcaWGjbWaa0baaSqaaiaadUgaaeaacqaHYoGydaWgaaadbaGaam4AaaqabaaaaOGaaiilaaaa@4618@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation><para id="id1172359182884">where <emphasis effect="italics">q</emphasis> is output and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>I</m:mi>
+    <m:mi>j</m:mi>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamysamaaBaaaleaacaWGQbaabeaaaaa@37DD@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ is the quantity of the j-th input (for example, land, machinery, labor, feed, and fertilizer). The parameter, <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>β</m:mi>
+    <m:mi>j</m:mi>
+   </m:msub>
+   <m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqOSdi2aaSbaaSqaaiaadQgaaeqaaOGaaiilaaaa@396A@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ is the output elasticity of the j-th input; the farms exhibit constant returns to scale if the output elasticities sum to one and either increasing or decreasing returns to scale if they sum to a value greater than or less than one, respectively.
+ is the quantity of the <emphasis effect="italics">j</emphasis>-th input (for example, land, machinery, labor, feed, and fertilizer). The parameter, is the output elasticity of the <emphasis effect="italics">j</emphasis>-th input; the farms exhibit constant returns to scale if the output elasticities sum to one and either increasing or decreasing returns to scale if they sum to a value greater than or less than one, respectively.</para>
+        <para id="id1172343428503">Taking the natural logarithm of (5) gives <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>ln</m:mi><m:mi>q</m:mi><m:mo>=</m:mo><m:mi>ln</m:mi><m:msub>
+    <m:mi>α</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:mi>ln</m:mi><m:msub>
+    <m:mi>I</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:mo>+</m:mo><m:mo>⋯</m:mo><m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mi>k</m:mi>
+   </m:msub>
+   <m:mi>ln</m:mi><m:msub>
+    <m:mi>I</m:mi>
+    <m:mi>k</m:mi>
+   </m:msub>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaciiBaiaac6gacaWGXbGaeyypa0JaciiBaiaac6gacqaHXoqydaWgaaWcbaGaaGimaaqabaGccqGHRaWkcqaHYoGydaWgaaWcbaGaaGymaaqabaGcciGGSbGaaiOBaiaadMeadaWgaaWcbaGaaGymaaqabaGccqGHRaWkcqWIVlctcqGHRaWkcqaHYoGydaWgaaWcbaGaam4AaaqabaGcciGGSbGaaiOBaiaadMeadaWgaaWcbaGaam4AaaqabaGccaGGUaaaaa@5060@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ We can re-write this equation (adding an error term, as well as farm and year subscripts) giving:</para>
+        
+        
+        <equation id="eip-176"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:msub>
+    <m:mi>x</m:mi>
+    <m:mrow>
+     <m:mn>1</m:mn><m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:mo>⋯</m:mo><m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mi>k</m:mi>
+   </m:msub>
+   <m:msub>
+    <m:mi>x</m:mi>
+    <m:mrow>
+     <m:mi>k</m:mi><m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+     <m:mo>,</m:mo>
+    </m:mrow>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWGPbGaamiDaaqabaGccqGH9aqpcqaHYoGydaWgaaWcbaGaaGimaaqabaGccqGHRaWkcqaHYoGydaWgaaWcbaGaaGymaaqabaGccaWG4bWaaSbaaSqaaiaaigdacaWGPbGaamiDaaqabaGccqGHRaWkcqWIVlctcqGHRaWkcqaHYoGydaWgaaWcbaGaam4AaaqabaGccaWG4bWaaSbaaSqaaiaadUgacaWGPbGaamiDaaqabaGccqGHRaWkcqaH1oqzdaWgaaWcbaGaamyAaiaadshaaeqaaaaa@530D@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation><para id="id1172359867551">where <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:mi>ln</m:mi><m:msub>
+    <m:mi>q</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWGPbGaamiDaaqabaGccqGH9aqpciGGSbGaaiOBaiaadghadaWgaaWcbaGaamyAaiaadshaaeqaaaaa@3F01@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+, <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   <m:mo>=</m:mo><m:mi>ln</m:mi><m:msub>
+    <m:mi>α</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+    <m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqOSdi2aaSbaaSqaaiaaicdaaeqaaOGaeyypa0JaciiBaiaac6gacqaHXoqydaWgaaWcbaGaaGimaaqabaaaaa@3DF4@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+<!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>x</m:mi>
+    <m:mrow>
+     <m:mi>j</m:mi><m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:mi>ln</m:mi><m:msub>
+    <m:mi>I</m:mi>
+    <m:mrow>
+     <m:mi>j</m:mi><m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+  <m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamiEamaaBaaaleaacaWGQbGaamyAaiaadshaaeqaaOGaeyypa0JaciiBaiaac6gacaWGjbWaaSbaaSqaaiaadQgacaWGPbGaamiDaaqabaaaaa@40B7@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ for <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>j</m:mi><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>,</m:mo><m:mo>…</m:mo><m:mo>,</m:mo><m:mi>k</m:mi>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamOAaiabg2da9iaaigdacaGGSaGaeSOjGSKaaiilaiaadUgaaaa@3C16@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ε</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqyTdu2aaSbaaSqaaiaadMgacaWG0baabeaaaaa@39AE@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ is an error term. One way to account for year and time effects is to assume:</para>
+        
+        
+        <equation id="eip-728"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ε</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:mi>λ</m:mi><m:msub>
+    <m:mi>F</m:mi>
+    <m:mi>i</m:mi>
+   </m:msub>
+   <m:mo>+</m:mo><m:mi>η</m:mi><m:msub>
+    <m:mi>P</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>υ</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqyTdu2aaSbaaSqaaiaadMgacaWG0baabeaakiabg2da9iabeU7aSjaadAeadaWgaaWcbaGaamyAaaqabaGccqGHRaWkcqaH3oaAcaWGqbWaaSbaaSqaaiaadshaaeqaaOGaey4kaSIaeqyXdu3aaSbaaSqaaiaadMgacaWG0baabeaakiaacYcaaaa@4868@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation><para id="id1172343015451">where <emphasis effect="italics">F<sub>i</sub></emphasis> is a measure of the unobserved farm specific effects on productivity and <emphasis effect="italics">P<sub>t</sub></emphasis> is a measure of the unobserved changes in productivity that are the same for all farms but vary annually. Substitution of (7) into (6) gives: <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>β</m:mi>
+      <m:mn>0</m:mn>
+     </m:msub>
+     <m:mo>+</m:mo><m:mi>λ</m:mi><m:msub>
+      <m:mi>F</m:mi>
+      <m:mi>i</m:mi>
+     </m:msub>
+     <m:mo>+</m:mo><m:mi>η</m:mi><m:msub>
+      <m:mi>P</m:mi>
+      <m:mi>t</m:mi>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>+</m:mo><m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>j</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+     <m:mi>k</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:msub>
+      <m:mi>β</m:mi>
+      <m:mi>j</m:mi>
+     </m:msub>
+     <m:msub>
+      <m:mi>x</m:mi>
+      <m:mrow>
+       <m:mi>j</m:mi><m:mi>i</m:mi><m:mi>t</m:mi>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   </m:mstyle><m:mo>+</m:mo><m:msub>
+    <m:mi>υ</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWGPbGaamiDaaqabaGccqGH9aqpdaqadaqaaiabek7aInaaBaaaleaacaaIWaaabeaakiabgUcaRiabeU7aSjaadAeadaWgaaWcbaGaamyAaaqabaGccqGHRaWkcqaH3oaAcaWGqbWaaSbaaSqaaiaadshaaeqaaaGccaGLOaGaayzkaaGaey4kaSYaaabCaeaacqaHYoGydaWgaaWcbaGaamOAaaqabaGccaWG4bWaaSbaaSqaaiaadQgacaWGPbGaamiDaaqabaaabaGaamOAaiabg2da9iaaigdaaeaacaWGRbaaniabggHiLdGccqGHRaWkcqaHfpqDdaWgaaWcbaGaamyAaiaadshaaeqaaaaa@5989@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ or </para>
+        
+        
+        <equation id="eip-682"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>α</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>j</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+     <m:mi>k</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:msub>
+      <m:mi>β</m:mi>
+      <m:mi>j</m:mi>
+     </m:msub>
+     <m:msub>
+      <m:mi>x</m:mi>
+      <m:mrow>
+       <m:mi>j</m:mi><m:mi>i</m:mi><m:mi>t</m:mi>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   </m:mstyle><m:mo>+</m:mo><m:msub>
+    <m:mi>υ</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWGPbGaamiDaaqabaGccqGH9aqpcqaHXoqydaWgaaWcbaGaamyAaiaadshaaeqaaOGaey4kaSYaaabCaeaacqaHYoGydaWgaaWcbaGaamOAaaqabaGccaWG4bWaaSbaaSqaaiaadQgacaWGPbGaamiDaaqabaaabaGaamOAaiabg2da9iaaigdaaeaacaWGRbaaniabggHiLdGccqGHRaWkcqaHfpqDdaWgaaWcbaGaamyAaiaadshaaeqaaOGaaiilaaaa@50CE@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation><para id="id1172369280564">where <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>α</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   <m:mo>+</m:mo><m:mi>λ</m:mi><m:msub>
+    <m:mi>F</m:mi>
+    <m:mi>i</m:mi>
+   </m:msub>
+   <m:mo>+</m:mo><m:mi>η</m:mi><m:msub>
+    <m:mi>P</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqySde2aaSbaaSqaaiaadMgacaWG0baabeaakiabg2da9iabek7aInaaBaaaleaacaaIWaaabeaakiabgUcaRiabeU7aSjaadAeadaWgaaWcbaGaamyAaaqabaGccqGHRaWkcqaH3oaAcaWGqbWaaSbaaSqaaiaadshaaeqaaOGaaiOlaaaa@4710@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ Thus, (8) is equivalent to (2). Moreover, if we assume that <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>η</m:mi><m:mo>=</m:mo><m:mn>0</m:mn>
+   <m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeq4TdGMaeyypa0JaaGimaaaa@3960@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ we get
+</para>
+        
+        <equation id="eip-864"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>α</m:mi>
+    <m:mi>i</m:mi>
+   </m:msub>
+   <m:mo>+</m:mo><m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>j</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+     <m:mi>k</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:msub>
+      <m:mi>β</m:mi>
+      <m:mi>j</m:mi>
+     </m:msub>
+     <m:msub>
+      <m:mi>x</m:mi>
+      <m:mrow>
+       <m:mi>j</m:mi><m:mi>i</m:mi><m:mi>t</m:mi>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   </m:mstyle><m:mo>+</m:mo><m:msub>
+    <m:mi>υ</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWGPbGaamiDaaqabaGccqGH9aqpcqaHXoqydaWgaaWcbaGaamyAaaqabaGccqGHRaWkdaaeWbqaaiabek7aInaaBaaaleaacaWGQbaabeaakiaadIhadaWgaaWcbaGaamOAaiaadMgacaWG0baabeaaaeaacaWGQbGaeyypa0JaaGymaaqaaiaadUgaa0GaeyyeIuoakiabgUcaRiabew8a1naaBaaaleaacaWGPbGaamiDaaqabaGccaGGSaaaaa@4FD5@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation><para id="id1172369222171">where <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>α</m:mi>
+    <m:mi>i</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   <m:mo>+</m:mo><m:mi>λ</m:mi><m:msub>
+    <m:mi>F</m:mi>
+    <m:mi>i</m:mi>
+   </m:msub>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqySde2aaSbaaSqaaiaadMgaaeqaaOGaeyypa0JaeqOSdi2aaSbaaSqaaiaaicdaaeqaaOGaey4kaSIaeq4UdWMaamOramaaBaaaleaacaWGPbaabeaakiaac6caaaa@4185@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ Thus, (9) is equivalent to (1). 
+</para>
+      </section>
+      <section id="id1172363303228">
+        <title>Fixed-effects models</title>
+        <para id="id1172363842059">A natural way to make (9) operational is to introduce a dummy variable, <emphasis effect="italics">D<sub>i</sub></emphasis>, for each farm so that the intercept term becomes:</para>
+        
+        <equation id="eip-696"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>α</m:mi>
+    <m:mi>i</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>α</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>α</m:mi>
+    <m:mn>2</m:mn>
+   </m:msub>
+   <m:msub>
+    <m:mi>D</m:mi>
+    <m:mn>2</m:mn>
+   </m:msub>
+   <m:mo>+</m:mo><m:mo>⋯</m:mo><m:mo>+</m:mo><m:msub>
+    <m:mi>α</m:mi>
+    <m:mi>m</m:mi>
+   </m:msub>
+   <m:msub>
+    <m:mi>D</m:mi>
+    <m:mi>m</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>α</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:mo>+</m:mo><m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>j</m:mi><m:mo>=</m:mo><m:mn>2</m:mn>
+     </m:mrow>
+     <m:mi>m</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:msub>
+      <m:mi>α</m:mi>
+      <m:mi>j</m:mi>
+     </m:msub>
+     <m:msub>
+      <m:mi>D</m:mi>
+      <m:mi>j</m:mi>
+     </m:msub>
+     
+    </m:mrow>
+   </m:mstyle><m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqySde2aaSbaaSqaaiaadMgaaeqaaOGaeyypa0JaeqySde2aaSbaaSqaaiaaigdaaeqaaOGaey4kaSIaeqySde2aaSbaaSqaaiaaikdaaeqaaOGaamiramaaBaaaleaacaaIYaaabeaakiabgUcaRiabl+UimjabgUcaRiabeg7aHnaaBaaaleaacaWGTbaabeaakiaadseadaWgaaWcbaGaamyBaaqabaGccqGH9aqpcqaHXoqydaWgaaWcbaGaaGymaaqabaGccqGHRaWkdaaeWbqaaiabeg7aHnaaBaaaleaacaWGQbaabeaakiaadseadaWgaaWcbaGaamOAaaqabaaabaGaamOAaiabg2da9iaaikdaaeaacaWGTbaaniabggHiLdGccaGGSaaaaa@5998@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation><para id="id1172342659186">where <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>D</m:mi>
+    <m:mi>j</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:mn>1</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamiramaaBaaaleaacaWGQbaabeaakiabg2da9iaaigdaaaa@39A3@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ if <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>j</m:mi><m:mo>=</m:mo><m:mi>i</m:mi>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamOAaiabg2da9iaadMgaaaa@38D7@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and 0 otherwise. This substitution is equivalent to replacing the intercept term with a dummy variable for each farm and letting the farm dummy variable “sweep out” the farm-specific effects. In this specification the slope terms are the same for every farm while the intercept term is given for farm <emphasis effect="italics">j</emphasis> by <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>α</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>α</m:mi>
+    <m:mi>j</m:mi>
+   </m:msub>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqySde2aaSbaaSqaaiaaigdaaeqaaOGaey4kaSIaeqySde2aaSbaaSqaaiaadQgaaeqaaOGaaiOlaaaa@3CDC@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ Clearly, the intercept term for the first farm is equal to just <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>α</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqySde2aaSbaaSqaaiaaigdaaeqaaOGaaiOlaaaa@3936@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ This specification is known as the <emphasis effect="italics">fixed effect model</emphasis> and is estimated using ordinary least squared (OLS). We can extend the fixed-effects model to fit (8) by including a dummy variable for each time period except one.</para>
+        <para id="id3954346">In sum, <emphasis effect="italics">fixed-effects models </emphasis>assume either (or both) that the omitted effects that are specific to cross-sectional units are constant over time or that the effects specific to time are constant over the cross-sectional units. This method is equivalent to including a dummy variable for all but one of the cross-sectional units and/or a dummy variable for all but one of the time periods.</para>
+      </section>
+      <section id="id1172356064729">
+        <title>Random-effects models</title>
+        <para id="id1172358270918">An alternative approach to treating the <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>α</m:mi>
+    <m:mi>i</m:mi>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqySde2aaSbaaSqaaiaadMgaaeqaaaaa@38AD@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ in (1) as fixed constants over time is to treat it as a random variable. Returning to (1) where the intercepts vary due to individual level differences, we have <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>α</m:mi>
+    <m:mi>i</m:mi>
+   </m:msub>
+   <m:mo>+</m:mo><m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>j</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+     <m:mi>k</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:msub>
+      <m:mi>β</m:mi>
+      <m:mi>k</m:mi>
+     </m:msub>
+     <m:msub>
+      <m:mi>x</m:mi>
+      <m:mrow>
+       <m:mi>k</m:mi><m:mi>i</m:mi><m:mi>t</m:mi>
+      </m:mrow>
+     </m:msub>
+     <m:mo>+</m:mo><m:msub>
+      <m:mi>ε</m:mi>
+      <m:mrow>
+       <m:mi>i</m:mi><m:mi>t</m:mi>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   </m:mstyle><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWGPbGaamiDaaqabaGccqGH9aqpcqaHXoqydaWgaaWcbaGaamyAaaqabaGccqGHRaWkdaaeWbqaaiabek7aInaaBaaaleaacaWGRbaabeaakiaadIhadaWgaaWcbaGaam4AaiaadMgacaWG0baabeaakiabgUcaRiabew7aLnaaBaaaleaacaWGPbGaamiDaaqabaaabaGaamOAaiabg2da9iaaigdaaeaacaWGRbaaniabggHiLdGccaGGUaaaaa@4FB9@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ Treating <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>α</m:mi>
+    <m:mi>i</m:mi>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqySde2aaSbaaSqaaiaadMgaaeqaaaaa@38AD@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ as a random variable is equivalent to setting the model up as:</para>
+        
+        
+        <equation id="eip-538"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:mi>α</m:mi><m:mo>+</m:mo><m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>j</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+     <m:mi>k</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:msub>
+      <m:mi>β</m:mi>
+      <m:mi>j</m:mi>
+     </m:msub>
+     <m:msub>
+      <m:mi>x</m:mi>
+      <m:mrow>
+       <m:mi>j</m:mi><m:mi>i</m:mi><m:mi>t</m:mi>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   </m:mstyle><m:mo>+</m:mo><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>α</m:mi>
+      <m:mi>i</m:mi>
+     </m:msub>
+     <m:mo>+</m:mo><m:msub>
+      <m:mi>λ</m:mi>
+      <m:mi>t</m:mi>
+     </m:msub>
+     <m:mo>+</m:mo><m:msub>
+      <m:mi>ε</m:mi>
+      <m:mrow>
+       <m:mi>i</m:mi><m:mi>t</m:mi>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWGPbGaamiDaaqabaGccqGH9aqpcqaHXoqycqGHRaWkdaaeWbqaaiabek7aInaaBaaaleaacaWGQbaabeaakiaadIhadaWgaaWcbaGaamOAaiaadMgacaWG0baabeaaaeaacaWGQbGaeyypa0JaaGymaaqaaiaadUgaa0GaeyyeIuoakiabgUcaRmaabmaabaGaeqySde2aaSbaaSqaaiaadMgaaeqaaOGaey4kaSIaeq4UdW2aaSbaaSqaaiaadshaaeqaaOGaey4kaSIaeqyTdu2aaSbaaSqaaiaadMgacaWG0baabeaaaOGaayjkaiaawMcaaiaac6caaaa@5786@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation><para id="id1172356287923">For simplicity we consider only the case when <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>λ</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:mn>0.</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeq4UdW2aaSbaaSqaaiaadshaaeqaaOGaeyypa0JaaGimaiaac6caaaa@3B49@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ Thus, the error term for (11) is <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>α</m:mi>
+      <m:mi>i</m:mi>
+     </m:msub>
+     <m:mo>+</m:mo><m:msub>
+      <m:mi>ε</m:mi>
+      <m:mrow>
+       <m:mi>i</m:mi><m:mi>t</m:mi>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaWaaeWaaeaacqaHXoqydaWgaaWcbaGaamyAaaqabaGccqGHRaWkcqaH1oqzdaWgaaWcbaGaamyAaiaadshaaeqaaaGccaGLOaGaayzkaaGaaiOlaaaa@3F97@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ We assume that</para>
+        
+        <equation id="eip-767"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mtable columnalign="left">
+   <m:mtr>
+    <m:mtd>
+     <m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:msub>
+        <m:mi>α</m:mi>
+        <m:mi>i</m:mi>
+       </m:msub>
+       
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:msub>
+        <m:mi>ε</m:mi>
+        <m:mrow>
+         <m:mi>i</m:mi><m:mi>t</m:mi>
+        </m:mrow>
+       </m:msub>
+       
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mn>0</m:mn><m:mo>,</m:mo>
+    </m:mtd>
+   </m:mtr>
+   <m:mtr>
+    <m:mtd>
+     <m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:msub>
+        <m:mi>α</m:mi>
+        <m:mi>i</m:mi>
+       </m:msub>
+       <m:msub>
+        <m:mi>ε</m:mi>
+        <m:mrow>
+         <m:mi>i</m:mi><m:mi>t</m:mi>
+        </m:mrow>
+       </m:msub>
+       
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mn>0</m:mn><m:mo>,</m:mo>
+    </m:mtd>
+   </m:mtr>
+   <m:mtr>
+    <m:mtd>
+     <m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:msub>
+        <m:mi>α</m:mi>
+        <m:mi>i</m:mi>
+       </m:msub>
+       <m:msub>
+        <m:mi>α</m:mi>
+        <m:mi>j</m:mi>
+       </m:msub>
+       
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mrow><m:mo>{</m:mo> <m:mtable columnalign="left">
+      <m:mtr>
+       <m:mtd>
+        <m:msubsup>
+         <m:mi>σ</m:mi>
+         <m:mi>α</m:mi>
+         <m:mn>2</m:mn>
+        </m:msubsup>
+        <m:mtext>   if </m:mtext><m:mi>i</m:mi><m:mo>=</m:mo><m:mi>j</m:mi>
+       </m:mtd>
+      </m:mtr>
+      <m:mtr>
+       <m:mtd>
+        <m:mn>0</m:mn><m:mtext>     if </m:mtext><m:mi>i</m:mi><m:mo>≠</m:mo><m:mi>j</m:mi>
+       </m:mtd>
+      </m:mtr>
+     </m:mtable>
+      </m:mrow><m:mo>,</m:mo><m:mtext> and</m:mtext>
+    </m:mtd>
+   </m:mtr>
+   <m:mtr>
+    <m:mtd>
+     <m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:msub>
+        <m:mi>ε</m:mi>
+        <m:mrow>
+         <m:mi>i</m:mi><m:mi>t</m:mi>
+        </m:mrow>
+       </m:msub>
+       <m:msub>
+        <m:mi>ε</m:mi>
+        <m:mrow>
+         <m:mi>j</m:mi><m:mi>s</m:mi>
+        </m:mrow>
+       </m:msub>
+       
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mrow><m:mo>{</m:mo> <m:mtable columnalign="left">
+      <m:mtr>
+       <m:mtd>
+        <m:msubsup>
+         <m:mi>σ</m:mi>
+         <m:mi>ε</m:mi>
+         <m:mn>2</m:mn>
+        </m:msubsup>
+        <m:mtext>   if </m:mtext><m:mi>i</m:mi><m:mo>=</m:mo><m:mi>j</m:mi><m:mo>,</m:mo><m:mtext> </m:mtext><m:mi>t</m:mi><m:mo>=</m:mo><m:mi>s</m:mi>
+       </m:mtd>
+      </m:mtr>
+      <m:mtr>
+       <m:mtd>
+        <m:mn>0</m:mn><m:mtext>     otherwise</m:mtext><m:mtext>.</m:mtext>
+       </m:mtd>
+      </m:mtr>
+     </m:mtable>
+      </m:mrow>
+    </m:mtd>
+   </m:mtr>
+  </m:mtable>
+  
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGceaqabeaacaWGfbWaaeWaaeaacqaHXoqydaWgaaWcbaGaamyAaaqabaaakiaawIcacaGLPaaacqGH9aqpcaWGfbWaaeWaaeaacqaH1oqzdaWgaaWcbaGaamyAaiaadshaaeqaaaGccaGLOaGaayzkaaGaeyypa0JaaGimaiaacYcaaeaacaWGfbWaaeWaaeaacqaHXoqydaWgaaWcbaGaamyAaaqabaGccqaH1oqzdaWgaaWcbaGaamyAaiaadshaaeqaaaGccaGLOaGaayzkaaGaeyypa0JaaGimaiaacYcaaeaacaWGfbWaaeWaaeaacqaHXoqydaWgaaWcbaGaamyAaaqabaGccqaHXoqydaWgaaWcbaGaamOAaaqabaaakiaawIcacaGLPaaacqGH9aqpdaGabaabaeqabaGaeq4Wdm3aa0baaSqaaiabeg7aHbqaaiaaikdaaaGccaqGGaGaaeiiaiaabccacaqGPbGaaeOzaiaabccacaWGPbGaeyypa0JaamOAaaqaaiaaicdacaqGGaGaaeiiaiaabccacaqGGaGaaeiiaiaabMgacaqGMbGaaeiiaiaadMgacqGHGjsUcaWGQbaaaiaawUhaaiaacYcacaqGGaGaaeyyaiaab6gacaqGKbaabaGaamyramaabmaabaGaeqyTdu2aaSbaaSqaaiaadMgacaWG0baabeaakiabew7aLnaaBaaaleaacaWGQbGaam4CaaqabaaakiaawIcacaGLPaaacqGH9aqpdaGabaabaeqabaGaeq4Wdm3aa0baaSqaaiabew7aLbqaaiaaikdaaaGccaqGGaGaaeiiaiaabccacaqGPbGaaeOzaiaabccacaWGPbGaeyypa0JaamOAaiaacYcacaqGGaGaamiDaiabg2da9iaadohaaeaacaaIWaGaaeiiaiaabccacaqGGaGaaeiiaiaabccacaqGVbGaaeiDaiaabIgacaqGLbGaaeOCaiaabEhacaqGPbGaae4CaiaabwgacaqGUaaaaiaawUhaaaaaaa@9C93@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation><para id="id1172352111401">We also assume that all of the elements of the error term are uncorrelated with the explanatory variables, <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>x</m:mi>
+    <m:mi>j</m:mi>
+   </m:msub>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamiEamaaBaaaleaacaWGQbaabeaakiaac6caaaa@38C8@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</para>
+        <para id="id1172367243165">The key econometric issue is that the presence of <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>α</m:mi>
+    <m:mi>i</m:mi>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqySde2aaSbaaSqaaiaadMgaaeqaaaaa@38AD@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ in the error term means that the correlation among the residual of the same cross-sectional unit is not zero; the error terms for one farm, for instance, are correlated with each other. Therefore, the error terms exhibit heteroskedasticity. The appropriate estimation technique is generalized-least-squares, a technique that attempts to adjust the parameter estimates (and their standard error estimates) for heteroskedasticity and autocorrelation. Alternatively one can assume that <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>α</m:mi>
+    <m:mi>i</m:mi>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqySde2aaSbaaSqaaiaadMgaaeqaaaaa@38AC@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ε</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqyTdu2aaSbaaSqaaiaadMgacaWG0baabeaaaaa@39AD@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ are normally distributed and use a ML estimator. Hsiao [2003: 35-41] and Cameron and Trivedi [2005: 699-716] offer greater detail on the estimation of the parameters of both the fixed-effects and the random-effects models. It is enough for our purposes to accept that the econometricians have found a number of ways to estimate these parameters.</para>
+      </section>
+      <section id="id1172359289179">
+        <title>Random-effects or fixed effect model?</title>
+        <para id="id1172362396997">Economists generally prefer to use fixed-effects models. The decision to use fixed-effects or random-effects does not matter when <emphasis effect="italics">T</emphasis> is large because the two methods will yield the same estimates of the parameters. When the number of individual categories (<emphasis effect="italics">N</emphasis>) is large and the number of time periods (<emphasis effect="italics">T</emphasis>) is small, the choice of which model to use becomes unclear. Hsiao summarized this somewhat arcane issue with the following observations:</para>
+        <para id="id1172370300869">
+          <quote id="id1172370300869_quote" display="block">If the effects of omitted variables can be appropriately summarized by a random variable and the individual (or time) effects represent the ignorance of the investigator, it does not see reasonable to treat one source of ignorance () as fixed and the other source of ignorance () as random. It appears that one way to unify the fixed-effects and random-effects models is to assume from </quote>
+          <quote id="id1172367438695_quote" display="block">the outset that the effects are random. The fixed-effects model is viewed as one in which investigators make inferences conditional on the effects that are in the sample. The random-effects model is viewed as one in which investigators make unconditional or marginal inferences with respect to the population of all effects. There is really no distinction in the “nature (of the effect).” It is up to the investigator to decide whether to make inference with respect to population characteristics or only with respect to the effects that are in the sample. Hsiao [2003: 43]</quote>
+        </para>
+        <para id="id1172343422819">Needless to say, Hsiao’s advice may well leave many researchers without any idea of whether to use a random-effects or a fixed-effects model. <emphasis effect="italics">In your own research I suggest that you consult an econometrician for advice</emphasis>.</para>
+        <para id="id1172358098093">There is one problem that arises when using a fixed-effects model. Assume that you have a sample of observations for a large number of individuals over a period of years. If you use a fixed-effects model, you will not be able to find parameter estimates for any variable like race or sex that do not change over the time period of the sample. The reason for this limitation is that the time-constant variables are perfectly correlated with the dummy variables used for the fixed-effects. A similar problem arises if the fixed-effects are for years (rather than individuals). You cannot include a variable is constant for all individuals in any given year. Quite often the individual-constant (or time-constant) variable is not of interest and nothing is lost by not having the parameter estimate. On the other hand, the random-effects model does not have this problem because the estimation makes use of differences amongst the individuals to estimate a parameter for the individual-constant variable.<footnote id="id1172343085280"> Another way to think about this point is to remember that, unlike the fixed-effects model, the random-effects does not use dummy variables to summarized the unknown characteristics; thus, there is no problem with multicollinearity.</footnote> We discuss in the next section an example in which this “problem” arises.</para>
+        <para id="id1172363782004">What would be nice is if there were a statistical test that allows us to decide if the random-effects model is the appropriate model? The <emphasis effect="italics">Hausman test</emphasis> offers such a statistical test. The Hausman (specification) test exploits the fact that the parameters for the random-effects model should be not be statistically different from those found using a fixed-effects specification. If one observes a chi-squared value greater than the critical value you can conclude that the parameter estimates for the random-effects model are statistically different from the parameter estimates for a model using an assumption of fixed-effects, then you can conclude that the random-effects model is misspecified. Unfortunately, the misspecification could be due to the fact that the fixed-effects model is appropriate or it could be due to the unobserved error terms being correlated with the included explanatory variables. If the latter is the case, then one might consider augmenting the model with an appropriate measure of the part of the unobserved effect that is correlated with the error term. What we are describing is that same thing that happens when omitted variables are correlated with the error term—the parameter estimates are biased. We include an example of how to use <emphasis effect="italics">Stata</emphasis> to perform the Housman specification test.</para>
+      </section>
+      <section id="id1172362356269">
+        <title>Estimation of panel data models in Stata</title>
+        <section id="id1172362140349">
+          <title>General comments</title>
+          <para id="id1172355853790">There are three commands that matter in setting up the panel data. The first two commands precede the regression command because they establish which variable denotes the time period and which variable denotes the cross-sectional unit. These commands are:</para>
+          <para id="id1172353359062">
+            <emphasis effect="bold">.iis [variable name]</emphasis>
+          </para>
+          <para id="id1172343632414">
+            <emphasis effect="bold">.tis [variable name]</emphasis>
+          </para>
+          <para id="id1172350041844">The command for estimating the fixed-effects model is:</para>
+          <para id="id1172344081969">
+            <emphasis effect="bold">. xtreg depvar [varlist], fe</emphasis>
+          </para>
+          <para id="id1172356642918">The command for estimating the random-effects model is:</para>
+          <para id="id1172343985335">
+            <emphasis effect="bold">. xtreg depvar [varlist], re</emphasis>
+          </para>
+          <para id="id1172362432972">If the part of the command with the comma and either re or fe is omitted, <emphasis effect="italics">Stata</emphasis> will assume that you want to estimate the random-effects model.</para>
+        </section>
+        <section id="id1172362176812">
+          <title>Understanding Stata output</title>
+          <para id="id1172359709679">To understand the <emphasis effect="italics">Stata</emphasis> output we need to return to the algebra of the model. Assume that we are fitting a model of the following form:</para>
+          
+          <equation id="eip-172"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:mi>α</m:mi><m:mo>+</m:mo><m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>j</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+     <m:mi>k</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:msub>
+      <m:mi>β</m:mi>
+      <m:mi>j</m:mi>
+     </m:msub>
+     <m:msub>
+      <m:mi>x</m:mi>
+      <m:mrow>
+       <m:mi>j</m:mi><m:mi>i</m:mi><m:mi>t</m:mi>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   </m:mstyle><m:mo>+</m:mo><m:msub>
+    <m:mi>ν</m:mi>
+    <m:mi>i</m:mi>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>,</m:mo><m:mtext> </m:mtext><m:mi>i</m:mi><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>,</m:mo><m:mo>…</m:mo><m:mo>,</m:mo><m:mi>N</m:mi><m:mo>,</m:mo><m:mtext> and </m:mtext><m:mi>t</m:mi><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>,</m:mo><m:mo>…</m:mo><m:mo>,</m:mo><m:mi>T</m:mi><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWGPbGaamiDaaqabaGccqGH9aqpcqaHXoqycqGHRaWkdaaeWbqaaiabek7aInaaBaaaleaacaWGQbaabeaakiaadIhadaWgaaWcbaGaamOAaiaadMgacaWG0baabeaaaeaacaWGQbGaeyypa0JaaGymaaqaaiaadUgaa0GaeyyeIuoakiabgUcaRiabe27aUnaaBaaaleaacaWGPbaabeaakiabgUcaRiabew7aLnaaBaaaleaacaWGPbGaamiDaaqabaGccaGGSaGaaeiiaiaadMgacqGH9aqpcaaIXaGaaiilaiablAciljaacYcacaWGobGaaiilaiaabccacaqGHbGaaeOBaiaabsgacaqGGaGaamiDaiabg2da9iaaigdacaGGSaGaeSOjGSKaaiilaiaadsfacaGGUaaaaa@646F@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation><para id="id1172342069734">We can sum (13) over <emphasis effect="italics">t</emphasis> (holding the individual unit constant) and divide by <emphasis effect="italics">T</emphasis> to get:</para>
+          
+          <equation id="eip-152"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mover accent="true">
+     <m:mi>y</m:mi>
+     <m:mo>¯</m:mo>
+    </m:mover>
+    
+    <m:mi>i</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:mi>α</m:mi><m:mo>+</m:mo><m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>j</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+     <m:mi>k</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:msub>
+      <m:mi>β</m:mi>
+      <m:mi>j</m:mi>
+     </m:msub>
+     <m:msub>
+      <m:mover accent="true">
+       <m:mi>x</m:mi>
+       <m:mo>¯</m:mo>
+      </m:mover>
+      
+      <m:mrow>
+       <m:mi>j</m:mi><m:mi>i</m:mi>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   </m:mstyle><m:mo>+</m:mo><m:msub>
+    <m:mi>ν</m:mi>
+    <m:mi>i</m:mi>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mover accent="true">
+     <m:mi>ε</m:mi>
+     <m:mo>¯</m:mo>
+    </m:mover>
+    
+    <m:mi>i</m:mi>
+   </m:msub>
+   <m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGabmyEayaaraWaaSbaaSqaaiaadMgaaeqaaOGaeyypa0JaeqySdeMaey4kaSYaaabCaeaacqaHYoGydaWgaaWcbaGaamOAaaqabaGcceWG4bGbaebadaWgaaWcbaGaamOAaiaadMgaaeqaaaqaaiaadQgacqGH9aqpcaaIXaaabaGaam4AaaqdcqGHris5aOGaey4kaSIaeqyVd42aaSbaaSqaaiaadMgaaeqaaOGaey4kaSIafqyTduMbaebadaWgaaWcbaGaamyAaaqabaGccaGGSaaaaa@4FAC@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation><para id="id1172364067223">where <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mover accent="true">
+     <m:mi>y</m:mi>
+     <m:mo>¯</m:mo>
+    </m:mover>
+    
+    <m:mi>i</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:mfrac>
+    <m:mrow>
+     <m:mstyle displaystyle="true">
+      <m:munderover>
+       <m:mo>∑</m:mo>
+       <m:mrow>
+        <m:mi>t</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+       </m:mrow>
+       <m:mi>T</m:mi>
+      </m:munderover>
+      <m:mrow>
+       <m:msub>
+        <m:mi>y</m:mi>
+        <m:mrow>
+         <m:mi>i</m:mi><m:mi>t</m:mi>
+        </m:mrow>
+       </m:msub>
+       
+      </m:mrow>
+     </m:mstyle>
+    </m:mrow>
+    <m:mi>T</m:mi>
+   </m:mfrac>
+   <m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGabmyEayaaraWaaSbaaSqaaiaadMgaaeqaaOGaeyypa0ZaaSaaaeaadaaeWbqaaiaadMhadaWgaaWcbaGaamyAaiaadshaaeqaaaqaaiaadshacqGH9aqpcaaIXaaabaGaamivaaqdcqGHris5aaGcbaGaamivaaaacaGGSaaaaa@43B1@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+<!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mover accent="true">
+     <m:mi>x</m:mi>
+     <m:mo>¯</m:mo>
+    </m:mover>
+    
+    <m:mrow>
+     <m:mi>j</m:mi><m:mi>i</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:mfrac>
+    <m:mrow>
+     <m:mstyle displaystyle="true">
+      <m:munderover>
+       <m:mo>∑</m:mo>
+       <m:mrow>
+        <m:mi>t</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+       </m:mrow>
+       <m:mi>T</m:mi>
+      </m:munderover>
+      <m:mrow>
+       <m:msub>
+        <m:mi>x</m:mi>
+        <m:mrow>
+         <m:mi>i</m:mi><m:mi>t</m:mi>
+        </m:mrow>
+       </m:msub>
+       
+      </m:mrow>
+     </m:mstyle>
+    </m:mrow>
+    <m:mi>T</m:mi>
+   </m:mfrac>
+   <m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGabmiEayaaraWaaSbaaSqaaiaadQgacaWGPbaabeaakiabg2da9maalaaabaWaaabCaeaacaWG4bWaaSbaaSqaaiaadMgacaWG0baabeaaaeaacaWG0bGaeyypa0JaaGymaaqaaiaadsfaa0GaeyyeIuoaaOqaaiaadsfaaaGaaiilaaaa@449E@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mover accent="true">
+     <m:mi>ε</m:mi>
+     <m:mo>¯</m:mo>
+    </m:mover>
+    
+    <m:mi>i</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:mfrac>
+    <m:mrow>
+     <m:mstyle displaystyle="true">
+      <m:munderover>
+       <m:mo>∑</m:mo>
+       <m:mrow>
+        <m:mi>t</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+       </m:mrow>
+       <m:mi>T</m:mi>
+      </m:munderover>
+      <m:mrow>
+       <m:msub>
+        <m:mi>ε</m:mi>
+        <m:mrow>
+         <m:mi>i</m:mi><m:mi>t</m:mi>
+        </m:mrow>
+       </m:msub>
+       
+      </m:mrow>
+     </m:mstyle>
+    </m:mrow>
+    <m:mi>T</m:mi>
+   </m:mfrac>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGafqyTduMbaebadaWgaaWcbaGaamyAaaqabaGccqGH9aqpdaWcaaqaamaaqahabaGaeqyTdu2aaSbaaSqaaiaadMgacaWG0baabeaaaeaacaWG0bGaeyypa0JaaGymaaqaaiaadsfaa0GaeyyeIuoaaOqaaiaadsfaaaGaaiOlaaaa@4505@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ Thus, (14) uses the mean values for each cross-sectional unit. We can subtract (14) from (13) to get:</para>
+          
+          <equation id="eip-970"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>y</m:mi>
+      <m:mrow>
+       <m:mi>i</m:mi><m:mi>t</m:mi>
+      </m:mrow>
+     </m:msub>
+     <m:mo>−</m:mo><m:msub>
+      <m:mover accent="true">
+       <m:mi>y</m:mi>
+       <m:mo>¯</m:mo>
+      </m:mover>
+      
+      <m:mi>i</m:mi>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>j</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+     <m:mi>k</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:msub>
+      <m:mi>β</m:mi>
+      <m:mi>j</m:mi>
+     </m:msub>
+     <m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:msub>
+        <m:mi>x</m:mi>
+        <m:mrow>
+         <m:mi>j</m:mi><m:mi>i</m:mi><m:mi>t</m:mi>
+        </m:mrow>
+       </m:msub>
+       <m:mo>−</m:mo><m:msub>
+        <m:mover accent="true">
+         <m:mi>x</m:mi>
+         <m:mo>¯</m:mo>
+        </m:mover>
+        
+        <m:mrow>
+         <m:mi>j</m:mi><m:mi>i</m:mi>
+        </m:mrow>
+       </m:msub>
+       
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow>
+    </m:mrow>
+   </m:mstyle><m:mo>+</m:mo><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>ε</m:mi>
+      <m:mrow>
+       <m:mi>i</m:mi><m:mi>t</m:mi>
+      </m:mrow>
+     </m:msub>
+     <m:mo>−</m:mo><m:msub>
+      <m:mover accent="true">
+       <m:mi>ε</m:mi>
+       <m:mo>¯</m:mo>
+      </m:mover>
+      
+      <m:mi>i</m:mi>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaWaaeWaaeaacaWG5bWaaSbaaSqaaiaadMgacaWG0baabeaakiabgkHiTiqadMhagaqeamaaBaaaleaacaWGPbaabeaaaOGaayjkaiaawMcaaiabg2da9maaqahabaGaeqOSdi2aaSbaaSqaaiaadQgaaeqaaOWaaeWaaeaacaWG4bWaaSbaaSqaaiaadQgacaWGPbGaamiDaaqabaGccqGHsislceWG4bGbaebadaWgaaWcbaGaamOAaiaadMgaaeqaaaGccaGLOaGaayzkaaaaleaacaWGQbGaeyypa0JaaGymaaqaaiaadUgaa0GaeyyeIuoakiabgUcaRmaabmaabaGaeqyTdu2aaSbaaSqaaiaadMgacaWG0baabeaakiabgkHiTiqbew7aLzaaraWaaSbaaSqaaiaadMgaaeqaaaGccaGLOaGaayzkaaGaaiOlaaaa@5BCE@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation><para id="id1172364758427">Equations (13), (14), and (15) are the basis of <emphasis effect="italics">Stats’s</emphasis> estimates of the parameters of the model. In particular, the command <emphasis effect="bold">xtreg, fe</emphasis> uses OLS to estimate (15); this is known as the <emphasis effect="italics">fixed-effects</emphasis> estimator (or the <emphasis effect="italics">within</emphasis> estimator). The command <emphasis effect="bold">xtreg, be</emphasis> uses OLS to estimate (14) and is known as the <emphasis effect="italics">between</emphasis> estimator. The command <emphasis effect="bold">xtreg, re</emphasis>—the random-effects estimator—is a weighted average of the between and within estimators, where the weight is a function of the variances of and ( and respectively).<footnote id="id1172343612404"> See Cameron and Trivedi (2005: 705] for a detailed discussion of the random-effects estimator.</footnote></para>
+          <para id="id1172355164380">In general, you will not make use of the between estimator. However, these three equations do lie at the basis of the goodness-of-fit measures that <emphasis effect="italics">Stata</emphasis> reports. In particular, <emphasis effect="italics">Stata</emphasis> output reports three “R-squareds”<footnote id="id1172343204015"> R-squared is in quotes in this line because these R-squareds do not have all the properties of OLS R-squareds.</footnote>—the <emphasis effect="italics">overall-R<sup>2</sup></emphasis> the <emphasis effect="italics">between-R<sup>2</sup></emphasis> and the <emphasis effect="italics">within-R<sup>2</sup></emphasis> These three R-squareds are derived using one of the three equations. In particular, the overall-<emphasis effect="italics">R<sup>2</sup></emphasis> uses (13); the between-<emphasis effect="italics">R<sup>2</sup></emphasis> uses (14); and the within-<emphasis effect="italics">R<sup>2</sup></emphasis> uses (15).</para>
+        </section>
+        <example id="eip-131"><title>A panel data analysis using <emphasis effect="italics">Stata</emphasis></title><para id="id1172342068226">In this example we follow the example offered in the <emphasis effect="italics">Stata</emphasis> manual and use a large data set from the National Longitudinal Survey of wage data on 28,534 women who were between 14 and 26 years of age in 1968. The women were surveyed in each of the 21 years between 1968 and 1988 except for the six years 1974, 1976, 1979, 1981, 1984, and 1986. The study is focused on the determinants of wage levels, as measured by the natural logarithm of real wages.</para>
+          <para id="eip-511"><figure id="pdfigure1">
+  <title/>
+  <media id="pdfig1" alt="The commands that Stata uses to load in the panel data example.">
+    <image mime-type="image/jpeg" src="../../media/Panel data figure 1.jpg"/>
+  </media>
+  <caption>
+     Loading in the data set into <emphasis effect="italics">Stata</emphasis> with a description of the data.
+  </caption>
+</figure>
+        
+</para><para id="id1172358725580">Figure 1 shows the commands used to put the data into <emphasis effect="italics">Stata</emphasis>. The first command (<emphasis effect="bold">set memory 5m</emphasis>) increases the size of the memory that the program uses; I did this because of the large sample size. The <emphasis effect="bold">use</emphasis> command accesses that data from the <emphasis effect="italics">Stata</emphasis> web site. The <emphasis effect="bold">describe</emphasis> command calls up a description of the variables. Figure 2 presents a summary of the data using the command <emphasis effect="bold">summerize</emphasis>.</para>
+          <para id="eip-88"><figure id="pdfigure2">
+  <title/>
+  <media id="pdfig2" alt="Summary of the panel data set variables.">
+    <image mime-type="image/jpeg" src="../../media/Panel data figure 2.jpg"/>
+  </media>
+  <caption>
+     Summary of the data.
+  </caption>
+</figure>
+        
+</para><para id="id1172357923343">There are several transformations of the variables that we will need. In particular, we want to include the squares of several of the variables in our regression—age (<emphasis effect="bold">age</emphasis>), work experience (<emphasis effect="bold">ttl_exp</emphasis>), and job tenure (<emphasis effect="bold">tenure</emphasis>). The reason we want to use the square of these variables is that we have reason to believe that wages have a non-linear relationship with these variables. For instance, consider the number of years a worker has been on the job, <emphasis effect="bold">Tenure</emphasis>. Theory suggests that wages increase over a worker’s work-life at a decreasing rate. Thus, if the equation we are estimating is <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>y</m:mi><m:mo>=</m:mo><m:mi>ln</m:mi><m:mi>w</m:mi><m:mo>=</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:mi>T</m:mi><m:mi>e</m:mi><m:mi>n</m:mi><m:mi>u</m:mi><m:mi>r</m:mi><m:mi>e</m:mi><m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>2</m:mn>
+   </m:msub>
+   <m:mi>T</m:mi><m:mi>e</m:mi><m:mi>n</m:mi><m:mi>u</m:mi><m:mi>r</m:mi><m:msup>
+    <m:mi>e</m:mi>
+    <m:mn>2</m:mn>
+   </m:msup>
+   <m:mo>+</m:mo><m:mo>⋯</m:mo><m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEaiabg2da9iGacYgacaGGUbGaam4Daiabg2da9iabek7aInaaBaaaleaacaaIWaaabeaakiabgUcaRiabek7aInaaBaaaleaacaaIXaaabeaakiaadsfacaWGLbGaamOBaiaadwhacaWGYbGaamyzaiabgUcaRiabek7aInaaBaaaleaacaaIYaaabeaakiaadsfacaWGLbGaamOBaiaadwhacaWGYbGaamyzamaaCaaaleqabaGaaGOmaaaakiabgUcaRiabl+UimjaacYcaaaa@54EC@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ what we expect is that: <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mfrac>
+    <m:mrow>
+     <m:mo>∂</m:mo><m:mi>y</m:mi>
+    </m:mrow>
+    <m:mrow>
+     <m:mo>∂</m:mo><m:mi>T</m:mi><m:mi>e</m:mi><m:mi>n</m:mi><m:mi>u</m:mi><m:mi>r</m:mi><m:mi>e</m:mi>
+    </m:mrow>
+   </m:mfrac>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:mo>+</m:mo><m:mn>2</m:mn><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>2</m:mn>
+   </m:msub>
+   <m:mi>T</m:mi><m:mi>e</m:mi><m:mi>n</m:mi><m:mi>u</m:mi><m:mi>r</m:mi><m:mi>e</m:mi><m:mo>&gt;</m:mo><m:mn>0</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaWaaSaaaeaacqGHciITcaWG5baabaGaeyOaIyRaamivaiaadwgacaWGUbGaamyDaiaadkhacaWGLbaaaiabg2da9iabek7aInaaBaaaleaacaaIXaaabeaakiabgUcaRiaaikdacqaHYoGydaWgaaWcbaGaaGOmaaqabaGccaWGubGaamyzaiaad6gacaWG1bGaamOCaiaadwgacqGH+aGpcaaIWaaaaa@4E7A@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mfrac>
+    <m:mrow>
+     <m:msup>
+      <m:mo>∂</m:mo>
+      <m:mn>2</m:mn>
+     </m:msup>
+     <m:mi>y</m:mi>
+    </m:mrow>
+    <m:mrow>
+     <m:mo>∂</m:mo><m:mi>T</m:mi><m:mi>e</m:mi><m:mi>n</m:mi><m:mi>u</m:mi><m:mi>r</m:mi><m:msup>
+      <m:mi>e</m:mi>
+      <m:mn>2</m:mn>
+     </m:msup>
+     
+    </m:mrow>
+   </m:mfrac>
+   <m:mo>=</m:mo><m:mn>2</m:mn><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>2</m:mn>
+   </m:msub>
+   <m:mo>&lt;</m:mo><m:mn>0.</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaWaaSaaaeaacqGHciITdaahaaWcbeqaaiaaikdaaaGccaWG5baabaGaeyOaIyRaamivaiaadwgacaWGUbGaamyDaiaadkhacaWGLbWaaWbaaSqabeaacaaIYaaaaaaakiabg2da9iaaikdacqaHYoGydaWgaaWcbaGaaGOmaaqabaGccqGH8aapcaaIWaGaaiOlaaaa@4809@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ The only way that this last equation can be true is if <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>2</m:mn>
+   </m:msub>
+   <m:mo>&lt;</m:mo><m:mn>0.</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqOSdi2aaSbaaSqaaiaaikdaaeqaaOGaeyipaWJaaGimaiaac6caaaa@3AF6@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ Moreover, if this is true, the first-derivative implies that <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:mo>&gt;</m:mo><m:mo>−</m:mo><m:mn>2</m:mn><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>2</m:mn>
+   </m:msub>
+   <m:mi>T</m:mi><m:mi>e</m:mi><m:mi>n</m:mi><m:mi>u</m:mi><m:mi>r</m:mi><m:mi>e</m:mi><m:mo>&gt;</m:mo><m:mn>0.</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqOSdi2aaSbaaSqaaiaaigdaaeqaaOGaeyOpa4JaeyOeI0IaaGOmaiabek7aInaaBaaaleaacaaIYaaabeaakiaadsfacaWGLbGaamOBaiaadwhacaWGYbGaamyzaiabg6da+iaaicdacaGGUaaaaa@45CE@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --> 
+ Also, notice that we can determine the number of years in a job when wages reach a peak; <emphasis effect="italics">y</emphasis> reaches a maximum at the age where <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mfrac>
+    <m:mrow>
+     <m:mo>∂</m:mo><m:mi>y</m:mi>
+    </m:mrow>
+    <m:mrow>
+     <m:mo>∂</m:mo><m:mi>T</m:mi><m:mi>e</m:mi><m:mi>n</m:mi><m:mi>u</m:mi><m:mi>r</m:mi><m:mi>e</m:mi>
+    </m:mrow>
+   </m:mfrac>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:mo>+</m:mo><m:mn>2</m:mn><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>2</m:mn>
+   </m:msub>
+   <m:mi>T</m:mi><m:mi>e</m:mi><m:mi>n</m:mi><m:mi>u</m:mi><m:mi>r</m:mi><m:mi>e</m:mi><m:mo>=</m:mo><m:mn>0</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaWaaSaaaeaacqGHciITcaWG5baabaGaeyOaIyRaamivaiaadwgacaWGUbGaamyDaiaadkhacaWGLbaaaiabg2da9iabek7aInaaBaaaleaacaaIXaaabeaakiabgUcaRiaaikdacqaHYoGydaWgaaWcbaGaaGOmaaqabaGccaWGubGaamyzaiaad6gacaWG1bGaamOCaiaadwgacqGH9aqpcaaIWaaaaa@4E78@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->. or when <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>T</m:mi><m:mi>e</m:mi><m:mi>n</m:mi><m:mi>u</m:mi><m:mi>r</m:mi><m:mi>e</m:mi><m:mo>=</m:mo><m:mo>−</m:mo><m:mfrac>
+    <m:mrow>
+     <m:msub>
+      <m:mi>β</m:mi>
+      <m:mn>1</m:mn>
+     </m:msub>
+     
+    </m:mrow>
+    <m:mrow>
+     <m:mn>2</m:mn><m:msub>
+      <m:mi>β</m:mi>
+      <m:mn>2</m:mn>
+     </m:msub>
+     
+    </m:mrow>
+   </m:mfrac>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamivaiaadwgacaWGUbGaamyDaiaadkhacaWGLbGaeyypa0JaeyOeI0YaaSaaaeaacqaHYoGydaWgaaWcbaGaaGymaaqabaaakeaacaaIYaGaeqOSdi2aaSbaaSqaaiaaikdaaeqaaaaakiaac6caaaa@441A@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ The fact that <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mfrac>
+    <m:mrow>
+     <m:msup>
+      <m:mo>∂</m:mo>
+      <m:mn>2</m:mn>
+     </m:msup>
+     <m:mi>y</m:mi>
+    </m:mrow>
+    <m:mrow>
+     <m:mo>∂</m:mo><m:mi>T</m:mi><m:mi>e</m:mi><m:mi>n</m:mi><m:mi>u</m:mi><m:mi>r</m:mi><m:msup>
+      <m:mi>e</m:mi>
+      <m:mn>2</m:mn>
+     </m:msup>
+     
+    </m:mrow>
+   </m:mfrac>
+   <m:mo>=</m:mo><m:mn>2</m:mn><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>2</m:mn>
+   </m:msub>
+   <m:mo>&lt;</m:mo><m:mn>0</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaWaaSaaaeaacqGHciITdaahaaWcbeqaaiaaikdaaaGccaWG5baabaGaeyOaIyRaamivaiaadwgacaWGUbGaamyDaiaadkhacaWGLbWaaWbaaSqabeaacaaIYaaaaaaakiabg2da9iaaikdacqaHYoGydaWgaaWcbaGaaGOmaaqabaGccqGH8aapcaaIWaaaaa@4757@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ guarantees that this point is indeed a maximum. </para>
+          
+          
+          
+          <para id="id1172366596117">Additionally, because race is a categorical variable that has three potential values—1 if white, 2 if black, and 3 otherwise—we have to create a dummy variable in order to use this variable. The transformations we use are shown in Figure 3.
+</para>
+          <para id="eip-18"><figure id="pdfigure3">
+  <media id="pdfig3" alt="Stata commands to transform the data.">
+    <image mime-type="image/jpeg" src="../../media/Panel data figure 3.jpg"/>
+  </media>
+  <caption>
+     Transformations of the variables to create new variables.
+  </caption>
+</figure>
+        </para><para id="id1172347097696">The last step before estimating the regressions is to identify the data set as a panel data. shows the two commands that must be entered in order for <emphasis effect="italics">Stata</emphasis> to know that <emphasis effect="bold">idcode</emphasis> is the individual category and that <emphasis effect="bold">year</emphasis> is the time series variable. Figure 4 shows these two commands.</para>
+          <para id="eip-626"><figure id="pdfigure4">
+  <media id="pdfig4" alt="Declaring the category and time identifiers.">
+    <image mime-type="image/jpeg" src="../../media/Panel data figure 4.jpg"/>
+  </media>
+  <caption>
+     Declaring the category and time identifiers.
+  </caption>
+</figure>
+        </para><para id="id1172362237189">We are now ready to estimate the model (the natural logarithm of wages as a function of various variables). We begin with the random-effects model. Figure 5 shows the command and the results of the estimation of the random-effects model. There are several things to note here. First, in the command we are able to refer to all variables that have age in them by using <emphasis effect="bold">age*</emphasis>, the * tells <emphasis effect="italics">Stata</emphasis> to use and variable that begins with the letters age. Second, we will need to use the estimation results in the Hausman test. Thus, we have stored these results in “random_effects” using the command <emphasis effect="bold">estimates store random_effects</emphasis>.</para>
+          <para id="eip-381"><figure id="pdfigure5">
+  <media id="pdfig5" alt="Stata output from the random-effects estimation.">
+    <image mime-type="image/jpeg" src="../../media/Panel data figure 5.jpg"/>
+  </media>
+  <caption>
+     The random-effects estimation.
+  </caption>
+</figure>
+        </para><para id="id1172342669104">Notice that three R-squared values are reported in Figure 5. Also, wages reach a peak when the woman is <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mo>−</m:mo><m:mfrac>
+    <m:mrow>
+     <m:mn>0.036806</m:mn>
+    </m:mrow>
+    <m:mrow>
+     <m:mn>2</m:mn><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mo>−</m:mo><m:mn>0.0007133</m:mn>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow>
+    </m:mrow>
+   </m:mfrac>
+   <m:mo>=</m:mo><m:mn>25.7998</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeyOeI0YaaSaaaeaacaaIWaGaaiOlaiaaicdacaaIZaGaaGOnaiaaiIdacaaIWaGaaGOnaaqaaiaaikdadaqadaqaaiabgkHiTiaaicdacaGGUaGaaGimaiaaicdacaaIWaGaaG4naiaaigdacaaIZaGaaG4maaGaayjkaiaawMcaaaaacqGH9aqpcaaIYaGaaGynaiaac6cacaaI3aGaaGyoaiaaiMdacaaI4aaaaa@4CCE@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ years old and after 9.795857 years on the job. The interpretation of the other variables demands a bit of algebra. For instance, the fact that <emphasis effect="bold">black</emphasis> is a dummy variable affects our interpretation; when an individual is a black, her wage level is: <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>ln</m:mi><m:msub>
+    <m:mi>w</m:mi>
+    <m:mi>B</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:mo>+</m:mo><m:mo>⋯</m:mo><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaciiBaiaac6gacaWG3bWaaSbaaSqaaiaadkeaaeqaaOGaeyypa0JaeqOSdi2aaSbaaSqaaiaaicdaaeqaaOGaey4kaSIaeqOSdi2aaSbaaSqaaiaaigdaaeqaaOGaey4kaSIaeS47IWKaaiOlaaaa@445D@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ When she is nonblack, her wage level is <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>ln</m:mi><m:msub>
+    <m:mi>w</m:mi>
+    <m:mrow>
+     <m:mi>N</m:mi><m:mi>B</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   <m:mo>+</m:mo><m:mo>⋯</m:mo><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaciiBaiaac6gacaWG3bWaaSbaaSqaaiaad6eacaWGcbaabeaakiabg2da9iabek7aInaaBaaaleaacaaIWaaabeaakiabgUcaRiabl+Uimjaac6caaaa@41BC@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ Thus, we have: <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>ln</m:mi><m:msub>
+    <m:mi>w</m:mi>
+    <m:mi>B</m:mi>
+   </m:msub>
+   <m:mo>−</m:mo><m:mi>ln</m:mi><m:msub>
+    <m:mi>w</m:mi>
+    <m:mrow>
+     <m:mi>N</m:mi><m:mi>B</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaciiBaiaac6gacaWG3bWaaSbaaSqaaiaadkeaaeqaaOGaeyOeI0IaciiBaiaac6gacaWG3bWaaSbaaSqaaiaad6eacaWGcbaabeaakiabg2da9iabek7aInaaBaaaleaacaaIXaaabeaaaaa@42FB@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ or <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mfrac>
+    <m:mrow>
+     <m:msub>
+      <m:mi>w</m:mi>
+      <m:mi>B</m:mi>
+     </m:msub>
+     
+    </m:mrow>
+    <m:mrow>
+     <m:msub>
+      <m:mi>w</m:mi>
+      <m:mrow>
+       <m:mi>N</m:mi><m:mi>B</m:mi>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   </m:mfrac>
+   <m:mo>=</m:mo><m:msup>
+    <m:mi>e</m:mi>
+    <m:mrow>
+     <m:msub>
+      <m:mi>β</m:mi>
+      <m:mn>1</m:mn>
+     </m:msub>
+     
+    </m:mrow>
+   </m:msup>
+   <m:mo>=</m:mo><m:msup>
+    <m:mi>e</m:mi>
+    <m:mrow>
+     <m:mo>−</m:mo><m:mn>0.0530532</m:mn>
+    </m:mrow>
+   </m:msup>
+   <m:mo>=</m:mo><m:mn>0.94833.</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaWaaSaaaeaacaWG3bWaaSbaaSqaaiaadkeaaeqaaaGcbaGaam4DamaaBaaaleaacaWGobGaamOqaaqabaaaaOGaeyypa0JaamyzamaaCaaaleqabaGaeqOSdi2aaSbaaWqaaiaaigdaaeqaaaaakiabg2da9iaadwgadaahaaWcbeqaaiabgkHiTiaaicdacaGGUaGaaGimaiaaiwdacaaIZaGaaGimaiaaiwdacaaIZaGaaGOmaaaakiabg2da9iaaicdacaGGUaGaaGyoaiaaisdacaaI4aGaaG4maiaaiodacaGGUaaaaa@5001@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ Thus, the wage level of a black is, everything else held constant, 94.8 percent of the wage level of a nonblack. </para>
+          
+          
+          
+          <para id="id1172343136104">If we assume that <emphasis effect="bold">grade</emphasis> is a continuous variable (it really is not), we have the following interpretation of the parameter: <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>ln</m:mi><m:mi>w</m:mi><m:mo>=</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:mi>g</m:mi><m:mi>r</m:mi><m:mi>a</m:mi><m:mi>d</m:mi><m:mi>e</m:mi><m:mo>+</m:mo><m:mo>⋯</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaciiBaiaac6gacaWG3bGaeyypa0JaeqOSdi2aaSbaaSqaaiaaicdaaeqaaOGaey4kaSIaeqOSdi2aaSbaaSqaaiaaigdaaeqaaOGaam4zaiaadkhacaWGHbGaamizaiaadwgacqGHRaWkcqWIVlctaaa@474A@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ implies that <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mfrac>
+    <m:mn>1</m:mn>
+    <m:mi>w</m:mi>
+   </m:mfrac>
+   <m:mfrac>
+    <m:mrow>
+     <m:mo>∂</m:mo><m:mi>w</m:mi>
+    </m:mrow>
+    <m:mrow>
+     <m:mo>∂</m:mo><m:mi>g</m:mi><m:mi>r</m:mi><m:mi>a</m:mi><m:mi>d</m:mi><m:mi>e</m:mi>
+    </m:mrow>
+   </m:mfrac>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaWaaSaaaeaacaaIXaaabaGaam4DaaaadaWcaaqaaiabgkGi2kaadEhaaeaacqGHciITcaWGNbGaamOCaiaadggacaWGKbGaamyzaaaacqGH9aqpcqaHYoGydaWgaaWcbaGaaGymaaqabaaaaa@43BC@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->. Thus, in our case a increase of 1 year of schooling causes wages to increase by 6.46 percent.
+</para>
+          
+          <para id="id1172358252730">We can compare the results of using the <emphasis effect="bold">re</emphasis> option with using the <emphasis effect="bold">mle</emphasis> option (which directs <emphasis effect="italics">Stata</emphasis> to use maximum likelihood techniques to estimate the parameters of the system. The mle parameter estimates, shown in Figure 6, are the same as those generated using the <emphasis effect="bold">re</emphasis> command. However, the estimates of the standard errors (and, thus, the z-values) are different.</para>
+          <para id="eip-698"><figure id="pdfigure6">
+  <media id="pdfig6" alt="Stata output from the maximum likelihood estimation.">
+    <image mime-type="image/jpeg" src="../../media/Panel data figure 6.jpg"/>
+  </media>
+  <caption>
+     The maximum likelihood estimation.
+  </caption>
+</figure>
+        </para><para id="id1172343191371">The estimation of the fixed-effects model is straightforward and is shown in Figure 7. The command is the same as in the random-effects model but with the <emphasis effect="bold">re</emphasis> replaced by <emphasis effect="bold">fe</emphasis>. Notice from the results that the variables <emphasis effect="bold">grade</emphasis> and <emphasis effect="bold">black</emphasis> are dropped from the estimation results. They are dropped because the amount of schooling and race of an individual is fixed over all observations. These two variables, thus, are perfectly correlated with the dummy variables that hold constant the individual level characteristics. The effects of education and race differences are absorbed into the residual.</para>
+          <para id="eip-877"><figure id="pdfigure7">
+  <media id="pdfig7" alt="Stata output from the fixed-effects estimation.">
+    <image mime-type="image/jpeg" src="../../media/Panel data figure 7.jpg"/>
+  </media>
+  <caption>
+     The fixed-effects estimation.
+  </caption>
+</figure>
+        </para><para id="id1172349646612">The estimates of the parameter values for the fixed-effects model are very similar to those found for the random-effects model with the exception for the parameters associated with not living in an SMSA (<emphasis effect="bold">not_smsa</emphasis>) and with living in the South (<emphasis effect="bold">south</emphasis>). The random-effects model suggests that the wage level for someone living outside of a SMSA is 87.6 percent of the wage level of someone living in an SMSA; in the fixed-effects model, the wage level outside the SMSA is estimated to be 91.5 percent of the wage level of a woman living in a SMSA. The random-effects model estimates wages in the South are 91.6 percent the level of wages outside the South; the fixed-effects model fixes this wage premium at 91.6 percent.</para>
+          <para id="eip-584"><figure id="pdfigure8">
+  <media id="pdfig8" alt="Stata output from the Hausman test.">
+    <image mime-type="image/jpeg" src="../../media/Panel data figure 8.jpg"/>
+  </media>
+  <caption>
+     The Hausman test results.
+  </caption>
+</figure>
+        </para><para id="id1172359779814">The final issue we discuss in this example is the Hausman specification test. If the model is correctly specified and if <emphasis effect="italics">ν</emphasis><sub>i</sub> is uncorrelated with the explanatory variables, then the parameter estimates in the two models should not be statistically different. As shown in Figure 8, we first must same the results of the fixed-effects estimation using the command <emphasis effect="bold">estimates store fixed_effects</emphasis>. The null hypothesis is that the the difference in that parameter estimates is not systematic. The appropriate test statistic is the <emphasis effect="italics">χ</emphasis><sup>2</sup>(8), where the degrees of freedom are equal to the number of parameters in the model (8). The chi-squared statistic of 149.44 is greater than the critical value and we must reject the null hypothesis. The <emphasis effect="italics">Stata</emphasis> offers this interpretation of this result:</para>
+          <para id="id1172371853578">
+            <quote id="id1172371853578_quote" display="block">What does this mean? We have an unpleasant choice: we can admit that our model is misspecified—that we have not parameterized it correctly—or we can hold to our specification </quote>
+            <quote id="id1172344010928_quote" display="block">being correct, in which case the observed differences must be due to the zero-correlation of and the assumption. [StataCorp: 202]</quote>
+          </para>
+        </example>
+      </section>
+      <section id="id1172343576943"><title>Exercises</title><exercise id="id1172358891842">
+          <problem id="oo-id1172343097476">
+            <para id="id1172363719361">Estimation of a Labor Supply Function. An important issue in labor economics is the responsiveness of the number of hours worked to wages. Because labor supply curves can, in theory, be backward-bending, the sign and size of the impact of wages on the amount of labor supplied is an empirical issue. In this project you are to estimate the demand for labor curve for a cross-section of adult males.</para>
+          </problem>
+        </exercise>
+        <equation id="eip-174"><title>The model to be estimated is:</title><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:msub>
+    <m:mi>h</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>2</m:mn>
+   </m:msub>
+   <m:mi>A</m:mi><m:mi>g</m:mi><m:msub>
+    <m:mi>e</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>3</m:mn>
+   </m:msub>
+   <m:mi>A</m:mi><m:mi>g</m:mi><m:msubsup>
+    <m:mi>e</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+    <m:mn>2</m:mn>
+   </m:msubsup>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>4</m:mn>
+   </m:msub>
+   <m:mi>N</m:mi><m:msub>
+    <m:mi>C</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>5</m:mn>
+   </m:msub>
+   <m:mi>H</m:mi><m:msub>
+    <m:mi>I</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadMhadaWgaaWcbaGaamyAaiaadshaaeqaaOGaeyypa0JaeqOSdi2aaSbaaSqaaiaaicdaaeqaaOGaey4kaSIaeqOSdi2aaSbaaSqaaiaaigdaaeqaaOGaamiAamaaBaaaleaacaWGPbGaamiDaaqabaGccqGHRaWkcqaHYoGydaWgaaWcbaGaaGOmaaqabaGccaWGbbGaam4zaiaadwgadaWgaaWcbaGaamyAaiaadshaaeqaaOGaey4kaSIaeqOSdi2aaSbaaSqaaiaaiodaaeqaaOGaamyqaiaadEgacaWGLbWaa0baaSqaaiaadMgacaWG0baabaGaaGOmaaaakiabgUcaRiabek7aInaaBaaaleaacaaI0aaabeaakiaad6eacaWGdbWaaSbaaSqaaiaadMgacaWG0baabeaakiabgUcaRiabek7aInaaBaaaleaacaaI1aaabeaakiaadIeacaWGjbWaaSbaaSqaaiaadMgacaWG0baabeaakiabgUcaRiabew7aLnaaBaaaleaacaWGPbGaamiDaaqabaaaaa@672E@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</equation><para id="id1172366416648">where:</para>
+        
+        
+        <para id="id1172343422529"><emphasis effect="italics">y </emphasis><sub>it</sub> = natural logarithm of individual <emphasis effect="italics">i</emphasis>’s wage rate in year <emphasis effect="italics">t</emphasis>,</para>
+        <para id="id1172362878851"><emphasis effect="italics">h </emphasis><sub>it</sub> = natural logarithm of total number of hours worked by individual <emphasis effect="italics">i</emphasis> in year <emphasis effect="italics">t</emphasis>,</para>
+        <para id="id1172356604455"><emphasis effect="italics">Age </emphasis><sub>it</sub> = age of individual <emphasis effect="italics">i</emphasis> in year <emphasis effect="italics">t</emphasis>,</para>
+        <para id="id1172367346674"><emphasis effect="italics">NC</emphasis><sub> it</sub> = number of children of individual <emphasis effect="italics">i</emphasis> in year <emphasis effect="italics">t</emphasis>, and</para>
+        <para id="id1172365601427"><emphasis effect="italics">HI</emphasis><sub> it</sub> = an dummy variable equal to 1 if individual <emphasis effect="italics">i</emphasis> in year <emphasis effect="italics">t</emphasis> has bad health and 0 otherwise.</para>
+        <para id="id3395854">The data are from Ziliak, James P. (1997) “Efficient Estimation with Panel Data When Instruments Are Predetermined: An Empirical Comparison of Moment-Condition Estimators,” <emphasis effect="italics">Journal of Business &amp; Economic Statistics</emphasis><emphasis effect="bold"> 15</emphasis>(4): 419-431. Ziliak (p. 423) describes his data as follows:</para>
+        <para id="eip-502"><quote id="ziliak-quote"> 
+  The data used to estimate the life-cycle labor-supply parameters come from Waves XII-XXI (calendar years 1978-1987) of the PSID. The sample is selected on many dimensions and is similar to other research studying life-cycle models of labor supply. The sample is restricted to continuously married, continuously working, prime-age men aged 22-51 in 1978 from the Survey Research Center random subsample of the PSID. In addition the individual must either be paid an hourly wage rate or must be salaried, and he cannot be a piece-rate worker or self-employed. This selection process resulted in a balanced panel of 532 men over 10 years or 5,320 observations. The real wage rate, <emphasis effect="italics">w</emphasis><emphasis effect="italics">it</emphasis>,. is the hourly wage reported by the panel participant rather than the average wage (annual earnings over annual hours) to minimize division bias (Borjas 1981).</quote>
+</para>
+        <para id="id1172354244289">The data are available in the any of the three files <link resource="Mom.dat" window="new"><emphasis effect="italics">MOM.dat</emphasis></link>, <link resource="MOM.doc" window="new"><emphasis effect="italics">MOM.doc</emphasis></link>, and <link resource="MOM.wks" window="new"><emphasis effect="italics">MOM.wks</emphasis></link>. </para>
+        
+        <list id="eip-101" list-type="enumerated" number-style="lower-alpha"><item>Provide scatter plots among the dependent variable (Natural logarithm of hours) against each of the explanatory variables Natural logarithm of real wages, Age, Number of children, and Health. (Label these Figures 1 to 4.)</item>
+<item>Present a table of the summary statistics for all of the variables in this data set (except <emphasis effect="italics">ID</emphasis> and <emphasis effect="italics">Year</emphasis>).</item>
+<item>Provide a histogram of each of the following variables: Natural logarithm of hours, Natural logarithm of real wages, Age, and Number of children. (Label these Figures 5 to 8).</item>
+<item>Estimate Equation (1) using (1) OLS (sometimes called a “pooled model”), (2) a “between” model (where the observations in the regression are the averages over the 10 years of each variable for each individual, (3) a fixed effects model, (4) a MLE random effects model and (5) a GLS random effects model. Present the results of your estimations in a single table and offer an interpretation for each parameter you estimate. Use <link resource="HW 1 Table.doc">Table 1</link> as shown below as a template for the table to present your results.</item></list>
+        
+        
+        <table id="eip-340" summary="Table of results to be completed in answering this question." frame="topbot" rowsep="0" colsep="0"><title>Hours and wages: Summary of linear panel model estimations (Dependent variable is the natural logarithm of total hours worked in a year; the observations consist of 532 adult males over the 10 year period 1978-1987).</title>
+<tgroup cols="6"><tbody>
+  <row rowsep="1">
+    <entry/>
+    <entry align="center">(1) Pooled</entry>
+    <entry align="center">(2) Between</entry>
+    <entry align="center">(3) Fixed Effects</entry>
+    <entry align="center">(4) MLE Random Effects</entry>
+    <entry align="center">(5) GLS Random Effects</entry>
+  </row>
+  <row>
+    <entry>Natural logarithm of real wages</entry>
+    <entry align="center"/>
+    <entry align="center"/>
+    <entry align="center"/>
+    <entry align="center"/>
+    <entry align="center"/>
+  </row>
+  <row>
+    <entry/>
+    <entry align="center">( )</entry>
+    <entry align="center">( )</entry>
+    <entry align="center">( )</entry>
+    <entry align="center">( )</entry>
+    <entry align="center">( )</entry>
+  </row>
+  <row>
+    <entry>Age</entry>
+    <entry align="center"/>
+    <entry align="center"/>
+    <entry align="center"/>
+    <entry align="center"/>
+    <entry align="center"/>
+  </row>
+  <row>
+    <entry/>
+    <entry align="center">( )</entry>
+    <entry align="center">( )</entry>
+    <entry align="center">( )</entry>
+    <entry align="center">( )</entry>
+    <entry align="center">( )</entry>
+  </row>
+  <row>
+    <entry>Age<sup>2</sup></entry>
+    <entry align="center"/>
+    <entry align="center"/>
+    <entry align="center"/>
+    <entry align="center"/>
+    <entry align="center"/>
+  </row>
+  <row>
+    <entry/>
+    <entry align="center">( )</entry>
+    <entry align="center">( )</entry>
+    <entry align="center">( )</entry>
+    <entry align="center">( )</entry>
+    <entry align="center">( )</entry>
+  </row>
+  <row>
+    <entry>Number of children</entry>
+    <entry align="center"/>
+    <entry align="center"/>
+    <entry align="center"/>
+    <entry align="center"/>
+    <entry align="center"/>
+  </row>
+  <row>
+    <entry/>
+    <entry align="center">( )</entry>
+    <entry align="center">( )</entry>
+    <entry align="center">( )</entry>
+    <entry align="center">( )</entry>
+    <entry align="center">( )</entry>
+  </row>
+  <row>
+    <entry>Health indicator</entry>
+    <entry align="center"/>
+    <entry align="center"/>
+    <entry align="center"/>
+    <entry align="center"/>
+    <entry align="center"/>
+  </row>
+  <row>
+    <entry/>
+    <entry align="center">( )</entry>
+    <entry align="center">( )</entry>
+    <entry align="center">( )</entry>
+    <entry align="center">( )</entry>
+    <entry align="center">( )</entry>
+  </row>
+  <row>
+    <entry>Intercept</entry>
+    <entry align="center"/>
+    <entry align="center"/>
+    <entry align="center"/>
+    <entry align="center"/>
+    <entry align="center"/>
+  </row>
+  <row rowsep="1">
+    <entry/>
+    <entry align="center">( )</entry>
+    <entry align="center">( )</entry>
+    <entry align="center">( )</entry>
+    <entry align="center">( )</entry>
+    <entry align="center">( )</entry>
+  </row>
+  <row>
+    <entry>R<sup>2</sup></entry>
+    <entry align="center"/>
+    <entry align="center"/>
+    <entry align="center"/>
+    <entry align="center">—</entry>
+    <entry align="center">—</entry>
+  </row>
+  <row>
+    <entry>σ<sub>μ</sub></entry>
+    <entry align="center">—</entry>
+    <entry align="center">—</entry>
+    <entry align="center"/>
+    <entry align="center"/>
+    <entry align="center"/>
+  </row>
+  <row>
+    <entry>σ<sub>ε</sub></entry>
+    <entry align="center">—</entry>
+    <entry align="center">—</entry>
+    <entry align="center"/>
+    <entry align="center"/>
+    <entry align="center"/>
+  </row>
+  <row>
+    <entry>Sample size</entry>
+    <entry align="center"/>
+    <entry align="center"/>
+    <entry align="center"/>
+    <entry align="center"/>
+    <entry align="center"/>
+  </row>
+</tbody>
+
+
+
+
+
+</tgroup>
+</table>
+        <exercise id="id1172358234255">
+          <problem id="oo-id1172346982300">
+            <para id="id1172348582280">The Effectiveness of Advertising Bans on Smoking. Anti-smoking activists often push for a total ban on cigarette advertisements. Indeed, one of the basic assumptions of the groups pushing the 1996 proposed settlement with the tobacco companies is that the amount of tobacco consumed is positively affected by the amount of tobacco advertising. There are two mechanisms that might underlie such a relationship. The first mechanism suggests that the advertising increases the amount of cigarettes smoked by <emphasis effect="italics">current</emphasis> smokers. Many economists doubt that the tobacco advertising increases the consumption of current smokers, arguing that the total consumption of cigarettes is unresponsive to advertisement. Instead, they argue that advertising is an effort by cigarette companies to affect the brand of cigarettes that current smokers consume. The second mechanism suggests that advertising is an effort by cigarette companies to induce non-smokers (especially children) to try cigarettes. The main reason that cigarette companies want non-smokers to try smoking, so the argument goes, is that some percentage of non-smokers who try cigarettes will become addicted and will form the future demand for cigarettes.</para>
+          </problem>
+        </exercise>
+        
+        <para id="id1172344115947">The effect of a total ban on advertising would be completely different if cigarette companies advertise with the hope of increasing the number of people addicted to cigarettes. In particular, the ban should have a small or negligible effect on current cigarette demand. Instead, the cigarette companies would face a steadily decreasing demand for their product. Such a decrease in demand would reduce future profits for these companies. If future profits fell enough, some of the companies might be forced out of business. Clearly, it is this result that anti-smoking activists have in mind with their proposals to ban cigarette advertisements. </para>
+        <para id="id1688157">Finally, if advertising only induces current smokers to increase the number of cigarettes they consume, then the total ban on advertising should cause a one-time reduction in cigarette consumption that will reduce the profits of cigarette companies. However, which of these three mechanisms (if any) is correct is an empirical question.</para>
+        <para id="id1172367429589">Six European countries adopted a complete ban on cigarette advertising in the period after 1970. It this project we use annual data on smoking consumption in 22 developed countries for the 27 years between 1964 and 1990 to test the effect of a complete smoking ban on cigarette demand (giving us 594 observations). Moreover, since we have no <emphasis effect="italics">a priori</emphasis> reason to choose one model specification over another, we check the stability of the estimated impact of an advertising ban on cigarette demand under several alternative model specifications.</para>
+        <para id="id1172374235049">We estimate three types of specifications of the model — the linear model, the log-linear model, and the log-log model. In general whether one uses a variable or the logarithm of the variable is the main difference in these three specifications. The linear model does not transform either the dependent or the independent variables. A variation on the linear models allows the use of the square and product of some of the independent variables in order to take care of any non-linearity in the data. The log-linear model takes the same form as the linear model except that the dependent variable is the logarithm of variable under study. Finally, in the log-log model both the dependent and independent variables are, if possible, in logarithm form. </para>
+        <para id="id1172365619404">For example, for this problem the dependent variable in any of these specifications is either the per capita consumption of tobacco or the logarithm of the per capita consumption of tobacco. The dependent variables might include (1) the real price of tobacco in each country for each year, (2) a measure of the per capita income level of the country for each year, (3) the unemployment rate of the country for each year, (4) a measure of the age distribution of the population to measure smoking intensity by age, (5) a trend variable to account for the rising awareness of the health costs of smoking, (6) a dummy variable equal to one for years that a country has a complete ban on cigarette advertising, and (7) a set of 21 dummy variables identifying the country. Let <emphasis effect="italics">T</emphasis><emphasis effect="italics">it</emphasis> be the measure of per capita cigarette consumption in country <emphasis effect="italics">i</emphasis> for year <emphasis effect="italics">t</emphasis>; <emphasis effect="italics">P</emphasis><emphasis effect="italics">it</emphasis>, the price of tobacco; <emphasis effect="italics">I</emphasis><emphasis effect="italics">it</emphasis>, the measure of per capita income level; <emphasis effect="italics">U</emphasis><emphasis effect="italics">it</emphasis>, country <emphasis effect="italics">i</emphasis>’s unemployment rate in year <emphasis effect="italics">t</emphasis>; <emphasis effect="italics">A</emphasis><emphasis effect="italics">it</emphasis>, country <emphasis effect="italics">i</emphasis>’s age distribution in year <emphasis effect="italics">t</emphasis>; <emphasis effect="italics">Year</emphasis>, a trend variable; <emphasis effect="italics">B</emphasis><emphasis effect="italics">it</emphasis>, the dummy variable for the ban; and <emphasis effect="italics">C</emphasis><emphasis effect="italics">i</emphasis>, the dummy variable for country <emphasis effect="italics">i</emphasis>.</para>
+        
+        <list id="eip-187" list-type="enumerated" number-style="arabic"><title>Examples of the three models are:</title><item>Linear: <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>T</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:msub>
+    <m:mi>P</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>2</m:mn>
+   </m:msub>
+   <m:msub>
+    <m:mi>I</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:mi>β</m:mi><m:msub>
+    <m:mi>U</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>4</m:mn>
+   </m:msub>
+   <m:msub>
+    <m:mi>A</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>5</m:mn>
+   </m:msub>
+   <m:mi>Y</m:mi><m:mi>e</m:mi><m:mi>a</m:mi><m:msub>
+    <m:mi>r</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>6</m:mn>
+   </m:msub>
+   <m:msub>
+    <m:mi>B</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadsfadaWgaaWcbaGaamyAaiaadshaaeqaaOGaeyypa0JaeqOSdi2aaSbaaSqaaiaaicdaaeqaaOGaey4kaSIaeqOSdi2aaSbaaSqaaiaaigdaaeqaaOGaamiuamaaBaaaleaacaWGPbGaamiDaaqabaGccqGHRaWkcqaHYoGydaWgaaWcbaGaaGOmaaqabaGccaWGjbWaaSbaaSqaaiaadMgacaWG0baabeaakiabgUcaRiabek7aIjaadwfadaWgaaWcbaGaamyAaiaadshaaeqaaOGaey4kaSIaeqOSdi2aaSbaaSqaaiaaisdaaeqaaOGaamyqamaaBaaaleaacaWGPbGaamiDaaqabaGccqGHRaWkcqaHYoGydaWgaaWcbaGaaGynaaqabaGccaWGzbGaamyzaiaadggacaWGYbWaaSbaaSqaaiaadshaaeqaaOGaey4kaSIaeqOSdi2aaSbaaSqaaiaaiAdaaeqaaOGaamOqamaaBaaaleaacaWGPbGaamiDaaqabaGccqGHRaWkcqaH1oqzdaWgaaWcbaGaamyAaiaadshaaeqaaaaa@6854@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</item>
+<item>Log-Linear: <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>ln</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>T</m:mi>
+      <m:mrow>
+       <m:mi>i</m:mi><m:mi>t</m:mi>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:msub>
+    <m:mi>P</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>2</m:mn>
+   </m:msub>
+   <m:msub>
+    <m:mi>I</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:mi>β</m:mi><m:msub>
+    <m:mi>U</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>4</m:mn>
+   </m:msub>
+   <m:msub>
+    <m:mi>A</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>5</m:mn>
+   </m:msub>
+   <m:mi>Y</m:mi><m:mi>e</m:mi><m:mi>a</m:mi><m:msub>
+    <m:mi>r</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>6</m:mn>
+   </m:msub>
+   <m:msub>
+    <m:mi>B</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiGacYgacaGGUbWaaeWaaeaacaWGubWaaSbaaSqaaiaadMgacaWG0baabeaaaOGaayjkaiaawMcaaiabg2da9iabek7aInaaBaaaleaacaaIWaaabeaakiabgUcaRiabek7aInaaBaaaleaacaaIXaaabeaakiaadcfadaWgaaWcbaGaamyAaiaadshaaeqaaOGaey4kaSIaeqOSdi2aaSbaaSqaaiaaikdaaeqaaOGaamysamaaBaaaleaacaWGPbGaamiDaaqabaGccqGHRaWkcqaHYoGycaWGvbWaaSbaaSqaaiaadMgacaWG0baabeaakiabgUcaRiabek7aInaaBaaaleaacaaI0aaabeaakiaadgeadaWgaaWcbaGaamyAaiaadshaaeqaaOGaey4kaSIaeqOSdi2aaSbaaSqaaiaaiwdaaeqaaOGaamywaiaadwgacaWGHbGaamOCamaaBaaaleaacaWG0baabeaakiabgUcaRiabek7aInaaBaaaleaacaaI2aaabeaakiaadkeadaWgaaWcbaGaamyAaiaadshaaeqaaOGaey4kaSIaeqyTdu2aaSbaaSqaaiaadMgacaWG0baabeaaaaa@6BC1@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</item>
+<item>Log-Log: <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>ln</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>T</m:mi>
+      <m:mrow>
+       <m:mi>i</m:mi><m:mi>t</m:mi>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:mi>ln</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>P</m:mi>
+      <m:mrow>
+       <m:mi>i</m:mi><m:mi>t</m:mi>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>2</m:mn>
+   </m:msub>
+   <m:mi>ln</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>I</m:mi>
+      <m:mrow>
+       <m:mi>i</m:mi><m:mi>t</m:mi>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>+</m:mo><m:mi>β</m:mi><m:msub>
+    <m:mi>U</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>4</m:mn>
+   </m:msub>
+   <m:msub>
+    <m:mi>A</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>5</m:mn>
+   </m:msub>
+   <m:mi>Y</m:mi><m:mi>e</m:mi><m:mi>a</m:mi><m:msub>
+    <m:mi>r</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>6</m:mn>
+   </m:msub>
+   <m:msub>
+    <m:mi>B</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiGacYgacaGGUbWaaeWaaeaacaWGubWaaSbaaSqaaiaadMgacaWG0baabeaaaOGaayjkaiaawMcaaiabg2da9iabek7aInaaBaaaleaacaaIWaaabeaakiabgUcaRiabek7aInaaBaaaleaacaaIXaaabeaakiGacYgacaGGUbWaaeWaaeaacaWGqbWaaSbaaSqaaiaadMgacaWG0baabeaaaOGaayjkaiaawMcaaiabgUcaRiabek7aInaaBaaaleaacaaIYaaabeaakiGacYgacaGGUbWaaeWaaeaacaWGjbWaaSbaaSqaaiaadMgacaWG0baabeaaaOGaayjkaiaawMcaaiabgUcaRiabek7aIjaadwfadaWgaaWcbaGaamyAaiaadshaaeqaaOGaey4kaSIaeqOSdi2aaSbaaSqaaiaaisdaaeqaaOGaamyqamaaBaaaleaacaWGPbGaamiDaaqabaGccqGHRaWkcqaHYoGydaWgaaWcbaGaaGynaaqabaGccaWGzbGaamyzaiaadggacaWGYbWaaSbaaSqaaiaadshaaeqaaOGaey4kaSIaeqOSdi2aaSbaaSqaaiaaiAdaaeqaaOGaamOqamaaBaaaleaacaWGPbGaamiDaaqabaGccqGHRaWkcqaH1oqzdaWgaaWcbaGaamyAaiaadshaaeqaaaaa@729B@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</item></list>
+        
+        <para id="id1172359145140">In models (1) and (2) it is possible to include additional explanatory variables that are the square of some of the currently included explanatory variables. In all three models it is possible to include as explanatory variables the product of the ban dummy and any of the currently included explanatory variables. Finally, in equation (2) we cannot take the logarithm of the unemployment rate because the data we have report zero levels of unemployment.</para>
+        <para id="id3553873">The data you will use in this project are in the <emphasis effect="italics">MS Excel</emphasis> file <link window="new" resource="SMKDATA.xls">Smkdata.xls</link>. The variables included in the file are as follows:</para>
+        <table id="eip-283" summary="Definitions of the variables in the smoking data set." frame="topbot" rowsep="0"><title>Definition of the cigarette consumption data set.</title>
+<tgroup cols="3"><tbody>
+  <row rowsep="1">
+    <entry align="center">Column</entry>
+    <entry align="center">Variable</entry>
+    <entry>Definition</entry>
+  </row>
+  <row>
+    <entry align="center">A</entry>
+    <entry align="center">Country</entry>
+    <entry>Name of country</entry>
+  </row>
+  <row>
+    <entry align="center">B</entry>
+    <entry align="center">Country ID</entry>
+    <entry>Integar from 1 to 22, each designating a country</entry>
+  </row>
+  <row>
+    <entry align="center">C</entry>
+    <entry align="center">Year</entry>
+    <entry>Year of observation (1964, …, 1990)</entry>
+  </row>
+  <row>
+    <entry align="center">D</entry>
+    <entry align="center">Tobacco</entry>
+    <entry>Total grams of tobacco sold per individual 15 years or older</entry>
+  </row>
+  <row>
+    <entry align="center">E</entry>
+    <entry align="center">Price</entry>
+    <entry>Real price of 20 grams of tobacco in 1990 US cents (= Nominal price per E 20 grams of tobacco divided by the Gross Domestic Price deflator)</entry>
+  </row>
+  <row>
+    <entry align="center">F</entry>
+    <entry align="center">Consump</entry>
+    <entry>Per capita private final consumption expenditures in 1990 US dollars</entry>
+  </row>
+  <row>
+    <entry align="center">G</entry>
+    <entry align="center">Unemp</entry>
+    <entry>Number of unemployed persons per 1000 members of the workforce</entry>
+  </row>
+  <row>
+    <entry align="center">H</entry>
+    <entry align="center">AgeDist</entry>
+    <entry>Age distribution. This variable attempts to measure the differences in intensity of smoking as a function of age. It is equal to the relative consumption rate of tobacco in the UK observed between 1966 and 1981 by age group times the percentage of the population in the country in that age group.</entry>
+  </row>
+  <row>
+    <entry align="center">I</entry>
+    <entry align="center">Ban</entry>
+    <entry>Dummy variable equal to 1 if the country has a complete ban on tobacco advertising. The six countries in the sample with a complete ban and the first year of the ban are: Iceland (1972), Norway (1976), Finland (1979), Portugal (1984), Italy (1984), and Canada (1989).</entry>
+  </row>
+  <row>
+    <entry align="center">J</entry>
+    <entry align="center">BanTime</entry>
+    <entry>The number of years since the ban was put in place (if ban went into effect in 1972, then years 1964-1972 are equal to 0, year 1973 equals 1, year 1974 equals 2, etc.)</entry>
+  </row>
+</tbody>
+
+
+
+</tgroup>
+</table>
+        
+        <para id="id1172363350364">(a) How do these variables match the ones suggested in the discussion of equations (1), (2), and (3)? </para>
+        
+        <para id="eip-167">(b) Estimate the fixed effects models of the following versions of equations (1), (2), and (3):</para><list id="id1172366220518" list-type="enumerated" number-style="arabic">
+          <item>Equations (1), (2), and (3) as specified above.</item>
+          <item>Equations (1) and (2) with squared terms for the price, income, unemployment rate, and the age distribution included. This regression is designed to test for non-linearity.</item>
+          <item>Equations (1) and (2) with the squared terms mentioned in 2 that are statistically significant plus the following new variables: Ban*Time, Ban*Price, and Ban*Consump. (You must create these variables) This regression allows for an effect of the Ban on the slopes of the other explanatory variables.</item>
+          <item>Equation (3) with the following new variables: Ban*Log(Time), Ban*Log(Price), and Ban*Log(Consump).</item>
+          <item>Equations (1), (2), and (3) as estimated in 3 and 4 with a variable that counts the number of years that a total ban has been in effect (BanTime) and its square (BanTime<sup>2</sup>). This regression allows for a changing impact of a ban the longer it is in effect.</item>
+        </list>
+        <para id="id1172377410889">Report the results of your regressions in a table that allows you to comment on the stability of your estimation results over specifications. </para>
+        <para id="id1172355589566">(c) Do these results support any of the theories suggested above? </para>
+        <para id="id1172363694223">(d) What, if any, policy conclusions would you make given your estimations? </para>
+        <para id="id1172343152681">(e) Assume for the moment that you “believe” your results you got in (5). Sketch out a strategy you would follow to forecast the impact of a ban in a country that does not currently have a ban.</para><para id="eip-150">Note: The data in this problem are from Stewart, Michael J. (1993) “The Effect on Tobacco Consumption of Advertising Bans in OECD Countries,” <emphasis effect="italics">International Journal of Advertising</emphasis> <emphasis effect="bold">12</emphasis>(2): 155-180. The data set can be downloaded from <link url="http://www.forces.org/evidence/oecd/6ban.htm">the author's website</link>.</para>
+      </section>
+      <section id="id1172361630100">
+        <title>Bibliography</title>
+        <para id="id1172342897362">Cameron, A. Colin and Pravin K. Trivedi (2005). <emphasis effect="italics">Microeconometrics: Methods and Applications</emphasis> (New York: Cambridge University Press).</para>
+        <para id="id1172359595781">Greene, W. H. (2003). <emphasis effect="italics">Econometric Analysis</emphasis>, 5<sup>th</sup> edition (Upper Saddle River, NJ: Prentice-Hall).</para>
+        <para id="id1172368092393">Hsiao, Cheng (2003). <emphasis effect="italics">Analysis of Panel Data</emphasis>, 2<sup>nd</sup> Edition (New York: Cambridge University Press).</para>
+        <para id="id1172363350422">StataCorp (2003). <emphasis effect="italics">Stata Statistical Software: Release8.0</emphasis> (College Station, TX: Stata Corporation).</para>
+        <para id="id1172362791243">Wooldridge, J. M. (2002). <emphasis effect="italics">Econometric Analysis of Cross Section and Panel Data</emphasis> (Cambridge, MA: MIT Press).</para>
+      </section>
+    </section>
+  </content>
+</document>

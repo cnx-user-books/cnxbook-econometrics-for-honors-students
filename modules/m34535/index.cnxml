@@ -1,0 +1,4328 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML">
+  <title>Statistical terminology</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m34535</md:content-id>
+  <md:title>Statistical terminology</md:title>
+  <md:abstract>This module contains a set of definitions from statistics that might be useful for advanced undergraduates.</md:abstract>
+  <md:uuid>1423f1f2-3633-48cd-8376-78e812087f6a</md:uuid>
+</metadata>
+
+<content>
+    <section id="id1171139956684">
+      <title>Important definitions in statistics</title>
+      <para id="id1171132620271">It is not unusual for students to forget important concepts learned in an earlier course. This set of definitions is intended to stir memories of those wonderful times when you were learning statistics and econometrics. It is not intended to replace a statistics course but to provide you with a handy guide to the denfinition of some important terms in the statistical tools used by economists.</para>
+    </section>
+    <section id="id1171119833047">
+      <title>Random variables</title>
+      <para id="id8618276"><title>Random experiment</title>A random experiment is an experiment whose outcome is uncertain.</para>
+      <para id="id1171124912101"><title>Outcome space</title>The outcome space (also sometimes referred to as the sample space) is the list of all possible outcomes of a random experiment.</para>
+      <example id="oo-id1171130703468"><title>Single toss of a coin. </title><para id="id1171129131626">Consider the toss of a coin. Since the outcome is uncertain, tossing the coin is an example of a random experiment. The outcome space consists of a heads and a tails. If we let <emphasis effect="italics">X</emphasis> be 0 if the outcome is a heads and let <emphasis effect="italics">X</emphasis> equal 1 if the outcome is a tails, then <emphasis effect="italics">X</emphasis> is a random variable. Since <emphasis effect="italics">X</emphasis> only can take on integer values (0 or 1), it is a discrete random variable.</para>
+      </example>
+      <para id="id1171122976788"><title>Random variable</title>A random variable is a number that can be assigned to an outcome of a random experiment. A discrete random variable has a finite number of possible values while a continuous random variable has an infinite number of potential values.</para>
+      <para id="id1171129199463"><title>Non-stochastic variable</title>A non-stochastic variable is any variable that is not a random variable; i.e., does not represent the outcome of a random experiment.</para>
+      <example id="oo-id1171128901242"><title>Multiple tosses of a coin. </title><para id="id1171132934702">Let <emphasis effect="italics">x</emphasis> equal the number of heads that occur when a coin is tossed n times. The tossing of the coin <emphasis effect="italics">n</emphasis> times is a random experiment. The outcome space of this random experiment is an integar between 0 and <emphasis effect="italics">n</emphasis>. Since the value <emphasis effect="italics">x</emphasis> is equal represents the outcome of a random experiment, it is a random variable.</para>
+      </example>
+      <para id="id1171136298806"><title>Random sample</title>A random sample of size <emphasis effect="italics">n</emphasis> out of a population of size <emphasis effect="italics">N</emphasis> has the characteristic that every member of the population is equally likely to be chosen.</para>
+      <example id="oo-id1171130508126"><title>Height of college age women. </title><para id="id1171133030993">Consider a random sample of the population of college age women. The height, <emphasis effect="italics">x</emphasis>, of any woman chosen from this population is a random variable with a value somewhere in the outcome space, where the outcome space is a number between (say) 24 and 96 inches. Since in theory we can have as accurate a measurement as we might like, <emphasis effect="italics">x</emphasis> can be thought of as being a continuous random variable.</para>
+      </example>
+    </section>
+    <section id="id1171122945925">
+      <title>Probability</title>
+      <section id="id1171123004709">
+        <title>General terms</title>
+        <para id="id1171129014495"><title>Probability distribution for a discrete random variable. </title>Consider a discrete random variable <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>x</m:mi>
+    <m:mi>i</m:mi>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadIhadaWgaaWcbaGaamyAaaqabaaaaa@3800@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --> that represents an outcome of the <emphasis effect="italics">n</emphasis> potential outcomes of a random experiment—that is, the set of potential outcomes is represented by <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mstyle mathsize="normal" mathvariant="bold"><m:mi>X</m:mi></m:mstyle><m:mo>=</m:mo><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>x</m:mi>
+      <m:mn>1</m:mn>
+     </m:msub>
+     <m:mo>,</m:mo><m:mo>…</m:mo><m:mo>,</m:mo><m:msub>
+      <m:mi>x</m:mi>
+      <m:mi>n</m:mi>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaahIfacqGH9aqpdaqadaqaaiaadIhadaWgaaWcbaGaaGymaaqabaGccaGGSaGaeSOjGSKaaiilaiaadIhadaWgaaWcbaGaamOBaaqabaaakiaawIcacaGLPaaacaGGUaaaaa@40A1@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+<!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>Pr</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>x</m:mi>
+      <m:mi>i</m:mi>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiGaccfacaGGYbWaaeWaaeaacaWG4bWaaSbaaSqaaiaadMgaaeqaaaGccaGLOaGaayzkaaaaaa@3B5F@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --> Any function is a probability if and only if (1) <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>Pr</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>x</m:mi>
+      <m:mi>i</m:mi>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>≥</m:mo><m:mn>0</m:mn><m:mtext> for all </m:mtext><m:mi>i</m:mi><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>,</m:mo><m:mo>…</m:mo><m:mo>,</m:mo><m:mi>n</m:mi><m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiGaccfacaGGYbWaaeWaaeaacaWG4bWaaSbaaSqaaiaadMgaaeqaaaGccaGLOaGaayzkaaGaeyyzImRaaGimaiaabccacaqGMbGaae4BaiaabkhacaqGGaGaaeyyaiaabYgacaqGSbGaaeiiaiaadMgacqGH9aqpcaaIXaGaaiilaiablAciljaacYcacaWGUbGaaiilaaaa@4C2E@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --> (2) <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>Pr</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>x</m:mi>
+      <m:mi>i</m:mi>
+     </m:msub>
+     <m:mo>∪</m:mo><m:msub>
+      <m:mi>x</m:mi>
+      <m:mi>j</m:mi>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mi>Pr</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>x</m:mi>
+      <m:mi>i</m:mi>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>+</m:mo><m:mi>Pr</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>x</m:mi>
+      <m:mi>j</m:mi>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiGaccfacaGGYbWaaeWaaeaacaWG4bWaaSbaaSqaaiaadMgaaeqaaOGaeyOkIGSaamiEamaaBaaaleaacaWGQbaabeaaaOGaayjkaiaawMcaaiabg2da9iGaccfacaGGYbWaaeWaaeaacaWG4bWaaSbaaSqaaiaadMgaaeqaaaGccaGLOaGaayzkaaGaey4kaSIaciiuaiaackhadaqadaqaaiaadIhadaWgaaWcbaGaamOAaaqabaaakiaawIcacaGLPaaaaaa@4BF6@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --> for all i and j, and (3) <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>i</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+     <m:mi>n</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:mi>Pr</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:msub>
+        <m:mi>x</m:mi>
+        <m:mi>i</m:mi>
+       </m:msub>
+       
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow>
+    </m:mrow>
+   </m:mstyle><m:mo>=</m:mo><m:mn>1.</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaamaaqahabaGaciiuaiaackhadaqadaqaaiaadIhadaWgaaWcbaGaamyAaaqabaaakiaawIcacaGLPaaaaSqaaiaadMgacqGH9aqpcaaIXaaabaGaamOBaaqdcqGHris5aOGaeyypa0JaaGymaiaac6caaaa@43C0@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --> An example of a discrete distribution is in Example 4.
+</para>
+        
+        <example id="oo-id1171137722121">
+          <para id="id1171123280308"><title>Discrete distribution.</title>Figure 1 illustrates a discrete probability distribution where <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>x</m:mi>
+    <m:mi>i</m:mi>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadIhadaWgaaWcbaGaamyAaaqabaaaaa@3800@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --> goes from 1 to 8. The areas in the shaded rectangles sum to 1.</para><para id="eip-1"><figure id="prfigure1">
+  <title>A discrete probability function</title>
+  <media id="dogpic" alt="Graph of a discrete probability function.">
+    <image mime-type="image/jpeg" src="../../media/PR figure 1.jpg"/>
+  </media>
+  <caption>
+     The areas of the rectangles sum to 1.
+  </caption>
+</figure>
+</para>
+        </example>
+        
+        <para id="id1171140010542"><title>Probability density function. </title>If <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>x</m:mi>
+    <m:mi>i</m:mi>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadIhadaWgaaWcbaGaamyAaaqabaaaaa@3800@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ is a continuous random variable, the concept of a probability distribution is replaced by a probility density function (pdf). A function, <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>x</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAgadaqadaqaaiaadIhaaiaawIcacaGLPaaacaGGSaaaaa@3A0A@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ is a pdf  for the continuous random variable x if and only if (1) <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>x</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>≥</m:mo><m:mn>0</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAgadaqadaqaaiaadIhaaiaawIcacaGLPaaacqGHLjYScaaIWaaaaa@3BDA@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ for <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mo>-</m:mo><m:mi>∞</m:mi><m:mo>&lt;</m:mo><m:mi>x</m:mi><m:mo>&lt;</m:mo><m:mi>∞</m:mi><m:mo>;</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaac2cacqGHEisPcqGH8aapcaWG4bGaeyipaWJaeyOhIuQaai4oaaaa@3D40@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+(2) <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mstyle displaystyle="true">
+    <m:mrow><m:munderover>
+     <m:mo>∫</m:mo>
+     <m:mrow>
+      <m:mo>−</m:mo><m:mi>∞</m:mi>
+     </m:mrow>
+     <m:mi>∞</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mi>x</m:mi>
+     <m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>x</m:mi>
+    </m:mrow>
+   </m:mrow>
+   
+  </m:mstyle><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>;</m:mo>
+ </m:mrow>
+ <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaamaapehabaGaamOzamaabmaabaGaamiEaaGaayjkaiaawMcaaiaadsgacaWG4baaleaacqGHsislcqGHEisPaeaacqGHEisPa0Gaey4kIipakiabg2da9iaaigdacaGG7aaaaa@4402@</m:annotation>
+</m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and (3) <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>x</m:mi>
+   <m:mo>)</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAgadaqadaqaaiaadIhaaiaawIcacaGLPaaaaaa@395A@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ has a finite number of discontinuities. By definition <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>Pr</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mi>a</m:mi><m:mo>≤</m:mo><m:mi>x</m:mi><m:mo>≤</m:mo><m:mi>b</m:mi>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mstyle displaystyle="true">
+    <m:mrow><m:munderover>
+     <m:mo>∫</m:mo>
+     <m:mi>a</m:mi>
+     <m:mi>b</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mi>x</m:mi>
+     <m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>x</m:mi>
+    </m:mrow>
+   </m:mrow>
+   
+  </m:mstyle><m:mo>.</m:mo>
+ </m:mrow>
+ <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiGaccfacaGGYbWaaeWaaeaacaWGHbGaeyizImQaamiEaiabgsMiJkaadkgaaiaawIcacaGLPaaacqGH9aqpdaWdXbqaaiaadAgadaqadaqaaiaadIhaaiaawIcacaGLPaaacaWGKbGaamiEaaWcbaGaamyyaaqaaiaadkgaa0Gaey4kIipakiaac6caaaa@4AC1@</m:annotation>
+</m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ Example 5 offers an example of a pfd.
+</para>
+        <example id="oo-id1171140025557"><title>Probability distribution function for a continuous random variable. </title><para id="id1171129199199"><figure id="PRfigure2"><media id="fig2" alt="Graph of a pdf.">
+    <image mime-type="image/jpeg" src="../../media/PR figure 2.jpg"/>
+  </media>
+  
+<caption>The red line is the pdf for the random variable <emphasis effect="italics">x</emphasis>. The shaded in area under the pdf is equal to the probability that <emphasis effect="italics">x</emphasis> falls between <emphasis effect="italics">a</emphasis> and <emphasis effect="italics">b</emphasis>. The total area under the pdf is equal to 1.
+  </caption></figure>
+
+</para>
+        </example>
+        
+        
+        <para id="id1171121638798"><title>Cumulative distribution function (cdf).</title>The cumulative distribution function is given by <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>F</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>x</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mi>Pr</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mi>X</m:mi><m:mo>≤</m:mo><m:mi>x</m:mi>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAeadaqadaqaaiaadIhaaiaawIcacaGLPaaacqGH9aqpciGGqbGaaiOCamaabmaabaGaamiwaiabgsMiJkaadIhaaiaawIcacaGLPaaacaGGUaaaaa@41D6@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ For a discrete variable the cdf is <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>F</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>x</m:mi>
+      <m:mi>w</m:mi>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>i</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+     <m:mi>w</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:msub>
+        <m:mi>x</m:mi>
+        <m:mi>i</m:mi>
+       </m:msub>
+       
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow>
+    </m:mrow>
+   </m:mstyle><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAeadaqadaqaaiaadIhadaWgaaWcbaGaam4DaaqabaaakiaawIcacaGLPaaacqGH9aqpdaaeWbqaaiaadAgadaqadaqaaiaadIhadaWgaaWcbaGaamyAaaqabaaakiaawIcacaGLPaaaaSqaaiaadMgacqGH9aqpcaaIXaaabaGaam4DaaqdcqGHris5aOGaaiOlaaaa@46B0@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ For a continuous distribution, the cdf is <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>F</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>x</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mstyle displaystyle="true">
+    <m:mrow><m:munderover>
+     <m:mo>∫</m:mo>
+     <m:mrow>
+      <m:mo>−</m:mo><m:mi>∞</m:mi>
+     </m:mrow>
+     <m:mi>x</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mi>w</m:mi>
+     <m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>w</m:mi><m:mo>.</m:mo>
+    </m:mrow>
+   </m:mrow>
+   
+  </m:mstyle>
+ </m:mrow>
+ <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAeadaqadaqaaiaadIhaaiaawIcacaGLPaaacqGH9aqpdaWdXbqaaiaadAgadaqadaqaaiaadEhaaiaawIcacaGLPaaacaWGKbGaam4Daiaac6caaSqaaiabgkHiTiabg6HiLcqaaiaadIhaa0Gaey4kIipaaaa@460B@</m:annotation>
+</m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ Example 6 illustrates the calculation of the cumulative distribution function for a continuous random variable.
+</para>
+        <example id="eip-458"><title>The cumulative distributon function.</title><para id="eip-661">Let <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>x</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:msup>
+    <m:mi>x</m:mi>
+    <m:mn>2</m:mn>
+   </m:msup>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAgadaqadaqaaiaadIhaaiaawIcacaGLPaaacqGH9aqpcaWG4bWaaWbaaSqabeaacaaIYaaaaaaa@3C46@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ be the pdf for the random variable x defined between 0 and 1. The cumulative distribution function for any <emphasis effect="italics">a</emphasis> is <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>F</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>a</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mstyle displaystyle="true">
+    <m:mrow><m:munderover>
+     <m:mo>∫</m:mo>
+     <m:mn>0</m:mn>
+     <m:mi>a</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:msup>
+      <m:mi>x</m:mi>
+      <m:mn>2</m:mn>
+     </m:msup>
+     <m:mi>d</m:mi><m:mi>x</m:mi>
+    </m:mrow>
+   </m:mrow>
+   
+  </m:mstyle><m:mo>=</m:mo><m:mfrac>
+   <m:mn>1</m:mn>
+   <m:mn>3</m:mn>
+  </m:mfrac>
+  <m:msubsup>
+   <m:mrow>
+    <m:mrow><m:mrow>
+     <m:msup>
+      <m:mi>x</m:mi>
+      <m:mn>3</m:mn>
+     </m:msup>
+     
+    </m:mrow><m:mo>|</m:mo></m:mrow>
+   </m:mrow>
+   <m:mn>0</m:mn>
+   <m:mi>a</m:mi>
+  </m:msubsup>
+  <m:mo>=</m:mo><m:mfrac>
+   <m:mrow>
+    <m:msup>
+     <m:mi>a</m:mi>
+     <m:mn>3</m:mn>
+    </m:msup>
+    
+   </m:mrow>
+   <m:mn>3</m:mn>
+  </m:mfrac>
+  <m:mo>.</m:mo>
+ </m:mrow>
+ <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAeadaqadaqaaiaadggaaiaawIcacaGLPaaacqGH9aqpdaWdXbqaaiaadIhadaahaaWcbeqaaiaaikdaaaGccaWGKbGaamiEaaWcbaGaaGimaaqaaiaadggaa0Gaey4kIipakiabg2da9maalaaabaGaaGymaaqaaiaaiodaaaWaaqGaaeaacaWG4bWaaWbaaSqabeaacaaIZaaaaaGccaGLiWoadaqhaaWcbaGaaGimaaqaaiaadggaaaGccqGH9aqpdaWcaaqaaiaadggadaahaaWcbeqaaiaaiodaaaaakeaacaaIZaaaaiaac6caaaa@4E5D@</m:annotation>
+</m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</para>
+</example>
+      </section>
+      <section id="id1171122110604">
+        <title>Mathematical expectation</title>
+        <para id="id1171123167298"><title>Mathematical expectation for a function.</title>The mathematical expectation of the function <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>g</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>x</m:mi>
+   <m:mo>)</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadEgadaqadaqaaiaadIhaaiaawIcacaGLPaaaaaa@395B@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ is <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mi>g</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mi>x</m:mi>
+     <m:mo>)</m:mo></m:mrow>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mstyle displaystyle="true">
+    <m:mrow>
+     <m:munder>
+      <m:mo>∫</m:mo>
+      <m:mi>x</m:mi>
+     </m:munder>
+     <m:mrow>
+      <m:mi>g</m:mi><m:mrow><m:mo>(</m:mo>
+       <m:mi>x</m:mi>
+      <m:mo>)</m:mo></m:mrow><m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+       <m:mi>x</m:mi>
+      <m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>x</m:mi>
+     </m:mrow>
+    </m:mrow>
+    
+   </m:mstyle>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadweadaqadaqaaiaadEgadaqadaqaaiaadIhaaiaawIcacaGLPaaaaiaawIcacaGLPaaacqGH9aqpdaWdrbqaaiaadEgadaqadaqaaiaadIhaaiaawIcacaGLPaaacaWGMbWaaeWaaeaacaWG4baacaGLOaGaayzkaaGaamizaiaadIhaaSqaaiaadIhaaeqaniabgUIiYdaaaa@48C4@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+where <emphasis effect="italics">x</emphasis> is a random variable. Example 7 shows the calculation of the expected value of a function.</para>
+        <example id="eip-37"><title>Expected value calculation.</title><para id="eip-984">Let <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>x</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:msup>
+    <m:mi>x</m:mi>
+    <m:mi>a</m:mi>
+   </m:msup>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAgadaqadaqaaiaadIhaaiaawIcacaGLPaaacqGH9aqpcaWG4bWaaWbaaSqabeaacaWGHbaaaaaa@3C70@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ be a pdf for <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mn>0</m:mn><m:mo>≤</m:mo><m:mi>x</m:mi><m:mo>≤</m:mo><m:mn>1</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaaicdacqGHKjYOcaWG4bGaeyizImQaaGymaaaa@3BC5@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>a</m:mi><m:mo>&gt;</m:mo><m:mn>0.</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadggacqGH+aGpcaaIWaGaaiOlaaaa@3943@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ Let <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>g</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>x</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:msup>
+    <m:mi>x</m:mi>
+    <m:mn>3</m:mn>
+   </m:msup>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadEgadaqadaqaaiaadIhaaiaawIcacaGLPaaacqGH9aqpcaWG4bWaaWbaaSqabeaacaaIZaaaaOGaaiOlaaaa@3D04@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ We can calculate <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>E</m:mi><m:mrow><m:mo>[</m:mo> <m:mrow>
+    <m:mi>g</m:mi><m:mrow><m:mo>(</m:mo>
+     <m:mi>x</m:mi>
+    <m:mo>)</m:mo></m:mrow>
+   </m:mrow> <m:mo>]</m:mo></m:mrow><m:mo>=</m:mo><m:mstyle displaystyle="true">
+    <m:mrow><m:munderover>
+     <m:mo>∫</m:mo>
+     <m:mn>0</m:mn>
+     <m:mn>1</m:mn>
+    </m:munderover>
+    <m:mrow>
+     <m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:msup>
+        <m:mi>x</m:mi>
+        <m:mn>3</m:mn>
+       </m:msup>
+       
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:msup>
+      <m:mi>x</m:mi>
+      <m:mi>a</m:mi>
+     </m:msup>
+     <m:mi>d</m:mi><m:mi>x</m:mi>
+    </m:mrow>
+   </m:mrow>
+   
+  </m:mstyle><m:mo>=</m:mo><m:mstyle displaystyle="true">
+   <m:mrow><m:munderover>
+    <m:mo>∫</m:mo>
+    <m:mn>0</m:mn>
+    <m:mn>1</m:mn>
+   </m:munderover>
+   <m:mrow>
+    <m:msup>
+     <m:mi>x</m:mi>
+     <m:mrow>
+      <m:mi>a</m:mi><m:mo>+</m:mo><m:mn>3</m:mn>
+     </m:mrow>
+    </m:msup>
+    <m:mi>d</m:mi><m:mi>x</m:mi>
+   </m:mrow>
+  </m:mrow>
+  
+ </m:mstyle><m:mo>=</m:mo><m:mfrac>
+  <m:mn>1</m:mn>
+  <m:mrow>
+   <m:mi>a</m:mi><m:mo>+</m:mo><m:mn>4</m:mn>
+  </m:mrow>
+ </m:mfrac>
+ <m:msubsup>
+  <m:mrow>
+   <m:mrow><m:mrow>
+    <m:msup>
+     <m:mi>x</m:mi>
+     <m:mrow>
+      <m:mi>a</m:mi><m:mo>+</m:mo><m:mn>4</m:mn>
+     </m:mrow>
+    </m:msup>
+    
+   </m:mrow><m:mo>|</m:mo></m:mrow>
+  </m:mrow>
+  <m:mn>0</m:mn>
+  <m:mn>1</m:mn>
+ </m:msubsup>
+ <m:mo>=</m:mo><m:mfrac>
+  <m:mn>1</m:mn>
+  <m:mrow>
+   <m:mi>a</m:mi><m:mo>+</m:mo><m:mn>4</m:mn>
+  </m:mrow>
+ </m:mfrac>
+ <m:mo>.</m:mo>
+</m:mrow>
+<m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadweadaWadaqaaiaadEgadaqadaqaaiaadIhaaiaawIcacaGLPaaaaiaawUfacaGLDbaacqGH9aqpdaWdXbqaamaabmaabaGaamiEamaaCaaaleqabaGaaG4maaaaaOGaayjkaiaawMcaaiaadIhadaahaaWcbeqaaiaadggaaaGccaWGKbGaamiEaaWcbaGaaGimaaqaaiaaigdaa0Gaey4kIipakiabg2da9maapehabaGaamiEamaaCaaaleqabaGaamyyaiabgUcaRiaaiodaaaGccaWGKbGaamiEaaWcbaGaaGimaaqaaiaaigdaa0Gaey4kIipakiabg2da9maalaaabaGaaGymaaqaaiaadggacqGHRaWkcaaI0aaaamaaeiaabaGaamiEamaaCaaaleqabaGaamyyaiabgUcaRiaaisdaaaaakiaawIa7amaaDaaaleaacaaIWaaabaGaaGymaaaakiabg2da9maalaaabaGaaGymaaqaaiaadggacqGHRaWkcaaI0aaaaiaac6caaaa@6368@</m:annotation>
+</m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</para>
+</example>
+        <para id="id1171120302858"><title>The mean of a distribution.</title>The population mean, <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>μ</m:mi><m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeY7aTjaacYcaaaa@384F@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ of a random variable, x, with a pdf of <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>x</m:mi>
+   <m:mo>)</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAgadaqadaqaaiaadIhaaiaawIcacaGLPaaaaaa@395A@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ is defined to be the expected value of x: <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>μ</m:mi><m:mo>=</m:mo><m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>x</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mstyle displaystyle="true">
+    <m:mrow><m:mo>∫</m:mo>
+     <m:mrow>
+      <m:mi>x</m:mi><m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+       <m:mi>x</m:mi>
+      <m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>x</m:mi><m:mo>.</m:mo>
+     </m:mrow>
+    </m:mrow>
+    
+   </m:mstyle>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeY7aTjabg2da9iaadweadaqadaqaaiaadIhaaiaawIcacaGLPaaacqGH9aqpdaWdbaqaaiaadIhacaWGMbWaaeWaaeaacaWG4baacaGLOaGaayzkaaGaamizaiaadIhacaGGUaaaleqabeqdcqGHRiI8aaaa@45FC@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --> Example 8 illustrates the calculation of the population mean.</para>
+        <example id="oo-id1171132128007"><title>Calculation of the population mean.</title><para id="id1171131584994">Assume we have the same pdf used in Example 7. The population mean for this distribution is <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>μ</m:mi><m:mo>=</m:mo><m:mi>E</m:mi><m:mrow><m:mo>[</m:mo> <m:mi>x</m:mi> <m:mo>]</m:mo></m:mrow><m:mo>=</m:mo><m:mstyle displaystyle="true">
+    <m:mrow><m:munderover>
+     <m:mo>∫</m:mo>
+     <m:mn>0</m:mn>
+     <m:mn>1</m:mn>
+    </m:munderover>
+    <m:mrow>
+     <m:mrow><m:mo>(</m:mo>
+      <m:mi>x</m:mi>
+     <m:mo>)</m:mo></m:mrow><m:msup>
+      <m:mi>x</m:mi>
+      <m:mi>a</m:mi>
+     </m:msup>
+     <m:mi>d</m:mi><m:mi>x</m:mi>
+    </m:mrow>
+   </m:mrow>
+   
+  </m:mstyle><m:mo>=</m:mo><m:mstyle displaystyle="true">
+   <m:mrow><m:munderover>
+    <m:mo>∫</m:mo>
+    <m:mn>0</m:mn>
+    <m:mn>1</m:mn>
+   </m:munderover>
+   <m:mrow>
+    <m:msup>
+     <m:mi>x</m:mi>
+     <m:mrow>
+      <m:mi>a</m:mi><m:mo>+</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+    </m:msup>
+    <m:mi>d</m:mi><m:mi>x</m:mi>
+   </m:mrow>
+  </m:mrow>
+  
+ </m:mstyle><m:mo>=</m:mo><m:mfrac>
+  <m:mn>1</m:mn>
+  <m:mrow>
+   <m:mi>a</m:mi><m:mo>+</m:mo><m:mn>2</m:mn>
+  </m:mrow>
+ </m:mfrac>
+ <m:msubsup>
+  <m:mrow>
+   <m:mrow><m:mrow>
+    <m:msup>
+     <m:mi>x</m:mi>
+     <m:mrow>
+      <m:mi>a</m:mi><m:mo>+</m:mo><m:mn>2</m:mn>
+     </m:mrow>
+    </m:msup>
+    
+   </m:mrow><m:mo>|</m:mo></m:mrow>
+  </m:mrow>
+  <m:mn>0</m:mn>
+  <m:mn>1</m:mn>
+ </m:msubsup>
+ <m:mo>=</m:mo><m:mfrac>
+  <m:mn>1</m:mn>
+  <m:mrow>
+   <m:mi>a</m:mi><m:mo>+</m:mo><m:mn>2</m:mn>
+  </m:mrow>
+ </m:mfrac>
+ <m:mo>.</m:mo>
+</m:mrow>
+<m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeY7aTjabg2da9iaadweadaWadaqaaiaadIhaaiaawUfacaGLDbaacqGH9aqpdaWdXbqaamaabmaabaGaamiEaaGaayjkaiaawMcaaiaadIhadaahaaWcbeqaaiaadggaaaGccaWGKbGaamiEaaWcbaGaaGimaaqaaiaaigdaa0Gaey4kIipakiabg2da9maapehabaGaamiEamaaCaaaleqabaGaamyyaiabgUcaRiaaigdaaaGccaWGKbGaamiEaaWcbaGaaGimaaqaaiaaigdaa0Gaey4kIipakiabg2da9maalaaabaGaaGymaaqaaiaadggacqGHRaWkcaaIYaaaamaaeiaabaGaamiEamaaCaaaleqabaGaamyyaiabgUcaRiaaikdaaaaakiaawIa7amaaDaaaleaacaaIWaaabaGaaGymaaaakiabg2da9maalaaabaGaaGymaaqaaiaadggacqGHRaWkcaaIYaaaaiaac6caaaa@62B3@</m:annotation>
+</m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</para>
+        </example>
+        <para id="id1171119858533"><title>The variance of a distribution.</title>The population variance, <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msup>
+    <m:mi>σ</m:mi>
+    <m:mn>2</m:mn>
+   </m:msup>
+   <m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeo8aZnaaCaaaleqabaGaaGOmaaaakiaacYcaaaa@394F@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ of a distribution is <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msup>
+    <m:mi>σ</m:mi>
+    <m:mn>2</m:mn>
+   </m:msup>
+   <m:mo>=</m:mo><m:mi>E</m:mi><m:mrow><m:mo>[</m:mo> <m:mrow>
+    <m:msup>
+     <m:mrow>
+      <m:mrow><m:mo>(</m:mo>
+       <m:mrow>
+        <m:mi>x</m:mi><m:mo>−</m:mo><m:mi>μ</m:mi>
+       </m:mrow>
+      <m:mo>)</m:mo></m:mrow>
+     </m:mrow>
+     <m:mn>2</m:mn>
+    </m:msup>
+    
+   </m:mrow> <m:mo>]</m:mo></m:mrow><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeo8aZnaaCaaaleqabaGaaGOmaaaakiabg2da9iaadweadaWadaqaamaabmaabaGaamiEaiabgkHiTiabeY7aTbGaayjkaiaawMcaamaaCaaaleqabaGaaGOmaaaaaOGaay5waiaaw2faaiaac6caaaa@432F@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --> Example 9 shows a shortcut way to calculate the population variance.</para>
+        <example id="oo-id1171120045085"><title>Calculation of the population variance using the expected value operator.</title><para id="id4120626">Define the variance operator, <emphasis effect="italics">V</emphasis>, to be: </para><para id="eip-999"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>V</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>x</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mi>E</m:mi><m:mrow><m:mo>[</m:mo> <m:mrow>
+    <m:msup>
+     <m:mrow>
+      <m:mrow><m:mo>(</m:mo>
+       <m:mrow>
+        <m:mi>x</m:mi><m:mo>−</m:mo><m:mi>μ</m:mi>
+       </m:mrow>
+      <m:mo>)</m:mo></m:mrow>
+     </m:mrow>
+     <m:mn>2</m:mn>
+    </m:msup>
+    
+   </m:mrow> <m:mo>]</m:mo></m:mrow><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAfadaqadaqaaiaadIhaaiaawIcacaGLPaaacqGH9aqpcaWGfbWaamWaaeaadaqadaqaaiaadIhacqGHsislcqaH8oqBaiaawIcacaGLPaaadaahaaWcbeqaaiaaikdaaaaakiaawUfacaGLDbaacaGGUaaaaa@43DA@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --></para><para id="eip-726">Then,</para><para id="eip-378"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>E</m:mi><m:mrow><m:mo>[</m:mo> <m:mrow>
+    <m:msup>
+     <m:mrow>
+      <m:mrow><m:mo>(</m:mo>
+       <m:mrow>
+        <m:mi>x</m:mi><m:mo>−</m:mo><m:mi>μ</m:mi>
+       </m:mrow>
+      <m:mo>)</m:mo></m:mrow>
+     </m:mrow>
+     <m:mn>2</m:mn>
+    </m:msup>
+    
+   </m:mrow> <m:mo>]</m:mo></m:mrow><m:mo>=</m:mo><m:mstyle displaystyle="true">
+    <m:mrow><m:mo>∫</m:mo>
+     <m:mrow>
+      <m:msup>
+       <m:mrow>
+        <m:mrow><m:mo>(</m:mo>
+         <m:mrow>
+          <m:mi>x</m:mi><m:mo>−</m:mo><m:mi>μ</m:mi>
+         </m:mrow>
+        <m:mo>)</m:mo></m:mrow>
+       </m:mrow>
+       <m:mn>2</m:mn>
+      </m:msup>
+      <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+       <m:mi>x</m:mi>
+      <m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>x</m:mi>
+     </m:mrow>
+    </m:mrow>
+    
+   </m:mstyle><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadweadaWadaqaamaabmaabaGaamiEaiabgkHiTiabeY7aTbGaayjkaiaawMcaamaaCaaaleqabaGaaGOmaaaaaOGaay5waiaaw2faaiabg2da9maapeaabaWaaeWaaeaacaWG4bGaeyOeI0IaeqiVd0gacaGLOaGaayzkaaWaaWbaaSqabeaacaaIYaaaaOGaamOzamaabmaabaGaamiEaaGaayjkaiaawMcaaiaadsgacaWG4baaleqabeqdcqGHRiI8aOGaaiOlaaaa@4DF1@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --></para><para id="eip-650">Squaring the term in the integral gives: <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mstyle displaystyle="true">
+    <m:mrow><m:mo>∫</m:mo>
+     <m:mrow>
+      <m:mrow><m:mo>(</m:mo>
+       <m:mrow>
+        <m:msup>
+         <m:mi>x</m:mi>
+         <m:mn>2</m:mn>
+        </m:msup>
+        <m:mo>−</m:mo><m:mn>2</m:mn><m:mi>μ</m:mi><m:mi>x</m:mi><m:mo>+</m:mo><m:msup>
+         <m:mi>μ</m:mi>
+         <m:mn>2</m:mn>
+        </m:msup>
+        
+       </m:mrow>
+      <m:mo>)</m:mo></m:mrow><m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+       <m:mi>x</m:mi>
+      <m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>x</m:mi>
+     </m:mrow>
+    </m:mrow>
+    
+   </m:mstyle><m:mo>=</m:mo><m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msup>
+      <m:mi>x</m:mi>
+      <m:mn>2</m:mn>
+     </m:msup>
+     <m:mo>−</m:mo><m:mn>2</m:mn><m:mi>μ</m:mi><m:mi>x</m:mi><m:mo>+</m:mo><m:msup>
+      <m:mi>μ</m:mi>
+      <m:mn>2</m:mn>
+     </m:msup>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaamaapeaabaWaaeWaaeaacaWG4bWaaWbaaSqabeaacaaIYaaaaOGaeyOeI0IaaGOmaiabeY7aTjaadIhacqGHRaWkcqaH8oqBdaahaaWcbeqaaiaaikdaaaaakiaawIcacaGLPaaacaWGMbWaaeWaaeaacaWG4baacaGLOaGaayzkaaGaamizaiaadIhaaSqabeqaniabgUIiYdGccqGH9aqpcaWGfbWaaeWaaeaacaWG4bWaaWbaaSqabeaacaaIYaaaaOGaeyOeI0IaaGOmaiabeY7aTjaadIhacqGHRaWkcqaH8oqBdaahaaWcbeqaaiaaikdaaaaakiaawIcacaGLPaaacaGGUaaaaa@5687@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ </para><para id="eip-949">Expand of the left-hand-side of this equality:</para><para id="eip-602"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mstyle displaystyle="true">
+    <m:mrow><m:mo>∫</m:mo>
+     <m:mrow>
+      <m:msup>
+       <m:mi>x</m:mi>
+       <m:mn>2</m:mn>
+      </m:msup>
+      <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+       <m:mi>x</m:mi>
+      <m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>x</m:mi>
+     </m:mrow>
+    </m:mrow>
+    
+   </m:mstyle><m:mo>−</m:mo><m:mstyle displaystyle="true">
+    <m:mrow><m:mo>∫</m:mo>
+     <m:mrow>
+      <m:mn>2</m:mn><m:mi>μ</m:mi><m:mi>x</m:mi><m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+       <m:mi>x</m:mi>
+      <m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>x</m:mi><m:mo>+</m:mo>
+     </m:mrow>
+    </m:mrow>
+    
+   </m:mstyle><m:mstyle displaystyle="true">
+    <m:mrow><m:mo>∫</m:mo>
+     <m:mrow>
+      <m:msup>
+       <m:mi>μ</m:mi>
+       <m:mn>2</m:mn>
+      </m:msup>
+      <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+       <m:mi>x</m:mi>
+      <m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>x</m:mi>
+     </m:mrow>
+    </m:mrow>
+    
+   </m:mstyle><m:mo>=</m:mo><m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msup>
+      <m:mi>x</m:mi>
+      <m:mn>2</m:mn>
+     </m:msup>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>−</m:mo><m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mn>2</m:mn><m:mi>μ</m:mi><m:mi>x</m:mi>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>+</m:mo><m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msup>
+      <m:mi>μ</m:mi>
+      <m:mn>2</m:mn>
+     </m:msup>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaamaapeaabaGaamiEamaaCaaaleqabaGaaGOmaaaakiaadAgadaqadaqaaiaadIhaaiaawIcacaGLPaaacaWGKbGaamiEaaWcbeqab0Gaey4kIipakiabgkHiTmaapeaabaGaaGOmaiabeY7aTjaadIhacaWGMbWaaeWaaeaacaWG4baacaGLOaGaayzkaaGaamizaiaadIhacqGHRaWkaSqabeqaniabgUIiYdGcdaWdbaqaaiabeY7aTnaaCaaaleqabaGaaGOmaaaakiaadAgadaqadaqaaiaadIhaaiaawIcacaGLPaaacaWGKbGaamiEaaWcbeqab0Gaey4kIipakiabg2da9iaadweadaqadaqaaiaadIhadaahaaWcbeqaaiaaikdaaaaakiaawIcacaGLPaaacqGHsislcaWGfbWaaeWaaeaacaaIYaGaeqiVd0MaamiEaaGaayjkaiaawMcaaiabgUcaRiaadweadaqadaqaaiabeY7aTnaaCaaaleqabaGaaGOmaaaaaOGaayjkaiaawMcaaiaac6caaaa@685C@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ </para><para id="eip-986">Thus, we have established that: </para><para id="eip-908"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>E</m:mi><m:mrow><m:mo>[</m:mo> <m:mrow>
+    <m:msup>
+     <m:mrow>
+      <m:mrow><m:mo>(</m:mo>
+       <m:mrow>
+        <m:mi>x</m:mi><m:mo>−</m:mo><m:mi>μ</m:mi>
+       </m:mrow>
+      <m:mo>)</m:mo></m:mrow>
+     </m:mrow>
+     <m:mn>2</m:mn>
+    </m:msup>
+    
+   </m:mrow> <m:mo>]</m:mo></m:mrow><m:mo>=</m:mo><m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msup>
+      <m:mi>x</m:mi>
+      <m:mn>2</m:mn>
+     </m:msup>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>−</m:mo><m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mn>2</m:mn><m:mi>μ</m:mi><m:mi>x</m:mi>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>+</m:mo><m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msup>
+      <m:mi>μ</m:mi>
+      <m:mn>2</m:mn>
+     </m:msup>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadweadaWadaqaamaabmaabaGaamiEaiabgkHiTiabeY7aTbGaayjkaiaawMcaamaaCaaaleqabaGaaGOmaaaaaOGaay5waiaaw2faaiabg2da9iaadweadaqadaqaaiaadIhadaahaaWcbeqaaiaaikdaaaaakiaawIcacaGLPaaacqGHsislcaWGfbWaaeWaaeaacaaIYaGaeqiVd0MaamiEaaGaayjkaiaawMcaaiabgUcaRiaadweadaqadaqaaiabeY7aTnaaCaaaleqabaGaaGOmaaaaaOGaayjkaiaawMcaaiaac6caaaa@5149@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --></para><para id="eip-242">Evaluating the last two terms gives </para><para id="eip-567"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mn>2</m:mn><m:mi>μ</m:mi><m:mi>x</m:mi>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mstyle displaystyle="true">
+    <m:mrow><m:mo>∫</m:mo>
+     <m:mrow>
+      <m:mn>2</m:mn><m:mi>μ</m:mi><m:mi>x</m:mi><m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+       <m:mi>x</m:mi>
+      <m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>x</m:mi>
+     </m:mrow>
+    </m:mrow>
+    
+   </m:mstyle><m:mo>=</m:mo><m:mn>2</m:mn><m:mi>μ</m:mi><m:mstyle displaystyle="true">
+    <m:mrow><m:mo>∫</m:mo>
+     <m:mi>x</m:mi>
+    </m:mrow>
+    
+   </m:mstyle><m:mi>d</m:mi><m:mi>x</m:mi><m:mo>=</m:mo><m:mn>2</m:mn><m:msup>
+    <m:mi>μ</m:mi>
+    <m:mn>2</m:mn>
+   </m:msup>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadweadaqadaqaaiaaikdacqaH8oqBcaWG4baacaGLOaGaayzkaaGaeyypa0Zaa8qaaeaacaaIYaGaeqiVd0MaamiEaiaadAgadaqadaqaaiaadIhaaiaawIcacaGLPaaacaWGKbGaamiEaaWcbeqab0Gaey4kIipakiabg2da9iaaikdacqaH8oqBdaWdbaqaaiaadIhaaSqabeqaniabgUIiYdGccaWGKbGaamiEaiabg2da9iaaikdacqaH8oqBdaahaaWcbeqaaiaaikdaaaaaaa@543D@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --></para><para id="eip-948">and</para><para id="eip-842"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msup>
+      <m:mi>μ</m:mi>
+      <m:mn>2</m:mn>
+     </m:msup>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mstyle displaystyle="true">
+    <m:mrow><m:mo>∫</m:mo>
+     <m:mrow>
+      <m:msup>
+       <m:mi>μ</m:mi>
+       <m:mn>2</m:mn>
+      </m:msup>
+      <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+       <m:mi>x</m:mi>
+      <m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>x</m:mi>
+     </m:mrow>
+    </m:mrow>
+    
+   </m:mstyle>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadweadaqadaqaaiabeY7aTnaaCaaaleqabaGaaGOmaaaaaOGaayjkaiaawMcaaiabg2da9maapeaabaGaeqiVd02aaWbaaSqabeaacaaIYaaaaOGaamOzamaabmaabaGaamiEaaGaayjkaiaawMcaaiaadsgacaWG4baaleqabeqdcqGHRiI8aaaa@45E6@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</para><para id="eip-434">or, since <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mstyle displaystyle="true">
+    <m:mrow><m:mo>∫</m:mo>
+     <m:mrow>
+      <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+       <m:mi>x</m:mi>
+      <m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>x</m:mi>
+     </m:mrow>
+    </m:mrow>
+    
+   </m:mstyle><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaamaapeaabaGaamOzamaabmaabaGaamiEaaGaayjkaiaawMcaaiaadsgacaWG4baaleqabeqdcqGHRiI8aOGaeyypa0JaaGymaiaacYcaaaa@3FB6@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --> that <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msup>
+      <m:mi>μ</m:mi>
+      <m:mn>2</m:mn>
+     </m:msup>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:msup>
+    <m:mi>μ</m:mi>
+    <m:mn>2</m:mn>
+   </m:msup>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadweadaqadaqaaiabeY7aTnaaCaaaleqabaGaaGOmaaaaaOGaayjkaiaawMcaaiabg2da9iabeY7aTnaaCaaaleqabaGaaGOmaaaakiaac6caaaa@3F46@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ Thus, <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>E</m:mi><m:mrow><m:mo>[</m:mo> <m:mrow>
+    <m:msup>
+     <m:mrow>
+      <m:mrow><m:mo>(</m:mo>
+       <m:mrow>
+        <m:mi>x</m:mi><m:mo>−</m:mo><m:mi>μ</m:mi>
+       </m:mrow>
+      <m:mo>)</m:mo></m:mrow>
+     </m:mrow>
+     <m:mn>2</m:mn>
+    </m:msup>
+    
+   </m:mrow> <m:mo>]</m:mo></m:mrow><m:mo>=</m:mo><m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msup>
+      <m:mi>x</m:mi>
+      <m:mn>2</m:mn>
+     </m:msup>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>−</m:mo><m:mn>2</m:mn><m:msup>
+    <m:mi>μ</m:mi>
+    <m:mn>2</m:mn>
+   </m:msup>
+   <m:mo>+</m:mo><m:msup>
+    <m:mi>μ</m:mi>
+    <m:mn>2</m:mn>
+   </m:msup>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadweadaWadaqaamaabmaabaGaamiEaiabgkHiTiabeY7aTbGaayjkaiaawMcaamaaCaaaleqabaGaaGOmaaaaaOGaay5waiaaw2faaiabg2da9iaadweadaqadaqaaiaadIhadaahaaWcbeqaaiaaikdaaaaakiaawIcacaGLPaaacqGHsislcaaIYaGaeqiVd02aaWbaaSqabeaacaaIYaaaaOGaey4kaSIaeqiVd02aaWbaaSqabeaacaaIYaaaaaaa@4BDD@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --> or</para><para id="eip-754"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>E</m:mi><m:mrow><m:mo>[</m:mo> <m:mrow>
+    <m:msup>
+     <m:mrow>
+      <m:mrow><m:mo>(</m:mo>
+       <m:mrow>
+        <m:mi>x</m:mi><m:mo>−</m:mo><m:mi>μ</m:mi>
+       </m:mrow>
+      <m:mo>)</m:mo></m:mrow>
+     </m:mrow>
+     <m:mn>2</m:mn>
+    </m:msup>
+    
+   </m:mrow> <m:mo>]</m:mo></m:mrow><m:mo>=</m:mo><m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msup>
+      <m:mi>x</m:mi>
+      <m:mn>2</m:mn>
+     </m:msup>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>−</m:mo><m:msup>
+    <m:mi>μ</m:mi>
+    <m:mn>2</m:mn>
+   </m:msup>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadweadaWadaqaamaabmaabaGaamiEaiabgkHiTiabeY7aTbGaayjkaiaawMcaamaaCaaaleqabaGaaGOmaaaaaOGaay5waiaaw2faaiabg2da9iaadweadaqadaqaaiaadIhadaahaaWcbeqaaiaaikdaaaaakiaawIcacaGLPaaacqGHsislcqaH8oqBdaahaaWcbeqaaiaaikdaaaGccaGGUaaaaa@4852@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --></para><para id="eip-853">For example, in Example 8 we found that <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>μ</m:mi><m:mo>=</m:mo><m:mfrac>
+    <m:mn>1</m:mn>
+    <m:mrow>
+     <m:mi>a</m:mi><m:mo>+</m:mo><m:mn>2</m:mn>
+    </m:mrow>
+   </m:mfrac>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeY7aTjabg2da9maalaaabaGaaGymaaqaaiaadggacqGHRaWkcaaIYaaaaiaac6caaaa@3CA6@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ The expected value of <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msup>
+    <m:mi>x</m:mi>
+    <m:mn>2</m:mn>
+   </m:msup>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadIhadaahaaWcbeqaaiaaikdaaaaaaa@37CF@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ is </para><para id="eip-831"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>E</m:mi><m:mrow><m:mo>[</m:mo> <m:mrow>
+    <m:msup>
+     <m:mi>x</m:mi>
+     <m:mn>2</m:mn>
+    </m:msup>
+    
+   </m:mrow> <m:mo>]</m:mo></m:mrow><m:mo>=</m:mo><m:mstyle displaystyle="true">
+    <m:mrow><m:munderover>
+     <m:mo>∫</m:mo>
+     <m:mn>0</m:mn>
+     <m:mn>1</m:mn>
+    </m:munderover>
+    <m:mrow>
+     <m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:msup>
+        <m:mi>x</m:mi>
+        <m:mn>2</m:mn>
+       </m:msup>
+       
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:msup>
+      <m:mi>x</m:mi>
+      <m:mi>a</m:mi>
+     </m:msup>
+     <m:mi>d</m:mi><m:mi>x</m:mi>
+    </m:mrow>
+   </m:mrow>
+   
+  </m:mstyle><m:mo>=</m:mo><m:mstyle displaystyle="true">
+   <m:mrow><m:munderover>
+    <m:mo>∫</m:mo>
+    <m:mn>0</m:mn>
+    <m:mn>1</m:mn>
+   </m:munderover>
+   <m:mrow>
+    <m:msup>
+     <m:mi>x</m:mi>
+     <m:mrow>
+      <m:mi>a</m:mi><m:mo>+</m:mo><m:mn>2</m:mn>
+     </m:mrow>
+    </m:msup>
+    <m:mi>d</m:mi><m:mi>x</m:mi>
+   </m:mrow>
+  </m:mrow>
+  
+ </m:mstyle><m:mo>=</m:mo><m:mfrac>
+  <m:mn>1</m:mn>
+  <m:mrow>
+   <m:mi>a</m:mi><m:mo>+</m:mo><m:mn>3</m:mn>
+  </m:mrow>
+ </m:mfrac>
+ <m:msubsup>
+  <m:mrow>
+   <m:mrow><m:mrow>
+    <m:msup>
+     <m:mi>x</m:mi>
+     <m:mrow>
+      <m:mi>a</m:mi><m:mo>+</m:mo><m:mn>3</m:mn>
+     </m:mrow>
+    </m:msup>
+    
+   </m:mrow><m:mo>|</m:mo></m:mrow>
+  </m:mrow>
+  <m:mn>0</m:mn>
+  <m:mn>1</m:mn>
+ </m:msubsup>
+ <m:mo>=</m:mo><m:mfrac>
+  <m:mn>1</m:mn>
+  <m:mrow>
+   <m:mi>a</m:mi><m:mo>+</m:mo><m:mn>3</m:mn>
+  </m:mrow>
+ </m:mfrac>
+ <m:mo>.</m:mo>
+</m:mrow>
+<m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadweadaWadaqaaiaadIhadaahaaWcbeqaaiaaikdaaaaakiaawUfacaGLDbaacqGH9aqpdaWdXbqaamaabmaabaGaamiEamaaCaaaleqabaGaaGOmaaaaaOGaayjkaiaawMcaaiaadIhadaahaaWcbeqaaiaadggaaaGccaWGKbGaamiEaaWcbaGaaGimaaqaaiaaigdaa0Gaey4kIipakiabg2da9maapehabaGaamiEamaaCaaaleqabaGaamyyaiabgUcaRiaaikdaaaGccaWGKbGaamiEaaWcbaGaaGimaaqaaiaaigdaa0Gaey4kIipakiabg2da9maalaaabaGaaGymaaqaaiaadggacqGHRaWkcaaIZaaaamaaeiaabaGaamiEamaaCaaaleqabaGaamyyaiabgUcaRiaaiodaaaaakiaawIa7amaaDaaaleaacaaIWaaabaGaaGymaaaakiabg2da9maalaaabaGaaGymaaqaaiaadggacqGHRaWkcaaIZaaaaiaac6caaaa@61E1@</m:annotation>
+</m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ </para><para id="eip-929">Thus, the variance of the distribution is </para><para id="eip-646"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>V</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>x</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mfrac>
+    <m:mn>1</m:mn>
+    <m:mrow>
+     <m:mi>a</m:mi><m:mo>+</m:mo><m:mn>3</m:mn>
+    </m:mrow>
+   </m:mfrac>
+   <m:mo>−</m:mo><m:msup>
+    <m:mrow>
+     <m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mfrac>
+        <m:mn>1</m:mn>
+        <m:mrow>
+         <m:mi>a</m:mi><m:mo>+</m:mo><m:mn>2</m:mn>
+        </m:mrow>
+       </m:mfrac>
+       
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow>
+    </m:mrow>
+    <m:mn>2</m:mn>
+   </m:msup>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAfadaqadaqaaiaadIhaaiaawIcacaGLPaaacqGH9aqpdaWcaaqaaiaaigdaaeaacaWGHbGaey4kaSIaaG4maaaacqGHsisldaqadaqaamaalaaabaGaaGymaaqaaiaadggacqGHRaWkcaaIYaaaaaGaayjkaiaawMcaamaaCaaaleqabaGaaGOmaaaaaaa@444E@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</para><para id="eip-245">or <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>V</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>x</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mfrac>
+    <m:mrow>
+     <m:msup>
+      <m:mrow>
+       <m:mrow><m:mo>(</m:mo>
+        <m:mrow>
+         <m:mi>a</m:mi><m:mo>+</m:mo><m:mn>2</m:mn>
+        </m:mrow>
+       <m:mo>)</m:mo></m:mrow>
+      </m:mrow>
+      <m:mn>2</m:mn>
+     </m:msup>
+     <m:mo>−</m:mo><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mi>a</m:mi><m:mo>+</m:mo><m:mn>3</m:mn>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow>
+    </m:mrow>
+    <m:mrow>
+     <m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mi>a</m:mi><m:mo>+</m:mo><m:mn>3</m:mn>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:msup>
+      <m:mrow>
+       <m:mrow><m:mo>(</m:mo>
+        <m:mrow>
+         <m:mi>a</m:mi><m:mo>+</m:mo><m:mn>2</m:mn>
+        </m:mrow>
+       <m:mo>)</m:mo></m:mrow>
+      </m:mrow>
+      <m:mn>2</m:mn>
+     </m:msup>
+     
+    </m:mrow>
+   </m:mfrac>
+   <m:mo>=</m:mo><m:mfrac>
+    <m:mrow>
+     <m:msup>
+      <m:mi>a</m:mi>
+      <m:mn>2</m:mn>
+     </m:msup>
+     <m:mo>+</m:mo><m:mn>3</m:mn><m:mi>a</m:mi><m:mo>+</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+    <m:mrow>
+     <m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mi>a</m:mi><m:mo>+</m:mo><m:mn>3</m:mn>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:msup>
+      <m:mrow>
+       <m:mrow><m:mo>(</m:mo>
+        <m:mrow>
+         <m:mi>a</m:mi><m:mo>+</m:mo><m:mn>2</m:mn>
+        </m:mrow>
+       <m:mo>)</m:mo></m:mrow>
+      </m:mrow>
+      <m:mn>2</m:mn>
+     </m:msup>
+     
+    </m:mrow>
+   </m:mfrac>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAfadaqadaqaaiaadIhaaiaawIcacaGLPaaacqGH9aqpdaWcaaqaamaabmaabaGaamyyaiabgUcaRiaaikdaaiaawIcacaGLPaaadaahaaWcbeqaaiaaikdaaaGccqGHsisldaqadaqaaiaadggacqGHRaWkcaaIZaaacaGLOaGaayzkaaaabaWaaeWaaeaacaWGHbGaey4kaSIaaG4maaGaayjkaiaawMcaamaabmaabaGaamyyaiabgUcaRiaaikdaaiaawIcacaGLPaaadaahaaWcbeqaaiaaikdaaaaaaOGaeyypa0ZaaSaaaeaacaWGHbWaaWbaaSqabeaacaaIYaaaaOGaey4kaSIaaG4maiaadggacqGHRaWkcaaIXaaabaWaaeWaaeaacaWGHbGaey4kaSIaaG4maaGaayjkaiaawMcaamaabmaabaGaamyyaiabgUcaRiaaikdaaiaawIcacaGLPaaadaahaaWcbeqaaiaaikdaaaaaaOGaaiOlaaaa@5E3A@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --></para>
+        </example>
+        <para id="id1171129090407"><title>Expected value operation rules.</title>As shown in Example 9, the expected value operation allows several linear operations. Let <emphasis effect="italics">a</emphasis> and <emphasis effect="italics">b</emphasis> be a non-stochastic variables and <emphasis effect="italics">x</emphasis> be a random variable. Then we have</para><list id="eip-342" list-type="enumerated" number-style="arabic"><item><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>a</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mi>a</m:mi><m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadweadaqadaqaaiaadggaaiaawIcacaGLPaaacqGH9aqpcaWGHbGaaiilaaaa@3BBE@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --></item>
+<item><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mi>a</m:mi><m:msup>
+      <m:mi>x</m:mi>
+      <m:mn>2</m:mn>
+     </m:msup>
+     <m:mo>+</m:mo><m:mi>b</m:mi><m:mi>x</m:mi><m:mo>+</m:mo><m:mi>c</m:mi>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mi>a</m:mi><m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msup>
+      <m:mi>x</m:mi>
+      <m:mn>2</m:mn>
+     </m:msup>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>+</m:mo><m:mi>b</m:mi><m:mi>μ</m:mi><m:mo>+</m:mo><m:mi>c</m:mi><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadweadaqadaqaaiaadggacaWG4bWaaWbaaSqabeaacaaIYaaaaOGaey4kaSIaamOyaiaadIhacqGHRaWkcaWGJbaacaGLOaGaayzkaaGaeyypa0JaamyyaiaadweadaqadaqaaiaadIhadaahaaWcbeqaaiaaikdaaaaakiaawIcacaGLPaaacqGHRaWkcaWGIbGaeqiVd0Maey4kaSIaam4yaiaac6caaaa@4BCC@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --></item>
+<item><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mi>a</m:mi><m:mi>x</m:mi><m:mo>+</m:mo><m:mi>b</m:mi>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mi>a</m:mi><m:mi>μ</m:mi><m:mo>+</m:mo><m:mi>b</m:mi><m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadweadaqadaqaaiaadggacaWG4bGaey4kaSIaamOyaaGaayjkaiaawMcaaiabg2da9iaadggacqaH8oqBcqGHRaWkcaWGIbGaaiilaaaa@4203@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --></item>
+</list><para id="eip-162">These rules work both for discrete and continuous random variables.
+</para>
+      </section>
+      <section id="id8035763">
+        <title>Joint distributions</title>
+        <para id="id1171123049614"><title>The joint pdf for two random variables.</title>Any function, <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mi>x</m:mi><m:mo>,</m:mo><m:mi>y</m:mi>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAgadaqadaqaaiaadIhacaGGSaGaamyEaaGaayjkaiaawMcaaiaacYcaaaa@3BB8@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ that has the characteristics 
+</para>
+        <list id="eip-36" list-type="enumerated" number-style="arabic"><item><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mi>x</m:mi><m:mo>,</m:mo><m:mi>y</m:mi>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>≥</m:mo><m:mn>0</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAgadaqadaqaaiaadIhacaGGSaGaamyEaaGaayjkaiaawMcaaiabgwMiZkaaicdaaaa@3D88@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ for all <emphasis effect="italics">x</emphasis> and <emphasis effect="italics">y</emphasis> and </item>
+<item><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mstyle displaystyle="true">
+    <m:mrow>
+     <m:munder>
+      <m:mo>∫</m:mo>
+      <m:mi>y</m:mi>
+     </m:munder>
+     <m:mrow>
+      <m:mstyle displaystyle="true">
+       <m:mrow>
+        <m:munder>
+         <m:mo>∫</m:mo>
+         <m:mi>x</m:mi>
+        </m:munder>
+        <m:mrow>
+         <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+          <m:mrow>
+           <m:mi>x</m:mi><m:mo>,</m:mo><m:mi>y</m:mi>
+          </m:mrow>
+         <m:mo>)</m:mo></m:mrow><m:mi>d</m:mi><m:mi>x</m:mi>
+        </m:mrow>
+       </m:mrow>
+       
+      </m:mstyle><m:mi>d</m:mi><m:mi>y</m:mi>
+     </m:mrow>
+    </m:mrow>
+    
+   </m:mstyle><m:mo>=</m:mo><m:mn>1</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaamaapefabaWaa8quaeaacaWGMbWaaeWaaeaacaWG4bGaaiilaiaadMhaaiaawIcacaGLPaaacaWGKbGaamiEaaWcbaGaamiEaaqab0Gaey4kIipakiaadsgacaWG5baaleaacaWG5baabeqdcqGHRiI8aOGaeyypa0JaaGymaaaa@4739@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --></item>
+</list><para id="eip-435">is a joint pdf. This definition can be extended easily to include more than two random variables.
+ </para><para id="id1171139344005"><title>Covariance between two random variables.</title>If x and y are random variables, then the covariance between the two variables, <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>C</m:mi><m:mi>o</m:mi><m:mi>v</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mi>x</m:mi><m:mo>,</m:mo><m:mi>y</m:mi>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadoeacaWGVbGaamODamaabmaabaGaamiEaiaacYcacaWG5baacaGLOaGaayzkaaaaaa@3CD4@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+or <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>σ</m:mi>
+    <m:mrow>
+     <m:mi>x</m:mi><m:mi>y</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeo8aZnaaBaaaleaacaWG4bGaamyEaaqabaGccaGGSaaaaa@3A8D@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ is defined to be <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>C</m:mi><m:mi>o</m:mi><m:mi>v</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mi>x</m:mi><m:mo>,</m:mo><m:mi>y</m:mi>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mi>E</m:mi><m:mrow><m:mo>[</m:mo> <m:mrow>
+    <m:mrow><m:mo>(</m:mo>
+     <m:mrow>
+      <m:mi>x</m:mi><m:mo>−</m:mo><m:msub>
+       <m:mi>μ</m:mi>
+       <m:mi>x</m:mi>
+      </m:msub>
+      
+     </m:mrow>
+    <m:mo>)</m:mo></m:mrow><m:mrow><m:mo>(</m:mo>
+     <m:mrow>
+      <m:mi>y</m:mi><m:mo>−</m:mo><m:msub>
+       <m:mi>μ</m:mi>
+       <m:mi>y</m:mi>
+      </m:msub>
+      
+     </m:mrow>
+    <m:mo>)</m:mo></m:mrow>
+   </m:mrow> <m:mo>]</m:mo></m:mrow><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadoeacaWGVbGaamODamaabmaabaGaamiEaiaacYcacaWG5baacaGLOaGaayzkaaGaeyypa0JaamyramaadmaabaWaaeWaaeaacaWG4bGaeyOeI0IaeqiVd02aaSbaaSqaaiaadIhaaeqaaaGccaGLOaGaayzkaaWaaeWaaeaacaWG5bGaeyOeI0IaeqiVd02aaSbaaSqaaiaadMhaaeqaaaGccaGLOaGaayzkaaaacaGLBbGaayzxaaGaaiOlaaaa@4E02@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ Expansion gives the alternative definition that <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>σ</m:mi>
+    <m:mrow>
+     <m:mi>x</m:mi><m:mi>y</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mi>x</m:mi><m:mi>y</m:mi>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>−</m:mo><m:msub>
+    <m:mi>μ</m:mi>
+    <m:mi>x</m:mi>
+   </m:msub>
+   <m:msub>
+    <m:mi>μ</m:mi>
+    <m:mi>y</m:mi>
+   </m:msub>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeo8aZnaaBaaaleaacaWG4bGaamyEaaqabaGccqGH9aqpcaWGfbWaaeWaaeaacaWG4bGaamyEaaGaayjkaiaawMcaaiabgkHiTiabeY7aTnaaBaaaleaacaWG4baabeaakiabeY7aTnaaBaaaleaacaWG5baabeaakiaac6caaaa@46A3@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</para>
+        <para id="id1171120794364"><title>Stochastic independence.</title>The random variables<emphasis effect="italics"> x</emphasis> and <emphasis effect="italics">y</emphasis> are stochastically independent if and only if <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>σ</m:mi>
+    <m:mrow>
+     <m:mi>x</m:mi><m:mi>y</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:mn>0.</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeo8aZnaaBaaaleaacaWG4bGaamyEaaqabaGccqGH9aqpcaaIWaGaaiOlaaaa@3C4F@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ An equivalent definition of independence is that <emphasis effect="italics">x</emphasis> and <emphasis effect="italics">y</emphasis> are stochastically independent if and only if <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mi>x</m:mi><m:mo>,</m:mo><m:mi>y</m:mi>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>x</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>y</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAgadaqadaqaaiaadIhacaGGSaGaamyEaaGaayjkaiaawMcaaiabg2da9iaadAgadaqadaqaaiaadIhaaiaawIcacaGLPaaacaWGMbWaaeWaaeaacaWG5baacaGLOaGaayzkaaGaaiilaaaa@43A1@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ or, in words, if the joint pdf of the two random variables is equal to the product of the pdf of each random variable. From the definition of covariance it is easy to see that if two random variables are stochastically independent then <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mi>x</m:mi><m:mi>y</m:mi>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:msub>
+    <m:mi>μ</m:mi>
+    <m:mi>x</m:mi>
+   </m:msub>
+   <m:msub>
+    <m:mi>μ</m:mi>
+    <m:mi>y</m:mi>
+   </m:msub>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadweadaqadaqaaiaadIhacaWG5baacaGLOaGaayzkaaGaeyypa0JaeqiVd02aaSbaaSqaaiaadIhaaeqaaOGaeqiVd02aaSbaaSqaaiaadMhaaeqaaOGaaiOlaaaa@41C2@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</para>
+        <para id="id1171128840759"><title>Correlation coefficient.</title>The correlation coefficient, <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>ρ</m:mi><m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeg8aYjaacYcaaaa@3859@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ is defined to be <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ρ</m:mi>
+    <m:mrow>
+     <m:mi>x</m:mi><m:mi>y</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:mfrac>
+    <m:mrow>
+     <m:msub>
+      <m:mi>σ</m:mi>
+      <m:mrow>
+       <m:mi>x</m:mi><m:mi>y</m:mi>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+    <m:mrow>
+     <m:msub>
+      <m:mi>σ</m:mi>
+      <m:mi>x</m:mi>
+     </m:msub>
+     <m:msub>
+      <m:mi>σ</m:mi>
+      <m:mi>y</m:mi>
+     </m:msub>
+     
+    </m:mrow>
+   </m:mfrac>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeg8aYnaaBaaaleaacaWG4bGaamyEaaqabaGccqGH9aqpdaWcaaqaaiabeo8aZnaaBaaaleaacaWG4bGaamyEaaqabaaakeaacqaHdpWCdaWgaaWcbaGaamiEaaqabaGccqaHdpWCdaWgaaWcbaGaamyEaaqabaaaaOGaaiOlaaaa@4583@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ The correlation coefficient is a unitless number that varies between -1 and +1. Clearly, two random variables are stochastically independent if and only if <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ρ</m:mi>
+    <m:mrow>
+     <m:mi>x</m:mi><m:mi>y</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:mn>0.</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeg8aYnaaBaaaleaacaWG4bGaamyEaaqabaGccqGH9aqpcaaIWaGaaiOlaaaa@3C4C@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</para>
+      </section>
+      <section id="id7619794">
+        <title>Discrete distributions</title>
+        <para id="id1171142594746"><title>Binomial distribution.</title>The discrete random variable <emphasis effect="italics">x</emphasis> has a binomial distribution if <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>x</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mrow><m:mo>{</m:mo> <m:mtable columnalign="left">
+    <m:mtr>
+     <m:mtd>
+      <m:mrow><m:mo>(</m:mo>
+       <m:mtable columnalign="left">
+        <m:mtr>
+         <m:mtd>
+          <m:mi>n</m:mi>
+         </m:mtd>
+        </m:mtr>
+        <m:mtr>
+         <m:mtd>
+          <m:mi>x</m:mi>
+         </m:mtd>
+        </m:mtr>
+       </m:mtable>
+       
+      <m:mo>)</m:mo></m:mrow><m:msup>
+       <m:mi>p</m:mi>
+       <m:mi>x</m:mi>
+      </m:msup>
+      <m:msup>
+       <m:mrow><m:mo>(</m:mo>
+        <m:mrow>
+         <m:mn>1</m:mn><m:mo>−</m:mo><m:mi>p</m:mi>
+        </m:mrow>
+       <m:mo>)</m:mo></m:mrow>
+       <m:mrow>
+        <m:mi>n</m:mi><m:mo>−</m:mo><m:mi>x</m:mi>
+       </m:mrow>
+      </m:msup>
+      <m:mo>,</m:mo><m:mtext>  </m:mtext><m:mi>x</m:mi><m:mo>=</m:mo><m:mn>0</m:mn><m:mo>,</m:mo><m:mn>1</m:mn><m:mo>,</m:mo><m:mo>…</m:mo><m:mo>,</m:mo><m:mi>n</m:mi>
+     </m:mtd>
+    </m:mtr>
+    <m:mtr>
+     <m:mtd>
+      <m:mn>0</m:mn><m:mtext>  elsewhere</m:mtext>
+     </m:mtd>
+    </m:mtr>
+   </m:mtable>
+    </m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAgadaqadaqaaiaadIhaaiaawIcacaGLPaaacqGH9aqpdaGabaabaeqabaWaaeWaaqaabeqaaiaad6gaaeaacaWG4baaaiaawIcacaGLPaaacaWGWbWaaWbaaSqabeaacaWG4baaaOWaaeWaaeaacaaIXaGaeyOeI0IaamiCaaGaayjkaiaawMcaamaaCaaaleqabaGaamOBaiabgkHiTiaadIhaaaGccaGGSaGaaeiiaiaabccacaWG4bGaeyypa0JaaGimaiaacYcacaaIXaGaaiilaiablAciljaacYcacaWGUbaabaGaaGimaiaabccacaqGGaGaaeyzaiaabYgacaqGZbGaaeyzaiaabEhacaqGObGaaeyzaiaabkhacaqGLbaaaiaawUhaaaaa@5C55@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ where <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mrow><m:mo>(</m:mo>
+    <m:mtable columnalign="left">
+     <m:mtr>
+      <m:mtd>
+       <m:mi>n</m:mi>
+      </m:mtd>
+     </m:mtr>
+     <m:mtr>
+      <m:mtd>
+       <m:mi>x</m:mi>
+      </m:mtd>
+     </m:mtr>
+    </m:mtable>
+    
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mfrac>
+    <m:mrow>
+     <m:mi>n</m:mi><m:mo>!</m:mo>
+    </m:mrow>
+    <m:mrow>
+     <m:mi>x</m:mi><m:mo>!</m:mo><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mi>n</m:mi><m:mo>−</m:mo><m:mi>x</m:mi>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow>
+    </m:mrow>
+   </m:mfrac>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaamaabmaaeaqabeaacaWGUbaabaGaamiEaaaacaGLOaGaayzkaaGaeyypa0ZaaSaaaeaacaWGUbGaaiyiaaqaaiaadIhacaGGHaWaaeWaaeaacaWGUbGaeyOeI0IaamiEaaGaayjkaiaawMcaaaaacaGGUaaaaa@42D1@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ For the binomial distribution, <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>μ</m:mi><m:mo>=</m:mo><m:mi>n</m:mi><m:mi>p</m:mi>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeY7aTjabg2da9iaad6gacaWGWbaaaa@3A8D@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msup>
+    <m:mi>σ</m:mi>
+    <m:mn>2</m:mn>
+   </m:msup>
+   <m:mo>=</m:mo><m:mi>n</m:mi><m:mi>p</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mn>1</m:mn><m:mo>−</m:mo><m:mi>p</m:mi>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeo8aZnaaCaaaleqabaGaaGOmaaaakiabg2da9iaad6gacaWGWbWaaeWaaeaacaaIXaGaeyOeI0IaamiCaaGaayjkaiaawMcaaiaac6caaaa@4065@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ </para>
+        <para id="id1171119785308"><title>Uniform distribution.</title>The discrete random variable <emphasis effect="italics">x</emphasis> has a uniform distribution if <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>x</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mrow><m:mo>{</m:mo> <m:mtable columnalign="left">
+    <m:mtr>
+     <m:mtd>
+      <m:mfrac>
+       <m:mn>1</m:mn>
+       <m:mrow>
+        <m:mi>b</m:mi><m:mo>−</m:mo><m:mi>a</m:mi>
+       </m:mrow>
+      </m:mfrac>
+      <m:mtext> if </m:mtext><m:mi>a</m:mi><m:mo>≤</m:mo><m:mi>x</m:mi><m:mo>≤</m:mo><m:mi>b</m:mi>
+     </m:mtd>
+    </m:mtr>
+    <m:mtr>
+     <m:mtd>
+      <m:mn>0</m:mn><m:mtext>  elsewhere</m:mtext>
+     </m:mtd>
+    </m:mtr>
+   </m:mtable>
+    <m:mo>}</m:mo></m:mrow><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAgadaqadaqaaiaadIhaaiaawIcacaGLPaaacqGH9aqpdaGadaabaeqabaWaaSaaaeaacaaIXaaabaGaamOyaiabgkHiTiaadggaaaGaaeiiaiaabMgacaqGMbGaaeiiaiaadggacqGHKjYOcaWG4bGaeyizImQaamOyaaqaaiaaicdacaqGGaGaaeiiaiaabwgacaqGSbGaae4CaiaabwgacaqG3bGaaeiAaiaabwgacaqGYbGaaeyzaaaacaGL7bGaayzFaaGaaiOlaaaa@547D@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ The mean and variance of the uniform distribution are <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>μ</m:mi><m:mo>=</m:mo><m:mfrac>
+    <m:mrow>
+     <m:mi>a</m:mi><m:mo>+</m:mo><m:mi>b</m:mi>
+    </m:mrow>
+    <m:mn>2</m:mn>
+   </m:mfrac>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeY7aTjabg2da9maalaaabaGaamyyaiabgUcaRiaadkgaaeaacaaIYaaaaaaa@3C20@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msup>
+    <m:mi>σ</m:mi>
+    <m:mn>2</m:mn>
+   </m:msup>
+   <m:mo>=</m:mo><m:mfrac>
+    <m:mrow>
+     <m:msup>
+      <m:mrow>
+       <m:mrow><m:mo>(</m:mo>
+        <m:mrow>
+         <m:mi>b</m:mi><m:mo>−</m:mo><m:mi>a</m:mi>
+        </m:mrow>
+       <m:mo>)</m:mo></m:mrow>
+      </m:mrow>
+      <m:mn>2</m:mn>
+     </m:msup>
+     
+    </m:mrow>
+    <m:mrow>
+     <m:mn>12</m:mn>
+    </m:mrow>
+   </m:mfrac>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeo8aZnaaCaaaleqabaGaaGOmaaaakiabg2da9maalaaabaWaaeWaaeaacaWGIbGaeyOeI0IaamyyaaGaayjkaiaawMcaamaaCaaaleqabaGaaGOmaaaaaOqaaiaaigdacaaIYaaaaiaac6caaaa@4114@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</para>
+        <para id="id1171121703933"><title>Poisson distribution.</title>The discrete random variable <emphasis effect="italics">x</emphasis> has a Poisson distribution if <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>x</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mrow><m:mo>{</m:mo> <m:mtable columnalign="left">
+    <m:mtr>
+     <m:mtd>
+      <m:mfrac>
+       <m:mrow>
+        <m:msup>
+         <m:mi>m</m:mi>
+         <m:mi>x</m:mi>
+        </m:msup>
+        <m:msup>
+         <m:mi>e</m:mi>
+         <m:mrow>
+          <m:mo>−</m:mo><m:mi>m</m:mi>
+         </m:mrow>
+        </m:msup>
+        
+       </m:mrow>
+       <m:mrow>
+        <m:mi>x</m:mi><m:mo>!</m:mo>
+       </m:mrow>
+      </m:mfrac>
+      <m:mo>,</m:mo><m:mtext>  </m:mtext><m:mi>x</m:mi><m:mo>=</m:mo><m:mn>0</m:mn><m:mo>,</m:mo><m:mn>1</m:mn><m:mo>,</m:mo><m:mo>…</m:mo>
+     </m:mtd>
+    </m:mtr>
+    <m:mtr>
+     <m:mtd>
+      <m:mn>0</m:mn><m:mtext>  elsewhere</m:mtext>
+     </m:mtd>
+    </m:mtr>
+   </m:mtable>
+    </m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAgadaqadaqaaiaadIhaaiaawIcacaGLPaaacqGH9aqpdaGabaabaeqabaWaaSaaaeaacaWGTbWaaWbaaSqabeaacaWG4baaaOGaamyzamaaCaaaleqabaGaeyOeI0IaamyBaaaaaOqaaiaadIhacaGGHaaaaiaacYcacaqGGaGaaeiiaiaadIhacqGH9aqpcaaIWaGaaiilaiaaigdacaGGSaGaeSOjGSeabaGaaGimaiaabccacaqGGaGaaeyzaiaabYgacaqGZbGaaeyzaiaabEhacaqGObGaaeyzaiaabkhacaqGLbaaaiaawUhaaaaa@54A7@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --> For the Poisson distribution <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>μ</m:mi><m:mo>=</m:mo><m:msup>
+    <m:mi>σ</m:mi>
+    <m:mn>2</m:mn>
+   </m:msup>
+   <m:mo>=</m:mo><m:mi>m</m:mi><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeY7aTjabg2da9iabeo8aZnaaCaaaleqabaGaaGOmaaaakiabg2da9iaad2gacaGGUaaaaa@3E05@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ The Poisson distribution is used quite often in queuing theory to, among other things, describe the arrival of customers at a cashier's station.</para>
+        
+      </section>
+      <section id="id1171147280737">
+        <title>Continuous distributions</title>
+        <para id="eip-849"><title>Expotential distribution.</title>The continuous random variable <emphasis effect="italics">x</emphasis> has an exponential distribution if <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>x</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mrow><m:mo>{</m:mo> <m:mtable columnalign="left">
+    <m:mtr>
+     <m:mtd>
+      <m:mi>λ</m:mi><m:msup>
+       <m:mi>e</m:mi>
+       <m:mrow>
+        <m:mo>−</m:mo><m:mi>λ</m:mi><m:mi>x</m:mi>
+       </m:mrow>
+      </m:msup>
+      <m:mo>,</m:mo><m:mtext> for </m:mtext><m:mi>x</m:mi><m:mo>≥</m:mo><m:mn>0</m:mn><m:mtext>  </m:mtext>
+     </m:mtd>
+    </m:mtr>
+    <m:mtr>
+     <m:mtd>
+      <m:mtext>0   for </m:mtext><m:mi>x</m:mi><m:mo>&lt;</m:mo><m:mn>0</m:mn>
+     </m:mtd>
+    </m:mtr>
+   </m:mtable>
+    <m:mo>}</m:mo></m:mrow><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAgadaqadaqaaiaadIhaaiaawIcacaGLPaaacqGH9aqpdaGadaabaeqabaGaeq4UdWMaamyzamaaCaaaleqabaGaeyOeI0Iaeq4UdWMaamiEaaaakiaacYcacaqGGaGaaeOzaiaab+gacaqGYbGaaeiiaiaadIhacqGHLjYScaaIWaGaaeiiaiaabccaaeaacaqGWaGaaeiiaiaabccacaqGGaGaaeOzaiaab+gacaqGYbGaaeiiaiaadIhacqGH8aapcaaIWaaaaiaawUhacaGL9baacaGGUaaaaa@560F@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ The cumulative exponential distribution is given by <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>F</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>x</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>−</m:mo><m:msup>
+    <m:mi>e</m:mi>
+    <m:mrow>
+     <m:mo>−</m:mo><m:mi>λ</m:mi><m:mi>x</m:mi>
+    </m:mrow>
+   </m:msup>
+   <m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAeadaqadaqaaiaadIhaaiaawIcacaGLPaaacqGH9aqpcaaIXaGaeyOeI0IaamyzamaaCaaaleqabaGaeyOeI0Iaeq4UdWMaamiEaaaakiaacYcaaaa@4157@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ for <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>x</m:mi><m:mo>≥</m:mo><m:mn>0.</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadIhacqGHLjYScaaIWaGaaiOlaaaa@3A18@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ The exponential distribution describes the times between events that occur continuously and independently at a constant rate (as in a Poisson process). The mean and variance of an exponential distribution are <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>μ</m:mi><m:mo>=</m:mo><m:msup>
+    <m:mi>λ</m:mi>
+    <m:mrow>
+     <m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msup>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeY7aTjabg2da9iabeU7aSnaaCaaaleqabaGaeyOeI0IaaGymaaaaaaa@3C2E@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msup>
+    <m:mi>σ</m:mi>
+    <m:mn>2</m:mn>
+   </m:msup>
+   <m:mo>=</m:mo><m:msup>
+    <m:mi>λ</m:mi>
+    <m:mrow>
+     <m:mo>−</m:mo><m:mn>2</m:mn>
+    </m:mrow>
+   </m:msup>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeo8aZnaaCaaaleqabaGaaGOmaaaakiabg2da9iabeU7aSnaaCaaaleqabaGaeyOeI0IaaGOmaaaakiaac6caaaa@3DEB@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</para><para id="id1171120573182"><title>Cauchy distribution.</title>A random variable <emphasis effect="italics">x</emphasis>, where <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mo>−</m:mo><m:mi>∞</m:mi><m:mo>&lt;</m:mo><m:mi>x</m:mi><m:mo>&lt;</m:mo><m:mi>∞</m:mi><m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabgkHiTiabg6HiLkabgYda8iaadIhacqGH8aapcqGHEisPcaGGSaaaaa@3D6D@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+has a Cauchy (or Cauchy-Lorentz) distribution if its pdf is <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>x</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mfrac>
+    <m:mn>1</m:mn>
+    <m:mi>π</m:mi>
+   </m:mfrac>
+   <m:mrow><m:mo>[</m:mo> <m:mrow>
+    <m:mfrac>
+     <m:mi>γ</m:mi>
+     <m:mrow>
+      <m:msup>
+       <m:mrow>
+        <m:mrow><m:mo>(</m:mo>
+         <m:mrow>
+          <m:mi>x</m:mi><m:mo>−</m:mo><m:msub>
+           <m:mi>x</m:mi>
+           <m:mn>0</m:mn>
+          </m:msub>
+          
+         </m:mrow>
+        <m:mo>)</m:mo></m:mrow>
+       </m:mrow>
+       <m:mn>2</m:mn>
+      </m:msup>
+      <m:mo>+</m:mo><m:msup>
+       <m:mi>γ</m:mi>
+       <m:mn>2</m:mn>
+      </m:msup>
+      
+     </m:mrow>
+    </m:mfrac>
+    
+   </m:mrow> <m:mo>]</m:mo></m:mrow><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAgadaqadaqaaiaadIhaaiaawIcacaGLPaaacqGH9aqpdaWcaaqaaiaaigdaaeaacqaHapaCaaWaamWaaeaadaWcaaqaaiabeo7aNbqaamaabmaabaGaamiEaiabgkHiTiaadIhadaWgaaWcbaGaaGimaaqabaaakiaawIcacaGLPaaadaahaaWcbeqaaiaaikdaaaGccqGHRaWkcqaHZoWzdaahaaWcbeqaaiaaikdaaaaaaaGccaGLBbGaayzxaaGaaiOlaaaa@4B12@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ The parameter <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>x</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadIhadaWgaaWcbaGaaGimaaqabaaaaa@37CC@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ locates the peak of the pdf while <emphasis effect="italics">γ</emphasis> specifies the half-width of the pdf at the half maximum. Figure 3 shows the pdf and cumulative function for two values of these two parameters.
+</para>
+        <para id="id1171120460858"><figure id="PRfigure3"><title>The Cauchy distribution.</title><media id="prfig3" alt="Graph of the Cauchy distribution for two values of the parameters.">
+    <image mime-type="image/jpeg" src="../../media/PR figure 3.jpg"/>
+  </media>
+  
+<caption>The two panels represent the Cauchy distribution for two sets of values of <emphasis effect="italics">x<sub>0</sub></emphasis> and <emphasis effect="italics">γ</emphasis>.
+  </caption></figure>
+</para>
+        <para id="id4405004"><title>Normal distribution.</title>The continuous random variable <emphasis effect="italics">x</emphasis>  has a normal distribution with a mean of <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mi>μ</m:mi>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeY7aTbaa@379F@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and a variance of <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msup>
+    <m:mi>σ</m:mi>
+    <m:mn>2</m:mn>
+   </m:msup>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeo8aZnaaCaaaleqabaGaaGOmaaaaaaa@3895@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ if its pdf is <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>x</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mfrac>
+    <m:mn>1</m:mn>
+    <m:mrow>
+     <m:mi>σ</m:mi><m:msqrt>
+      <m:mrow>
+       <m:mn>2</m:mn><m:mi>π</m:mi>
+      </m:mrow>
+     </m:msqrt>
+     
+    </m:mrow>
+   </m:mfrac>
+   <m:msup>
+    <m:mi>e</m:mi>
+    <m:mrow>
+     <m:mo>−</m:mo><m:mfrac>
+      <m:mrow>
+       <m:msup>
+        <m:mrow>
+         <m:mrow><m:mo>(</m:mo>
+          <m:mrow>
+           <m:mi>x</m:mi><m:mo>−</m:mo><m:mi>μ</m:mi>
+          </m:mrow>
+         <m:mo>)</m:mo></m:mrow>
+        </m:mrow>
+        <m:mn>2</m:mn>
+       </m:msup>
+       
+      </m:mrow>
+      <m:mrow>
+       <m:mn>2</m:mn><m:msup>
+        <m:mi>σ</m:mi>
+        <m:mn>2</m:mn>
+       </m:msup>
+       
+      </m:mrow>
+     </m:mfrac>
+     
+    </m:mrow>
+   </m:msup>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAgadaqadaqaaiaadIhaaiaawIcacaGLPaaacqGH9aqpdaWcaaqaaiaaigdaaeaacqaHdpWCdaGcaaqaaiaaikdacqaHapaCaSqabaaaaOGaamyzamaaCaaaleqabaGaeyOeI0YaaSaaaeaadaqadaqaaiaadIhacqGHsislcqaH8oqBaiaawIcacaGLPaaadaahaaadbeqaaiaaikdaaaaaleaacaaIYaGaeq4Wdm3aaWbaaWqabeaacaaIYaaaaaaaaaaaaa@4B27@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ for <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mo>−</m:mo><m:mi>∞</m:mi><m:mo>≤</m:mo><m:mi>x</m:mi><m:mo>≤</m:mo><m:mi>∞</m:mi><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabgkHiTiabg6HiLkabgsMiJkaadIhacqGHKjYOcqGHEisPcaGGUaaaaa@3ED1@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ The distribution is symmetric around the mean.</para>
+        <para id="id1171124110930"><title>Log normal distribution.</title>The continuous random variable <emphasis effect="italics">x</emphasis> has log normal distribution if <emphasis effect="italics">y</emphasis> has a normal distribution and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>x</m:mi><m:mo>=</m:mo><m:msup>
+    <m:mi>e</m:mi>
+    <m:mi>y</m:mi>
+   </m:msup>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadIhacqGH9aqpcaWGLbWaaWbaaSqabeaacaWG5baaaOGaaiOlaaaa@3ABD@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ Thus, if <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>y</m:mi><m:mo>∼</m:mo><m:mi>N</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mi>μ</m:mi><m:mo>,</m:mo><m:msup>
+      <m:mi>σ</m:mi>
+      <m:mn>2</m:mn>
+     </m:msup>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadMhacqWI8iIocaWGobWaaeWaaeaacqaH8oqBcaGGSaGaeq4Wdm3aaWbaaSqabeaacaaIYaaaaaGccaGLOaGaayzkaaGaaiilaaaa@4038@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ then the pdf of a log normal distribution is <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>x</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mrow><m:mo>{</m:mo> <m:mtable columnalign="left">
+    <m:mtr>
+     <m:mtd>
+      <m:mfrac>
+       <m:mn>1</m:mn>
+       <m:mrow>
+        <m:mi>x</m:mi><m:mi>σ</m:mi><m:msqrt>
+         <m:mrow>
+          <m:mn>2</m:mn><m:mi>π</m:mi>
+         </m:mrow>
+        </m:msqrt>
+        
+       </m:mrow>
+      </m:mfrac>
+      <m:msup>
+       <m:mi>e</m:mi>
+       <m:mrow>
+        <m:mo>−</m:mo><m:mfrac>
+         <m:mrow>
+          <m:msup>
+           <m:mrow>
+            <m:mrow><m:mo>(</m:mo>
+             <m:mrow>
+              <m:mi>ln</m:mi><m:mrow><m:mo>(</m:mo>
+               <m:mi>x</m:mi>
+              <m:mo>)</m:mo></m:mrow><m:mo>−</m:mo><m:mi>μ</m:mi>
+             </m:mrow>
+            <m:mo>)</m:mo></m:mrow>
+           </m:mrow>
+           <m:mn>2</m:mn>
+          </m:msup>
+          
+         </m:mrow>
+         <m:mrow>
+          <m:mn>2</m:mn><m:msup>
+           <m:mi>σ</m:mi>
+           <m:mn>2</m:mn>
+          </m:msup>
+          
+         </m:mrow>
+        </m:mfrac>
+        
+       </m:mrow>
+      </m:msup>
+      <m:mtext>,  for </m:mtext><m:mi>x</m:mi><m:mo>&gt;</m:mo><m:mn>0</m:mn>
+     </m:mtd>
+    </m:mtr>
+    <m:mtr>
+     <m:mtd>
+      <m:mn>0</m:mn><m:mtext>    otherwise</m:mtext>
+     </m:mtd>
+    </m:mtr>
+   </m:mtable>
+    <m:mo>}</m:mo></m:mrow><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAgadaqadaqaaiaadIhaaiaawIcacaGLPaaacqGH9aqpdaGadaabaeqabaWaaSaaaeaacaaIXaaabaGaamiEaiabeo8aZnaakaaabaGaaGOmaiabec8aWbWcbeaaaaGccaWGLbWaaWbaaSqabeaacqGHsisldaWcaaqaamaabmaabaGaciiBaiaac6gadaqadaqaaiaadIhaaiaawIcacaGLPaaacqGHsislcqaH8oqBaiaawIcacaGLPaaadaahaaadbeqaaiaaikdaaaaaleaacaaIYaGaeq4Wdm3aaWbaaWqabeaacaaIYaaaaaaaaaGccaqGSaGaaeiiaiaabccacaqGMbGaae4BaiaabkhacaqGGaGaamiEaiabg6da+iaaicdaaeaacaaIWaGaaeiiaiaabccacaqGGaGaaeiiaiaab+gacaqG0bGaaeiAaiaabwgacaqGYbGaae4DaiaabMgacaqGZbGaaeyzaaaacaGL7bGaayzFaaGaaiOlaaaa@6667@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ The mean and variance of <emphasis effect="italics">x</emphasis> are <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>μ</m:mi>
+    <m:mi>x</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:msup>
+    <m:mi>e</m:mi>
+    <m:mrow>
+     <m:mi>μ</m:mi><m:mo>+</m:mo><m:mstyle scriptlevel="+1">
+      <m:mfrac>
+       <m:mrow>
+        <m:msup>
+         <m:mi>σ</m:mi>
+         <m:mn>2</m:mn>
+        </m:msup>
+        
+       </m:mrow>
+       <m:mn>2</m:mn>
+      </m:mfrac>
+     </m:mstyle>
+     
+    </m:mrow>
+   </m:msup>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeY7aTnaaBaaaleaacaWG4baabeaakiabg2da9iaadwgadaahaaWcbeqaaiabeY7aTjabgUcaRmaaleaameaacqaHdpWCdaahaaqabeaacaaIYaaaaaqaaiaaikdaaaaaaaaa@4101@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msubsup>
+    <m:mi>σ</m:mi>
+    <m:mi>x</m:mi>
+    <m:mn>2</m:mn>
+   </m:msubsup>
+   <m:mo>=</m:mo><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msup>
+      <m:mi>e</m:mi>
+      <m:mrow>
+       <m:msup>
+        <m:mi>σ</m:mi>
+        <m:mn>2</m:mn>
+       </m:msup>
+       
+      </m:mrow>
+     </m:msup>
+     <m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:msup>
+    <m:mi>e</m:mi>
+    <m:mrow>
+     <m:mn>2</m:mn><m:mi>μ</m:mi><m:mo>+</m:mo><m:msup>
+      <m:mi>σ</m:mi>
+      <m:mn>2</m:mn>
+     </m:msup>
+     
+    </m:mrow>
+   </m:msup>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeo8aZnaaDaaaleaacaWG4baabaGaaGOmaaaakiabg2da9maabmaabaGaamyzamaaCaaaleqabaGaeq4Wdm3aaWbaaWqabeaacaaIYaaaaaaakiabgkHiTiaaigdaaiaawIcacaGLPaaacaWGLbWaaWbaaSqabeaacaaIYaGaeqiVd0Maey4kaSIaeq4Wdm3aaWbaaWqabeaacaaIYaaaaaaakiaac6caaaa@4975@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ Because the distribution is skewed downward for variances over 1, the log normal distribution is sometimes used to describe income distributions (where there are relatively few very wealthy people and incomes generally are positive. Figure 4 shows the graphs of the pdf and cumulative functions for the log normal distributions for two values of <emphasis effect="italics">σ</emphasis>.</para>
+        <para id="eip-282"><figure id="PRfigure4">
+  <title>The log-normal distribution.</title>
+  <media id="fig4" alt="Graph of the log-normal distribution for two values of σ.">
+    <image mime-type="image/jpeg" src="../../media/PR figure 4.jpg"/>
+  </media>
+  <caption>
+     The two panels illustrate the log-normal distribution for two values of <emphasis effect="italics">σ</emphasis>..
+  </caption>
+</figure>
+</para><para id="id1171121142627"><title>Gamma distribution.</title>A positive random variable <emphasis effect="italics">x</emphasis> has a gamma distribution if its pdf is <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>x</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mfrac>
+    <m:mn>1</m:mn>
+    <m:mrow>
+     <m:mi>Γ</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mi>α</m:mi>
+     <m:mo>)</m:mo></m:mrow><m:msup>
+      <m:mi>β</m:mi>
+      <m:mi>α</m:mi>
+     </m:msup>
+     
+    </m:mrow>
+   </m:mfrac>
+   <m:msup>
+    <m:mi>x</m:mi>
+    <m:mrow>
+     <m:mi>α</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msup>
+   <m:msup>
+    <m:mi>e</m:mi>
+    <m:mrow>
+     <m:mo>−</m:mo><m:mstyle scriptlevel="+1">
+      <m:mfrac>
+       <m:mi>x</m:mi>
+       <m:mi>β</m:mi>
+      </m:mfrac>
+     </m:mstyle>
+     
+    </m:mrow>
+   </m:msup>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAgadaqadaqaaiaadIhaaiaawIcacaGLPaaacqGH9aqpdaWcaaqaaiaaigdaaeaacqqHtoWrdaqadaqaaiabeg7aHbGaayjkaiaawMcaaiabek7aInaaCaaaleqabaGaeqySdegaaaaakiaadIhadaahaaWcbeqaaiabeg7aHjabgkHiTiaaigdaaaGccaWGLbWaaWbaaSqabeaacqGHsisldaWcbaadbaGaamiEaaqaaiabek7aIbaaaaaaaa@4C6C@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ for <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>x</m:mi><m:mo>&gt;</m:mo><m:mn>0</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadIhacqGH+aGpcaaIWaaaaa@38A8@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --> and 0 elsewhere. 
+ <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>Γ</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>α</m:mi>
+   <m:mo>)</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabfo5ahnaabmaabaGaeqySdegacaGLOaGaayzkaaaaaa@3A79@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --> is known as the gamma function and is defined to be <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>Γ</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>α</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mstyle displaystyle="true">
+    <m:mrow>
+     <m:msubsup>
+      <m:mo>∫</m:mo>
+      <m:mn>0</m:mn>
+      <m:mi>∞</m:mi>
+     </m:msubsup>
+     <m:mrow>
+      <m:msup>
+       <m:mi>y</m:mi>
+       <m:mrow>
+        <m:mi>α</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+       </m:mrow>
+      </m:msup>
+      <m:msup>
+       <m:mi>e</m:mi>
+       <m:mrow>
+        <m:mo>−</m:mo><m:mi>y</m:mi>
+       </m:mrow>
+      </m:msup>
+      <m:mi>d</m:mi><m:mi>y</m:mi>
+     </m:mrow>
+    </m:mrow>
+    
+   </m:mstyle><m:mo>=</m:mo><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mi>α</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>!</m:mo><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabfo5ahnaabmaabaGaeqySdegacaGLOaGaayzkaaGaeyypa0Zaa8qmaeaacaWG5bWaaWbaaSqabeaacqaHXoqycqGHsislcaaIXaaaaOGaamyzamaaCaaaleqabaGaeyOeI0IaamyEaaaakiaadsgacaWG5baaleaacaaIWaaabaGaeyOhIukaniabgUIiYdGccqGH9aqpdaqadaqaaiabeg7aHjabgkHiTiaaigdaaiaawIcacaGLPaaacaGGHaGaaiOlaaaa@5079@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ The gamma function is often used to model waiting times like waiting for death. Its mean and variance are given by <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>μ</m:mi><m:mo>=</m:mo><m:mi>α</m:mi><m:mi>β</m:mi>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeY7aTjabg2da9iabeg7aHjabek7aIbaa@3BE5@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msup>
+    <m:mi>σ</m:mi>
+    <m:mn>2</m:mn>
+   </m:msup>
+   <m:mo>=</m:mo><m:mi>α</m:mi><m:msup>
+    <m:mi>β</m:mi>
+    <m:mn>2</m:mn>
+   </m:msup>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeo8aZnaaCaaaleqabaGaaGOmaaaakiabg2da9iabeg7aHjabek7aInaaCaaaleqabaGaaGOmaaaakiaac6caaaa@3E8A@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</para>
+        
+        
+        <para id="id1171119748656"><title>Chi-square distribution.</title>A chi-square distribution  (<!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ --> <m:math>  <m:semantics>   <m:mrow>    <m:msup>     <m:mi>χ</m:mi>     <m:mn>2</m:mn>    </m:msup>    <m:mrow><m:mo>(</m:mo>     <m:mi>k</m:mi><m:mo>)</m:mo></m:mrow></m:mrow><m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeE8aJnaaCaaaleqabaGaaGOmaaaakmaabmaabaGaam4AaaGaayjkaiaawMcaaiaac6caaaa@3BBE@</m:annotation>  </m:semantics></m:math><!-- MathType@End@5@5@ -->) is the sum of <emphasis effect="italics">k</emphasis> independent standard normal random variables and is a special case of the gamma distribution (with <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>α</m:mi><m:mo>=</m:mo><m:mfrac>
+    <m:mi>k</m:mi>
+    <m:mn>2</m:mn>
+   </m:mfrac>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeg7aHjabg2da9maalaaabaGaam4Aaaqaaiaaikdaaaaaaa@3A4A@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>β</m:mi><m:mo>=</m:mo><m:mn>2</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabek7aIjabg2da9iaaikdaaaa@394C@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->). The pdf of a chi-square distribution with <emphasis effect="italics">k</emphasis> degrees of freedom is <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>x</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mfrac>
+    <m:mn>1</m:mn>
+    <m:mrow>
+     <m:msup>
+      <m:mn>2</m:mn>
+      <m:mrow>
+       <m:mstyle scriptlevel="+1">
+        <m:mfrac bevelled="true">
+         <m:mi>k</m:mi>
+         <m:mn>2</m:mn>
+        </m:mfrac>
+       </m:mstyle>
+       
+      </m:mrow>
+     </m:msup>
+     <m:mi>Γ</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mstyle scriptlevel="+1">
+        <m:mfrac>
+         <m:mi>k</m:mi>
+         <m:mn>2</m:mn>
+        </m:mfrac>
+       </m:mstyle>
+       
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow>
+    </m:mrow>
+   </m:mfrac>
+   <m:msup>
+    <m:mi>x</m:mi>
+    <m:mrow>
+     <m:mstyle scriptlevel="+1">
+      <m:mfrac>
+       <m:mi>k</m:mi>
+       <m:mn>2</m:mn>
+      </m:mfrac>
+     </m:mstyle>
+     <m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msup>
+   <m:msup>
+    <m:mi>e</m:mi>
+    <m:mrow>
+     <m:mo>−</m:mo><m:mstyle scriptlevel="+1">
+      <m:mfrac>
+       <m:mi>x</m:mi>
+       <m:mn>2</m:mn>
+      </m:mfrac>
+     </m:mstyle>
+     
+    </m:mrow>
+   </m:msup>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAgadaqadaqaaiaadIhaaiaawIcacaGLPaaacqGH9aqpdaWcaaqaaiaaigdaaeaacaaIYaWaaWbaaSqabeaadaWcdaadbaGaam4AaaqaaiaaikdaaaaaaOGaeu4KdC0aaeWaaeaadaWcbaWcbaGaam4AaaqaaiaaikdaaaaakiaawIcacaGLPaaaaaGaamiEamaaCaaaleqabaWaaSqaaWqaaiaadUgaaeaacaaIYaaaaSGaeyOeI0IaaGymaaaakiaadwgadaahaaWcbeqaaiabgkHiTmaaleaameaacaWG4baabaGaaGOmaaaaaaaaaa@4B36@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ where <emphasis effect="italics">x</emphasis> &gt; 0. Its mean and variance are <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>μ</m:mi><m:mo>=</m:mo><m:mi>k</m:mi>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeY7aTjabg2da9iaadUgaaaa@3995@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msup>
+    <m:mi>σ</m:mi>
+    <m:mn>2</m:mn>
+   </m:msup>
+   <m:mo>=</m:mo><m:mn>2</m:mn><m:mi>k</m:mi><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeo8aZnaaCaaaleqabaGaaGOmaaaakiabg2da9iaaikdacaWGRbGaaiOlaaaa@3C03@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ If <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>y</m:mi><m:mo>=</m:mo><m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>i</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+     <m:mi>k</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:msubsup>
+      <m:mi>x</m:mi>
+      <m:mi>i</m:mi>
+      <m:mn>2</m:mn>
+     </m:msubsup>
+     
+    </m:mrow>
+   </m:mstyle>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadMhacqGH9aqpdaaeWbqaaiaadIhadaqhaaWcbaGaamyAaaqaaiaaikdaaaaabaGaamyAaiabg2da9iaaigdaaeaacaWGRbaaniabggHiLdaaaa@4097@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ where the <emphasis effect="italics">x<sub>i</sub></emphasis>'s are independently drawn from the standard normal distribution (N(1, 0)), then <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mi>i</m:mi>
+   </m:msub>
+   <m:mo>∼</m:mo><m:msup>
+    <m:mi>χ</m:mi>
+    <m:mn>2</m:mn>
+   </m:msup>	
+   <m:mrow><m:mo>(</m:mo>
+    <m:mi>k</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadMhadaWgaaWcbaGaamyAaaqabaGccqWI8iIocqaHhpWydaahaaWcbeqaaiaaikdaaaGcdaqadaqaaiaadUgaaiaawIcacaGLPaaacaGGUaaaaa@3F09@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</para>
+        <para id="id1171120266912"><title>Student's t-distribution.</title>Consider two random variables, <emphasis effect="italics">x</emphasis> and <emphasis effect="italics">v</emphasis>. Assume that <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>x</m:mi><m:mo>∼</m:mo><m:mi>N</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mn>0</m:mn><m:mo>,</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadIhacqWI8iIocaWGobWaaeWaaeaacaaIWaGaaiilaiaaigdaaiaawIcacaGLPaaaaaa@3C90@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>v</m:mi><m:mo>∼</m:mo><m:msup>
+    <m:mi>χ</m:mi>
+    <m:mn>2</m:mn>
+   </m:msup>
+   <m:mrow><m:mo>(</m:mo>
+    <m:mi>r</m:mi>
+   <m:mo>)</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAhacqWI8iIocqaHhpWydaahaaWcbeqaaiaaikdaaaGcdaqadaqaaiaadkhaaiaawIcacaGLPaaaaaa@3D37@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --> 
+and are stochastically independent. Then the random variable <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>t</m:mi><m:mo>=</m:mo><m:mfrac>
+    <m:mi>w</m:mi>
+    <m:mrow>
+     <m:msqrt>
+      <m:mrow>
+       <m:mfrac>
+        <m:mi>v</m:mi>
+        <m:mi>r</m:mi>
+       </m:mfrac>
+       
+      </m:mrow>
+     </m:msqrt>
+     
+    </m:mrow>
+   </m:mfrac>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadshacqGH9aqpdaWcaaqaaiaadEhaaeaadaGcaaqaamaalaaabaGaamODaaqaaiaadkhaaaaaleqaaaaaaaa@3B11@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ has the t-distribution with <emphasis effect="italics">r</emphasis><emphasis effect="italics">degrees of freedom</emphasis>. The pdf and cumulative function of <emphasis effect="italics">t</emphasis> are <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>t</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mfrac>
+    <m:mrow>
+     <m:mi>Γ</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mfrac>
+        <m:mrow>
+         <m:mi>r</m:mi><m:mo>+</m:mo><m:mn>1</m:mn>
+        </m:mrow>
+        <m:mn>2</m:mn>
+       </m:mfrac>
+       
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow>
+    </m:mrow>
+    <m:mrow>
+     <m:msqrt>
+      <m:mrow>
+       <m:mi>r</m:mi><m:mi>π</m:mi>
+      </m:mrow>
+     </m:msqrt>
+     <m:mi>Γ</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mfrac>
+        <m:mi>r</m:mi>
+        <m:mn>2</m:mn>
+       </m:mfrac>
+       
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow>
+    </m:mrow>
+   </m:mfrac>
+   <m:msup>
+    <m:mrow>
+     <m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mn>1</m:mn><m:mo>+</m:mo><m:mfrac>
+        <m:mrow>
+         <m:msup>
+          <m:mi>t</m:mi>
+          <m:mn>2</m:mn>
+         </m:msup>
+         
+        </m:mrow>
+        <m:mi>r</m:mi>
+       </m:mfrac>
+       
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow>
+    </m:mrow>
+    <m:mrow>
+     <m:mo>−</m:mo><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mfrac>
+        <m:mrow>
+         <m:mi>r</m:mi><m:mo>+</m:mo><m:mn>1</m:mn>
+        </m:mrow>
+        <m:mn>2</m:mn>
+       </m:mfrac>
+       
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow>
+    </m:mrow>
+   </m:msup>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAgadaqadaqaaiaadshaaiaawIcacaGLPaaacqGH9aqpdaWcaaqaaiabfo5ahnaabmaabaWaaSaaaeaacaWGYbGaey4kaSIaaGymaaqaaiaaikdaaaaacaGLOaGaayzkaaaabaWaaOaaaeaacaWGYbGaeqiWdahaleqaaOGaeu4KdC0aaeWaaeaadaWcaaqaaiaadkhaaeaacaaIYaaaaaGaayjkaiaawMcaaaaadaqadaqaaiaaigdacqGHRaWkdaWcaaqaaiaadshadaahaaWcbeqaaiaaikdaaaaakeaacaWGYbaaaaGaayjkaiaawMcaamaaCaaaleqabaGaeyOeI0YaaeWaaeaadaWcaaqaaiaadkhacqGHRaWkcaaIXaaabaGaaGOmaaaaaiaawIcacaGLPaaaaaaaaa@5466@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>F</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>t</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mfrac>
+    <m:mn>1</m:mn>
+    <m:mn>2</m:mn>
+   </m:mfrac>
+   <m:mo>+</m:mo><m:mi>t</m:mi><m:mi>Γ</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mfrac>
+      <m:mi>t</m:mi>
+      <m:mn>2</m:mn>
+     </m:mfrac>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAeadaqadaqaaiaadshaaiaawIcacaGLPaaacqGH9aqpdaWcaaqaaiaaigdaaeaacaaIYaaaaiabgUcaRiaadshacqqHtoWrdaqadaqaamaalaaabaGaamiDaaqaaiaaikdaaaaacaGLOaGaayzkaaGaaiOlaaaa@4306@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ The mean and variance of the distribution are 0 for <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>r</m:mi><m:mo>&gt;</m:mo><m:mn>1</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadkhacqGH+aGpcaaIXaaaaa@38A3@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mfrac>
+    <m:mi>r</m:mi>
+    <m:mrow>
+     <m:mi>r</m:mi><m:mo>−</m:mo><m:mn>2</m:mn>
+    </m:mrow>
+   </m:mfrac>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaamaalaaabaGaamOCaaqaaiaadkhacqGHsislcaaIYaaaaaaa@3990@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ for <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>t</m:mi><m:mo>&gt;</m:mo><m:mn>2</m:mn><m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadshacqGH+aGpcaaIYaGaaiilaaaa@3956@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ respectively.<footnote id="eip-id1169944814931">The mean of the t-distribution is undefined for <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>t</m:mi><m:mo>≤</m:mo><m:mn>1.</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadshacqGHKjYOcaaIXaGaaiOlaaaa@3A04@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ The variance of the distribution is <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mi>∞</m:mi>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabg6HiLcaa@375A@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ for <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mn>1</m:mn><m:mo>&lt;</m:mo><m:mi>r</m:mi><m:mo>≤</m:mo><m:mn>2</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaaigdacqGH8aapcaWGYbGaeyizImQaaGOmaaaa@3B10@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and undefined for <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>r</m:mi><m:mo>≤</m:mo><m:mn>1.</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadkhacqGHKjYOcaaIXaGaaiOlaaaa@3A02@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</footnote>  The t-distribution plays a prominent role in hypothesis testing that is well-known to all undergraduate economics majors.</para>
+        <para id="id1171120293407"><title>F distribution.</title>Consider two stochastically independent chi-square random variable such that <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>u</m:mi><m:mo>∼</m:mo><m:msup>
+    <m:mtext>χ</m:mtext>
+    <m:mn>2</m:mn>
+   </m:msup>
+   <m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>r</m:mi>
+      <m:mn>1</m:mn>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadwhacqWI8iIocaqGhpWaaWbaaSqabeaacaaIYaaaaOWaaeWaaeaacaWGYbWaaSbaaSqaaiaaigdaaeqaaaGccaGLOaGaayzkaaaaaa@3DBD@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>v</m:mi><m:mo>∼</m:mo><m:msup>
+    <m:mtext>χ</m:mtext>
+    <m:mn>2</m:mn>
+   </m:msup>
+   <m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>r</m:mi>
+      <m:mn>2</m:mn>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAhacqWI8iIocaqGhpWaaWbaaSqabeaacaaIYaaaaOWaaeWaaeaacaWGYbWaaSbaaSqaaiaaikdaaeqaaaGccaGLOaGaayzkaaaaaa@3DBF@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>u</m:mi><m:mo>,</m:mo><m:mi>v</m:mi><m:mo>&gt;</m:mo><m:mn>0.</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadwhacaGGSaGaamODaiabg6da+iaaicdacaGGUaaaaa@3B02@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --> 
+The new random variable <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>f</m:mi><m:mo>=</m:mo><m:mfrac>
+    <m:mrow>
+     <m:mfrac bevelled="true">
+      <m:mi>u</m:mi>
+      <m:mrow>
+       <m:msub>
+        <m:mi>r</m:mi>
+        <m:mn>1</m:mn>
+       </m:msub>
+       
+      </m:mrow>
+     </m:mfrac>
+     
+    </m:mrow>
+    <m:mrow>
+     <m:mfrac bevelled="true">
+      <m:mi>v</m:mi>
+      <m:mrow>
+       <m:msub>
+        <m:mi>r</m:mi>
+        <m:mn>2</m:mn>
+       </m:msub>
+       
+      </m:mrow>
+     </m:mfrac>
+     
+    </m:mrow>
+   </m:mfrac>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAgacqGH9aqpdaWcaaqaamaaliaabaGaamyDaaqaaiaadkhadaWgaaWcbaGaaGymaaqabaaaaaGcbaWaaSGaaeaacaWG2baabaGaamOCamaaBaaaleaacaaIYaaabeaaaaaaaaaa@3DCA@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ has a F-distribution with <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>r</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadkhadaWgaaWcbaGaaGymaaqabaaaaa@37C7@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>r</m:mi>
+    <m:mn>2</m:mn>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadkhadaWgaaWcbaGaaGOmaaqabaaaaa@37C8@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ degrees of freedom. The pdf for the F-distribution is <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>g</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mi>f</m:mi>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mfrac>
+    <m:mrow>
+     <m:mi>Γ</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mfrac>
+        <m:mrow>
+         <m:msub>
+          <m:mi>r</m:mi>
+          <m:mn>1</m:mn>
+         </m:msub>
+         <m:mo>+</m:mo><m:msub>
+          <m:mi>r</m:mi>
+          <m:mn>2</m:mn>
+         </m:msub>
+         
+        </m:mrow>
+        <m:mn>2</m:mn>
+       </m:mfrac>
+       
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mfrac>
+        <m:mrow>
+         <m:msub>
+          <m:mi>r</m:mi>
+          <m:mn>1</m:mn>
+         </m:msub>
+         
+        </m:mrow>
+        <m:mrow>
+         <m:msub>
+          <m:mi>r</m:mi>
+          <m:mn>2</m:mn>
+         </m:msub>
+         
+        </m:mrow>
+       </m:mfrac>
+       
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow>
+    </m:mrow>
+    <m:mrow>
+     <m:mi>Γ</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mfrac>
+        <m:mrow>
+         <m:msub>
+          <m:mi>r</m:mi>
+          <m:mn>1</m:mn>
+         </m:msub>
+         
+        </m:mrow>
+        <m:mn>2</m:mn>
+       </m:mfrac>
+       
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mi>Γ</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mfrac>
+        <m:mrow>
+         <m:msub>
+          <m:mi>r</m:mi>
+          <m:mn>2</m:mn>
+         </m:msub>
+         
+        </m:mrow>
+        <m:mn>2</m:mn>
+       </m:mfrac>
+       
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow>
+    </m:mrow>
+   </m:mfrac>
+   <m:mfrac>
+    <m:mrow>
+     <m:msup>
+      <m:mi>f</m:mi>
+      <m:mrow>
+       <m:mfrac>
+        <m:mrow>
+         <m:msub>
+          <m:mi>r</m:mi>
+          <m:mn>1</m:mn>
+         </m:msub>
+         
+        </m:mrow>
+        <m:mn>2</m:mn>
+       </m:mfrac>
+       <m:mo>−</m:mo><m:mn>1</m:mn>
+      </m:mrow>
+     </m:msup>
+     
+    </m:mrow>
+    <m:mrow>
+     <m:msup>
+      <m:mrow>
+       <m:mrow><m:mo>(</m:mo>
+        <m:mrow>
+         <m:mn>1</m:mn><m:mo>+</m:mo><m:mfrac>
+          <m:mrow>
+           <m:msub>
+            <m:mi>r</m:mi>
+            <m:mn>1</m:mn>
+           </m:msub>
+           <m:mi>f</m:mi>
+          </m:mrow>
+          <m:mrow>
+           <m:msub>
+            <m:mi>r</m:mi>
+            <m:mn>2</m:mn>
+           </m:msub>
+           
+          </m:mrow>
+         </m:mfrac>
+         
+        </m:mrow>
+       <m:mo>)</m:mo></m:mrow>
+      </m:mrow>
+      <m:mrow>
+       <m:mfrac>
+        <m:mrow>
+         <m:msub>
+          <m:mi>r</m:mi>
+          <m:mn>1</m:mn>
+         </m:msub>
+         <m:mo>+</m:mo><m:msub>
+          <m:mi>r</m:mi>
+          <m:mn>2</m:mn>
+         </m:msub>
+         
+        </m:mrow>
+        <m:mn>2</m:mn>
+       </m:mfrac>
+       
+      </m:mrow>
+     </m:msup>
+     
+    </m:mrow>
+   </m:mfrac>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadEgadaqadaqaaiaadAgaaiaawIcacaGLPaaacqGH9aqpdaWcaaqaaiabfo5ahnaabmaabaWaaSaaaeaacaWGYbWaaSbaaSqaaiaaigdaaeqaaOGaey4kaSIaamOCamaaBaaaleaacaaIYaaabeaaaOqaaiaaikdaaaaacaGLOaGaayzkaaWaaeWaaeaadaWcaaqaaiaadkhadaWgaaWcbaGaaGymaaqabaaakeaacaWGYbWaaSbaaSqaaiaaikdaaeqaaaaaaOGaayjkaiaawMcaaaqaaiabfo5ahnaabmaabaWaaSaaaeaacaWGYbWaaSbaaSqaaiaaigdaaeqaaaGcbaGaaGOmaaaaaiaawIcacaGLPaaacqqHtoWrdaqadaqaamaalaaabaGaamOCamaaBaaaleaacaaIYaaabeaaaOqaaiaaikdaaaaacaGLOaGaayzkaaaaamaalaaabaGaamOzamaaCaaaleqabaWaaSaaaeaacaWGYbWaaSbaaWqaaiaaigdaaeqaaaWcbaGaaGOmaaaacqGHsislcaaIXaaaaaGcbaWaaeWaaeaacaaIXaGaey4kaSYaaSaaaeaacaWGYbWaaSbaaSqaaiaaigdaaeqaaOGaamOzaaqaaiaadkhadaWgaaWcbaGaaGOmaaqabaaaaaGccaGLOaGaayzkaaWaaWbaaSqabeaadaWcaaqaaiaadkhadaWgaaadbaGaaGymaaqabaWccqGHRaWkcaWGYbWaaSbaaWqaaiaaikdaaeqaaaWcbaGaaGOmaaaaaaaaaOGaaiOlaaaa@6771@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ The F-distribution is used in testing if population variances are equal and in performing likelihood ratio tests.</para>
+        <para id="id1171120436351"><title>Multinomial distribution.</title>Consider the <emphasis effect="italics">n</emphasis> random variables <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>x</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:mo>,</m:mo><m:msub>
+    <m:mi>x</m:mi>
+    <m:mn>2</m:mn>
+   </m:msub>
+   <m:mo>,</m:mo><m:mo>⋯</m:mo><m:mo>,</m:mo><m:msub>
+    <m:mi>x</m:mi>
+    <m:mi>n</m:mi>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadIhadaWgaaWcbaGaaGymaaqabaGccaGGSaGaamiEamaaBaaaleaacaaIYaaabeaakiaacYcacqWIVlctcaGGSaGaamiEamaaBaaaleaacaWGUbaabeaaaaa@3FE0@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ where each variable has a normal distribution—that is, <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>x</m:mi>
+    <m:mi>i</m:mi>
+   </m:msub>
+   <m:mo>∼</m:mo><m:mi>N</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>μ</m:mi>
+      <m:mi>i</m:mi>
+     </m:msub>
+     <m:mo>,</m:mo><m:msubsup>
+      <m:mi>σ</m:mi>
+      <m:mi>i</m:mi>
+      <m:mn>2</m:mn>
+     </m:msubsup>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadIhadaWgaaWcbaGaamyAaaqabaGccqWI8iIocaWGobWaaeWaaeaacqaH8oqBdaWgaaWcbaGaamyAaaqabaGccaGGSaGaeq4Wdm3aa0baaSqaaiaadMgaaeaacaaIYaaaaaGccaGLOaGaayzkaaaaaa@42BD@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and the covariance between of the variables is <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>σ</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>j</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:mi>E</m:mi><m:mrow><m:mo>[</m:mo> <m:mrow>
+    <m:mrow><m:mo>(</m:mo>
+     <m:mrow>
+      <m:msub>
+       <m:mi>x</m:mi>
+       <m:mi>i</m:mi>
+      </m:msub>
+      <m:mo>−</m:mo><m:msub>
+       <m:mi>μ</m:mi>
+       <m:mi>i</m:mi>
+      </m:msub>
+      
+     </m:mrow>
+    <m:mo>)</m:mo></m:mrow><m:mrow><m:mo>(</m:mo>
+     <m:mrow>
+      <m:msub>
+       <m:mi>x</m:mi>
+       <m:mi>j</m:mi>
+      </m:msub>
+      <m:mo>−</m:mo><m:msub>
+       <m:mi>μ</m:mi>
+       <m:mi>j</m:mi>
+      </m:msub>
+      
+     </m:mrow>
+    <m:mo>.</m:mo>
+    <m:mo>)</m:mo></m:mrow>
+   </m:mrow> <m:mo>]</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeo8aZnaaBaaaleaacaWGPbGaamOAaaqabaGccqGH9aqpcaWGfbWaamWaaeaadaqadaqaaiaadIhadaWgaaWcbaGaamyAaaqabaGccqGHsislcqaH8oqBdaWgaaWcbaGaamyAaaqabaaakiaawIcacaGLPaaadaqadaqaaiaadIhadaWgaaWcbaGaamOAaaqabaGccqGHsislcqaH8oqBdaWgaaWcbaGaamOAaaqabaaakiaawIcacaGLPaaaaiaawUfacaGLDbaaaaa@4C65@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ We can arrange the variances and covariances into a <emphasis effect="italics">n</emphasis>-by-<emphasis effect="italics">n</emphasis> matrix where <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>Σ</m:mi><m:mo>=</m:mo><m:mrow><m:mo>[</m:mo> <m:mrow>
+    <m:mtable>
+     <m:mtr>
+      <m:mtd>
+       <m:mrow>
+        <m:msubsup>
+         <m:mi>σ</m:mi>
+         <m:mn>1</m:mn>
+         <m:mn>2</m:mn>
+        </m:msubsup>
+        
+       </m:mrow>
+      </m:mtd>
+      <m:mtd>
+       <m:mrow>
+        <m:msub>
+         <m:mi>σ</m:mi>
+         <m:mrow>
+          <m:mn>12</m:mn>
+         </m:mrow>
+        </m:msub>
+        
+       </m:mrow>
+      </m:mtd>
+      <m:mtd>
+       <m:mo>⋯</m:mo>
+      </m:mtd>
+      <m:mtd>
+       <m:mrow>
+        <m:msub>
+         <m:mi>σ</m:mi>
+         <m:mrow>
+          <m:mn>1</m:mn><m:mi>n</m:mi>
+         </m:mrow>
+        </m:msub>
+        
+       </m:mrow>
+      </m:mtd>
+     </m:mtr>
+     <m:mtr>
+      <m:mtd>
+       <m:mrow>
+        <m:msub>
+         <m:mi>σ</m:mi>
+         <m:mrow>
+          <m:mn>21</m:mn>
+         </m:mrow>
+        </m:msub>
+        
+       </m:mrow>
+      </m:mtd>
+      <m:mtd>
+       <m:mrow>
+        <m:msubsup>
+         <m:mi>σ</m:mi>
+         <m:mn>2</m:mn>
+         <m:mn>2</m:mn>
+        </m:msubsup>
+        
+       </m:mrow>
+      </m:mtd>
+      <m:mtd>
+       <m:mo>⋯</m:mo>
+      </m:mtd>
+      <m:mtd>
+       <m:mrow>
+        <m:msub>
+         <m:mi>σ</m:mi>
+         <m:mrow>
+          <m:mn>2</m:mn><m:mi>n</m:mi>
+         </m:mrow>
+        </m:msub>
+        
+       </m:mrow>
+      </m:mtd>
+     </m:mtr>
+     <m:mtr>
+      <m:mtd>
+       <m:mo>⋮</m:mo>
+      </m:mtd>
+      <m:mtd>
+       <m:mo>⋮</m:mo>
+      </m:mtd>
+      <m:mtd>
+       <m:mo>⋱</m:mo>
+      </m:mtd>
+      <m:mtd>
+       <m:mo>⋮</m:mo>
+      </m:mtd>
+     </m:mtr>
+     <m:mtr>
+      <m:mtd>
+       <m:mrow>
+        <m:msub>
+         <m:mi>σ</m:mi>
+         <m:mrow>
+          <m:mi>n</m:mi><m:mn>1</m:mn>
+         </m:mrow>
+        </m:msub>
+        
+       </m:mrow>
+      </m:mtd>
+      <m:mtd>
+       <m:mrow>
+        <m:msub>
+         <m:mi>σ</m:mi>
+         <m:mrow>
+          <m:mi>n</m:mi><m:mn>2</m:mn>
+         </m:mrow>
+        </m:msub>
+        
+       </m:mrow>
+      </m:mtd>
+      <m:mtd>
+       <m:mo>⋯</m:mo>
+      </m:mtd>
+      <m:mtd>
+       <m:mrow>
+        <m:msubsup>
+         <m:mi>σ</m:mi>
+         <m:mi>n</m:mi>
+         <m:mn>2</m:mn>
+        </m:msubsup>
+        
+       </m:mrow>
+      </m:mtd>
+     </m:mtr>
+     
+    </m:mtable>
+   </m:mrow> <m:mo>]</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabfo6atjabg2da9maadmaabaqbaeqabqabaaaaaeaacqaHdpWCdaqhaaWcbaGaaGymaaqaaiaaikdaaaaakeaacqaHdpWCdaWgaaWcbaGaaGymaiaaikdaaeqaaaGcbaGaeS47IWeabaGaeq4Wdm3aaSbaaSqaaiaaigdacaWGUbaabeaaaOqaaiabeo8aZnaaBaaaleaacaaIYaGaaGymaaqabaaakeaacqaHdpWCdaqhaaWcbaGaaGOmaaqaaiaaikdaaaaakeaacqWIVlctaeaacqaHdpWCdaWgaaWcbaGaaGOmaiaad6gaaeqaaaGcbaGaeSO7I0eabaGaeSO7I0eabaGaeSy8I8eabaGaeSO7I0eabaGaeq4Wdm3aaSbaaSqaaiaad6gacaaIXaaabeaaaOqaaiabeo8aZnaaBaaaleaacaWGUbGaaGOmaaqabaaakeaacqWIVlctaeaacqaHdpWCdaqhaaWcbaGaamOBaaqaaiaaikdaaaaaaaGccaGLBbGaayzxaaaaaa@6816@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ that is known as the variance-covariance matrix. Define the vector <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mstyle mathsize="normal" mathvariant="bold"><m:mi>x</m:mi></m:mstyle><m:mo>−</m:mo><m:mstyle mathsize="normal" mathvariant="bold"><m:mi>μ</m:mi></m:mstyle>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mtable>
+      <m:mtr>
+       <m:mtd>
+        <m:mrow>
+         <m:msub>
+          <m:mi>x</m:mi>
+          <m:mn>1</m:mn>
+         </m:msub>
+         <m:mo>−</m:mo><m:msub>
+          <m:mi>μ</m:mi>
+          <m:mn>1</m:mn>
+         </m:msub>
+         
+        </m:mrow>
+       </m:mtd>
+      </m:mtr>
+      <m:mtr>
+       <m:mtd>
+        <m:mo>⋮</m:mo>
+       </m:mtd>
+      </m:mtr>
+      <m:mtr>
+       <m:mtd>
+        <m:mrow>
+         <m:msub>
+          <m:mi>x</m:mi>
+          <m:mi>n</m:mi>
+         </m:msub>
+         <m:mo>−</m:mo><m:msub>
+          <m:mi>μ</m:mi>
+          <m:mi>n</m:mi>
+         </m:msub>
+         
+        </m:mrow>
+       </m:mtd>
+      </m:mtr>
+      
+     </m:mtable>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaamaabmaabaGaaCiEaiabgkHiTiaahY7aaiaawIcacaGLPaaacqGH9aqpdaqadaqaauaabeqadeaaaeaacaWG4bWaaSbaaSqaaiaaigdaaeqaaOGaeyOeI0IaeqiVd02aaSbaaSqaaiaaigdaaeqaaaGcbaGaeSO7I0eabaGaamiEamaaBaaaleaacaWGUbaabeaakiabgkHiTiabeY7aTnaaBaaaleaacaWGUbaabeaaaaaakiaawIcacaGLPaaaaaa@4AA8@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msup>
+    <m:mrow>
+     <m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mstyle mathsize="normal" mathvariant="bold"><m:mi>x</m:mi></m:mstyle><m:mo>−</m:mo><m:mstyle mathsize="normal" mathvariant="bold"><m:mi>μ</m:mi></m:mstyle>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow>
+    </m:mrow>
+    <m:mo>′</m:mo>
+   </m:msup>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaamaabmaabaGaaCiEaiabgkHiTiaahY7aaiaawIcacaGLPaaadaahaaWcbeqaaOGamai4gkdiIcaaaaa@3DC7@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --> 
+as its transpose. Then, <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:msup>
+    <m:mrow>
+     <m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mstyle mathsize="normal" mathvariant="bold"><m:mi>x</m:mi></m:mstyle><m:mo>−</m:mo><m:mstyle mathsize="normal" mathvariant="bold"><m:mi>μ</m:mi></m:mstyle>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow>
+    </m:mrow>
+    <m:mo>′</m:mo>
+   </m:msup>
+   <m:mstyle mathsize="normal" mathvariant="bold"><m:mi>Σ</m:mi></m:mstyle><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mstyle mathsize="normal" mathvariant="bold"><m:mi>x</m:mi></m:mstyle><m:mo>−</m:mo><m:mstyle mathsize="normal" mathvariant="bold"><m:mi>μ</m:mi></m:mstyle>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>i</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+     <m:mi>n</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:mstyle displaystyle="true">
+      <m:munderover>
+       <m:mo>∑</m:mo>
+       <m:mrow>
+        <m:mi>j</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+       </m:mrow>
+       <m:mi>n</m:mi>
+      </m:munderover>
+      <m:mrow>
+       <m:mrow><m:mo>(</m:mo>
+        <m:mrow>
+         <m:msub>
+          <m:mi>x</m:mi>
+          <m:mi>i</m:mi>
+         </m:msub>
+         <m:mo>−</m:mo><m:msub>
+          <m:mi>μ</m:mi>
+          <m:mi>i</m:mi>
+         </m:msub>
+         
+        </m:mrow>
+       <m:mo>)</m:mo></m:mrow><m:mrow><m:mo>(</m:mo>
+        <m:mrow>
+         <m:msub>
+          <m:mi>x</m:mi>
+          <m:mi>j</m:mi>
+         </m:msub>
+         <m:mo>−</m:mo><m:msub>
+          <m:mi>μ</m:mi>
+          <m:mi>j</m:mi>
+         </m:msub>
+         
+        </m:mrow>
+       <m:mo>)</m:mo></m:mrow><m:msub>
+        <m:mi>σ</m:mi>
+        <m:mrow>
+         <m:mi>i</m:mi><m:mi>j</m:mi>
+        </m:mrow>
+       </m:msub>
+       
+      </m:mrow>
+     </m:mstyle>
+    </m:mrow>
+   </m:mstyle><m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaamaabmaabaGaaCiEaiabgkHiTiaahY7aaiaawIcacaGLPaaadaahaaWcbeqaaOGamai4gkdiIcaacaWHJoWaaeWaaeaacaWH4bGaeyOeI0IaaCiVdaGaayjkaiaawMcaaiabg2da9maaqahabaWaaabCaeaadaqadaqaaiaadIhadaWgaaWcbaGaamyAaaqabaGccqGHsislcqaH8oqBdaWgaaWcbaGaamyAaaqabaaakiaawIcacaGLPaaadaqadaqaaiaadIhadaWgaaWcbaGaamOAaaqabaGccqGHsislcqaH8oqBdaWgaaWcbaGaamOAaaqabaaakiaawIcacaGLPaaacqaHdpWCdaWgaaWcbaGaamyAaiaadQgaaeqaaaqaaiaadQgacqGH9aqpcaaIXaaabaGaamOBaaqdcqGHris5aaWcbaGaamyAaiabg2da9iaaigdaaeaacaWGUbaaniabggHiLdGccaGGSaaaaa@63E3@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ where <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>σ</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>i</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:msubsup>
+    <m:mi>σ</m:mi>
+    <m:mi>i</m:mi>
+    <m:mn>2</m:mn>
+   </m:msubsup>
+  <m:mo>.</m:mo> 
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeo8aZnaaBaaaleaacaWGPbGaamyAaaqabaGccqGH9aqpcqaHdpWCdaqhaaWcbaGaamyAaaqaaiaaikdaaaaaaa@3E5E@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ If <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mrow><m:mo>|</m:mo> <m:mstyle mathsize="normal" mathvariant="bold"><m:mi>Σ</m:mi></m:mstyle> <m:mo>|</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaamaaemaabaGaaC4OdaGaay5bSlaawIa7aaaa@3A3A@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ is the determinant of the variance-covariance matrix, then the pdf for the joint distribution of these random variables is <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>x</m:mi>
+      <m:mn>1</m:mn>
+     </m:msub>
+     <m:mo>,</m:mo><m:msub>
+      <m:mi>x</m:mi>
+      <m:mn>2</m:mn>
+     </m:msub>
+     <m:mo>,</m:mo><m:mo>…</m:mo><m:mo>,</m:mo><m:msub>
+      <m:mi>x</m:mi>
+      <m:mi>n</m:mi>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mfrac>
+    <m:mn>1</m:mn>
+    <m:mrow>
+     <m:msup>
+      <m:mrow>
+       <m:mrow><m:mo>(</m:mo>
+        <m:mrow>
+         <m:mn>2</m:mn><m:mi>π</m:mi>
+        </m:mrow>
+       <m:mo>)</m:mo></m:mrow>
+      </m:mrow>
+      <m:mrow>
+       <m:mi>n</m:mi><m:mo>/</m:mo><m:mn>2</m:mn>
+      </m:mrow>
+     </m:msup>
+     <m:msup>
+      <m:mrow>
+       <m:mrow><m:mo>|</m:mo> <m:mstyle mathsize="normal" mathvariant="bold"><m:mi>Σ</m:mi></m:mstyle> <m:mo>|</m:mo></m:mrow>
+      </m:mrow>
+      <m:mrow>
+       <m:mfrac bevelled="true">
+        <m:mn>1</m:mn>
+        <m:mn>2</m:mn>
+       </m:mfrac>
+       
+      </m:mrow>
+     </m:msup>
+     
+    </m:mrow>
+   </m:mfrac>
+   <m:msup>
+    <m:mi>e</m:mi>
+    <m:mrow>
+     <m:mo>−</m:mo><m:mfrac>
+      <m:mn>1</m:mn>
+      <m:mn>2</m:mn>
+     </m:mfrac>
+     <m:msup>
+      <m:mrow>
+       <m:mrow><m:mo>(</m:mo>
+        <m:mrow>
+         <m:mstyle mathsize="normal" mathvariant="bold"><m:mi>x</m:mi></m:mstyle><m:mo>−</m:mo><m:mstyle mathsize="normal" mathvariant="bold"><m:mi>μ</m:mi></m:mstyle>
+        </m:mrow>
+       <m:mo>)</m:mo></m:mrow>
+      </m:mrow>
+      <m:mo>′</m:mo>
+     </m:msup>
+     <m:mstyle mathsize="normal" mathvariant="bold"><m:mi>Σ</m:mi></m:mstyle><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mstyle mathsize="normal" mathvariant="bold"><m:mi>x</m:mi></m:mstyle><m:mo>−</m:mo><m:mstyle mathsize="normal" mathvariant="bold"><m:mi>μ</m:mi></m:mstyle>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow>
+    </m:mrow>
+   </m:msup>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAgadaqadaqaaiaadIhadaWgaaWcbaGaaGymaaqabaGccaGGSaGaamiEamaaBaaaleaacaaIYaaabeaakiaacYcacqWIMaYscaGGSaGaamiEamaaBaaaleaacaWGUbaabeaaaOGaayjkaiaawMcaaiabg2da9maalaaabaGaaGymaaqaamaabmaabaGaaGOmaiabec8aWbGaayjkaiaawMcaamaaCaaaleqabaGaamOBaiaac+cacaaIYaaaaOWaaqWaaeaacaWHJoaacaGLhWUaayjcSdWaaWbaaSqabeaadaWccaqaaiaaigdaaeaacaaIYaaaaaaaaaGccaWGLbWaaWbaaSqabeaacqGHsisldaWcaaqaaiaaigdaaeaacaaIYaaaamaabmaabaGaaCiEaiabgkHiTiaahY7aaiaawIcacaGLPaaadaahaaadbeqaaSGamaiUgkdiIcaacaWHJoWaaeWaaeaacaWH4bGaeyOeI0IaaCiVdaGaayjkaiaawMcaaaaakiaac6caaaa@61FC@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ If the random variables are stochastically independent the covariances are equal to 0 and the pdf becomes <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>x</m:mi>
+      <m:mn>1</m:mn>
+     </m:msub>
+     <m:mo>,</m:mo><m:msub>
+      <m:mi>x</m:mi>
+      <m:mn>2</m:mn>
+     </m:msub>
+     <m:mo>,</m:mo><m:mo>…</m:mo><m:mo>,</m:mo><m:msub>
+      <m:mi>x</m:mi>
+      <m:mi>n</m:mi>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mfrac>
+    <m:mn>1</m:mn>
+    <m:mrow>
+     <m:msup>
+      <m:mrow>
+       <m:mrow><m:mo>(</m:mo>
+        <m:mrow>
+         <m:mn>2</m:mn><m:mi>π</m:mi>
+        </m:mrow>
+       <m:mo>)</m:mo></m:mrow>
+      </m:mrow>
+      <m:mrow>
+       <m:mi>n</m:mi><m:mo>/</m:mo><m:mn>2</m:mn>
+      </m:mrow>
+     </m:msup>
+     <m:msup>
+      <m:mrow>
+       <m:mrow><m:mo>(</m:mo>
+        <m:mrow>
+         <m:mstyle displaystyle="true">
+          <m:munderover>
+           <m:mo>∏</m:mo>
+           <m:mrow>
+            <m:mi>i</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+           </m:mrow>
+           <m:mi>n</m:mi>
+          </m:munderover>
+          <m:mrow>
+           <m:msubsup>
+            <m:mi>σ</m:mi>
+            <m:mn>1</m:mn>
+            <m:mn>2</m:mn>
+           </m:msubsup>
+           
+          </m:mrow>
+         </m:mstyle>
+        </m:mrow>
+       <m:mo>)</m:mo></m:mrow>
+      </m:mrow>
+      <m:mrow>
+       <m:mfrac bevelled="true">
+        <m:mn>1</m:mn>
+        <m:mn>2</m:mn>
+       </m:mfrac>
+       
+      </m:mrow>
+     </m:msup>
+     
+    </m:mrow>
+   </m:mfrac>
+   <m:msup>
+    <m:mi>e</m:mi>
+    <m:mrow>
+     <m:mo>−</m:mo><m:mfrac>
+      <m:mn>1</m:mn>
+      <m:mn>2</m:mn>
+     </m:mfrac>
+     <m:mstyle displaystyle="true">
+      <m:munderover>
+       <m:mo>∑</m:mo>
+       <m:mrow>
+        <m:mi>i</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+       </m:mrow>
+       <m:mi>n</m:mi>
+      </m:munderover>
+      <m:mrow>
+       <m:mfrac>
+        <m:mrow>
+         <m:msup>
+          <m:mrow>
+           <m:mrow><m:mo>(</m:mo>
+            <m:mrow>
+             <m:msub>
+              <m:mi>x</m:mi>
+              <m:mi>i</m:mi>
+             </m:msub>
+             <m:mo>−</m:mo><m:msub>
+              <m:mi>μ</m:mi>
+              <m:mi>i</m:mi>
+             </m:msub>
+             
+            </m:mrow>
+           <m:mo>)</m:mo></m:mrow>
+          </m:mrow>
+          <m:mn>2</m:mn>
+         </m:msup>
+         
+        </m:mrow>
+        <m:mrow>
+         <m:msubsup>
+          <m:mi>σ</m:mi>
+          <m:mi>i</m:mi>
+          <m:mn>2</m:mn>
+         </m:msubsup>
+         
+        </m:mrow>
+       </m:mfrac>
+       
+      </m:mrow>
+     </m:mstyle>
+    </m:mrow>
+   </m:msup>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAgadaqadaqaaiaadIhadaWgaaWcbaGaaGymaaqabaGccaGGSaGaamiEamaaBaaaleaacaaIYaaabeaakiaacYcacqWIMaYscaGGSaGaamiEamaaBaaaleaacaWGUbaabeaaaOGaayjkaiaawMcaaiabg2da9maalaaabaGaaGymaaqaamaabmaabaGaaGOmaiabec8aWbGaayjkaiaawMcaamaaCaaaleqabaGaamOBaiaac+cacaaIYaaaaOWaaeWaaeaadaqeWbqaaiabeo8aZnaaDaaaleaacaaIXaaabaGaaGOmaaaaaeaacaWGPbGaeyypa0JaaGymaaqaaiaad6gaa0Gaey4dIunaaOGaayjkaiaawMcaamaaCaaaleqabaWaaSGaaeaacaaIXaaabaGaaGOmaaaaaaaaaOGaamyzamaaCaaaleqabaGaeyOeI0YaaSaaaeaacaaIXaaabaGaaGOmaaaadaaeWbqaamaalaaabaWaaeWaaeaacaWG4bWaaSbaaWqaaiaadMgaaeqaaSGaeyOeI0IaeqiVd02aaSbaaWqaaiaadMgaaeqaaaWccaGLOaGaayzkaaWaaWbaaWqabeaacaaIYaaaaaWcbaGaeq4Wdm3aa0baaWqaaiaadMgaaeaacaaIYaaaaaaaaeaacaWGPbGaeyypa0JaaGymaaqaaiaad6gaa4GaeyyeIuoaaaGccaGGUaaaaa@6CB6@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ If the <emphasis effect="italics">n</emphasis> random variables are all drawn from the same normal distribution with a mean of μ and a variance of <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msup>
+    <m:mi>σ</m:mi>
+    <m:mn>2</m:mn>
+   </m:msup>
+   <m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeo8aZnaaCaaaleqabaGaaGOmaaaakiaacYcaaaa@394F@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ then the pdf simplifies to <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>x</m:mi>
+      <m:mn>1</m:mn>
+     </m:msub>
+     <m:mo>,</m:mo><m:msub>
+      <m:mi>x</m:mi>
+      <m:mn>2</m:mn>
+     </m:msub>
+     <m:mo>,</m:mo><m:mo>…</m:mo><m:mo>,</m:mo><m:msub>
+      <m:mi>x</m:mi>
+      <m:mi>n</m:mi>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mfrac>
+    <m:mn>1</m:mn>
+    <m:mrow>
+     <m:msup>
+      <m:mrow>
+       <m:mrow><m:mo>(</m:mo>
+        <m:mrow>
+         <m:mn>2</m:mn><m:mi>π</m:mi><m:msup>
+          <m:mi>σ</m:mi>
+          <m:mn>2</m:mn>
+         </m:msup>
+         
+        </m:mrow>
+       <m:mo>)</m:mo></m:mrow>
+      </m:mrow>
+      <m:mrow>
+       <m:mi>n</m:mi><m:mo>/</m:mo><m:mn>2</m:mn>
+      </m:mrow>
+     </m:msup>
+     
+    </m:mrow>
+   </m:mfrac>
+   <m:msup>
+    <m:mi>e</m:mi>
+    <m:mrow>
+     <m:mo>−</m:mo><m:mfrac>
+      <m:mn>1</m:mn>
+      <m:mrow>
+       <m:mn>2</m:mn><m:msup>
+        <m:mi>σ</m:mi>
+        <m:mn>2</m:mn>
+       </m:msup>
+       
+      </m:mrow>
+     </m:mfrac>
+     <m:mstyle displaystyle="true">
+      <m:munderover>
+       <m:mo>∑</m:mo>
+       <m:mrow>
+        <m:mi>i</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+       </m:mrow>
+       <m:mi>n</m:mi>
+      </m:munderover>
+      <m:mrow>
+       <m:msup>
+        <m:mrow>
+         <m:mrow><m:mo>(</m:mo>
+          <m:mrow>
+           <m:msub>
+            <m:mi>x</m:mi>
+            <m:mi>i</m:mi>
+           </m:msub>
+           <m:mo>−</m:mo><m:mi>μ</m:mi>
+          </m:mrow>
+         <m:mo>)</m:mo></m:mrow>
+        </m:mrow>
+        <m:mn>2</m:mn>
+       </m:msup>
+       
+      </m:mrow>
+     </m:mstyle>
+    </m:mrow>
+   </m:msup>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAgadaqadaqaaiaadIhadaWgaaWcbaGaaGymaaqabaGccaGGSaGaamiEamaaBaaaleaacaaIYaaabeaakiaacYcacqWIMaYscaGGSaGaamiEamaaBaaaleaacaWGUbaabeaaaOGaayjkaiaawMcaaiabg2da9maalaaabaGaaGymaaqaamaabmaabaGaaGOmaiabec8aWjabeo8aZnaaCaaaleqabaGaaGOmaaaaaOGaayjkaiaawMcaamaaCaaaleqabaGaamOBaiaac+cacaaIYaaaaaaakiaadwgadaahaaWcbeqaaiabgkHiTmaalaaabaGaaGymaaqaaiaaikdacqaHdpWCdaahaaadbeqaaiaaikdaaaaaaSWaaabCaeaadaqadaqaaiaadIhadaWgaaadbaGaamyAaaqabaWccqGHsislcqaH8oqBaiaawIcacaGLPaaadaahaaadbeqaaiaaikdaaaaabaGaamyAaiabg2da9iaaigdaaeaacaWGUbaaoiabggHiLdaaaOGaaiOlaaaa@60C6@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</para>
+        
+      </section>
+    </section>
+    <section id="id1171137715607">
+      <title>Characteristics of an estimator of a population parameter θ</title>
+      <section id="id1171125389011">
+        <title>Finite estimators</title>
+        <para id="id1171121757748"><title>Bias.</title>The bias of an estimator is defined to be <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>B</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mover accent="true">
+     <m:mi>θ</m:mi>
+     <m:mo>^</m:mo>
+    </m:mover>
+    
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mover accent="true">
+     <m:mi>θ</m:mi>
+     <m:mo>^</m:mo>
+    </m:mover>
+    
+   <m:mo>)</m:mo></m:mrow><m:mo>−</m:mo><m:mi>θ</m:mi><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadkeadaqadaqaaiqbeI7aXzaajaaacaGLOaGaayzkaaGaeyypa0JaamyramaabmaabaGafqiUdeNbaKaaaiaawIcacaGLPaaacqGHsislcqaH4oqCcaGGUaaaaa@4273@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ An estimator is unbiased if and only if <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>B</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mover accent="true">
+     <m:mi>θ</m:mi>
+     <m:mo>^</m:mo>
+    </m:mover>
+    
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mn>0.</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadkeadaqadaqaaiqbeI7aXzaajaaacaGLOaGaayzkaaGaeyypa0JaaGimaiaac6caaaa@3C71@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</para>
+        <para id="id1171124447823"><title>Mean square error.</title>The mean square error (MSE) of an estimator is defined to be <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>M</m:mi><m:mi>S</m:mi><m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mover accent="true">
+     <m:mi>θ</m:mi>
+     <m:mo>^</m:mo>
+    </m:mover>
+    
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mi>E</m:mi><m:mrow><m:mo>[</m:mo> <m:mrow>
+    <m:msup>
+     <m:mrow>
+      <m:mrow><m:mo>(</m:mo>
+       <m:mrow>
+        <m:mover accent="true">
+         <m:mi>θ</m:mi>
+         <m:mo>^</m:mo>
+        </m:mover>
+        <m:mo>−</m:mo><m:mi>θ</m:mi>
+       </m:mrow>
+      <m:mo>)</m:mo></m:mrow>
+     </m:mrow>
+     <m:mn>2</m:mn>
+    </m:msup>
+    
+   </m:mrow> <m:mo>]</m:mo></m:mrow><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaad2eacaWGtbGaamyramaabmaabaGafqiUdeNbaKaaaiaawIcacaGLPaaacqGH9aqpcaWGfbWaamWaaeaadaqadaqaaiqbeI7aXzaajaGaeyOeI0IaeqiUdehacaGLOaGaayzkaaWaaWbaaSqabeaacaaIYaaaaaGccaGLBbGaayzxaaGaaiOlaaaa@4705@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ It is relatively easy to show that <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>M</m:mi><m:mi>S</m:mi><m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mover accent="true">
+     <m:mi>θ</m:mi>
+     <m:mo>^</m:mo>
+    </m:mover>
+    
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mi>V</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mover accent="true">
+     <m:mi>θ</m:mi>
+     <m:mo>^</m:mo>
+    </m:mover>
+    
+   <m:mo>)</m:mo></m:mrow><m:mo>+</m:mo><m:msup>
+    <m:mrow>
+     <m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mi>B</m:mi><m:mrow><m:mo>(</m:mo>
+        <m:mover accent="true">
+         <m:mi>θ</m:mi>
+         <m:mo>^</m:mo>
+        </m:mover>
+        
+       <m:mo>)</m:mo></m:mrow>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow>
+    </m:mrow>
+    <m:mn>2</m:mn>
+   </m:msup>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaad2eacaWGtbGaamyramaabmaabaGafqiUdeNbaKaaaiaawIcacaGLPaaacqGH9aqpcaWGwbWaaeWaaeaacuaH4oqCgaqcaaGaayjkaiaawMcaaiabgUcaRmaabmaabaGaamOqamaabmaabaGafqiUdeNbaKaaaiaawIcacaGLPaaaaiaawIcacaGLPaaadaahaaWcbeqaaiaaikdaaaGccaGGUaaaaa@4902@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ Often a biased estimator with a smaller MSE may be preferred to an unbiased estimator with a relatively larger MSE.</para>
+        <para id="id1171122827990"><title>Efficiency.</title>An estimator <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mover accent="true">
+   <m:mi>θ</m:mi>
+   <m:mo>^</m:mo>
+  </m:mover>
+  
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiqbeI7aXzaajaaaaa@37AF@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ is relatively more efficient than <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mover accent="true">
+   <m:mi>θ</m:mi>
+   <m:mo>˜</m:mo>
+  </m:mover>
+  
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiqbeI7aXzaaiaaaaa@37AE@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ if and only if<!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>V</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mover accent="true">
+     <m:mi>θ</m:mi>
+     <m:mo>^</m:mo>
+    </m:mover>
+    
+   <m:mo>)</m:mo></m:mrow><m:mo>&lt;</m:mo><m:mi>V</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mover accent="true">
+     <m:mi>θ</m:mi>
+     <m:mo>˜</m:mo>
+    </m:mover>
+    
+   <m:mo>)</m:mo></m:mrow><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAfadaqadaqaaiqbeI7aXzaajaaacaGLOaGaayzkaaGaeyipaWJaamOvamaabmaabaGafqiUdeNbaGaaaiaawIcacaGLPaaacaGGUaaaaa@3FF2@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --> Generally, we would prefer to use the most efficient estimator available (if it is unbiased).
+</para>
+      </section>
+      
+      <section id="id1171132208456">
+        <title>Asymtoptic estimators</title>
+        <para id="id1171122257370"><title>plim.</title><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>x</m:mi>
+    <m:mi>n</m:mi>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadIhadaWgaaWcbaGaamOBaaqabaaaaa@3805@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ converges to a constant, <emphasis effect="italics">c</emphasis>, if <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mrow>
+     <m:mi>lim</m:mi>
+    </m:mrow>
+    <m:mrow>
+     <m:mi>n</m:mi><m:mo>→</m:mo><m:mi>∞</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mi>Pr</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mrow><m:mo>|</m:mo> <m:mrow>
+      <m:msub>
+       <m:mi>x</m:mi>
+       <m:mi>n</m:mi>
+      </m:msub>
+      <m:mo>−</m:mo><m:mi>c</m:mi>
+     </m:mrow> <m:mo>|</m:mo></m:mrow><m:mo>&gt;</m:mo><m:mi>ε</m:mi>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mn>0</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiGacYgacaGGPbGaaiyBamaaBaaaleaacaWGUbGaeyOKH4QaeyOhIukabeaakiGaccfacaGGYbWaaeWaaeaadaabdaqaaiaadIhadaWgaaWcbaGaamOBaaqabaGccqGHsislcaWGJbaacaGLhWUaayjcSdGaeyOpa4JaeqyTdugacaGLOaGaayzkaaGaeyypa0JaaGimaaaa@4C21@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ for any positive <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>ε</m:mi><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabew7aLjaac6caaaa@3842@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+  We can write this relationship as <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>p</m:mi><m:mi>lim</m:mi><m:msub>
+    <m:mi>x</m:mi>
+    <m:mi>n</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:mi>c</m:mi><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadchaciGGSbGaaiyAaiaac2gacaWG4bWaaSbaaSqaaiaad6gaaeqaaOGaeyypa0Jaam4yaiaac6caaaa@3E74@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</para>
+        <example id="oo-id1171131626640">
+          <para id="id1171129171674">Greene<footnote id="id1171128406281"> Greene, William H. (1990). <emphasis effect="italics">Econometric Analysis</emphasis> (New York: Macmillan Publishing Company): 103.</footnote> offers this example of plim: Suppose <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>x</m:mi>
+    <m:mi>n</m:mi>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadIhadaWgaaWcbaGaamOBaaqabaaaaa@3805@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ equals 0 with probability <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mn>1</m:mn><m:mo>−</m:mo><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mfrac>
+      <m:mn>1</m:mn>
+      <m:mi>n</m:mi>
+     </m:mfrac>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaaigdacqGHsisldaqadaqaamaalaaabaGaaGymaaqaaiaad6gaaaaacaGLOaGaayzkaaaaaa@3AD8@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <emphasis effect="italics">n</emphasis> with probability <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mfrac>
+      <m:mn>1</m:mn>
+      <m:mi>n</m:mi>
+     </m:mfrac>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaamaabmaabaWaaSaaaeaacaaIXaaabaGaamOBaaaaaiaawIcacaGLPaaacaGGUaaaaa@39E2@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ As <emphasis effect="italics">n</emphasis> increases, the second point becomes more remote from the first point. However, at the same time the probability of observing the second point becomes more and more unlikely. This effect is shown in Figure 5 where as <emphasis effect="italics">n</emphasis> increases the probability distribution concentrates more and more on 1.</para><para id="eip-213"><figure id="PRfigure5"><title>Example of plim.</title><media id="prfig5" alt="This is an illustration of the concept of plim.">
+    <image mime-type="image/jpeg" src="../../media/PR figure 5.jpg"/>
+  </media>
+  
+<caption>The probability x = 1 is the area of the gray box centered on 1 for n = 5; the gray area plus the blue area for n = 10; and the sum of the gray, blue, and red areas for n = 20; the probability x = n is the area of the box centered on n.
+  </caption></figure>
+</para>
+        </example>
+        
+        <para id="id1171122615320"><title>Consistency.</title>The estimator <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mover accent="true">
+   <m:mi>θ</m:mi>
+   <m:mo>^</m:mo>
+  </m:mover>
+  
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiqbeI7aXzaajaaaaa@37AF@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ is a consistent estimator of <emphasis effect="italics">θ</emphasis> if and only if <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>p</m:mi><m:mi>lim</m:mi><m:mover accent="true">
+    <m:mi>θ</m:mi>
+    <m:mo>^</m:mo>
+   </m:mover>
+   <m:mo>=</m:mo><m:mi>θ</m:mi><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadchaciGGSbGaaiyAaiaac2gacuaH4oqCgaqcaiabg2da9iabeI7aXjaac6caaaa@3EE2@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</para>
+        <para id="id1171122027598"><title>Asymmtotically unbiased.</title>An estimator <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mover accent="true">
+   <m:mi>θ</m:mi>
+   <m:mo>^</m:mo>
+  </m:mover>
+  
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiqbeI7aXzaajaaaaa@37AF@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ is an asymtotically unbiased estimator of <emphasis effect="italics">θ</emphasis> if <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mrow>
+     <m:mi>lim</m:mi>
+    </m:mrow>
+    <m:mrow>
+     <m:mi>n</m:mi><m:mo>→</m:mo><m:mi>∞</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mi>E</m:mi><m:mrow><m:mo>[</m:mo> <m:mover accent="true">
+    <m:mi>θ</m:mi>
+    <m:mo>^</m:mo>
+   </m:mover>
+    <m:mo>]</m:mo></m:mrow><m:mo>=</m:mo><m:mi>θ</m:mi><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiGacYgacaGGPbGaaiyBamaaBaaaleaacaWGUbGaeyOKH4QaeyOhIukabeaakiaadweadaWadaqaaiqbeI7aXzaajaaacaGLBbGaayzxaaGaeyypa0JaeqiUdeNaaiOlaaaa@4530@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</para>
+      </section>
+    </section>
+  </content>
+</document>

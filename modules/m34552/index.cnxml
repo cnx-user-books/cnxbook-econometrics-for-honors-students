@@ -1,0 +1,3808 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML">
+  <title>Replication of econometric studies</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m34552</md:content-id>
+  <md:title>Replication of econometric studies</md:title>
+  <md:abstract>This module leads the advanced undergraduate student through the process of replicating the econometrics in a published study.</md:abstract>
+  <md:uuid>ef977baa-a667-4a80-b989-25118597cf47</md:uuid>
+</metadata>
+<featured-links>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit below.
+       Changes to the links section in the source will not be saved. -->
+    <link-group type="supplemental">
+      <link url="http://qed.econ.queensu.ca/jae/1998-v13.2/butler-finegan-siegfried/" strength="3">Butler, et al. data</link>
+    </link-group>
+    <link-group type="prerequisite">
+      <link url="http://cnx.org/content/m34535/latest/" strength="3">Statistical terminology</link>
+      <link url="http://cnx.org/content/m34539/latest/" strength="3">The maximum likelihood estimation method</link>
+    </link-group>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit above.
+       Changes to the links section in the source will not be saved. -->
+</featured-links>
+<content>
+    <section id="id1168234946183">
+      <title>Replication</title>
+      <section id="id1168252095229">
+        <title>Introduction</title>
+        <para id="id1168249425068">One of the most important first steps in a science experiment is to replicate the results of earlier research. For a variety of reasons (most of them practical and not theoretically sound) economists generally do not undertake this step; what they tend to do is report the results of earlier papers and then compare their results with the earlier results without asking the question of whether these earlier results were reported accurately. Omitting this step in a world of honest careful researchers might seem to be a minor problem. However, there is enough casual evidence to suggest that a large portion of the econometric results reported in the journals cannot be replicated because the original researcher (1) does not have the data set used in the research because it has been lost for a variety of reasons, (2) cannot share the data set because it is proprietory, (3) is unwilling to share the data set because there are other issues they wish to investigate using the data set, or (4) just are unwilling to share the data set. For this reason much of the published econometrics research has never been replicated. In recognization of this problem several journals like the <emphasis effect="italics">Journal of Applied Econometrics</emphasis> now require that authors submit the data set they used to the journal to be posted on the web for use by any other researcher. Whether this effort has been successful will not be clear unless someone undertakes to replicate the work in this journal to see if all of the data necessary to replicate an article have been posted and if the regressions included in the article actually can be replicated. It is very unlikely anyone would undertake such an effort given the fact that no journal will publish results that are merely a replication of previously published articles.</para>
+        <para id="id1168238409381">In this module we explore some of the difficulties that exist in replicating existing research by undertaking to replicate some of the results reported in the Butler, Finegan, and Siegfried (1998) (BFS, hereafter) article analyzing the effect of a student's calculus background on the grade he or she earns in intermediate microeconomics or in intermediate macroeconomics.<footnote id="id1168231255503">Butler, J. S., T. Aldrich Finegan, and John J. Siegfried (1998). Does more calculus improve student learning in Intermediate Micro- and Macroeconomic Theory? <emphasis effect="italics">Journal of Applied Econometrics</emphasis><emphasis effect="bold">13</emphasis>(2):185-202.</footnote> The goal of this module is to (1) help students to learn how to read in detail an article that appears in a typical economics trade journal, (2) introduce them to ordered probit, an advanced econometrics tool, and (3) teach them how to present and discuss the results of an estimation of a model in an economics paper. While most of the discussion in this module focuses on using <emphasis effect="italics">Stata</emphasis> in this replication, one can use most any econometrics program they are comfortable with to replicate some of the results reported in the BFS article.</para>
+      </section>
+    </section>
+    <section id="id1168252426671">
+      <title>Butler, Finegan, and Siefried (1998).</title>
+      <para id="id1168257903260">The obvious first step is to find and print a copy of the article by Butler, Finegan, and Siefried. In fact, do not proceed any further in reading this module until you have read the article. We will discuss in class what the authors do in the paper and how clearly they present their conclusions. In this first pass at the article you are to pay attention to how convincing you find their arguments to be. Since everyone in the class has completed an intermediate microeconomics course, your discussion of their conclusions should reflect your own experiences. Also, you need to be able to discuss in class the estimation strategy they use in the paper. In particular, you will need to be able to identify what the source of the data is and what equations did they estimate. Also, try to determine how the estimations in the "first" stage are used in the estimations of the "second" stage. Why did the authors use a two-stage estimation strategy?</para>
+      <para id="id1168249215499">Also, what do you think the authors mean in their description of their estimation strategy by their statement about the estimation methods they use:</para>
+      <para id="id1168260773017">
+        <quote id="id1168260773017_quote" display="block">Estimation Methods and Expectations</quote>
+        <quote id="id1168247496455_quote" display="block">To cope with the selection bias problem, we use a two-stage estimation procedure. The first stage employs an ordered probit model to predict the highest level of calculus attained by each student prior to taking each intermediate economic theory course.... In the second stage, the student's grade in MICRO-2 ... (the `outcome') is regressed on the actual level of calculus attained, the grade earned in that calculus course, the predicted residual in the grade equation that we would expect on the basis of the actual level of calculus attained, and a roster of control variables reflecting ability and motivation. Individuals are the unit of observation. Ordinary least squares estimation is used because there are twelve categories of grades which are commonly interpreted as cardinal measures of performance (as is implied by the calculation of `grade point averages'). (Butler, Finegan, and Siegfried, 1998: 188)</quote>
+      </para>
+    </section>
+    <section id="id1168242187623">
+      <title>The ordered-probit model</title>
+      <para id="id1168237141009">In what follows you are to “replicate” the equations the authors estimate in the paper for the intermediate microeconomics course. In order to complete this assignment you will need to figure out several things including (1) what an ordered-probit model is and (2) how to use <emphasis effect="italics">Stata</emphasis> to estimate an ordered-probit model. In this section of the module we introduce the ordered-probit model. I strongly encourage you to consult Greene (1990: 703-706) for an excellent and clear discussion of the ordered-probit model. The discussion here follows Greene closely.</para>
+      <para id="id1168253509583">It is common for surveys to have questions that require the responder to choose one of several categories that have an innate order to them. For instance, most course evaluations ask the respondent to choose an answer to a question that reflects their agreement with a statement about the course. For instance, the question might read, "The Professor was interested in the material taught in the class" where the student completing the evaluation would choose a number from 1 to 9 where a 1 indicates complete disagreement with the statement and a 9 reflects complete agreement with the statement. Thus, there is an order to the potential answers. Using a logit, probit, or multilogit model would completely ignore this order. A linear regression is inappropriate because OLS treats the difference between answers of 1 and 2 as being the same as the difference between a 7 and and 8, when in fact the numbers only provide a ranking.</para>
+      <para id="id1168243113910">Consider a latent variable, <emphasis effect="italics">y*</emphasis>, that is not observed but where <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>y</m:mi><m:mo>=</m:mo><m:mstyle mathsize="normal" mathvariant="bold"><m:msup>
+    <m:mi>β</m:mi>
+    <m:mo>′</m:mo>
+   </m:msup>
+   <m:mi>x</m:mi></m:mstyle><m:mo>+</m:mo><m:mi>ε</m:mi><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadMhacqGH9aqpceWHYoGbauaacaWH4bGaey4kaSIaeqyTduMaaiOlaaaa@3D72@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ We want to estimate the <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>β</m:mi>
+    <m:mi>k</m:mi>
+   </m:msub>
+   <m:mo>'</m:mo><m:mtext>s</m:mtext>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabek7aInaaBaaaleaacaWGRbaabeaakiaacEcacaqGZbaaaa@3A51@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ in the vector <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mstyle mathsize="normal" mathvariant="bold"><m:mi>β</m:mi></m:mstyle><m:mo>=</m:mo><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mtable>
+      <m:mtr>
+       <m:mtd>
+        <m:mrow>
+         <m:msub>
+          <m:mi>β</m:mi>
+          <m:mn>0</m:mn>
+         </m:msub>
+         
+        </m:mrow>
+       </m:mtd>
+       <m:mtd>
+        <m:mrow>
+         <m:msub>
+          <m:mi>β</m:mi>
+          <m:mn>1</m:mn>
+         </m:msub>
+         
+        </m:mrow>
+       </m:mtd>
+       <m:mtd>
+        <m:mo>⋯</m:mo>
+       </m:mtd>
+       <m:mtd>
+        <m:mrow>
+         <m:msub>
+          <m:mi>β</m:mi>
+          <m:mi>K</m:mi>
+         </m:msub>
+         
+        </m:mrow>
+       </m:mtd>
+      </m:mtr>
+      
+     </m:mtable>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaahk7acqGH9aqpdaqadaqaauaabeqabqaaaaqaaiabek7aInaaBaaaleaacaaIWaaabeaaaOqaaiabek7aInaaBaaaleaacaaIXaaabeaaaOqaaiabl+Uimbqaaiabek7aInaaBaaaleaacaWGlbaabeaaaaaakiaawIcacaGLPaaacaGGUaaaaa@4431@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+<footnote id="id1168246726073">This particular notation implies that there are <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>k</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadUgacqGHsislcaaIXaaaaa@3881@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ explanatory variables.</footnote> We may not observe <emphasis effect="italics">y*</emphasis> but we do observe:</para>
+      
+      <para id="id1168245307136">The <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>μ</m:mi>
+    <m:mi>i</m:mi>
+   </m:msub>
+   <m:mtext>'s</m:mtext>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeY7aTnaaBaaaleaacaWGPbaabeaakiaabEcacaqGZbaaaa@3A63@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ in (1) are parameters that must be estimated along with <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mstyle mathvariant="bold" mathsize="normal"><m:mi>β</m:mi></m:mstyle><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaahk7acaGGUaaaaa@37D9@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ As usual, we assume that the error term <emphasis effect="italics">ε</emphasis> is normally distributed (with a normalized mean and variance arbitrarily set to 0 and 1, respectively). It is trivial to estimate the model with the error terms having a logistic distribution, but this chance in assumptions appears to make virtually no difference in practice).<footnote id="id1168234541836">See Greene (1990): 704.</footnote> With the normal distribution, we have:</para>
+      <equation id="eip-724"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>y</m:mi><m:mo>=</m:mo><m:mrow><m:mo>{</m:mo> <m:mtable columnalign="left">
+    <m:mtr>
+     <m:mtd>
+      <m:mn>0</m:mn><m:mtext>   if </m:mtext><m:msup>
+       <m:mi>y</m:mi>
+       <m:mo>∗</m:mo>
+      </m:msup>
+      <m:mo>&lt;</m:mo><m:mn>0</m:mn><m:mo>,</m:mo>
+     </m:mtd>
+    </m:mtr>
+    <m:mtr>
+     <m:mtd>
+      <m:mn>1</m:mn><m:mtext>   if </m:mtext><m:mn>0</m:mn><m:mo>≤</m:mo><m:msup>
+       <m:mi>y</m:mi>
+       <m:mo>∗</m:mo>
+      </m:msup>
+      <m:mo>&lt;</m:mo><m:msub>
+       <m:mi>μ</m:mi>
+       <m:mn>1</m:mn>
+      </m:msub>
+      <m:mo>,</m:mo>
+     </m:mtd>
+    </m:mtr>
+    <m:mtr>
+     <m:mtd>
+      <m:mtext>2   if </m:mtext><m:msub>
+       <m:mi>μ</m:mi>
+       <m:mn>1</m:mn>
+      </m:msub>
+      <m:mo>≤</m:mo><m:msup>
+       <m:mi>y</m:mi>
+       <m:mo>∗</m:mo>
+      </m:msup>
+      <m:mo>&lt;</m:mo><m:msub>
+       <m:mi>μ</m:mi>
+       <m:mn>2</m:mn>
+      </m:msub>
+      <m:mo>,</m:mo>
+     </m:mtd>
+    </m:mtr>
+    <m:mtr>
+     <m:mtd>
+      <m:mo>⋮</m:mo>
+     </m:mtd>
+    </m:mtr>
+    <m:mtr>
+     <m:mtd>
+      <m:mi>J</m:mi><m:mtext>   if </m:mtext><m:msub>
+       <m:mi>μ</m:mi>
+       <m:mrow>
+        <m:mi>J</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+       </m:mrow>
+      </m:msub>
+      <m:mo>≤</m:mo><m:msup>
+       <m:mi>y</m:mi>
+       <m:mo>∗</m:mo>
+      </m:msup>
+      <m:mo>.</m:mo>
+     </m:mtd>
+    </m:mtr>
+   </m:mtable>
+    </m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadMhacqGH9aqpdaGabaabaeqabaGaaGimaiaabccacaqGGaGaaeiiaiaabMgacaqGMbGaaeiiaiaadMhadaahaaWcbeqaaiabgEHiQaaakiabgYda8iaaicdacaGGSaaabaGaaGymaiaabccacaqGGaGaaeiiaiaabMgacaqGMbGaaeiiaiaaicdacqGHKjYOcaWG5bWaaWbaaSqabeaacqGHxiIkaaGccqGH8aapcqaH8oqBdaWgaaWcbaGaaGymaaqabaGccaGGSaaabaGaaeOmaiaabccacaqGGaGaaeiiaiaabMgacaqGMbGaaeiiaiabeY7aTnaaBaaaleaacaaIXaaabeaakiabgsMiJkaadMhadaahaaWcbeqaaiabgEHiQaaakiabgYda8iabeY7aTnaaBaaaleaacaaIYaaabeaakiaacYcaaeaacqWIUlstaeaacaWGkbGaaeiiaiaabccacaqGGaGaaeyAaiaabAgacaqGGaGaeqiVd02aaSbaaSqaaiaadQeacqGHsislcaaIXaaabeaakiabgsMiJkaadMhadaahaaWcbeqaaiabgEHiQaaakiaac6caaaGaay5Eaaaaaa@70C5@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation>
+      <equation id="eip-392"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mtable columnalign="left">
+   <m:mtr>
+    <m:mtd>
+     <m:mi>Pr</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mi>y</m:mi><m:mo>=</m:mo><m:mn>0</m:mn>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mi>Φ</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mo>−</m:mo><m:mstyle mathsize="normal" mathvariant="bold"><m:msup>
+        <m:mi>β</m:mi>
+        <m:mo>′</m:mo>
+       </m:msup>
+       <m:mi>x</m:mi></m:mstyle>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mo>,</m:mo>
+    </m:mtd>
+   </m:mtr>
+   <m:mtr>
+    <m:mtd>
+     <m:mi>Pr</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mi>y</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mi>Φ</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:msub>
+        <m:mi>μ</m:mi>
+        <m:mn>1</m:mn>
+       </m:msub>
+       <m:mo>−</m:mo><m:mstyle mathsize="normal" mathvariant="bold"><m:msup>
+        <m:mi>β</m:mi>
+        <m:mo>′</m:mo>
+       </m:msup>
+       <m:mi>x</m:mi></m:mstyle>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mo>−</m:mo><m:mi>Φ</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mo>−</m:mo><m:mstyle mathsize="normal" mathvariant="bold"><m:msup>
+        <m:mi>β</m:mi>
+        <m:mo>′</m:mo>
+       </m:msup>
+       <m:mi>x</m:mi></m:mstyle>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mo>,</m:mo>
+    </m:mtd>
+   </m:mtr>
+   <m:mtr>
+    <m:mtd>
+     <m:mi>Pr</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mi>y</m:mi><m:mo>=</m:mo><m:mn>2</m:mn>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mi>Φ</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:msub>
+        <m:mi>μ</m:mi>
+        <m:mn>2</m:mn>
+       </m:msub>
+       <m:mo>−</m:mo><m:mstyle mathsize="normal" mathvariant="bold"><m:msup>
+        <m:mi>β</m:mi>
+        <m:mo>′</m:mo>
+       </m:msup>
+       <m:mi>x</m:mi></m:mstyle>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mo>−</m:mo><m:mi>Φ</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:msub>
+        <m:mi>μ</m:mi>
+        <m:mn>1</m:mn>
+       </m:msub>
+       <m:mo>−</m:mo><m:mstyle mathsize="normal" mathvariant="bold"><m:msup>
+        <m:mi>β</m:mi>
+        <m:mo>′</m:mo>
+       </m:msup>
+       <m:mi>x</m:mi></m:mstyle>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mo>,</m:mo>
+    </m:mtd>
+   </m:mtr>
+   <m:mtr>
+    <m:mtd>
+     <m:mo>⋮</m:mo>
+    </m:mtd>
+   </m:mtr>
+   <m:mtr>
+    <m:mtd>
+     <m:mi>Pr</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mi>y</m:mi><m:mo>=</m:mo><m:mi>J</m:mi>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>−</m:mo><m:mi>Φ</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:msub>
+        <m:mi>μ</m:mi>
+        <m:mrow>
+         <m:mi>J</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+        </m:mrow>
+       </m:msub>
+       <m:mo>−</m:mo><m:mstyle mathsize="normal" mathvariant="bold"><m:msup>
+        <m:mi>β</m:mi>
+        <m:mo>′</m:mo>
+       </m:msup>
+       <m:mi>x</m:mi></m:mstyle>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mo>,</m:mo>
+    </m:mtd>
+   </m:mtr>
+  </m:mtable>
+  
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOabaeqabaGaciiuaiaackhadaqadaqaaiaadMhacqGH9aqpcaaIWaaacaGLOaGaayzkaaGaeyypa0JaeuOPdy0aaeWaaeaacqGHsislceWHYoGbauaacaWH4baacaGLOaGaayzkaaGaaiilaaqaaiGaccfacaGGYbWaaeWaaeaacaWG5bGaeyypa0JaaGymaaGaayjkaiaawMcaaiabg2da9iabfA6agnaabmaabaGaeqiVd02aaSbaaSqaaiaaigdaaeqaaOGaeyOeI0IabCOSdyaafaGaaCiEaaGaayjkaiaawMcaaiabgkHiTiabfA6agnaabmaabaGaeyOeI0IabCOSdyaafaGaaCiEaaGaayjkaiaawMcaaiaacYcaaeaaciGGqbGaaiOCamaabmaabaGaamyEaiabg2da9iaaikdaaiaawIcacaGLPaaacqGH9aqpcqqHMoGrdaqadaqaaiabeY7aTnaaBaaaleaacaaIYaaabeaakiabgkHiTiqahk7agaqbaiaahIhaaiaawIcacaGLPaaacqGHsislcqqHMoGrdaqadaqaaiabeY7aTnaaBaaaleaacaaIXaaabeaakiabgkHiTiqahk7agaqbaiaahIhaaiaawIcacaGLPaaacaGGSaaabaGaeSO7I0eabaGaciiuaiaackhadaqadaqaaiaadMhacqGH9aqpcaWGkbaacaGLOaGaayzkaaGaeyypa0JaaGymaiabgkHiTiabfA6agnaabmaabaGaeqiVd02aaSbaaSqaaiaadQeacqGHsislcaaIXaaabeaakiabgkHiTiqahk7agaqbaiaahIhaaiaawIcacaGLPaaacaGGSaaaaaa@8C59@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation><para id="id1168243742143">where <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mstyle mathvariant="bold" mathsize="normal"><m:mi>Φ</m:mi></m:mstyle><m:mrow><m:mo>(</m:mo>
+    <m:mo>⋅</m:mo>
+   <m:mo>)</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaahA6adaqadaqaaiabgwSixdGaayjkaiaawMcaaaaa@3AEE@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ is the cumulative normal function. In order for all of the probabilities to be positive, we need <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>μ</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:mo>&lt;</m:mo><m:msub>
+    <m:mi>μ</m:mi>
+    <m:mn>2</m:mn>
+   </m:msub>
+   <m:mo>&lt;</m:mo><m:mo>⋯</m:mo><m:mo>&lt;</m:mo><m:msub>
+    <m:mi>μ</m:mi>
+    <m:mrow>
+     <m:mi>J</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabeY7aTnaaBaaaleaacaaIXaaabeaakiabgYda8iabeY7aTnaaBaaaleaacaaIYaaabeaakiabgYda8iabl+UimjabgYda8iabeY7aTnaaBaaaleaacaWGkbGaeyOeI0IaaGymaaqabaGccaGGSaaaaa@4545@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ as shown in Figure 1. One thing to note in Figure 1 is that the cutoff locations change when the values of the explanatory variables change.</para>
+      <para id="id1168257545882"><figure id="Rfigure1"><media id="Rfig1" alt="This is the graph of the distribution of the error term in the ordered-probit model.">
+    <image mime-type="image/jpeg" src="../../media/R Figure 1.jpg"/>
+  </media>
+  
+<caption>Distribution of the error term in the ordered-probit model.
+  </caption></figure>
+</para>
+      <para id="id1168242152974">The estimation strategy from here follows the usual maximum likelihood method. The computer program forms the likelihood function and then chooses the values of the parameters (including the cutoffs) that maximize this likelihood function.</para>
+      <para id="id1168231968714">The estimated coefficients are not equal to the marginal effects of a change in one of the explanatory variables (as is also true with the logit and probit models). Consider the simple example Greene (1990, 704) describes. Assume that there are three categories. Then (2) becomes:</para>
+      
+      <equation id="eip-280"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mtable columnalign="left">
+   <m:mtr>
+    <m:mtd>
+     <m:mi>Pr</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mi>y</m:mi><m:mo>=</m:mo><m:mn>0</m:mn>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>−</m:mo><m:mi>Φ</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mstyle mathsize="normal" mathvariant="bold"><m:msup>
+        <m:mi>β</m:mi>
+        <m:mo>′</m:mo>
+       </m:msup>
+       <m:mi>x</m:mi></m:mstyle>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mo>,</m:mo>
+    </m:mtd>
+   </m:mtr>
+   <m:mtr>
+    <m:mtd>
+     <m:mi>Pr</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mi>y</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mi>Φ</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mi>μ</m:mi><m:mo>−</m:mo><m:mstyle mathsize="normal" mathvariant="bold"><m:msup>
+        <m:mi>β</m:mi>
+        <m:mo>′</m:mo>
+       </m:msup>
+       <m:mi>x</m:mi></m:mstyle>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mo>−</m:mo><m:mi>Φ</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mo>−</m:mo><m:mstyle mathsize="normal" mathvariant="bold"><m:msup>
+        <m:mi>β</m:mi>
+        <m:mo>′</m:mo>
+       </m:msup>
+       <m:mi>x</m:mi></m:mstyle>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mo>,</m:mo>
+    </m:mtd>
+   </m:mtr>
+   <m:mtr>
+    <m:mtd>
+     <m:mi>Pr</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mi>y</m:mi><m:mo>=</m:mo><m:mn>2</m:mn>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mn>1</m:mn><m:mo>−</m:mo><m:mi>Φ</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mi>μ</m:mi><m:mo>−</m:mo><m:mstyle mathsize="normal" mathvariant="bold"><m:msup>
+        <m:mi>β</m:mi>
+        <m:mo>′</m:mo>
+       </m:msup>
+       <m:mi>x</m:mi></m:mstyle>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mo>.</m:mo>
+    </m:mtd>
+   </m:mtr>
+  </m:mtable>
+  
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOabaeqabaGaciiuaiaackhadaqadaqaaiaadMhacqGH9aqpcaaIWaaacaGLOaGaayzkaaGaeyypa0JaaGymaiabgkHiTiabfA6agnaabmaabaGabCOSdyaafaGaaCiEaaGaayjkaiaawMcaaiaacYcaaeaaciGGqbGaaiOCamaabmaabaGaamyEaiabg2da9iaaigdaaiaawIcacaGLPaaacqGH9aqpcqqHMoGrdaqadaqaaiabeY7aTjabgkHiTiqahk7agaqbaiaahIhaaiaawIcacaGLPaaacqGHsislcqqHMoGrdaqadaqaaiabgkHiTiqahk7agaqbaiaahIhaaiaawIcacaGLPaaacaGGSaaabaGaciiuaiaackhadaqadaqaaiaadMhacqGH9aqpcaaIYaaacaGLOaGaayzkaaGaeyypa0JaaGymaiabgkHiTiabfA6agnaabmaabaGaeqiVd0MaeyOeI0IabCOSdyaafaGaaCiEaaGaayjkaiaawMcaaiaac6caaaaa@6CF8@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation><para id="id1168249149045">Figure 2 shows this situation. The solid curve shows the distribution of <emphasis effect="italics">y</emphasis> and <emphasis effect="italics">y*</emphasis>. Increasing one of the <emphasis effect="bold">x</emphasis>'s while holding the <emphasis effect="bold">β</emphasis> constant (that is, changing <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mstyle mathsize="normal" mathvariant="bold"><m:msup>
+    <m:mover accent="true">
+     <m:mi>β</m:mi>
+     <m:mo>^</m:mo>
+    </m:mover>
+    
+    <m:mo>′</m:mo>
+   </m:msup>
+   </m:mstyle><m:msub>
+    <m:mstyle mathsize="normal" mathvariant="bold"><m:mi>x</m:mi></m:mstyle>
+    <m:mn>0</m:mn>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiqahk7agaqcgaqbaiaahIhadaWgaaWcbaGaaGimaaqabaaaaa@3928@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ to <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mstyle mathsize="normal" mathvariant="bold"><m:msup>
+    <m:mover accent="true">
+     <m:mi>β</m:mi>
+     <m:mo>^</m:mo>
+    </m:mover>
+    
+    <m:mo>′</m:mo>
+   </m:msup>
+   </m:mstyle><m:msub>
+    <m:mstyle mathsize="normal" mathvariant="bold"><m:mi>x</m:mi></m:mstyle>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:mo stretchy="false">)</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiqahk7agaqcgaqbaiaahIhadaWgaaWcbaGaaGymaaqabaGccaGGPaaaaa@39E0@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ is the same as shifting the entire distribution of <emphasis effect="italics">y</emphasis> and <emphasis effect="italics">y*</emphasis> to the right with <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mover accent="true">
+   <m:mi>μ</m:mi>
+   <m:mo>^</m:mo>
+  </m:mover>
+  
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiqbeY7aTzaajaaaaa@37AF@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ remaining constant. As a result the probabilities that y takes on the values of 0, 1, and 2 change. Clearly, as shown in Figure 2, <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>Pr</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mi>y</m:mi><m:mo>=</m:mo><m:mn>0</m:mn>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiGaccfacaGGYbWaaeWaaeaacaWG5bGaeyypa0JaaGimaaGaayjkaiaawMcaaaaa@3BFC@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ decreases and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>Pr</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mi>y</m:mi><m:mo>=</m:mo><m:mn>2</m:mn>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiGaccfacaGGYbWaaeWaaeaacaWG5bGaeyypa0JaaGOmaaGaayjkaiaawMcaaaaa@3BFE@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ increases. The <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>Pr</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mi>y</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiGaccfacaGGYbWaaeWaaeaacaWG5bGaeyypa0JaaGymaaGaayjkaiaawMcaaiaacYcaaaa@3CAD@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ on the other hand, may increase or decrease and, thus, the effect of an increase in one of the explanatory variables is ambiguous. It is easy to show this result algebraically. The marginal effects for the 3 probabilities in (3) are, assuming <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mstyle mathsize="normal" mathvariant="bold"><m:mi>β</m:mi></m:mstyle><m:mo>&gt;</m:mo><m:mn>0</m:mn><m:mo>:</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaahk7acqGH+aGpcaaIWaGaaiOoaaaa@39A7@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+      </para>
+      
+      <equation id="eip-844"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mtable columnalign="left">
+   <m:mtr>
+    <m:mtd>
+     <m:mfrac>
+      <m:mrow>
+       <m:mo>∂</m:mo><m:mi>Pr</m:mi><m:mrow><m:mo>(</m:mo>
+        <m:mrow>
+         <m:mi>y</m:mi><m:mo>=</m:mo><m:mn>0</m:mn>
+        </m:mrow>
+       <m:mo>)</m:mo></m:mrow>
+      </m:mrow>
+      <m:mrow>
+       <m:mo>∂</m:mo><m:mstyle mathsize="normal" mathvariant="bold"><m:mi>x</m:mi></m:mstyle>
+      </m:mrow>
+     </m:mfrac>
+     <m:mo>=</m:mo><m:mo>−</m:mo><m:mi>ϕ</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mstyle mathsize="normal" mathvariant="bold"><m:msup>
+        <m:mi>β</m:mi>
+        <m:mo>′</m:mo>
+       </m:msup>
+       <m:mi>x</m:mi></m:mstyle>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mstyle mathsize="normal" mathvariant="bold"><m:mi>β</m:mi></m:mstyle><m:mo>&lt;</m:mo><m:mn>0</m:mn><m:mo>,</m:mo>
+    </m:mtd>
+   </m:mtr>
+   <m:mtr>
+    <m:mtd>
+     <m:mfrac>
+      <m:mrow>
+       <m:mo>∂</m:mo><m:mi>Pr</m:mi><m:mrow><m:mo>(</m:mo>
+        <m:mrow>
+         <m:mi>y</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+        </m:mrow>
+       <m:mo>)</m:mo></m:mrow>
+      </m:mrow>
+      <m:mrow>
+       <m:mo>∂</m:mo><m:mstyle mathsize="normal" mathvariant="bold"><m:mi>x</m:mi></m:mstyle>
+      </m:mrow>
+     </m:mfrac>
+     <m:mo>=</m:mo><m:mi>ϕ</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mi>μ</m:mi><m:mo>−</m:mo><m:mstyle mathsize="normal" mathvariant="bold"><m:msup>
+        <m:mi>β</m:mi>
+        <m:mo>′</m:mo>
+       </m:msup>
+       <m:mi>x</m:mi></m:mstyle>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mstyle mathsize="normal" mathvariant="bold"><m:mi>β</m:mi></m:mstyle><m:mo>−</m:mo><m:mi>ϕ</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mstyle mathsize="normal" mathvariant="bold"><m:msup>
+        <m:mi>β</m:mi>
+        <m:mo>′</m:mo>
+       </m:msup>
+       <m:mi>x</m:mi></m:mstyle>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mstyle mathsize="normal" mathvariant="bold"><m:mi>β</m:mi></m:mstyle><m:mo>,</m:mo>
+    </m:mtd>
+   </m:mtr>
+   <m:mtr>
+    <m:mtd>
+     <m:mfrac>
+      <m:mrow>
+       <m:mo>∂</m:mo><m:mi>Pr</m:mi><m:mrow><m:mo>(</m:mo>
+        <m:mrow>
+         <m:mi>y</m:mi><m:mo>=</m:mo><m:mn>2</m:mn>
+        </m:mrow>
+       <m:mo>)</m:mo></m:mrow>
+      </m:mrow>
+      <m:mrow>
+       <m:mo>∂</m:mo><m:mstyle mathsize="normal" mathvariant="bold"><m:mi>x</m:mi></m:mstyle>
+      </m:mrow>
+     </m:mfrac>
+     <m:mo>=</m:mo><m:mi>ϕ</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:mi>μ</m:mi><m:mo>−</m:mo><m:mstyle mathsize="normal" mathvariant="bold"><m:msup>
+        <m:mi>β</m:mi>
+        <m:mo>′</m:mo>
+       </m:msup>
+       <m:mi>x</m:mi></m:mstyle>
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mstyle mathsize="normal" mathvariant="bold"><m:mi>β</m:mi></m:mstyle><m:mo>&gt;</m:mo><m:mn>0.</m:mn>
+    </m:mtd>
+   </m:mtr>
+  </m:mtable>
+  
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOabaeqabaWaaSaaaeaacqGHciITciGGqbGaaiOCamaabmaabaGaamyEaiabg2da9iaaicdaaiaawIcacaGLPaaaaeaacqGHciITcaWH4baaaiabg2da9iabgkHiTiabew9aMnaabmaabaGabCOSdyaafaGaaCiEaaGaayjkaiaawMcaaiaahk7acqGH8aapcaaIWaGaaiilaaqaamaalaaabaGaeyOaIyRaciiuaiaackhadaqadaqaaiaadMhacqGH9aqpcaaIXaaacaGLOaGaayzkaaaabaGaeyOaIyRaaCiEaaaacqGH9aqpcqaHvpGzdaqadaqaaiabeY7aTjabgkHiTiqahk7agaqbaiaahIhaaiaawIcacaGLPaaacaWHYoGaeyOeI0Iaeqy1dy2aaeWaaeaaceWHYoGbauaacaWH4baacaGLOaGaayzkaaGaaCOSdiaacYcaaeaadaWcaaqaaiabgkGi2kGaccfacaGGYbWaaeWaaeaacaWG5bGaeyypa0JaaGOmaaGaayjkaiaawMcaaaqaaiabgkGi2kaahIhaaaGaeyypa0Jaeqy1dy2aaeWaaeaacqaH8oqBcqGHsislceWHYoGbauaacaWH4baacaGLOaGaayzkaaGaaCOSdiabg6da+iaaicdacaGGUaaaaaa@7EEF@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation><para id="eip-906"><figure id="Rfigure2"><media id="rfig2" alt="The figure shows the impact of a change in one of the explanatory variables on the probabilities that y equals 0, 1, or 2.">
+    <image mime-type="image/jpeg" src="../../media/R Figure 2.jpg"/>
+  </media>
+  
+<caption>A rise in one of the explanatory variables whose parameter is positive will shift the probability distribution of the outcome to the right (from the solid line to the dashed line).
+  </caption></figure>
+</para><para id="id1168237048919">In general, only the sign's of the change <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>Pr</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mi>y</m:mi><m:mo>=</m:mo><m:mn>0</m:mn>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiGaccfacaGGYbWaaeWaaeaacaWG5bGaeyypa0JaaGimaaGaayjkaiaawMcaaaaa@3BFC@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>Pr</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mi>y</m:mi><m:mo>=</m:mo><m:mi>J</m:mi>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiGaccfacaGGYbWaaeWaaeaacaWG5bGaeyypa0JaamOsaaGaayjkaiaawMcaaaaa@3C11@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ are unambiguous. Greene (1990, 705) cautions that "<quote display="inline">[w]e must be very careful in interpreting the coefficients in this model.... Indeed, without a fair amount o extra calculation, it is quite unclear how the coefficients in the ordered-probit model should be interpreted.</quote>" </para>
+    </section>
+    <section id="id1168242472476"><title>The BFS Dataset</title><para id="id1168257298208">The data used by BFS are available at the <emphasis effect="italics">Journal of Applied Econometrics</emphasis> <link url="http://qed.econ.queensu.ca/jae/1998-v13.2/butler-finegan-siegfried/" window="new">data website</link> or in the <emphasis effect="italics">MS Excel</emphasis> file <emphasis effect="italics"><link resource="Vanderbilt data set.xls" window="new">Vanderbilt data set.xls</link></emphasis>. Table 1 identifies the variables in the dataset.</para>
+      
+      <table id="id1168235319376" summary="This is a list of variables in the Vanderbilt data set." rowsep="0" colsep="0" frame="topbot"><title>Definition of the variables included in the Vanderbilt data set.</title>
+<tgroup cols="3"><colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2"/>
+          <colspec colnum="3" colname="c3"/>
+          <tbody>
+            <row rowsep="1">
+              <entry>Column</entry>
+              <entry>Code</entry>
+              <entry>Variable definition</entry>
+            </row>
+            <row>
+              <entry>A</entry>
+              <entry>Obs</entry>
+              <entry>Observation number</entry>
+            </row>
+            <row>
+              <entry>B</entry>
+              <entry>SID</entry>
+              <entry>Student ID</entry>
+            </row>
+            <row>
+              <entry>C</entry>
+              <entry>Grade</entry>
+              <entry>Grade earned in Economics 231, A = 4, A- = 3.7, etc.</entry>
+            </row>
+            <row>
+              <entry>D</entry>
+              <entry>SelCorr</entry>
+              <entry>Variable correcting for selection bias</entry>
+            </row>
+            <row>
+              <entry>E</entry>
+              <entry>Soph</entry>
+              <entry>Dummy variable = 1 if student is a sophomore</entry>
+            </row>
+            <row>
+              <entry>F</entry>
+              <entry>Senior</entry>
+              <entry>Dummy variable = 1 if student is a senior</entry>
+            </row>
+            <row>
+              <entry>G</entry>
+              <entry>Same</entry>
+              <entry>Dummy variable = 1 if student took both intermediate classes the same year</entry>
+            </row>
+            <row>
+              <entry>H</entry>
+              <entry>Skip</entry>
+              <entry>Dummy variable = 1 if student took the intermediate classes at least one semester apart</entry>
+            </row>
+            <row>
+              <entry>I</entry>
+              <entry>HighestMath</entry>
+              <entry>Highest level of math attained (the dependent variable, 0-6 corresponding to Math 170, 171a, 172a, 171b, 172b, 221a, 221b)</entry>
+            </row>
+            <row>
+              <entry>J</entry>
+              <entry>M170</entry>
+              <entry>Dummy variable = 1 if student's highest level of math was Math 170</entry>
+            </row>
+            <row>
+              <entry>K</entry>
+              <entry>M171a</entry>
+              <entry>Dummy variable = 1 if student's highest level of math was Math 171A</entry>
+            </row>
+            <row>
+              <entry>L</entry>
+              <entry>M172a</entry>
+              <entry>Dummy variable = 1 if student's highest level of math was Math 172a</entry>
+            </row>
+            <row>
+              <entry>M</entry>
+              <entry>M171b</entry>
+              <entry>Dummy variable = 1 if student's highest level of math was Math 171b</entry>
+            </row>
+            <row>
+              <entry>N</entry>
+              <entry>M172b</entry>
+              <entry>Dummy variable = 1 if student's highest level of math was Math 172b</entry>
+            </row>
+            <row>
+              <entry>O</entry>
+              <entry>M221a</entry>
+              <entry>Dummy variable = 1 if student's highest level of math was Math 221a</entry>
+            </row>
+            <row>
+              <entry>P</entry>
+              <entry>M221b</entry>
+              <entry>Dummy variable = 1 if student's highest level of math was Math 221b</entry>
+            </row>
+            <row>
+              <entry>Q</entry>
+              <entry>GE100</entry>
+              <entry>Grade in Economics 100</entry>
+            </row>
+            <row>
+              <entry>R</entry>
+              <entry>GDE100</entry>
+              <entry>Individual instructor grade deflator in Economics 100</entry>
+            </row>
+            <row>
+              <entry>S</entry>
+              <entry>GE101</entry>
+              <entry>Grade in Economics 101</entry>
+            </row>
+            <row>
+              <entry>T</entry>
+              <entry>GDE101</entry>
+              <entry>Individual instructor grade deflator in Economics 101</entry>
+            </row>
+            <row>
+              <entry>U</entry>
+              <entry>GDE231</entry>
+              <entry>Individual instructor grade deflator in Economics 231</entry>
+            </row>
+            <row>
+              <entry>V</entry>
+              <entry>Size</entry>
+              <entry>Class size</entry>
+            </row>
+            <row>
+              <entry>W</entry>
+              <entry>FGPA</entry>
+              <entry>Freshman GPA</entry>
+            </row>
+            <row>
+              <entry>X</entry>
+              <entry>Female</entry>
+              <entry>Dummy variable =1 if student is a female</entry>
+            </row>
+            <row>
+              <entry>Y</entry>
+              <entry>MSAT</entry>
+              <entry>Score on Math section of the SAT</entry>
+            </row>
+            <row>
+              <entry>Z</entry>
+              <entry>VSAT</entry>
+              <entry>Score on Verbal section of the SAT</entry>
+            </row>
+            <row>
+              <entry>AA</entry>
+              <entry>TE231</entry>
+              <entry>Teacher of Economics 231 (numerical code)</entry>
+            </row>
+            <row>
+              <entry>AB</entry>
+              <entry>SE231</entry>
+              <entry>Section of Economics 231 (numerical code)</entry>
+            </row>
+            <row>
+              <entry>AC</entry>
+              <entry>GM170</entry>
+              <entry>Grade in highest math class: Math 170</entry>
+            </row>
+            <row>
+              <entry>AD</entry>
+              <entry>GM171a</entry>
+              <entry>Grade in highest math class: Math 171a</entry>
+            </row>
+            <row>
+              <entry>AE</entry>
+              <entry>GM172a</entry>
+              <entry>Grade in highest math class: Math 172a</entry>
+            </row>
+            <row>
+              <entry>AF</entry>
+              <entry>GM171b</entry>
+              <entry>Grade in highest math class: Math 171b</entry>
+            </row>
+            <row>
+              <entry>AG</entry>
+              <entry>GM172b</entry>
+              <entry>Grade in highest math class: Math 172b</entry>
+            </row>
+            <row>
+              <entry>AH</entry>
+              <entry>GM221a</entry>
+              <entry>Grade in highest math class: Math 221a</entry>
+            </row>
+            <row>
+              <entry>AI</entry>
+              <entry>GM221b</entry>
+              <entry>Grade in highest math class: Math 221b</entry>
+            </row>
+            <row>
+              <entry>AJ</entry>
+              <entry>GHM</entry>
+              <entry>Grade in highest math class</entry>
+            </row>
+            <row>
+              <entry>AK</entry>
+              <entry>Foreign</entry>
+              <entry>Dummy variable = 1 if student passed foreign language proficiency test</entry>
+            </row>
+            <row>
+              <entry>AL</entry>
+              <entry>EMEcon</entry>
+              <entry>Dummy variable = 1 if expected major is economics</entry>
+            </row>
+            <row>
+              <entry>AM</entry>
+              <entry>EMOSS</entry>
+              <entry>Dummy variable = 1 if expected major is another social science</entry>
+            </row>
+            <row>
+              <entry>AN</entry>
+              <entry>EMNS</entry>
+              <entry>Dummy variable = 1 if expected major is a natural science</entry>
+            </row>
+            <row>
+              <entry>AO</entry>
+              <entry>EMH</entry>
+              <entry>Dummy variable = 1 if expected major is in the humanities</entry>
+            </row>
+            <row>
+              <entry>AP</entry>
+              <entry>AM1</entry>
+              <entry>Dummy variable = 1 if student completed 1 year of advanced math in high school</entry>
+            </row>
+            <row>
+              <entry>AQ</entry>
+              <entry>AM2</entry>
+              <entry>Dummy variable = 1 if student completed 2 years of advanced math in high school</entry>
+            </row>
+            <row>
+              <entry>AR</entry>
+              <entry>AM3</entry>
+              <entry>Dummy variable = 1 if student completed 3 years of advanced math in high school</entry>
+            </row>
+            <row>
+              <entry>AS</entry>
+              <entry>Phy1</entry>
+              <entry>Dummy variable = 1 if student completed 1 course in physics in high school</entry>
+            </row>
+            <row>
+              <entry>AT</entry>
+              <entry>Phy2</entry>
+              <entry>Dummy variable = 1 if student completed 2 courses in physics in high school</entry>
+            </row>
+            <row>
+              <entry>AU</entry>
+              <entry>Chem1</entry>
+              <entry>Dummy variable = 1 if student completed 1 course in chemistry in high school</entry>
+            </row>
+            <row>
+              <entry>AV</entry>
+              <entry>Chem2</entry>
+              <entry>Dummy variable = 1 if student completed 2 courses in chemistry in high school</entry>
+            </row>
+          </tbody>
+        
+</tgroup>
+</table>
+    </section>
+    <section id="id1168261350888"><title>Replication of the Ordered Probit Regression</title><para id="id1168232911229">At this point we are ready to begin the replication. Since it is easy to get lost in the process, I have created a list of steps that include both instructions on what to do and questions you need to answer. As part of this exercise you will be asked to complete several tables of results. In order to make this effort easier, I have provided a MS Word file, <link resource="Tables for ordered probit discussion.doc" window="new">Tables for ordered probit discussion.doc</link>, with the tables to be completed in it.</para>
+      <para id="id1168252299025">1. Load the data in <emphasis effect="italics">Stata</emphasis> from <emphasis effect="italics">Excel</emphasis>.</para>
+      <para id="id1168252609027">2. Convert MSAT and VSAT to MSAT/100 and VSAT/100, respectively, using the commands:</para>
+      <para id="id1168241273428"><emphasis effect="bold">.replace msat = msat/100</emphasis></para>
+      <para id="id1168257566354"><emphasis effect="bold">.replace vsat = vsat/100</emphasis></para>
+      <para id="id1168251886386">3. Common sense dictates that we should calculate the means and standard deviations of the variables to be sure that there are no entry errors. We need to construct a table that compares the means and standard deviations reported in BFS with those in our dataset. Table 2, which has the means and standard deviations reported by BFS, gives a place to put the means and standard deviations for the variables in our dataset. Fill in the information missing from Table 2.</para>
+      
+      <table id="id1168235176919" summary="" frame="topbot" colsep="0" rowsep="0"><title>Means and standard deviations of the data.</title><tgroup cols="5">
+          <colspec colnum="1" colname="c1" colwidth="0.75in"/>
+          <colspec colnum="2" colname="c2" colwidth="0.65in"/>
+          <colspec colnum="3" colname="c3" colwidth="0.65in"/>
+          <colspec colnum="4" colname="c4" colwidth="0.65in"/>
+          <colspec colnum="5" colname="c5" colwidth="0.65in"/>
+          <tbody>
+            <row>
+              <entry/>
+              <entry namest="c2" nameend="c3" align="center">Our data</entry>
+              <entry namest="c4" nameend="c5" align="center">Butler, et al.</entry>
+            </row>
+            <row rowsep="1">
+              <entry>Variable</entry>
+              <entry align="center">Mean</entry>
+              <entry align="center">Std. Dev.</entry>
+              <entry align="center">Mean</entry>
+              <entry align="center">Std. Dev.</entry>
+            </row>
+            <row>
+              <entry>msat</entry>
+              <entry/>
+              <entry/>
+              <entry align="center">6.25</entry>
+              <entry align="center">0.60</entry>
+            </row>
+            <row>
+              <entry>foreign</entry>
+              <entry/>
+              <entry/>
+              <entry align="center">0.11</entry>
+              <entry align="center">0.32</entry>
+            </row>
+            <row>
+              <entry>female</entry>
+              <entry/>
+              <entry/>
+              <entry align="center">0.39</entry>
+              <entry align="center">0.49</entry>
+            </row>
+            <row>
+              <entry>emecon</entry>
+              <entry/>
+              <entry/>
+              <entry align="center">0.34</entry>
+              <entry align="center">0.48</entry>
+            </row>
+            <row>
+              <entry>emoss</entry>
+              <entry/>
+              <entry/>
+              <entry align="center">0.17</entry>
+              <entry align="center">0.38</entry>
+            </row>
+            <row>
+              <entry>emns</entry>
+              <entry/>
+              <entry/>
+              <entry align="center">0.21</entry>
+              <entry align="center">0.41</entry>
+            </row>
+            <row>
+              <entry>emh</entry>
+              <entry/>
+              <entry/>
+              <entry align="center">0.07</entry>
+              <entry align="center">0.25</entry>
+            </row>
+            <row>
+              <entry>am1</entry>
+              <entry/>
+              <entry/>
+              <entry align="center">0.49</entry>
+              <entry align="center">0.50</entry>
+            </row>
+            <row>
+              <entry>am2</entry>
+              <entry/>
+              <entry/>
+              <entry align="center">0.45</entry>
+              <entry align="center">0.50</entry>
+            </row>
+            <row>
+              <entry>am3</entry>
+              <entry/>
+              <entry/>
+              <entry align="center">0.01</entry>
+              <entry align="center">0.11</entry>
+            </row>
+            <row>
+              <entry>phy1</entry>
+              <entry/>
+              <entry/>
+              <entry align="center">0.67</entry>
+              <entry align="center">0.47</entry>
+            </row>
+            <row>
+              <entry>Phy2</entry>
+              <entry/>
+              <entry/>
+              <entry align="center">0.02</entry>
+              <entry align="center">0.14</entry>
+            </row>
+            <row>
+              <entry>chem1</entry>
+              <entry/>
+              <entry/>
+              <entry align="center">0.82</entry>
+              <entry align="center">0.39</entry>
+            </row>
+            <row>
+              <entry>chem2</entry>
+              <entry/>
+              <entry/>
+              <entry align="center">0.12</entry>
+              <entry align="center">0.32</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para id="id6602782">4. Estimate the ordered probit regression using (in <emphasis effect="italics">Stata</emphasis>) the commands:</para>
+      <para id="id1168251218394"><emphasis effect="bold">.global indvar msat foreign female emecon emoss emns emh am1 am2 am3 phy1 phy2 chem1 chem2</emphasis></para>
+      <para id="id1168231817090"><emphasis effect="bold">.oprobit highestmath $indvar</emphasis></para>
+      <para id="id1168234997901">5. Use the result of this estimation to complete Table 3.<footnote id="id1168250262512">One way to make the conversion from the <emphasis effect="italics">Stata</emphasis> output to the neater table relatively easily is to follow these steps: (1) replace each double space by a single space until there were none left; (2) replace each space with a tab (^t); (3) convert the material into a table using the "Insert/Table" command with a tab as the separator; and (4) clean up the table by moving the data into an <emphasis effect="italics">Excel</emphasis> file, fixing the formatting, and returning the data to the <emphasis effect="italics">Word</emphasis> file (alternatively, you can use formatting commands in <emphasis effect="italics">Stata</emphasis> to control how the output appears).</footnote></para>
+      
+      <table id="id1168251930313" summary="" frame="topbot" rowsep="0" colsep="0"><title>Results of <emphasis effect="italics">Stata</emphasis> ordered-probit regression.</title><tgroup cols="7">
+          <colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2" align="center" colwidth="0.5in"/>
+          <colspec colnum="3" colname="c3" align="center" colwidth="0.5in"/>
+          <colspec colnum="4" colname="c4" align="center" colwidth="0.5in"/>
+          <colspec colnum="5" colname="c5" align="center" colwidth="0.5in"/>
+          <colspec colnum="6" colname="c6" align="center" colwidth="0.75in"/>
+          <colspec colnum="7" colname="c7" align="center" colwidth="0.75in"/>
+          <tbody>
+            <row rowsep="1" valign="bottom">
+              <entry>highestmath</entry>
+              <entry>Coef.</entry>
+              <entry>Std. Err.</entry>
+              <entry>z</entry>
+              <entry>P&gt;z</entry>
+              <entry namest="c6" nameend="c7" align="center">[95% Conf. Interval] </entry>
+            </row>
+            <row>
+              <entry>msat1</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>foreign</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>female</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>emecon</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>emoss</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>emns</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>emh</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>am1</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>am2</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>am3</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>phy1</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>Phy2</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>chem1</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>chem2</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>_cut1</entry>
+              <entry/>
+              <entry/>
+              <entry namest="c4" nameend="c7"/>
+            </row>
+            <row>
+              <entry>_cut2</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>_cut3</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>_cut4</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>_cut5</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row rowsep="1">
+              <entry>_cut6</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>Observations</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>Log likelihood</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>LR χ<sup>2</sup>(14)</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>Prob &gt; χ<sup>2</sup></entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>Pueudo-R<sup>2</sup></entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para id="id3982828">6. Compare your results with the table reported in the article. The table in the article is Table II on page 193 and is reproduced in Figure 3. What we are interested in is comparing column 4 in Figure 3 with columns 2 and 4 in Table 3. Table 4 below offers a model for this comparison.</para>
+      <para id="id1168245790345"><figure id="Rfigure3">
+  <title/>
+  <media id="Rfig3" alt="This figure shows a copy of the results as reported by BFS.">
+    <image mime-type="image/jpeg" src="../../media/R Figure 3.jpg"/>
+  </media>
+  <caption>
+     Results of ordered probit regression as reported in Butler, et al.
+  </caption>
+</figure></para>
+      
+      <para id="id1168250299039">Table 4. Comparison of ordered probit estimations.</para>
+      <table id="id1168242844348" summary="" frame="topbot" rowsep="0" colsep="0"><title>Comparison of ordered-probit estimations.</title><tgroup cols="5">
+          <colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2" align="center" colwidth="0.75in"/>
+          <colspec colnum="3" colname="c3" align="center" colwidth="0.75in"/>
+          <colspec colnum="4" colname="c4" align="center" colwidth="0.75in"/>
+          <colspec colnum="5" colname="c5" align="center" colwidth="0.75in"/>
+          <tbody>
+            <row>
+              <entry/>
+              <entry namest="c2" nameend="c3">Our estimates</entry>
+              <entry namest="c4" nameend="c5">Butler, et al. estimates</entry>
+            </row>
+            <row rowsep="1">
+              <entry/>
+              <entry>Estimate</entry>
+              <entry>z</entry>
+              <entry>Estimate</entry>
+              <entry>t-value</entry>
+            </row>
+            <row>
+              <entry>msat1</entry>
+              <entry/>
+              <entry/>
+              <entry>0.05</entry>
+              <entry>6.12</entry>
+            </row>
+            <row>
+              <entry>foreign</entry>
+              <entry/>
+              <entry/>
+              <entry>0.02</entry>
+              <entry>0.14</entry>
+            </row>
+            <row>
+              <entry>female</entry>
+              <entry/>
+              <entry/>
+              <entry>0.25</entry>
+              <entry>2.59</entry>
+            </row>
+            <row>
+              <entry>emecon</entry>
+              <entry/>
+              <entry/>
+              <entry>-0.11</entry>
+              <entry>0.86</entry>
+            </row>
+            <row>
+              <entry>emoss</entry>
+              <entry/>
+              <entry/>
+              <entry>-0.29</entry>
+              <entry>1.99</entry>
+            </row>
+            <row>
+              <entry>emns</entry>
+              <entry/>
+              <entry/>
+              <entry>0.43</entry>
+              <entry>3.10</entry>
+            </row>
+            <row>
+              <entry>emh</entry>
+              <entry/>
+              <entry/>
+              <entry>-0.37</entry>
+              <entry>1.78</entry>
+            </row>
+            <row>
+              <entry>am1</entry>
+              <entry/>
+              <entry/>
+              <entry>0.24</entry>
+              <entry>1.07</entry>
+            </row>
+            <row>
+              <entry>am2</entry>
+              <entry/>
+              <entry/>
+              <entry>0.93</entry>
+              <entry>4.04</entry>
+            </row>
+            <row>
+              <entry>am3</entry>
+              <entry/>
+              <entry/>
+              <entry>0.77</entry>
+              <entry>1.70</entry>
+            </row>
+            <row>
+              <entry>phy1</entry>
+              <entry/>
+              <entry/>
+              <entry>0.26</entry>
+              <entry>2.71</entry>
+            </row>
+            <row>
+              <entry>Phy2</entry>
+              <entry/>
+              <entry/>
+              <entry>0.38</entry>
+              <entry>1.07</entry>
+            </row>
+            <row>
+              <entry>chem1</entry>
+              <entry/>
+              <entry/>
+              <entry>-0.12</entry>
+              <entry>0.69</entry>
+            </row>
+            <row>
+              <entry>chem2</entry>
+              <entry/>
+              <entry/>
+              <entry>0.17</entry>
+              <entry>0.75</entry>
+            </row>
+            <row>
+              <entry>Intercept</entry>
+              <entry/>
+              <entry/>
+              <entry>-3.09</entry>
+              <entry>5.48</entry>
+            </row>
+            <row>
+              <entry>_cut1</entry>
+              <entry/>
+              <entry/>
+              <entry>0.27</entry>
+              <entry>7.29</entry>
+            </row>
+            <row>
+              <entry>_cut2</entry>
+              <entry/>
+              <entry/>
+              <entry>0.33</entry>
+              <entry>8.16</entry>
+            </row>
+            <row>
+              <entry>_cut3</entry>
+              <entry/>
+              <entry/>
+              <entry>1.52</entry>
+              <entry>20.32</entry>
+            </row>
+            <row>
+              <entry>_cut4</entry>
+              <entry/>
+              <entry/>
+              <entry>1.79</entry>
+              <entry>23.07</entry>
+            </row>
+            <row>
+              <entry>_cut5</entry>
+              <entry/>
+              <entry/>
+              <entry>2.04</entry>
+              <entry>23.72</entry>
+            </row>
+            <row>
+              <entry>_cut6</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para id="id1168262464628">7. It is easy to see from Table 4 is that almost without exception the estimates of the parameters and their t-ratios are very similar. The exception arises with the estimates of the truncation points (_cut# in the <emphasis effect="italics">Stata</emphasis> results). We will have to figure out what these are estimates of in order to make sense of them. Figure 1 shows the "cutoffs" that are being estimated. Footnote c in the BFS Table II on page 193 (shown in Figure 3) offers a useful observation: </para>
+      <para id="id1168264382561"><quote id="id1168264382561_quote" display="block">In an ordered probit, an underlying, normally distributed, latent variable has a mean which is a function of observable variables. The latent variable gives rise to a set of observed dummy variables for ordered categories based on ranges between unobserved but estimable truncation points which correspond to levels of effort, ability, or other factors reflected in the explanatory variables. If L categories are observed, there are <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>L</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaqcaaKaamitaiabgkHiTiaaigdaaaa@38B6@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ truncation points, of which the first is normalized to be zero, so that <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>L</m:mi><m:mo>−</m:mo><m:mn>2</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaqcaaKaamitaiabgkHiTiaaikdaaaa@38B7@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ truncation points are estimated and reported in the table. The values correspond to standard deviations of the latent normally distributed variable.</quote>
+      </para>
+      <para id="id1168237848348">The key idea is that the values of cutoffs are relative and can be normalized around any value. Notice that the <emphasis effect="italics">Stata</emphasis> results do not report an intercept term but do report six cutoff values. Moreover, the difference between the estimate by <emphasis effect="italics">Stata</emphasis> for the first cutoff (3.08402) and the estimate for the second cutoff (3.356916) is equal to 0.272896, which is itself equal to the first truncation point reported by BFS (1998: 193). Use Table 5 to report the difference between the first cutoff value and each of the cutoff points reported by <emphasis effect="italics">Stata</emphasis>.</para>
+      <table id="id1168237315217" summary="Place in this table the values of the truncation points that reconcile the Stata output with the BFS cutoff points." frame="topbot" rowsep="0" colsep="0"><title>Reconciling <emphasis effect="italics">Stata</emphasis> estimates of cutoff points with Butler, et al.'s truncation points.</title>
+<tgroup cols="4"><colspec colnum="1" colname="c1" colwidth="0.75in"/>
+          <colspec colnum="2" colname="c2" align="center" colwidth="1in"/>
+          <colspec colnum="3" colname="c3" align="center" colwidth="1.5in"/>
+          <colspec colnum="4" colname="c4" align="center" colwidth="1.5in"/>
+          <tbody>
+            <row rowsep="1" valign="bottom">
+              <entry>Cutoff</entry>
+              <entry>Estimate</entry>
+              <entry>Estimate - _cut1</entry>
+              <entry>BFS Truncation Points</entry>
+            </row>
+            <row>
+              <entry>_cut1</entry>
+              <entry>3.0840</entry>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>_cut2</entry>
+              <entry>3.3569</entry>
+              <entry/>
+              <entry>0.27</entry>
+            </row>
+            <row>
+              <entry>_cut3</entry>
+              <entry>3.4146</entry>
+              <entry/>
+              <entry>0.33</entry>
+            </row>
+            <row>
+              <entry>_cut4</entry>
+              <entry>4.6013</entry>
+              <entry/>
+              <entry>1.52</entry>
+            </row>
+            <row>
+              <entry>_cut5</entry>
+              <entry>4.8774</entry>
+              <entry/>
+              <entry>1.79</entry>
+            </row>
+            <row>
+              <entry>_cut6</entry>
+              <entry>5.1202</entry>
+              <entry/>
+              <entry>2.04</entry>
+            </row>
+          </tbody>
+        
+
+
+
+
+
+</tgroup>
+</table>
+      <para id="id1168252640218">The second part of the reconciliation of the two sets of results is to compute the t-ratios. To do this we need to compute the standard deviation of the estimates of the cutoff points reported by <emphasis effect="italics">Stata</emphasis>. To do this we need to retrieve the variance-covariance matrix from the regression. First, let's see what we are interested in computing. Let <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mover accent="true">
+     <m:mi>β</m:mi>
+     <m:mo>^</m:mo>
+    </m:mover>
+    
+    <m:mi>i</m:mi>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGafqOSdiMbaKaadaWgaaWcbaGaamyAaaqabaaaaa@38BF@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ be the estimate of the <emphasis effect="italics">i</emphasis><sup>th</sup> cutoff point. In column 3 of Table 5 you computed <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mover accent="true">
+     <m:mi>α</m:mi>
+     <m:mo>^</m:mo>
+    </m:mover>
+    
+    <m:mi>i</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mover accent="true">
+     <m:mi>β</m:mi>
+     <m:mo>^</m:mo>
+    </m:mover>
+    
+    <m:mi>i</m:mi>
+   </m:msub>
+   <m:mo>−</m:mo><m:msub>
+    <m:mover accent="true">
+     <m:mi>β</m:mi>
+     <m:mo>^</m:mo>
+    </m:mover>
+    
+    <m:mn>1</m:mn>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGafqySdeMbaKaadaWgaaWcbaGaamyAaaqabaGccqGH9aqpcuaHYoGygaqcamaaBaaaleaacaWGPbaabeaakiabgkHiTiqbek7aIzaajaWaaSbaaSqaaiaaigdaaeqaaaaa@4027@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ for <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>i</m:mi><m:mo>=</m:mo><m:mn>2</m:mn><m:mo>,</m:mo><m:mo>…</m:mo><m:mo>,</m:mo><m:mn>6</m:mn>
+  </m:mrow>
+   <m:mo>.</m:mo>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyAaiabg2da9iaaikdacaGGSaGaeSOjGSKaaiilaiaaiAdaaaa@3BE6@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->.
+ The variance of the new variable is:</para>
+      
+      <equation id="eip-268"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>V</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mover accent="true">
+       <m:mi>α</m:mi>
+       <m:mo>^</m:mo>
+      </m:mover>
+      
+      <m:mi>i</m:mi>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mi>V</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mover accent="true">
+       <m:mi>β</m:mi>
+       <m:mo>^</m:mo>
+      </m:mover>
+      
+      <m:mi>i</m:mi>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>−</m:mo><m:mn>2</m:mn><m:mi>C</m:mi><m:mi>o</m:mi><m:mi>v</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mover accent="true">
+       <m:mi>β</m:mi>
+       <m:mo>^</m:mo>
+      </m:mover>
+      
+      <m:mi>i</m:mi>
+     </m:msub>
+     <m:msub>
+      <m:mover accent="true">
+       <m:mi>β</m:mi>
+       <m:mo>^</m:mo>
+      </m:mover>
+      
+      <m:mn>1</m:mn>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>+</m:mo><m:mi>V</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mover accent="true">
+       <m:mi>β</m:mi>
+       <m:mo>^</m:mo>
+      </m:mover>
+      
+      <m:mn>1</m:mn>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:msubsup>
+    <m:mi>σ</m:mi>
+    <m:mi>i</m:mi>
+    <m:mn>2</m:mn>
+   </m:msubsup>
+   <m:mo>−</m:mo><m:mn>2</m:mn><m:msub>
+    <m:mi>σ</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:msubsup>
+    <m:mi>σ</m:mi>
+    <m:mn>1</m:mn>
+    <m:mn>2</m:mn>
+   </m:msubsup>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamOvamaabmaabaGafqySdeMbaKaadaWgaaWcbaGaamyAaaqabaaakiaawIcacaGLPaaacqGH9aqpcaWGwbWaaeWaaeaacuaHYoGygaqcamaaBaaaleaacaWGPbaabeaaaOGaayjkaiaawMcaaiabgkHiTiaaikdacaWGdbGaam4BaiaadAhadaqadaqaaiqbek7aIzaajaWaaSbaaSqaaiaadMgaaeqaaOGafqOSdiMbaKaadaWgaaWcbaGaaGymaaqabaaakiaawIcacaGLPaaacqGHRaWkcaWGwbWaaeWaaeaacuaHYoGygaqcamaaBaaaleaacaaIXaaabeaaaOGaayjkaiaawMcaaiabg2da9iabeo8aZnaaDaaaleaacaWGPbaabaGaaGOmaaaakiabgkHiTiaaikdacqaHdpWCdaWgaaWcbaGaamyAaiaaigdaaeqaaOGaey4kaSIaeq4Wdm3aa0baaSqaaiaaigdaaeaacaaIYaaaaaaa@60F0@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation><para id="id1168242823896">The variance-covariance matrix will give us estimates of these variances and covariances. When there are <emphasis effect="italics">j</emphasis> parameters in a regression equation, this matrix is defined to be:</para>
+      
+      <para id="eip-885"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mover accent="true">
+    <m:mi>Σ</m:mi>
+    <m:mo>^</m:mo>
+   </m:mover>
+   <m:mo>=</m:mo><m:mrow><m:mo>[</m:mo> <m:mrow>
+    <m:mtable>
+     <m:mtr>
+      <m:mtd>
+       <m:mrow>
+        <m:msubsup>
+         <m:mover accent="true">
+          <m:mi>σ</m:mi>
+          <m:mo>^</m:mo>
+         </m:mover>
+         
+         <m:mrow>
+          <m:msub>
+           <m:mi>β</m:mi>
+           <m:mn>1</m:mn>
+          </m:msub>
+          
+         </m:mrow>
+         <m:mn>2</m:mn>
+        </m:msubsup>
+        
+       </m:mrow>
+      </m:mtd>
+      <m:mtd>
+       <m:mrow>
+        <m:msub>
+         <m:mover accent="true">
+          <m:mi>σ</m:mi>
+          <m:mo>^</m:mo>
+         </m:mover>
+         
+         <m:mrow>
+          <m:msub>
+           <m:mi>β</m:mi>
+           <m:mn>1</m:mn>
+          </m:msub>
+          <m:msub>
+           <m:mi>β</m:mi>
+           <m:mn>2</m:mn>
+          </m:msub>
+          
+         </m:mrow>
+        </m:msub>
+        
+       </m:mrow>
+      </m:mtd>
+      <m:mtd>
+       <m:mo>⋯</m:mo>
+      </m:mtd>
+      <m:mtd>
+       <m:mrow>
+        <m:msub>
+         <m:mi>σ</m:mi>
+         <m:mrow>
+          <m:msub>
+           <m:mi>β</m:mi>
+           <m:mn>1</m:mn>
+          </m:msub>
+          <m:msub>
+           <m:mi>β</m:mi>
+           <m:mi>k</m:mi>
+          </m:msub>
+          
+         </m:mrow>
+        </m:msub>
+        
+       </m:mrow>
+      </m:mtd>
+     </m:mtr>
+     <m:mtr>
+      <m:mtd>
+       <m:mrow>
+        <m:msub>
+         <m:mover accent="true">
+          <m:mi>σ</m:mi>
+          <m:mo>^</m:mo>
+         </m:mover>
+         
+         <m:mrow>
+          <m:msub>
+           <m:mi>β</m:mi>
+           <m:mn>2</m:mn>
+          </m:msub>
+          <m:msub>
+           <m:mi>β</m:mi>
+           <m:mn>1</m:mn>
+          </m:msub>
+          
+         </m:mrow>
+        </m:msub>
+        
+       </m:mrow>
+      </m:mtd>
+      <m:mtd>
+       <m:mrow>
+        <m:msubsup>
+         <m:mover accent="true">
+          <m:mi>σ</m:mi>
+          <m:mo>^</m:mo>
+         </m:mover>
+         
+         <m:mrow>
+          <m:msub>
+           <m:mi>β</m:mi>
+           <m:mn>2</m:mn>
+          </m:msub>
+          
+         </m:mrow>
+         <m:mn>2</m:mn>
+        </m:msubsup>
+        
+       </m:mrow>
+      </m:mtd>
+      <m:mtd>
+       <m:mo>⋯</m:mo>
+      </m:mtd>
+      <m:mtd>
+       <m:mrow>
+        <m:msub>
+         <m:mover accent="true">
+          <m:mi>σ</m:mi>
+          <m:mo>^</m:mo>
+         </m:mover>
+         
+         <m:mrow>
+          <m:msub>
+           <m:mi>β</m:mi>
+           <m:mn>2</m:mn>
+          </m:msub>
+          <m:msub>
+           <m:mi>β</m:mi>
+           <m:mi>k</m:mi>
+          </m:msub>
+          
+         </m:mrow>
+        </m:msub>
+        
+       </m:mrow>
+      </m:mtd>
+     </m:mtr>
+     <m:mtr>
+      <m:mtd>
+       <m:mo>⋮</m:mo>
+      </m:mtd>
+      <m:mtd>
+       <m:mo>⋮</m:mo>
+      </m:mtd>
+      <m:mtd>
+       <m:mo>⋱</m:mo>
+      </m:mtd>
+      <m:mtd>
+       <m:mrow/>
+      </m:mtd>
+     </m:mtr>
+     <m:mtr>
+      <m:mtd>
+       <m:mrow>
+        <m:msub>
+         <m:mi>σ</m:mi>
+         <m:mrow>
+          <m:msub>
+           <m:mi>β</m:mi>
+           <m:mi>k</m:mi>
+          </m:msub>
+          <m:msub>
+           <m:mi>β</m:mi>
+           <m:mn>1</m:mn>
+          </m:msub>
+          
+         </m:mrow>
+        </m:msub>
+        
+       </m:mrow>
+      </m:mtd>
+      <m:mtd>
+       <m:mrow>
+        <m:msub>
+         <m:mi>σ</m:mi>
+         <m:mrow>
+          <m:msub>
+           <m:mi>β</m:mi>
+           <m:mi>k</m:mi>
+          </m:msub>
+          <m:msub>
+           <m:mi>β</m:mi>
+           <m:mn>2</m:mn>
+          </m:msub>
+          
+         </m:mrow>
+        </m:msub>
+        
+       </m:mrow>
+      </m:mtd>
+      <m:mtd>
+       <m:mo>⋯</m:mo>
+      </m:mtd>
+      <m:mtd>
+       <m:mrow>
+        <m:msubsup>
+         <m:mover accent="true">
+          <m:mi>σ</m:mi>
+          <m:mo>^</m:mo>
+         </m:mover>
+         
+         <m:mrow>
+          <m:msub>
+           <m:mi>β</m:mi>
+           <m:mi>k</m:mi>
+          </m:msub>
+          
+         </m:mrow>
+         <m:mn>2</m:mn>
+        </m:msubsup>
+        
+       </m:mrow>
+      </m:mtd>
+     </m:mtr>
+     
+    </m:mtable>
+   </m:mrow> <m:mo>]</m:mo></m:mrow><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGafu4OdmLbaKaacqGH9aqpdaWadaqaauaabeqaeqaaaaaabaGafq4WdmNbaKaadaqhaaWcbaGaeqOSdi2aaSbaaWqaaiaaigdaaeqaaaWcbaGaaGOmaaaaaOqaaiqbeo8aZzaajaWaaSbaaSqaaiabek7aInaaBaaameaacaaIXaaabeaaliabek7aInaaBaaameaacaaIYaaabeaaaSqabaaakeaacqWIVlctaeaacqaHdpWCdaWgaaWcbaGaeqOSdi2aaSbaaWqaaiaaigdaaeqaaSGaeqOSdi2aaSbaaWqaaiaadUgaaeqaaaWcbeaaaOqaaiqbeo8aZzaajaWaaSbaaSqaaiabek7aInaaBaaameaacaaIYaaabeaaliabek7aInaaBaaameaacaaIXaaabeaaaSqabaaakeaacuaHdpWCgaqcamaaDaaaleaacqaHYoGydaWgaaadbaGaaGOmaaqabaaaleaacaaIYaaaaaGcbaGaeS47IWeabaGafq4WdmNbaKaadaWgaaWcbaGaeqOSdi2aaSbaaWqaaiaaikdaaeqaaSGaeqOSdi2aaSbaaWqaaiaadUgaaeqaaaWcbeaaaOqaaiabl6Uinbqaaiabl6UinbqaaiablgVipbqaaaqaaiabeo8aZnaaBaaaleaacqaHYoGydaWgaaadbaGaam4AaaqabaWccqaHYoGydaWgaaadbaGaaGymaaqabaaaleqaaaGcbaGaeq4Wdm3aaSbaaSqaaiabek7aInaaBaaameaacaWGRbaabeaaliabek7aInaaBaaameaacaaIYaaabeaaaSqabaaakeaacqWIVlctaeaacuaHdpWCgaqcamaaDaaaleaacqaHYoGydaWgaaadbaGaam4AaaqabaaaleaacaaIYaaaaaaaaOGaay5waiaaw2faaiaac6caaaa@82FC@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</para><para id="id1168242185760">If you type the command <emphasis effect="bold">.vce</emphasis>, <emphasis effect="italics">Stata</emphasis> will report <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mover accent="true">
+   <m:mi>Σ</m:mi>
+   <m:mo>^</m:mo>
+  </m:mover>
+   <m:mo>,</m:mo>  
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGafu4OdmLbaKaaaaa@3788@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ as shown in Figure 4. We need the section of this matrix shown in Part A of Table 6. Use equation (5) to estimate the standard errors of the estimates of the cutoff points and complete Part B of Table 6 and compares the t-ratios with the values reported by Butler, et al. (and shown in the last column 4 of Table 6). Are you satisfied that we have been able to come reasonably close to the results reported in the article?</para>
+      <para id="id1168245584490"><figure id="Rfigure4"><media id="Rfig4" alt="Copy of the Stata variance-covariance matrix estimate.">
+    <image mime-type="image/jpeg" src="../../media/R figure 4.jpg"/>
+  </media>
+  
+<caption><emphasis effect="italics">Stata</emphasis> estimate of the variance-covariance matrix.
+  </caption></figure>
+</para>
+      
+      <table id="id1168254025536" summary="" frame="topbot" rowsep="0" colsep="0"><title>Calculation of the t-ratios for the cutoff estimates.</title><tgroup cols="7">
+          <colspec colnum="1" colname="c1" align="center"/>
+          <colspec colnum="2" colname="c2" align="center"/>
+          <colspec colnum="3" colname="c3" align="center"/>
+          <colspec colnum="4" colname="c4" align="center"/>
+          <colspec colnum="5" colname="c5" align="center"/>
+          <colspec colnum="6" colname="c6" align="center"/>
+          <colspec colnum="7" colname="c7" align="center"/>
+          <tbody>
+            <row rowsep="1">
+              <entry namest="c1" nameend="c7">Part A. Relevant portion of the variance-covariance matrix.</entry>
+            </row>
+            <row rowsep="1">
+              <entry/>
+              <entry>_cut1</entry>
+              <entry>_cut2</entry>
+              <entry>_cut3</entry>
+              <entry>_cut4</entry>
+              <entry>_cut5</entry>
+              <entry>_cut6</entry>
+            </row>
+            <row>
+              <entry>_cut1</entry>
+              <entry>0.329</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>_cut2</entry>
+              <entry>0.329</entry>
+              <entry>0.330</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>_cut3</entry>
+              <entry>0.329</entry>
+              <entry>0.330</entry>
+              <entry>0.331</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>_cut4</entry>
+              <entry>0.332</entry>
+              <entry>0.333</entry>
+              <entry>0.334</entry>
+              <entry>0.341</entry>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>_cut5</entry>
+              <entry>0.333</entry>
+              <entry>0.334</entry>
+              <entry>0.334</entry>
+              <entry>0.341</entry>
+              <entry>0.343</entry>
+              <entry/>
+            </row>
+            <row rowsep="1">
+              <entry>_cut6</entry>
+              <entry>0.333</entry>
+              <entry>0.334</entry>
+              <entry>0.335</entry>
+              <entry>0.342</entry>
+              <entry>0.343</entry>
+              <entry>0.345</entry>
+            </row>
+            <row>
+              <entry namest="c1" nameend="c7">Part B. Calculation of the t-ratios (with comparison of values reported in BFS)</entry>
+            </row>
+            <row rowsep="1" valign="bottom">
+              <entry/>
+              <entry>V(<!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mover accent="true">
+   <m:mi>β</m:mi>
+   <m:mo>^</m:mo>
+  </m:mover>
+  
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGafqOSdiMbaKaaaaa@37A5@</m:annotation>
+ </m:semantics>
+</m:math>
+)</entry>
+              <entry>St. Dev.(<!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mover accent="true">
+   <m:mi>β</m:mi>
+   <m:mo>^</m:mo>
+  </m:mover>
+  
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGafqOSdiMbaKaaaaa@37A5@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+      </entry>
+              <entry>t-ratio</entry>
+              <entry>BFS t-ratio</entry>
+
+            </row>
+            <row>
+              <entry>_cut2</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry>7.29</entry>
+              <entry/>
+            </row>
+            <row>
+              <entry>_cut3</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry>8.16</entry>
+              <entry/>
+            </row>
+            <row>
+              <entry>_cut4</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry>20.32</entry>
+              <entry/>
+            </row>
+            <row>
+              <entry>_cut5</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry>23.07</entry>
+              <entry/>
+            </row>
+            <row>
+              <entry>_cut6</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry>23.72</entry>
+              <entry/>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para id="id1168252429585">8. The next step in the process is to generate the term we will use in the estimation of the grade regression to account for the potential sample selection bias. To do this we will need to find a reference in the literature that offers a clear description of what we need to do. As it turns out, a reasonable explanation of the appropriate estimation technique is available in Jimenez and Kugler (1987). Since much of what follows comes directly from this article, I highly recommend you read it yourself.</para>
+      <para id="id1168258731481">The gist of the method suggests that the potential sample bias is accounted for by an inverse Mills ratio for each of the categories. What we need to do is calculate:</para>
+      
+      <equation id="eip-542"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mover accent="true">
+     <m:mi>λ</m:mi>
+     <m:mo>^</m:mo>
+    </m:mover>
+    
+    <m:mi>i</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:mfrac>
+    <m:mrow>
+     <m:mi>ϕ</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:msub>
+        <m:mover accent="true">
+         <m:mi>μ</m:mi>
+         <m:mo>^</m:mo>
+        </m:mover>
+        
+        <m:mi>j</m:mi>
+       </m:msub>
+       <m:mo>−</m:mo><m:msubsup>
+        <m:mover accent="true">
+         <m:mi>z</m:mi>
+         <m:mo>^</m:mo>
+        </m:mover>
+        
+        <m:mi>i</m:mi>
+        <m:mo>∗</m:mo>
+       </m:msubsup>
+       
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mo>−</m:mo><m:mi>ϕ</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:msub>
+        <m:mover accent="true">
+         <m:mi>μ</m:mi>
+         <m:mo>^</m:mo>
+        </m:mover>
+        
+        <m:mrow>
+         <m:mi>j</m:mi><m:mo>+</m:mo><m:mn>1</m:mn>
+        </m:mrow>
+       </m:msub>
+       <m:mo>−</m:mo><m:msubsup>
+        <m:mover accent="true">
+         <m:mi>z</m:mi>
+         <m:mo>^</m:mo>
+        </m:mover>
+        
+        <m:mi>i</m:mi>
+        <m:mo>∗</m:mo>
+       </m:msubsup>
+       
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow>
+    </m:mrow>
+    <m:mrow>
+     <m:mi>Φ</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:msub>
+        <m:mover accent="true">
+         <m:mi>μ</m:mi>
+         <m:mo>^</m:mo>
+        </m:mover>
+        
+        <m:mrow>
+         <m:mi>j</m:mi><m:mo>+</m:mo><m:mn>1</m:mn>
+        </m:mrow>
+       </m:msub>
+       <m:mo>−</m:mo><m:msubsup>
+        <m:mover accent="true">
+         <m:mi>z</m:mi>
+         <m:mo>^</m:mo>
+        </m:mover>
+        
+        <m:mi>i</m:mi>
+        <m:mo>∗</m:mo>
+       </m:msubsup>
+       
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow><m:mo>−</m:mo><m:mi>Φ</m:mi><m:mrow><m:mo>(</m:mo>
+      <m:mrow>
+       <m:msub>
+        <m:mover accent="true">
+         <m:mi>μ</m:mi>
+         <m:mo>^</m:mo>
+        </m:mover>
+        
+        <m:mi>j</m:mi>
+       </m:msub>
+       <m:mo>−</m:mo><m:msubsup>
+        <m:mover accent="true">
+         <m:mi>z</m:mi>
+         <m:mo>^</m:mo>
+        </m:mover>
+        
+        <m:mi>i</m:mi>
+        <m:mo>∗</m:mo>
+       </m:msubsup>
+       
+      </m:mrow>
+     <m:mo>)</m:mo></m:mrow>
+    </m:mrow>
+   </m:mfrac>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGafq4UdWMbaKaadaWgaaWcbaGaamyAaaqabaGccqGH9aqpdaWcaaqaaiabew9aMnaabmaabaGafqiVd0MbaKaadaWgaaWcbaGaamOAaaqabaGccqGHsislceWG6bGbaKaadaqhaaWcbaGaamyAaaqaaiabgEHiQaaaaOGaayjkaiaawMcaaiabgkHiTiabew9aMnaabmaabaGafqiVd0MbaKaadaWgaaWcbaGaamOAaiabgUcaRiaaigdaaeqaaOGaeyOeI0IabmOEayaajaWaa0baaSqaaiaadMgaaeaacqGHxiIkaaaakiaawIcacaGLPaaaaeaacqqHMoGrdaqadaqaaiqbeY7aTzaajaWaaSbaaSqaaiaadQgacqGHRaWkcaaIXaaabeaakiabgkHiTiqadQhagaqcamaaDaaaleaacaWGPbaabaGaey4fIOcaaaGccaGLOaGaayzkaaGaeyOeI0IaeuOPdy0aaeWaaeaacuaH8oqBgaqcamaaBaaaleaacaWGQbaabeaakiabgkHiTiqadQhagaqcamaaDaaaleaacaWGPbaabaGaey4fIOcaaaGccaGLOaGaayzkaaaaaaaa@6799@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation><para id="id8758747">for the category that the individual actually is in. What we will do is calculate (6) for all of the categories and then sum the product of this number and a dummy variable indicating if a course is the highest math class completed by an individual. Since the dummy variables will equal 0 for math categories an individual is not in, the resulting sum will preserve the value of (6) that is associated with the category the individual does belong to.</para>
+      <para id="id1168248875659">It is clear from (6) that we will need to retain the 6 cutoffs. We can do this with the commands:</para>
+      <para id="id4915175"><emphasis effect="bold">. generate cutoff1 = _b[_cut1]</emphasis></para>
+      <para id="id1168233996938"><emphasis effect="bold">. generate cutoff2 = _b[_cut2]</emphasis></para>
+      <para id="id1168243406593"><emphasis effect="bold">. generate cutoff3 = _b[_cut3]</emphasis></para>
+      <para id="id1168248603429"><emphasis effect="bold">. generate cutoff4 = _b[_cut4]</emphasis></para>
+      <para id="id1168248601057"><emphasis effect="bold">. generate cutoff5 = _b[_cut5]</emphasis></para>
+      <para id="id1168239645825"><emphasis effect="bold">. generate cutoff6 = _b[_cut6]</emphasis></para>
+      <para id="id2129809">Technically, this step is not necessary since the parameter estimates are preserved until the next regression is estimated; I suggest doing this purely as a precaution.</para>
+      <para id="id4914574">9. Preserve the predicted values of the ordered-probit using the command:</para>
+      <para id="id1168239674849"><emphasis effect="bold">. predict zhat, xb</emphasis></para>
+      <para id="id1168245503015"><emphasis effect="bold">. predict phat1 phat2 phat3 phat4 phat5 phat6 phat7, p </emphasis></para>
+      <para id="id1168237405542">These two commands will generate for each observation the predicted mean category of math classes and the probability that this individual will fall in each category. To see what is going on we will retrieve some representative values of these variables and then graph them for one individual. Table 7 reports these values for 10 individuals in the sample. Now consider individual 2. Fitting a normal distribution with a mean of 4.25 and using the critical values from our estimation yields the probabilities that the individual is in each of the categories. For example, the probability that individual 1 will have completed no math classes is equal to 0.1223. Figure 5 illustrates the results for individual 1. The dashed vertical lines are the six cutoff values that are the same for each individual. The solid vertical line is the zhat for individual 1. The heavy blue line represents the normal probability density function for this individual. While, there is, of course, a different probability distribution for each individual, the cutoff values are the same for all members of the sample.</para>
+      
+      <table id="id1168254273815" summary="Predicted values of the cutoffs for a sample of 10 observations." frame="topbot" rowsep="0" colsep="0"><title>Predicted values of the ordered probit regression.</title>
+<tgroup cols="10"><colspec colnum="1" colname="c1" align="center" colwidth="0.5in"/>
+          <colspec colnum="2" colname="c2" align="center" colwidth="0.5in"/>
+          <colspec colnum="3" colname="c3" align="center" colwidth="0.5in"/>
+          <colspec colnum="4" colname="c4" align="center" colwidth="0.5in"/>
+          <colspec colnum="5" colname="c5" align="center" colwidth="0.5in"/>
+          <colspec colnum="6" colname="c6" align="center" colwidth="0.5in"/>
+          <colspec colnum="7" colname="c7" align="center" colwidth="0.5in"/>
+          <colspec colnum="8" colname="c8" align="center" colwidth="0.5in"/>
+          <colspec colnum="9" colname="c9" align="center" colwidth="0.5in"/>
+          <colspec colnum="10" colname="c10" align="center" colwidth="0.5in"/>
+          <tbody>
+            <row valign="bottom" rowsep="1">
+              <entry>Observation</entry>
+              <entry>Highest Math Class</entry>
+              <entry>zhat</entry>
+              <entry>Pr(0)</entry>
+              <entry>Pr(1)</entry>
+              <entry>Pr(2)</entry>
+              <entry>Pr(3)</entry>
+              <entry>Pr(4)</entry>
+              <entry>Pr(5)</entry>
+              <entry>Pr(6)</entry>
+            </row>
+            <row>
+              <entry>1</entry>
+              <entry>3</entry>
+              <entry>3.9657</entry>
+              <entry>0.1890</entry>
+              <entry>0.0824</entry>
+              <entry>0.0194</entry>
+              <entry>0.4467</entry>
+              <entry>0.0816</entry>
+              <entry>0.0568</entry>
+              <entry>0.1241</entry>
+            </row>
+            <row>
+              <entry>2</entry>
+              <entry>0</entry>
+              <entry>4.2507</entry>
+              <entry>0.1217</entry>
+              <entry>0.0640</entry>
+              <entry>0.0158</entry>
+              <entry>0.4355</entry>
+              <entry>0.0975</entry>
+              <entry>0.0731</entry>
+              <entry>0.1923</entry>
+            </row>
+            <row>
+              <entry>165</entry>
+              <entry>0</entry>
+              <entry>3.5982</entry>
+              <entry>0.3036</entry>
+              <entry>0.1011</entry>
+              <entry>0.0225</entry>
+              <entry>0.4149</entry>
+              <entry>0.0575</entry>
+              <entry>0.0364</entry>
+              <entry>0.0640</entry>
+            </row>
+            <row>
+              <entry>166</entry>
+              <entry>6</entry>
+              <entry>4.6914</entry>
+              <entry>0.0540</entry>
+              <entry>0.0370</entry>
+              <entry>0.0098</entry>
+              <entry>0.3633</entry>
+              <entry>0.1097</entry>
+              <entry>0.0922</entry>
+              <entry>0.3340</entry>
+            </row>
+            <row>
+              <entry>214</entry>
+              <entry>3</entry>
+              <entry>3.4533</entry>
+              <entry>0.3560</entry>
+              <entry>0.1056</entry>
+              <entry>0.0229</entry>
+              <entry>0.3900</entry>
+              <entry>0.0483</entry>
+              <entry>0.0294</entry>
+              <entry>0.0478</entry>
+            </row>
+            <row>
+              <entry>215</entry>
+              <entry>3</entry>
+              <entry>4.0840</entry>
+              <entry>0.1587</entry>
+              <entry>0.0749</entry>
+              <entry>0.0180</entry>
+              <entry>0.4459</entry>
+              <entry>0.0887</entry>
+              <entry>0.0637</entry>
+              <entry>0.1501</entry>
+            </row>
+            <row>
+              <entry>225</entry>
+              <entry>3</entry>
+              <entry>3.5250</entry>
+              <entry>0.3296</entry>
+              <entry>0.1036</entry>
+              <entry>0.0228</entry>
+              <entry>0.4031</entry>
+              <entry>0.0528</entry>
+              <entry>0.0328</entry>
+              <entry>0.0553</entry>
+            </row>
+            <row>
+              <entry>226</entry>
+              <entry>3</entry>
+              <entry>3.6990</entry>
+              <entry>0.2693</entry>
+              <entry>0.0969</entry>
+              <entry>0.0219</entry>
+              <entry>0.4285</entry>
+              <entry>0.0641</entry>
+              <entry>0.0417</entry>
+              <entry>0.0776</entry>
+            </row>
+            <row>
+              <entry>453</entry>
+              <entry>3</entry>
+              <entry>3.9713</entry>
+              <entry>0.1875</entry>
+              <entry>0.0820</entry>
+              <entry>0.0194</entry>
+              <entry>0.4468</entry>
+              <entry>0.0819</entry>
+              <entry>0.0571</entry>
+              <entry>0.1253</entry>
+            </row>
+            <row>
+              <entry>454</entry>
+              <entry>5</entry>
+              <entry>4.1650</entry>
+              <entry>0.1399</entry>
+              <entry>0.0697</entry>
+              <entry>0.0170</entry>
+              <entry>0.4422</entry>
+              <entry>0.0932</entry>
+              <entry>0.0684</entry>
+              <entry>0.1697</entry>
+            </row>
+            <row>
+              <entry>495</entry>
+              <entry>3</entry>
+              <entry>4.4168</entry>
+              <entry>0.0913</entry>
+              <entry>0.0533</entry>
+              <entry>0.0135</entry>
+              <entry>0.4151</entry>
+              <entry>0.1043</entry>
+              <entry>0.0816</entry>
+              <entry>0.2409</entry>
+            </row>
+            <row>
+              <entry>496</entry>
+              <entry>0</entry>
+              <entry>2.9811</entry>
+              <entry>0.5410</entry>
+              <entry>0.1055</entry>
+              <entry>0.0212</entry>
+              <entry>0.2797</entry>
+              <entry>0.0236</entry>
+              <entry>0.0127</entry>
+              <entry>0.0162</entry>
+            </row>
+            <row>
+              <entry>526</entry>
+              <entry>0</entry>
+              <entry>2.9247</entry>
+              <entry>0.5633</entry>
+              <entry>0.1039</entry>
+              <entry>0.0207</entry>
+              <entry>0.2653</entry>
+              <entry>0.0214</entry>
+              <entry>0.0114</entry>
+              <entry>0.0141</entry>
+            </row>
+            <row>
+              <entry>527</entry>
+              <entry>3</entry>
+              <entry>3.9757</entry>
+              <entry>0.1863</entry>
+              <entry>0.0817</entry>
+              <entry>0.0193</entry>
+              <entry>0.4469</entry>
+              <entry>0.0822</entry>
+              <entry>0.0574</entry>
+              <entry>0.1262</entry>
+            </row>
+          </tbody>
+        
+
+
+
+</tgroup>
+</table>
+      <para id="id1168241779140">Now we are ready to calculate (6). The commands are:</para>
+      <para id="id1168249372385"><emphasis effect="bold">.generate lambda0 = (-normden(cutoff1-zhat))/(norm(cutoff1-zhat)-norm(-zhat))</emphasis></para>
+      <para id="id1168245872352"><emphasis effect="bold">.generate lambda1 = (normden(cutoff1-zhat)-normden(cutoff2-zhat))/(norm(cutoff2-zhat)-norm(cutoff1-zhat))</emphasis></para>
+      <para id="id1168256606522"><emphasis effect="bold">.generate lambda2 = (normden(cutoff2-zhat)-normden(cutoff3-zhat))/(norm(cutoff3-zhat)-norm(cutoff2-zhat))</emphasis></para>
+      <para id="id1168243009940"><emphasis effect="bold">.generate lambda3 = (normden(cutoff3-zhat)-normden(cutoff4-zhat))/(norm(cutoff4-zhat)-norm(cutoff3-zhat))</emphasis></para>
+      <para id="id1168249235288"><emphasis effect="bold">.generate lambda4 = (normden(cutoff4-zhat)-normden(cutoff5-zhat))/(norm(cutoff5-zhat)-norm(cutoff4-zhat))</emphasis></para>
+      <para id="id4543565"><emphasis effect="bold">.generate lambda5 = (normden(cutoff5-zhat)-normden(cutoff6-zhat))/(norm(cutoff6-zhat)-norm(cutoff5-zhat))</emphasis></para>
+      <para id="id1168229988476"><emphasis effect="bold">.generate lambda6 = (normden(cutoff6-zhat))/(1-norm(cutoff6)-norm(cutoff5-zhat))</emphasis></para>
+      <para id="id1168242743008"><emphasis effect="bold">.generate lambda = m170*lambda0 + m171a*lambda1 + m172a*lambda2 + m171b*lambda3 + m172b*lambda4 + m221a*lambda5+m221b*lambda6</emphasis></para>
+      <para id="id1168248641483">One thing to notice in these calculations is that cutoff0 is assumed to be <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mo>−</m:mo><m:mi>∞</m:mi>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeyOeI0IaeyOhIukaaa@3852@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and cutoff7 is assumed to be <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mi>∞.</m:mi>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeyOhIukaaa@3765@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</para>
+      <para id="id1168248547258"><figure id="Rfigure5">
+  <title/>
+  <media id="rfig5" alt="The probability distribution for individual 2.">
+    <image mime-type="image/jpeg" src="../../media/R figure 5.jpg"/>
+  </media>
+  <caption>
+     The probability distribution of math class category for individual 2.
+  </caption>
+</figure>
+</para>
+      
+      <para id="id1168237054215">10. Now we are ready to estimate our regression explaining the grade that each individual received in intermediate microeconomics. Use Table 8 to report the regression results for four specifications of the model. The first question is can the null hypothesis of sample selection bias be rejected? How does this conclusion compare with BFS's conclusions? (See Table 9.) Second, since many of the potential explanatory variables like class size and scores on the SATs do not seem to be statistically significant, it is reasonable to focus our comments on the results reported in column (4) of Table 8.</para>
+      <para id="id1168251899331">What can you conclude about the impact of calculus on how well a student will do in intermediate microeconomics? Do the final grades earned in a majority of the math classes impact the grade earned in intermediate microeconomics? Do the grades earned in any of the math classes positively and significantly affect the grade earned in intermediate microeconomics? Can you explain the impact of the freshman GPA on the grade earned in intermediate microeconomics? What, if any, is your bottom line conclusions about what matters in determining the grades earned in intermediate microeconomics?</para>
+      
+      <table id="id1168243406415" summary="Table to be completed of the final results of the estimation." frame="topbot" rowsep="0" colsep="0"><title>Determinants of Final Grade in Intermediate Microeconomics.</title>
+<tgroup cols="5"><colspec colnum="1" colname="c1" colwidth="1.5in"/>
+          <colspec colnum="2" colname="c2" align="center" colwidth="1in"/>
+          <colspec colnum="3" colname="c3" align="center" colwidth="1in"/>
+          <colspec colnum="4" colname="c4" align="center" colwidth="1in"/>
+          <colspec colnum="5" colname="c5" align="center" colwidth="1in"/>
+          <tbody>
+            <row rowsep="1">
+              <entry>Explanatory variables</entry>
+              <entry>Model (1)</entry>
+              <entry>Model (2)</entry>
+              <entry>Model (3)</entry>
+              <entry>Model (4)</entry>
+            </row>
+            <row>
+              <entry>Lambda</entry>
+              <entry/>
+              <entry/>
+              <entry>—</entry>
+              <entry>—</entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>Sophomore</entry>
+              <entry/>
+              <entry>—</entry>
+              <entry/>
+              <entry>—</entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>Senior</entry>
+              <entry/>
+              <entry>—</entry>
+              <entry/>
+              <entry>—</entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>Same</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>Skip</entry>
+              <entry/>
+              <entry>—</entry>
+              <entry/>
+              <entry>—</entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>M171a</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>M172a</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>M171b</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>M172b</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>M221a</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>M221b</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>GE100</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>GDE100</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>GE101</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>GDE101</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry>—</entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>GDE231</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>Size</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry>—</entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>FGPA</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>Female</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>MSAT</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry>—</entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>VSAT</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry>—</entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>Grade in highest Math </entry>
+              <entry>—</entry>
+              <entry/>
+              <entry>—</entry>
+              <entry>—</entry>
+            </row>
+            <row>
+              <entry>class</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>GM170</entry>
+              <entry/>
+              <entry>—</entry>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>GM171a</entry>
+              <entry/>
+              <entry>—</entry>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>GM172a</entry>
+              <entry/>
+              <entry>—</entry>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>GM171b</entry>
+              <entry/>
+              <entry>—</entry>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>GM172b</entry>
+              <entry/>
+              <entry>—</entry>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>GM221a</entry>
+              <entry/>
+              <entry>—</entry>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>GM221b</entry>
+              <entry/>
+              <entry>—</entry>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>Intercept</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>F( 28, 580)</entry>
+              <entry/>
+              <entry>—</entry>
+              <entry>—</entry>
+              <entry>—</entry>
+            </row>
+            <row>
+              <entry>Prob &gt; F</entry>
+              <entry/>
+              <entry>—</entry>
+              <entry>—</entry>
+              <entry>—</entry>
+            </row>
+            <row>
+              <entry>F( 27, 581)</entry>
+              <entry>—</entry>
+              <entry>—</entry>
+              <entry/>
+              <entry>—</entry>
+            </row>
+            <row>
+              <entry>Prob &gt; F</entry>
+              <entry>—</entry>
+              <entry>—</entry>
+              <entry/>
+              <entry>—</entry>
+            </row>
+            <row>
+              <entry>F( 20, 588)</entry>
+              <entry/>
+              <entry>—</entry>
+              <entry>—</entry>
+              <entry/>
+            </row>
+            <row>
+              <entry>Prob &gt; F</entry>
+              <entry/>
+              <entry>—</entry>
+              <entry>—</entry>
+              <entry/>
+            </row>
+            <row>
+              <entry>F( 19, 589)</entry>
+              <entry>—</entry>
+              <entry/>
+              <entry>—</entry>
+              <entry>—</entry>
+            </row>
+            <row>
+              <entry>Prob &gt; F</entry>
+              <entry>—</entry>
+              <entry/>
+              <entry>—</entry>
+              <entry>—</entry>
+            </row>
+            <row>
+              <entry>R-Squared</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>Root MSE</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>Sample Size</entry>
+              <entry>609</entry>
+              <entry>609</entry>
+              <entry>609</entry>
+              <entry>609</entry>
+            </row>
+          </tbody>
+        
+
+
+</tgroup><caption>Robust t-ratios are in parentheses.</caption>
+</table>
+      
+      <table id="id1168265641119" summary="" frame="topbot" rowsep="0" colsep="0"><title>Results reported in BFS (p. 195).</title><tgroup cols="4">
+          <colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2" align="center"/>
+          <colspec colnum="3" colname="c3" align="center"/>
+          <colspec colnum="4" colname="c4" align="center"/>
+          <tbody>
+            <row>
+              <entry/>
+              <entry/>
+              <entry namest="c3" nameend="c4">MICRO-2</entry>
+            </row>
+            <row rowsep="1">
+              <entry>Variable<sup>a</sup></entry>
+              <entry>Expected sign</entry>
+              <entry>Mean (SD)</entry>
+              <entry>Coefficient(t-value)</entry>
+            </row>
+            <row>
+              <entry>Intercept</entry>
+              <entry>—</entry>
+              <entry>—</entry>
+              <entry>-1.64</entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry>(3.48)</entry>
+            </row>
+            <row>
+              <entry>Selection bias correction</entry>
+              <entry>+</entry>
+              <entry>-0.00</entry>
+              <entry>0.10</entry>
+            </row>
+            <row>
+              <entry>(Predicted residual)</entry>
+              <entry/>
+              <entry>(0.92)</entry>
+              <entry>(1.29)</entry>
+            </row>
+            <row>
+              <entry namest="c1" nameend="c4">Level of calculus attained:</entry>
+            </row>
+            <row>
+              <entry>Math 171A</entry>
+              <entry>+</entry>
+              <entry>0.08</entry>
+              <entry>0.39</entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry>(0.27)</entry>
+              <entry>(1.04)</entry>
+            </row>
+            <row>
+              <entry>Math 172A</entry>
+              <entry>+</entry>
+              <entry>0.02</entry>
+              <entry>-0.18</entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry>(0.13)</entry>
+              <entry>(0.21)</entry>
+            </row>
+            <row>
+              <entry>Math 171B</entry>
+              <entry>+</entry>
+              <entry>0.37</entry>
+              <entry>1.02<sup>b</sup></entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry>(0.48)</entry>
+              <entry>(3.49)</entry>
+            </row>
+            <row>
+              <entry>Math 172B</entry>
+              <entry>+</entry>
+              <entry>0.07</entry>
+              <entry>1.52<sup> b</sup></entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry>(0.25)</entry>
+              <entry>(3.53)</entry>
+            </row>
+            <row>
+              <entry>Math 221A</entry>
+              <entry>+</entry>
+              <entry>0.05</entry>
+              <entry>1.33<sup>c</sup></entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry>(0.22)</entry>
+              <entry>(2.27)</entry>
+            </row>
+            <row>
+              <entry>Math 221B or 222</entry>
+              <entry>+</entry>
+              <entry>0.14)</entry>
+              <entry>0.75<sup>c</sup></entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry>(0.35</entry>
+              <entry>(1.67)</entry>
+            </row>
+            <row>
+              <entry namest="c1" nameend="c4">Grade in last calculus course:</entry>
+            </row>
+            <row>
+              <entry>Math 170</entry>
+              <entry>+</entry>
+              <entry>3.06</entry>
+              <entry>0.36<sup>b</sup></entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry>(0.70)</entry>
+              <entry>(4.36)</entry>
+            </row>
+            <row>
+              <entry>Math 171A</entry>
+              <entry>+</entry>
+              <entry>2.22 </entry>
+              <entry>0.26<sup>c</sup></entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry>(0.86)</entry>
+              <entry>(2.21)</entry>
+            </row>
+            <row>
+              <entry>Math 172A</entry>
+              <entry>+</entry>
+              <entry>2.94</entry>
+              <entry>0.42</entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry>(0.80)</entry>
+              <entry>(1.54)</entry>
+            </row>
+            <row>
+              <entry>Math 171B</entry>
+              <entry>+</entry>
+              <entry>2.62</entry>
+              <entry>0.10<sup>c</sup></entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry>(0.93)</entry>
+              <entry>(1.85)</entry>
+            </row>
+            <row>
+              <entry>Math 172B</entry>
+              <entry>+</entry>
+              <entry>2.63</entry>
+              <entry>-0.01</entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry>(0.90)</entry>
+              <entry>(0.10)</entry>
+            </row>
+            <row>
+              <entry>Math 221A</entry>
+              <entry>+</entry>
+              <entry>3.10</entry>
+              <entry>-0.09</entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry>(0.77)</entry>
+              <entry>(0.55)</entry>
+            </row>
+            <row>
+              <entry>Math 221B or 222</entry>
+              <entry>+</entry>
+              <entry>3.15</entry>
+              <entry>0.11</entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry>(0.76)</entry>
+              <entry>(1.04)</entry>
+            </row>
+            <row>
+              <entry>Grade deflator of instructor in intermediate theory </entry>
+              <entry>+</entry>
+              <entry>-0.16</entry>
+              <entry>0.88b</entry>
+            </row>
+            <row>
+              <entry>course</entry>
+              <entry/>
+              <entry>(0.27)</entry>
+              <entry>(8.28)</entry>
+            </row>
+            <row>
+              <entry>Taken in Sophomore year</entry>
+              <entry>?</entry>
+              <entry>0.32</entry>
+              <entry>0.07</entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry>(0.47)</entry>
+              <entry>(0.94)</entry>
+            </row>
+            <row>
+              <entry>Taken in Senior year</entry>
+              <entry>-</entry>
+              <entry>0.06</entry>
+              <entry>-0.02</entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry>(0.24)</entry>
+              <entry>(0.13)</entry>
+            </row>
+            <row>
+              <entry>MICRO-1 and MICRO-2 in same academic year</entry>
+              <entry>+</entry>
+              <entry>0.35</entry>
+              <entry>0.04</entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry>(0.48)</entry>
+              <entry>(0.46)</entry>
+            </row>
+            <row>
+              <entry>At least one semester between MICRO-1 and </entry>
+              <entry>-</entry>
+              <entry>0.27</entry>
+              <entry>0.13</entry>
+            </row>
+            <row>
+              <entry>MICRO-2</entry>
+              <entry/>
+              <entry>(0.44)</entry>
+              <entry>(1.85)</entry>
+            </row>
+            <row>
+              <entry>Grade in MACRO-1</entry>
+              <entry>+</entry>
+              <entry>2.73</entry>
+              <entry>0.20<sup>b</sup></entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry>(0.73)</entry>
+              <entry>(3.93)</entry>
+            </row>
+            <row>
+              <entry>Grade in MICRO-1</entry>
+              <entry>+</entry>
+              <entry>2.67</entry>
+              <entry>0.29<sup>b</sup></entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry>(0.74)</entry>
+              <entry>(5.93)</entry>
+            </row>
+            <row>
+              <entry namest="c1" nameend="c4">Instructor's grade deflator:</entry>
+            </row>
+            <row>
+              <entry namest="c1" nameend="c4"/>
+            </row>
+            <row>
+              <entry>MACRO-1</entry>
+              <entry>-</entry>
+              <entry>-0.32</entry>
+              <entry>-0.33<sup>c</sup></entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry>(0.20)</entry>
+              <entry>(2.20)</entry>
+            </row>
+            <row>
+              <entry>MICRO-1</entry>
+              <entry>-</entry>
+              <entry>-0.29</entry>
+              <entry>-0.11</entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry>(0.16)</entry>
+              <entry>(0.53)</entry>
+            </row>
+            <row>
+              <entry>Class size (intermediate theory course)</entry>
+              <entry>?</entry>
+              <entry>28.2</entry>
+              <entry>-0.002</entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry>(5.5)</entry>
+              <entry>(0.45)</entry>
+            </row>
+            <row>
+              <entry>Freshman Grade Point Average</entry>
+              <entry>+</entry>
+              <entry>2.79</entry>
+              <entry>0.29<sup>b</sup></entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry>(0.46)</entry>
+              <entry>(3.04)</entry>
+            </row>
+            <row>
+              <entry>Sex (female = 1; male = 0)</entry>
+              <entry>?</entry>
+              <entry>0.39</entry>
+              <entry>0.13<sup>c</sup></entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry>(0.49)</entry>
+              <entry>(2.09)</entry>
+            </row>
+            <row>
+              <entry>SAT-Math score x 10<sup>-2</sup></entry>
+              <entry>+</entry>
+              <entry>6.25</entry>
+              <entry>0.12<sup>c</sup></entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry>(0.60)</entry>
+              <entry>(1.75)</entry>
+            </row>
+            <row>
+              <entry>SAT-Verbal score x 10<sup>-2</sup></entry>
+              <entry>+</entry>
+              <entry>5.56</entry>
+              <entry>0.04</entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry>(0.67)</entry>
+              <entry>(0.78)</entry>
+            </row>
+            <row>
+              <entry namest="c1" nameend="c4">OVERALL RESULTS</entry>
+            </row>
+            <row>
+              <entry>Mean (SD) of dependent variable</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>Adjusted R<sup>2</sup></entry>
+              <entry/>
+              <entry>0.44</entry>
+              <entry/>
+            </row>
+            <row>
+              <entry>Number of observations</entry>
+              <entry/>
+              <entry>609</entry>
+              <entry/>
+            </row>
+          </tbody>
+        </tgroup>
+      <caption><sup>a</sup> Omitted reference groups in MICRO-2 regression: attained Math 170; took MICRO-2 in Junior year; took MICRO-1 in spring, MICRO-2 next fall.
+<sup>b</sup> Significant at 0.01 level, one- or two-tailed test as appropriate.
+<sup>c</sup> Significant at 0.05 level, one- or two-tailed test as appropriate.</caption></table>
+      
+      
+      
+    </section>
+    <section id="eip-5"><title>Exercises</title><exercise id="eip-135"><problem id="eip-604">
+		<para id="eip-398">
+Quite often health professionals request that a patient a report their perception of their health status on a scale of 0 to 10, where 0 is the lowest possible health status and 10 is the highest health status. This type of data set is best analyzed using ordered probit. In this exercise you will analyze a data set of responses to a survey made in Germany between 1984 and 1995. The question we are interested in analyzing is the respondent’s perception of their own health status.  </para>
+</problem></exercise><para id="eip-582">The file <link resource="Riphahn, Wambach, Million data.xls" window="new">Riphahn, Wambach, Million data.xls</link> is an MS Excel file that contains 27,326 observations on 25 variables, one observation per line. The data are from Riphahn, Wambach, and Million (2003) and are also available on the <link url="http://qed.econ.queensu.ca/jae/2003-v18.4/riphahn-wambach-million/" window="new">web</link>. The variables are defined in Table 10. As a first step you will need to load these data into Stata. However, due to the large sample size you will need to first expand the size of the memory that is available to Stata with the command: <emphasis effect="bold">. set memory 1G</emphasis>. Here I have increased the memory to 1 gigabyte. This amount may be overkill but it seemed to be big enough on my computer to handle the data.</para><table id="eip-347" summary="Definitions of the variables included in the German health survey data set." frame="topbot" rowsep="0" colsep="0"><title>Variables in the German Socioeconomic Panel Data Set.</title>
+<tgroup cols="3"><colspec colname="col1" colnum="1" colwidth="0.5in"/>
+    <colspec colname="col2" colnum="2" colwidth="0.75in"/>
+    <colspec colname="col3" colnum="3" colwidth="5in"/>
+<tbody>
+  <row rowsep="1" valign="bottom">
+    <entry align="center">Column</entry>
+    <entry>Variable</entry>
+    <entry>Variable definition</entry>
+  </row>
+  <row>
+    <entry align="center">A</entry>
+    <entry>ID</entry>
+    <entry>individual's ID number</entry>
+  </row>
+  <row>
+    <entry align="center">B</entry>
+    <entry>Female</entry>
+    <entry>female = 1; male = 0</entry>
+  </row>
+  <row>
+    <entry align="center">C</entry>
+    <entry>Year</entry>
+    <entry>calendar year of the observation </entry>
+  </row>
+  <row>
+    <entry align="center">D</entry>
+    <entry>Age</entry>
+    <entry>age in years </entry>
+  </row>
+  <row>
+    <entry align="center">E</entry>
+    <entry>HSAT</entry>
+    <entry>health satisfaction, coded 0 (low) - 10 (high)</entry>
+  </row>
+  <row>
+    <entry align="center">F</entry>
+    <entry>Handdum </entry>
+    <entry>handicapped = 1; otherwise = 0</entry>
+  </row>
+  <row>
+    <entry align="center">G</entry>
+    <entry>Handper </entry>
+    <entry>degree of handicap in percent (0 - 100)</entry>
+  </row>
+  <row>
+    <entry align="center">H</entry>
+    <entry>HhnINC </entry>
+    <entry>household nominal monthly net income in German marks / 1000</entry>
+  </row>
+  <row>
+    <entry align="center">I</entry>
+    <entry>HHKIDS </entry>
+    <entry>children under age 16 in the household = 1; otherwise = 0</entry>
+  </row>
+  <row>
+    <entry align="center">J</entry>
+    <entry>Educ</entry>
+    <entry>years of schooling </entry>
+  </row>
+  <row>
+    <entry align="center">K</entry>
+    <entry>Married</entry>
+    <entry>married = 1; otherwise = 0</entry>
+  </row>
+  <row>
+    <entry align="center">L</entry>
+    <entry>Haupts</entry>
+    <entry>highest schooling degree is Hauptschul degree = 1; otherwise = 0</entry>
+  </row>
+  <row>
+    <entry align="center">M</entry>
+    <entry>Reals </entry>
+    <entry>highest schooling degree is Realschul degree = 1; otherwise = 0</entry>
+  </row>
+  <row>
+    <entry align="center">N</entry>
+    <entry>FachHS </entry>
+    <entry>highest schooling degree is Polytechnical degree = 1; otherwise = 0</entry>
+  </row>
+  <row>
+    <entry align="center">O</entry>
+    <entry>Abitur</entry>
+    <entry>highest schooling degree is Abitur = 1; otherwise = 0</entry>
+  </row>
+  <row>
+    <entry align="center">P</entry>
+    <entry>Univ</entry>
+    <entry>highest schooling degree is university degree = 1; otherwise = 0</entry>
+  </row>
+  <row>
+    <entry align="center">Q</entry>
+    <entry>Working </entry>
+    <entry>employed = 1; otherwise = 0</entry>
+  </row>
+  <row>
+    <entry align="center">R</entry>
+    <entry>BlueC </entry>
+    <entry>blue collar employee = 1; otherwise = 0</entry>
+  </row>
+  <row>
+    <entry align="center">S</entry>
+    <entry>WhiteC</entry>
+    <entry>white collar employee = 1; otherwise = 0</entry>
+  </row>
+  <row>
+    <entry align="center">T</entry>
+    <entry>Self</entry>
+    <entry>self employed = 1; otherwise = 0</entry>
+  </row>
+  <row>
+    <entry align="center">U</entry>
+    <entry>Beamt </entry>
+    <entry>civil servant = 1; otherwise = 0</entry>
+  </row>
+  <row>
+    <entry align="center">V</entry>
+    <entry>DocVis </entry>
+    <entry>number of doctor visits in last three months </entry>
+  </row>
+  <row>
+    <entry align="center">W</entry>
+    <entry>HospVis </entry>
+    <entry>number of hospital visits in last calendar year </entry>
+  </row>
+  <row>
+    <entry align="center">X</entry>
+    <entry>Public </entry>
+    <entry>insured in public health insurance = 1; otherwise = 0</entry>
+  </row>
+  <row>
+    <entry align="center">Y</entry>
+    <entry>Addon </entry>
+    <entry>insured by add-on insurance = 1; otherwise = 0</entry>
+  </row>
+</tbody>
+
+
+</tgroup>
+</table><para id="eip-214"><figure id="Rfigure11"><media id="rfig11" alt="Distribution of health status responses.">
+    <image mime-type="image/jpeg" src="../../media/R Figure 1 Exercise 1.jpg"/>
+  </media>
+  
+<caption>Distribution of responses on health status.
+  </caption></figure>
+</para><para id="eip-810">One of the major problems with survey indices is that the numbers seem to mean different things to respondents. One way to reduce this problem is to collapse the index into fewer outcomes by combining some of the responses together. However, anyway we do this is going to be ad hoc. Figure 6 shows a histogram of the responses to this question. Based on this graph, we will create 5 categories—(0) HSat = 0, 1, or 2; (1) HSat = 3, 4 or 5; (2) HSat = 6, 7, or 8; (3) HSat = 9; and (4) HSat = 10. We can create a new categorical variable called hsatnew with the command:</para><para id="eip-126"><emphasis effect="bold">. recode hsat (0/2 = 0) (3/5 = 1) (6/8 = 2) (9 = 3) (10 = 4), generate(hsatnew)</emphasis></para><para id="eip-23">Figure 7 shows the histogram of the new variable.</para><para id="eip-523"><figure id="Rfigure21">
+  <title/>
+  <media id="rfig21" alt="The collapsed distribution of health status responses.">
+    <image mime-type="image/jpeg" src="../../media/R Figure 2 Exercise 1.jpg"/>
+  </media>
+  <caption>
+     The collapsed distribution of health status responses.
+  </caption>
+</figure>
+</para><list id="eip-597" list-type="enumerated" number-style="lower-alpha"><item>Create a table of summary statistics for (1) health status, (2) age, (3) household income, (4) years of education, (5) marital status, and (6) number of children by year and sex. (You might want to use the command <emphasis effect="bold">.bysort year female, list of variables</emphasis>).</item>
+<item>Estimate an ordered probit regression for 1988 for health status (the new variable) using age, income, education, married, and kids as the explanatory variables. Here you might want to used the command: <emphasis effect="bold">.oprobit hsatnew  age hninc educ married hhkids if year==1988</emphasis>.</item>
+<item>Use the predict newvariable, xb command to calculate the predicted mean values for each individual for the 1988 observations. Compare this histogram to one using the 1988 regression parameters to estimate xb for all years.</item>
+<item>Estimate the ordered probit model for all of the years in the sample and put the results into a table like <link resource="Tables for ordered probit discussion.doc">Table 11</link>. (Here you might want to make use of the command: <emphasis effect="bold">.bysort year: oprobit hsatnew varlist)</emphasis></item></list><table id="eip-293" summary="This is a mock up of how the table for part (d) of Exercise should look like." rowsep="0" colsep="0" frame="topbot"><title>Sample table for part (d) of Exercise 1.</title>
+<tgroup cols="8"><colspec colname="col1" colnum="1" colwidth="0.8in"/>
+    <colspec colname="col2" colnum="2" colwidth="0.8in"/>
+    <colspec colname="col3" colnum="3" colwidth="0.8in"/>
+    <colspec colname="col4" colnum="4" colwidth="0.8in"/>
+    <colspec colname="col5" colnum="5" colwidth="0.8in"/>
+    <colspec colname="col6" colnum="6" colwidth="0.8in"/>
+    <colspec colname="col7" colnum="7" colwidth="0.8in"/>
+    <colspec colname="col8" colnum="8" colwidth="0.8in"/>
+<tbody>
+  <row rowsep="1">
+    <entry>Variable</entry>
+    <entry align="center">1984</entry>
+    <entry align="center">1985</entry>
+    <entry align="center">1986</entry>
+    <entry align="center">1987</entry>
+    <entry align="center">1988</entry>
+    <entry align="center">1991</entry>
+    <entry align="center">1994</entry>
+  </row>
+  <row>
+    <entry>age</entry>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+  </row>
+  <row>
+    <entry>income</entry>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+  </row>
+  <row>
+    <entry>education</entry>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+  </row>
+  <row>
+    <entry>married</entry>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+  </row>
+  <row>
+    <entry>kids</entry>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+  </row>
+  <row>
+    <entry>_cut1</entry>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+  </row>
+  <row>
+    <entry>_cut2</entry>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+  </row>
+  <row>
+    <entry>_cut3</entry>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+  </row>
+  <row rowsep="4">
+    <entry>_cut4</entry>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+  </row>
+  <row>
+    <entry>Observations</entry>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+  </row>
+  <row>
+    <entry>LR χ<sup>2</sup>(5)</entry>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+  </row>
+  <row>
+    <entry>Prob &gt; χ<sup>2</sup></entry>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+  </row>
+  <row>
+    <entry>Log likelihood</entry>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+  </row>
+  <row>
+    <entry>Pseudo-R<sup>2</sup></entry>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+    <entry/>
+  </row>
+</tbody>
+
+
+
+</tgroup><caption>t-ratios are in parentheses.</caption>
+</table></section><section id="id1168245250923">
+      <title>References</title>
+      <para id="id1168250304774">Amemiya, T. (1985). <emphasis effect="italics">Advanced Econometrics</emphasis> (Cambridge, MA: Harvard University Press). </para>
+      <para id="id1168254482616">Bourguignon, François, Martin Fournier, and Marc Gurgand (2007). Selection bias corrections based on the multinomial logit model: Monte Carlo comparisons. <emphasis effect="italics">Journal of Economic Surveys</emphasis> <emphasis effect="bold">21</emphasis>(1): 174-205.</para>
+      <para id="id1168257504683">Butler, J. S., T. Aldrich Finegan, and John J. Siegfried (1998). Does more calculus improve student learning in intermediate micro- and macroeconomic theory?" <emphasis effect="italics">Journal of Applied Econometrics</emphasis> <emphasis effect="bold">13</emphasis>(2): 185-202.</para>
+      <para id="id1168252544408">Chiburis, Richard and Michael Lokshin (2007). Maximum likelihood and two–step estimation of an ordered–probit selection model. <emphasis effect="italics">The Stata Journal</emphasis> <emphasis effect="bold">7</emphasis>(2): 167-182.</para>
+      <para id="id1168241164857">Dahl, Gordon B. (2002). Mobility and the returns to education: testing a roy model with multiple markets. <emphasis effect="italics">Econometrica </emphasis><emphasis effect="bold">70</emphasis>(6): 2367–2420.</para>
+      <para id="id1168234016333">Dubin, Jeffrey A. and Daniel L. McFadden (1984). An econometric analysis of residential electric appliance holdings and consumption. <emphasis effect="italics">Econometrica </emphasis><emphasis effect="bold">52</emphasis>(2): 345–362.</para>
+      <para id="id1168247417283">Greene, William H. (1990). <emphasis effect="italics">Econometric Analysis</emphasis> (New York: Macmillan Publishing Company).</para>
+      <para id="id1168243970786">Heckman, James J. (1979). Sample selection bias as a specification error. <emphasis effect="italics">Econometrica </emphasis><emphasis effect="bold">47</emphasis>(1): 153–161.</para>
+      <para id="id1168234410814">Jimenez, Emmanuel and Bernardo Kugler (1987). The earnings impact of training duration in a developing country an ordered probit selection model of Colombia's <emphasis effect="italics">Servicio Nacional de Aprendizaje </emphasis>(SENA). <emphasis effect="italics">Journal of Human Resources</emphasis> <emphasis effect="bold">22</emphasis>(2): 230-233.</para>
+      <para id="id1168245976689">Lee, Lung-Fei (1983). Generalized econometric models with selectivity. <emphasis effect="italics">Econometrica </emphasis><emphasis effect="bold">51</emphasis>(2): 507–512.</para>
+      <para id="id1168245814243">Maddala, G. S. (1983). <emphasis effect="italics">Limited-Dependent and Qualitative Variables in Econometrics</emphasis> (Cambridge: Cambridge University Press). </para>
+      <para id="id1168242407242">Main, B. and B. Reilly (1993). The employer size-wage gap: Evidence for Britain. <emphasis effect="italics">Economica</emphasis> <emphasis effect="bold">60</emphasis>: 125–142.</para>
+      <para id="id1168237187467">McFadden, Daniel L. (1973). Conditional logit analysis of qualitative choice behavior. In P. Zarembka (ed.) <emphasis effect="italics">Frontiers in Econometrics</emphasis> (New York: Academic Press).</para>
+      <para id="id1168239831007">Newey, W. K. and Daniel L. McFadden (1994). Large sample estimation and hypothesis testing. In R. F. Engle and Daniel L. McFadden (eds.) <emphasis effect="italics">Handbook of Econometrics,</emphasis> vol. IV (Amsterdam: North Holland).</para>
+      <para id="eip-491">Riphahn, Regina T., Achim Wambach, and Andreas Million (2003). Incentive effects in the demand for health care: a bivariate panel count data estimation. <emphasis effect="italics">Journal of Applied Econometrics</emphasis> <emphasis effect="bold">18</emphasis>(4): 387-405</para><para id="id1168250283318">Schmertmann, Carl P. (1994). Selectivity bias correction methods in polychotomous sample selection models. <emphasis effect="italics">Journal of Econometrics </emphasis><emphasis effect="bold">60</emphasis>(1): 101–132.</para>
+      <para id="id1168260951761">Vella, Francis (1998). Estimating models with sample selection bias. <emphasis effect="italics">The Journal of Human Resources</emphasis> <emphasis effect="bold">33</emphasis>(1): 127-169.</para>
+    </section>
+  </content>
+</document>

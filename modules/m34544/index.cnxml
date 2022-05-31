@@ -1,0 +1,2950 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML">
+  <title>Analysis of time series</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m34544</md:content-id>
+  <md:title>Analysis of time series</md:title>
+  <md:abstract>This module provides a cursory introduction to the techniques used in the analysis of time series that is intended for advanced undergraduates.</md:abstract>
+  <md:uuid>07e1cac0-51d9-4fdb-be80-77a17125a484</md:uuid>
+</metadata>
+<featured-links>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit below.
+       Changes to the links section in the source will not be saved. -->
+    <link-group type="supplemental">
+      <link url="http://cnx.org/content/m34535/latest/" strength="3">Statistical terminology</link>
+    </link-group>
+  <!-- WARNING! The 'featured-links' section is read only. Do not edit above.
+       Changes to the links section in the source will not be saved. -->
+</featured-links>
+<content>
+    <section id="id1165176433980">
+      <title>Analysis of Time-Series </title>
+      <section id="id1165183418134">
+        <title>Introduction</title>
+        <para id="id1165196418745">This module offers a brief introduction of some of the issues that arise in the analysis of time-series. Most of the topics covered are those that we attacked first by statisticians and economists. As such they do not demand the more sophisticated tools used by the more modern approaches to time-series. In spite of these shortcomings, they should give you some understanding of the issues that arise with the use of times-series in econometric analyses. One final note of explanation is necessary. These notes are designed to give you a brief introduction to how <emphasis effect="italics">Stata</emphasis> handles time-series data. These notes are not a substitute for reading the <emphasis effect="italics">Stata</emphasis> manual, completing a forecasting course, or reading standard texts on the rather complicated field.</para>
+      </section>
+      <section id="id1165192560514">
+        <title>Time-series analysis in <emphasis effect="italics">Stata</emphasis></title>
+        <para id="id1165183300879">Throughout this module we work with US macroeconomic data included in the MS Excel file <link resource="Macro data.xls" window="new">Macro data.xls</link>. The variables are real level of investments (RINV), real gross national product (RGNP), and real interest rate (RINTRATE). The real interest rate is approximated by the difference between the nominal interest rate and the rate of change of the price index from the previous year. The data are for the years 1963 to 1982. You can replicate the analysis done here by copying this data set into a <emphasis effect="italics">Stata</emphasis> file.</para>
+        <para id="id1165183461514">The first step after entering the data set into <emphasis effect="italics">Stata</emphasis>, is to declare that the data set is a time-series. The command to do this is:</para>
+        <para id="id1165173826520">
+          <emphasis effect="bold">. tsset year</emphasis>
+        </para>
+        <para id="id7827682">The data set can be broken into any number of time periods including daily, weekly, monthly, quarterly, halfyearly, yearly and generic.<footnote id="id1165175339216"> See StataCorp [2003:119-130] for more detail on this command.</footnote></para>
+        <para id="id1165178119868">Assume that we want to estimate the following regression:</para>
+        
+        <equation id="eip-470"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>R</m:mi><m:mi>I</m:mi><m:mi>N</m:mi><m:msub>
+    <m:mi>V</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:mi>R</m:mi><m:mi>G</m:mi><m:mi>N</m:mi><m:msub>
+    <m:mi>P</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>2</m:mn>
+   </m:msub>
+   <m:mi>R</m:mi><m:mi>I</m:mi><m:mi>N</m:mi><m:mi>T</m:mi><m:mi>R</m:mi><m:mi>A</m:mi><m:mi>T</m:mi><m:msub>
+    <m:mi>E</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamOuaiaadMeacaWGobGaamOvamaaBaaaleaacaWG0baabeaakiabg2da9iabek7aInaaBaaaleaacaaIWaaabeaakiabgUcaRiabek7aInaaBaaaleaacaaIXaaabeaakiaadkfacaWGhbGaamOtaiaadcfadaWgaaWcbaGaamiDaaqabaGccqGHRaWkcqaHYoGydaWgaaWcbaGaaGOmaaqabaGccaWGsbGaamysaiaad6eacaWGubGaamOuaiaadgeacaWGubGaamyramaaBaaaleaacaWG0baabeaakiabgUcaRiabew7aLnaaBaaaleaacaWG0baabeaaaaa@54DD@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation><para id="id1165183141123">using the data set in the appendix. Figure 1 shows this regression command and the resultant output.</para>
+        <para id="eip-774"><figure id="figure1"><media id="fig01" alt="Stata output of an OLS regression of equation (1).">
+    <image mime-type="image/jpeg" src="../../media/TS Figure 1.jpg"/>
+  </media>
+  
+<caption>OLS estimates for Equation (1).</caption></figure>
+</para><para id="id1165183394702">On the surface the estimates seem “reasonable” because the signs on the two explanatory variables are what theory predicts they should be and the parameter for real GNP is statistically different from zero. However, an examination of the residuals shown in Figure 2 suggest that the error terms might exhibit autocorrelation.</para>
+        <para id="id8675584"><figure id="figure2"><media id="fig02" alt="Graph of the residuals of the OLS estimation of Equation (1).">
+    <image mime-type="image/jpeg" src="../../media/TS Figure 2.jpg"/>
+  </media>
+  
+<caption>The residuals appear to be autocorrelated.
+  </caption></figure>
+        
+</para>
+        
+        
+        <para id="id1165178894403">There are several issues that arise here. First, what sort of models can we use to account for autocorrelation? Second, what sorts of tests exist for detecting the existence of autocorrelation? We begin with the first of these questions by introducing the concept of first-order autocorrelation. Consider the following model:</para>
+        
+        <equation id="eip-376"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:msub>
+    <m:mi>x</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWG0baabeaakiabg2da9iabek7aInaaBaaaleaacaaIWaaabeaakiabgUcaRiabek7aInaaBaaaleaacaaIXaaabeaakiaadIhadaWgaaWcbaGaamiDaaqabaGccqGHRaWkcqaH1oqzdaWgaaWcbaGaamiDaaqabaGccaGGUaaaaa@45C1@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation><para id="id1165174397401">We say that this model exhibits first-order autocorrelation if the error terms can be written as:</para>
+        
+        <equation id="eip-423"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ε</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:mi>ρ</m:mi><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>μ</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqyTdu2aaSbaaSqaaiaadshaaeqaaOGaeyypa0JaeqyWdiNaeqyTdu2aaSbaaSqaaiaadshacqGHsislcaaIXaaabeaakiabgUcaRiabeY7aTnaaBaaaleaacaWG0baabeaakiaacYcaaaa@4484@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation><para id="id1165174358135">where <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>μ</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>~</m:mo><m:mi>N</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mn>0</m:mn><m:mo>,</m:mo><m:msup>
+      <m:mi>σ</m:mi>
+      <m:mn>2</m:mn>
+     </m:msup>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqiVd02aaSbaaSqaaiaadshaaeqaaOGaaiOFaiaad6eadaqadaqaaiaaicdacaGGSaGaeq4Wdm3aaWbaaSqabeaacaaIYaaaaaGccaGLOaGaayzkaaGaaiOlaaaa@4108@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+
+ Equation (3) implies that the error terms in (2) are correlated with each other. It is rather easy to show that, while the estimates of the unknown parameters are unbiased, the estimates of the standard errors are biased—downward if <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mn>1</m:mn><m:mo>&gt;</m:mo><m:mi>ρ</m:mi><m:mo>&gt;</m:mo><m:mn>0</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaaGymaiabg6da+iabeg8aYjabg6da+iaaicdaaaa@3B39@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and upward if <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mo>−</m:mo><m:mn>1</m:mn><m:mo>&lt;</m:mo><m:mi>ρ</m:mi><m:mo>&lt;</m:mo><m:mn>0.</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeyOeI0IaaGymaiabgYda8iabeg8aYjabgYda8iaaicdacaGGUaaaaa@3CD0@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+This conclusion holds as long as the source of the autocorrelation is due to (3). If, on the other hand, the source of autocorrelation among the error terms in (2) is due to omitted explanatory variables (whose effects are absorbed in the error term), we have a potentially more serious problem. In particular, if the omitted explanatory variables are correlated with the included explanatory variables (as is often true in time-series), then the estimates of the unknown slope parameters are also biased.</para>
+        
+        <para id="id1165177995132">For the moment we will assume that Equations (2) and (3) are true representations of the world. What then can we do to estimate (2)? What we need to do is find a way to transform (2) so that the error term of whatever regression we estimate does not exhibit autocorrelation. In time period <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadshacqGHsislcaaIXaaaaa@388A@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ we have:</para>
+        
+        <equation id="eip-671"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:msub>
+    <m:mi>x</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWG0bGaeyOeI0IaaGymaaqabaGccqGH9aqpcqaHYoGydaWgaaWcbaGaaGimaaqabaGccqGHRaWkcqaHYoGydaWgaaWcbaGaaGymaaqabaGccaWG4bWaaSbaaSqaaiaadshacqGHsislcaaIXaaabeaakiabgUcaRiabew7aLnaaBaaaleaacaWG0bGaeyOeI0IaaGymaaqabaGccaGGUaaaaa@4AB9@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation><para id="id1165184726665">Multiply (4) by <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mi>ρ</m:mi>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqyWdihaaa@37B4@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ to get:</para>
+        
+        <equation id="eip-608"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>ρ</m:mi><m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:mi>ρ</m:mi><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   <m:mo>+</m:mo><m:mi>ρ</m:mi><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:msub>
+    <m:mi>x</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:mi>ρ</m:mi><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqyWdiNaamyEamaaBaaaleaacaWG0bGaeyOeI0IaaGymaaqabaGccqGH9aqpcqaHbpGCcqaHYoGydaWgaaWcbaGaaGimaaqabaGccqGHRaWkcqaHbpGCcqaHYoGydaWgaaWcbaGaaGymaaqabaGccaWG4bWaaSbaaSqaaiaadshacqGHsislcaaIXaaabeaakiabgUcaRiabeg8aYjabew7aLnaaBaaaleaacaWG0bGaeyOeI0IaaGymaaqabaGccaGGUaaaaa@51B9@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation><para id="id2330163">Now subtracting (5) from (4) gives: </para>
+        
+        
+        
+        <para id="eip-278"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>−</m:mo><m:mi>ρ</m:mi><m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:msub>
+    <m:mi>x</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>−</m:mo><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mi>ρ</m:mi><m:msub>
+      <m:mi>β</m:mi>
+      <m:mn>0</m:mn>
+     </m:msub>
+     <m:mo>+</m:mo><m:mi>ρ</m:mi><m:msub>
+      <m:mi>β</m:mi>
+      <m:mn>1</m:mn>
+     </m:msub>
+     <m:msub>
+      <m:mi>x</m:mi>
+      <m:mrow>
+       <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+      </m:mrow>
+     </m:msub>
+     <m:mo>+</m:mo><m:mi>ρ</m:mi><m:msub>
+      <m:mi>ε</m:mi>
+      <m:mrow>
+       <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWG0baabeaakiabgkHiTiabeg8aYjaadMhadaWgaaWcbaGaamiDaiabgkHiTiaaigdaaeqaaOGaeyypa0JaeqOSdi2aaSbaaSqaaiaaicdaaeqaaOGaey4kaSIaeqOSdi2aaSbaaSqaaiaaigdaaeqaaOGaamiEamaaBaaaleaacaWG0baabeaakiabgUcaRiabew7aLnaaBaaaleaacaWG0baabeaakiabgkHiTmaabmaabaGaeqyWdiNaeqOSdi2aaSbaaSqaaiaaicdaaeqaaOGaey4kaSIaeqyWdiNaeqOSdi2aaSbaaSqaaiaaigdaaeqaaOGaamiEamaaBaaaleaacaWG0bGaeyOeI0IaaGymaaqabaGccqGHRaWkcqaHbpGCcqaH1oqzdaWgaaWcbaGaamiDaiabgkHiTiaaigdaaeqaaaGccaGLOaGaayzkaaaaaa@6280@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ </para><para id="eip-560">or, equivalently, </para><para id="eip-901"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>y</m:mi>
+      <m:mi>t</m:mi>
+     </m:msub>
+     <m:mo>−</m:mo><m:mi>ρ</m:mi><m:msub>
+      <m:mi>y</m:mi>
+      <m:mrow>
+       <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   <m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mn>1</m:mn><m:mo>−</m:mo><m:mi>ρ</m:mi>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>x</m:mi>
+      <m:mi>t</m:mi>
+     </m:msub>
+     <m:mo>−</m:mo><m:mi>ρ</m:mi><m:msub>
+      <m:mi>x</m:mi>
+      <m:mrow>
+       <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>+</m:mo><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>ε</m:mi>
+      <m:mi>t</m:mi>
+     </m:msub>
+     <m:mo>−</m:mo><m:mi>ρ</m:mi><m:msub>
+      <m:mi>ε</m:mi>
+      <m:mrow>
+       <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaWaaeWaaeaacaWG5bWaaSbaaSqaaiaadshaaeqaaOGaeyOeI0IaeqyWdiNaamyEamaaBaaaleaacaWG0bGaeyOeI0IaaGymaaqabaaakiaawIcacaGLPaaacqGH9aqpcqaHYoGydaWgaaWcbaGaaGimaaqabaGcdaqadaqaaiaaigdacqGHsislcqaHbpGCaiaawIcacaGLPaaacqGHRaWkcqaHYoGydaWgaaWcbaGaaGymaaqabaGcdaqadaqaaiaadIhadaWgaaWcbaGaamiDaaqabaGccqGHsislcqaHbpGCcaWG4bWaaSbaaSqaaiaadshacqGHsislcaaIXaaabeaaaOGaayjkaiaawMcaaiabgUcaRmaabmaabaGaeqyTdu2aaSbaaSqaaiaadshaaeqaaOGaeyOeI0IaeqyWdiNaeqyTdu2aaSbaaSqaaiaadshacqGHsislcaaIXaaabeaaaOGaayjkaiaawMcaaiaac6caaaa@637B@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ </para><para id="eip-482">Let </para><para id="eip-347"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:msubsup>
+    <m:mi>y</m:mi>
+    <m:mi>t</m:mi>
+    <m:mo>∗</m:mo>
+   </m:msubsup>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>−</m:mo><m:mi>ρ</m:mi><m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaDaaaleaacaWG0baabaGaey4fIOcaaOGaeyypa0JaamyEamaaBaaaleaacaWG0bGaeyOeI0IaaGymaaqabaGccqGHsislcqaHbpGCcaWG5bWaaSbaaSqaaiaadshacqGHsislcaaIXaaabeaakiaacYcaaaa@451D@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ </para><para id="eip-124"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:msubsup>
+    <m:mi>β</m:mi>
+    <m:mn>0</m:mn>
+    <m:mo>∗</m:mo>
+   </m:msubsup>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   <m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mn>1</m:mn><m:mo>−</m:mo><m:mi>ρ</m:mi>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqOSdi2aa0baaSqaaiaaicdaaeaacqGHxiIkaaGccqGH9aqpcqaHYoGydaWgaaWcbaGaaGimaaqabaGcdaqadaqaaiaaigdacqGHsislcqaHbpGCaiaawIcacaGLPaaacaGGSaaaaa@42AC@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ </para><para id="eip-919">and</para><para id="eip-60"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:msubsup>
+    <m:mi>x</m:mi>
+    <m:mi>t</m:mi>
+    <m:mo>∗</m:mo>
+   </m:msubsup>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>x</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>−</m:mo><m:mi>ρ</m:mi><m:msub>
+    <m:mi>x</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamiEamaaDaaaleaacaWG0baabaGaey4fIOcaaOGaeyypa0JaamiEamaaBaaaleaacaWG0bGaeyOeI0IaaGymaaqabaGccqGHsislcqaHbpGCcaWG4bWaaSbaaSqaaiaadshacqGHsislcaaIXaaabeaakiaac6caaaa@451C@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ </para><para id="eip-104">Remember that (3) implies that <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>μ</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>−</m:mo><m:mi>ρ</m:mi><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqiVd02aaSbaaSqaaiaadshaaeqaaOGaeyypa0JaeqyTdu2aaSbaaSqaaiaadshaaeqaaOGaeyOeI0IaeqyWdiNaeqyTdu2aaSbaaSqaaiaadshacqGHsislcaaIXaaabeaakiaac6caaaa@4491@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ Thus, we have:</para>
+        <equation id="eip-764"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:msubsup>
+    <m:mi>y</m:mi>
+    <m:mi>t</m:mi>
+    <m:mo>∗</m:mo>
+   </m:msubsup>
+   <m:mo>=</m:mo><m:msubsup>
+    <m:mi>β</m:mi>
+    <m:mn>0</m:mn>
+    <m:mo>∗</m:mo>
+   </m:msubsup>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:msubsup>
+    <m:mi>x</m:mi>
+    <m:mi>t</m:mi>
+    <m:mo>∗</m:mo>
+   </m:msubsup>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>μ</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaDaaaleaacaWG0baabaGaey4fIOcaaOGaeyypa0JaeqOSdi2aa0baaSqaaiaaicdaaeaacqGHxiIkaaGccqGHRaWkcqaHYoGydaWgaaWcbaGaaGymaaqabaGccaWG4bWaa0baaSqaaiaadshaaeaacqGHxiIkaaGccqGHRaWkcqaH8oqBdaWgaaWcbaGaamiDaaqabaGccaGGSaaaaa@489E@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation><para id="id1165178947181">where <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>μ</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>~</m:mo><m:mi>N</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mn>0</m:mn><m:mo>,</m:mo><m:msup>
+      <m:mi>σ</m:mi>
+      <m:mn>2</m:mn>
+     </m:msup>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqiVd02aaSbaaSqaaiaadshaaeqaaOGaaiOFaiaad6eadaqadaqaaiaaicdacaGGSaGaeq4Wdm3aaWbaaSqabeaacaaIYaaaaaGccaGLOaGaayzkaaGaaiOlaaaa@4109@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ Thus, we have a regression for which the OLS estimates will be BLUE (Best Linear Unbiased Estimator) if we only knew the true value of <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>ρ</m:mi><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqyWdiNaaiOlaaaa@3866@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</para>
+        <para id="id1165177628302">Cochran and Orcutt [1949] use this algebra to suggest one way to estimate (6). The estimation entails several steps. First, you use OLS to estimate (2). Second, you estimate (3) using the residuals from the first stage to approximate <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ε</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqyTdu2aaSbaaSqaaiaadshaaeqaaOGaaiOlaaaa@397C@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ This regression gives an estimate of <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>ρ</m:mi><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqyWdiNaaiOlaaaa@3866@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ In the third step, you use the estimate of <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mi>ρ</m:mi>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqyWdihaaa@37B4@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ to construct estimates of <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msubsup>
+    <m:mi>y</m:mi>
+    <m:mi>t</m:mi>
+    <m:mo>∗</m:mo>
+   </m:msubsup>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaDaaaleaacaWG0baabaGaey4fIOcaaaaa@3907@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msubsup>
+    <m:mi>x</m:mi>
+    <m:mi>t</m:mi>
+    <m:mo>∗</m:mo>
+   </m:msubsup>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamiEamaaDaaaleaacaWG0baabaGaey4fIOcaaOGaaiOlaaaa@39C2@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ In the fourth step, you use the estimates of <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msubsup>
+    <m:mi>y</m:mi>
+    <m:mi>t</m:mi>
+    <m:mo>∗</m:mo>
+   </m:msubsup>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaDaaaleaacaWG0baabaGaey4fIOcaaaaa@3907@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msubsup>
+    <m:mi>x</m:mi>
+    <m:mi>t</m:mi>
+    <m:mo>∗</m:mo>
+   </m:msubsup>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamiEamaaDaaaleaacaWG0baabaGaey4fIOcaaaaa@3906@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ to estimate (6); this will yield new estimates of <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqOSdi2aaSbaaSqaaiaaicdaaeqaaaaa@387B@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqOSdi2aaSbaaSqaaiaaigdaaeqaaaaa@387C@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+. You then repeat step (2) using these new estimates of <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqOSdi2aaSbaaSqaaiaaicdaaeqaaaaa@387B@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqOSdi2aaSbaaSqaaiaaigdaaeqaaaaa@387C@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ to calculate the residuals and then repeat with steps (3) and (4). You continue the process until the estimate of <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mi>ρ</m:mi>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqyWdihaaa@37B4@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ does not change anymore (i.e., until the change in the estimate of <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mi>ρ</m:mi>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqyWdihaaa@37B4@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ is less than some value chosen by the researcher). There are a multitude of alternative ways of estimating <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>ρ</m:mi><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqyWdiNaaiOlaaaa@3866@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ [See Greene (1990): Chapter 15 for a full discussion of these methods.] Once you have an estimator for <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>ρ</m:mi><m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqyWdiNaaiilaaaa@3864@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ there exist two major ways of completing the estimation—the Cochran-Orcutt procedure described above and the Prais-Winsten (1954) estimator. The latter estimation procedure does not involve dropping the first observation (as does the Cochran-Orcutt) estimator. In large samples these two estimation techniques are likely to be very similar. In small samples the two techniques may produce estimates that are substantially different.
+</para>
+        
+        <para id="id1165182315984">We now turn to the issue of detecting the existence of autocorrelation. In what follows we focus mainly on the detection of first-order autocorrelation as shown in Equation (3). We can use the Durbin-Watson test to see if our suspicions are correct. The Durbin-Watson statistic tests the hypothesis:</para>
+        
+        
+        <equation id="eip-623"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mtable columnalign="left">
+   <m:mtr>
+    <m:mtd>
+     <m:msub>
+      <m:mtext>H</m:mtext>
+      <m:mtext>0</m:mtext>
+     </m:msub>
+     <m:mtext>: </m:mtext><m:mi>ρ</m:mi><m:mo>=</m:mo><m:mn>0</m:mn>
+    </m:mtd>
+   </m:mtr>
+   <m:mtr>
+    <m:mtd>
+     <m:msub>
+      <m:mtext>H</m:mtext>
+      <m:mn>1</m:mn>
+     </m:msub>
+     <m:mtext>: </m:mtext><m:mi>ρ</m:mi><m:mo>≠</m:mo><m:mtext>0</m:mtext>
+    </m:mtd>
+   </m:mtr>
+  </m:mtable>
+  
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGceaqabeaacaqGibWaaSbaaSqaaiaabcdaaeqaaOGaaeOoaiaabccacqaHbpGCcqGH9aqpcaaIWaaabaGaaeisamaaBaaaleaacaaIXaaabeaakiaabQdacaqGGaGaeqyWdiNaeyiyIKRaaeimaaaaaa@43E4@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation><para id="eip-421"><figure id="ID"><media id="fig3" alt="The distribution of the Durbin-Watson statistic falls between two distributions.">
+    <image mime-type="image/jpeg" src="../../media/TS Figure 3.jpg"/>
+  </media>
+<caption>Limiting distributions for the Durbin-Watson statistic.</caption></figure>
+        
+</para><para id="id8726850">The details of the test statistic can be found in any econometrics textbook and need not detain us here. What you need to know about the DW-statistic are (1) it has a mean value of 2; (2) because its distribution lies between two limiting distributions, we need to look at two critical values. For this reason there are two critical values—one for each of the limiting distributions. Figure 3 illustrates the probability distribution function (pdf) for the Durbin-Watson statistic. The true pdf lies somewhere between the blue pdf and the red pdf. What is shown in the figure is the point below which, say, 5 percent of the distribution lies for each distribution. The true critical point lies somewhere between <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>d</m:mi>
+    <m:mi>L</m:mi>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamizamaaBaaaleaacaWGmbaabeaaaaa@37DA@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>d</m:mi>
+    <m:mi>U</m:mi>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamizamaaBaaaleaacaWGvbaabeaaaaa@37E3@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+These values are relevant to testing the null hypothesis of no autocorrelation against the alternative hypothesis of positive autocorrelation <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mrow><m:mo>(</m:mo> <m:mrow>
+    <m:mtext>i</m:mtext><m:mtext>. e</m:mtext><m:mtext>.,</m:mtext>
+   </m:mrow></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaamaabeaabaGaaeyAaiaab6cacaqGGaGaaeyzaiaab6cacaqGSaaacaGLOaaaaaa@3B37@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+<!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mrow> <m:mrow>
+    <m:mi>ρ</m:mi><m:mo>&gt;</m:mo><m:mn>0</m:mn>
+   </m:mrow> <m:mo>)</m:mo></m:mrow><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaWaaeGaaeaacqaHbpGCcqGH+aGpcaaIWaaacaGLPaaacaGGUaaaaa@3AF0@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ </para>
+        
+        <para id="eip-892">If <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>d</m:mi><m:mo>&lt;</m:mo><m:msub>
+    <m:mi>d</m:mi>
+    <m:mi>L</m:mi>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamizaiabgYda8iaadsgadaWgaaWcbaGaamitaaqabaaaaa@39C7@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+, we can reject the null hypothesis of no autocorrelation; if <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>d</m:mi>
+    <m:mi>U</m:mi>
+   </m:msub>
+   <m:mo>&lt;</m:mo><m:mi>d</m:mi><m:mo>&lt;</m:mo><m:mn>4</m:mn><m:mo>−</m:mo><m:msub>
+    <m:mi>d</m:mi>
+    <m:mi>U</m:mi>
+   </m:msub>
+   <m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamizamaaBaaaleaacaWGvbaabeaakiabgYda8iaadsgacqGH8aapcaaI0aGaeyOeI0IaamizamaaBaaaleaacaWGvbaabeaakiaacYcaaaa@3F32@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ we cannot reject the null hypothesis; and if <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>d</m:mi>
+    <m:mi>L</m:mi>
+   </m:msub>
+   <m:mo>&lt;</m:mo><m:mi>d</m:mi><m:mo>&lt;</m:mo><m:msub>
+    <m:mi>d</m:mi>
+    <m:mi>U</m:mi>
+   </m:msub>
+   <m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamizamaaBaaaleaacaWGmbaabeaakiabgYda8iaadsgacqGH8aapcaWGKbWaaSbaaSqaaiaadwfaaeqaaOGaaiilaaaa@3D7E@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ the results of the test are uncertain. Moreover, since the distributions are symmetric around 2 and between 0 and 4, the critical values for the alternative hypothesis of negative autocorrelation <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mrow><m:mo>(</m:mo> <m:mrow>
+    <m:mtext>i</m:mtext><m:mtext>. e</m:mtext><m:mtext>.,</m:mtext>
+   </m:mrow></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaamaabeaabaGaaeyAaiaab6cacaqGGaGaaeyzaiaab6cacaqGSaaacaGLOaaaaaa@3B37@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+<!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mrow> <m:mrow>
+    <m:mi>ρ</m:mi><m:mo>&gt;</m:mo><m:mn>0</m:mn>
+   </m:mrow> <m:mo>)</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaWaaeGaaeaacqaHbpGCcqGH+aGpcaaIWaaacaGLPaaaaaa@3A3E@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+are 4 minus either the upper or lower critical values, as shown in Figure 3. Critical values for the Durbin-Watson statistic can be found in the appendices of most econometric textbooks. 
+</para><para id="id1165176344732"><figure id="Figure4">
+  <title/>
+  <media id="fig4" alt="The distribution of the Durbin-Watson statistic falls between two distributions.">
+    <image mime-type="image/jpeg" src="../../media/TS Figure 4.jpg"/>
+  </media>
+  <caption>
+     Command for calculating the Durbin-Watson statistic in Stata.
+  </caption>
+</figure>
+        
+</para>
+        <para id="id1165184366753">The command for the test and the resultant DW-statistics for the estimate of Equation (2) are shown in Figure 4. The 5 percent level critical values for the Durbin-Watson statistic for a sample size of 19 with two parameters (less the intercept) estimated are 1.074 and 1.536—if the observed value of the DW-statistic is between 1.536 and 2.464, we can accept the null hypothesis that the residuals do not exhibit autocorrelation. Our value of 1.32 falls in the uncertain region where we are not sure if we can or cannot reject the null hypothesis.</para>
+        <para id="eip-302">At this point we can try the Cochran-Orcutt estimate. Figure 5 reports the results of using the Cochran-Orcutt estimation procedure. Notice that it took 7 iterations for the estimate of <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mi>ρ</m:mi>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqyWdihaaa@37B4@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ to converge. If we use the Prais-Winsten estimation technique, we get the results shown in Figure 6. It is reassuring to see that the two estimation techniques do not yield estimates of the standard errors that are substantially different from each other.</para><para id="eip-238"><figure id="figure5">
+  <title/>
+  <media id="fig5" alt="Results from estimating equation (1) using the Cochran-Orcutt adjustment.">
+    <image mime-type="image/jpeg" src="../../media/TS Figure 5.jpg"/>
+  </media>
+  <caption>
+     Estimation of Equation (1) using the Cochran-Orcutt method.
+  </caption>
+</figure>
+</para><para id="eip-223"><figure id="figure6">
+  <title/>
+  <media id="fig6" alt="Estimation of equation (1) using the Prais-Winston estimator.">
+    <image mime-type="image/jpeg" src="../../media/TS Figure 6.jpg"/>
+  </media>
+  <caption>
+     Estimation of Equation (1) using the Prais-Winsten estimator.
+  </caption>
+</figure>
+ </para>
+        <para id="id1165185288350">Using either the Cochran-Orcutt or the Prais-Winstn estimator is dependent on the assumption that the error terms exhibit first-order autocorrelation. Unfortunately, there is no particular reason (from a theoretical viewpoint) to believe in this assumption. Why, for instance, couldn't the error terms of Equation (2) exhibit second-order autocorrelation of the form:</para>
+        
+        <equation id="eip-822"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ε</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>ρ</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:msub>
+    <m:mi>ε</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>ρ</m:mi>
+    <m:mn>2</m:mn>
+   </m:msub>
+   <m:msub>
+    <m:mi>ε</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>2</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>μ</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>?</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqyTdu2aaSbaaSqaaiaadshaaeqaaOGaeyypa0JaeqyWdi3aaSbaaSqaaiaaigdaaeqaaOGaeqyTdu2aaSbaaSqaaiaadshacqGHsislcaaIXaaabeaakiabgUcaRiabeg8aYnaaBaaaleaacaaIYaaabeaakiabew7aLnaaBaaaleaacaWG0bGaeyOeI0IaaGOmaaqabaGccqGHRaWkcqaH8oqBdaWgaaWcbaGaamiDaaqabaGccaGG=aaaaa@4D9B@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation><para id="id1165191574082">There is a more troubling possible explanation for the low Durbin-Watson statistic: the model may be <emphasis effect="bold">misspecified</emphasis>. In particular, there may be important explanatory variables omitted from the regression. These omitted explanatory variables may exhibit autocorrelation and, thus, may be the source of autocorrelation in the error term. If the omitted explanatory variables are correlated with the included explanatory variables, then the parameter estimates are biased. The large difference in the estimate of parameter for real interest rates for the OLS regression and the Cochran-Orcutt estimate is suggestive of model misspecification.<footnote id="id1165183237973"> If the OLS parameter estimates are unbiased but the standard error estimates are, then applying the Cochran-Orcutt adjustment should change the estimates of the standard errors without changing the estimates of the equation parameters substantially.</footnote></para>
+        
+        
+      </section>
+      <section id="id1165174875934">
+        <title>More modern time-series models</title>
+        <section id="id1165183217644">
+          <title>ARMA models</title>
+          <para id="id1165183180044">The model we described above is assumed to have first-order autoregressive error disturbances. Such a process is referred to as AR(1). The error structure in (8) is AR(2). If we apply this concept to a data series, we would call the following an AR(<emphasis effect="italics">p</emphasis>) process:</para>
+          
+          <equation id="eip-273"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>α</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   <m:mo>+</m:mo><m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>i</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+     <m:mi>p</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:msub>
+      <m:mi>β</m:mi>
+      <m:mi>i</m:mi>
+     </m:msub>
+     <m:msub>
+      <m:mi>y</m:mi>
+      <m:mrow>
+       <m:mi>t</m:mi><m:mo>−</m:mo><m:mi>i</m:mi>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   </m:mstyle><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWG0baabeaakiabg2da9iabeg7aHnaaBaaaleaacaaIWaaabeaakiabgUcaRmaaqahabaGaeqOSdi2aaSbaaSqaaiaadMgaaeqaaOGaamyEamaaBaaaleaacaWG0bGaeyOeI0IaamyAaaqabaaabaGaamyAaiabg2da9iaaigdaaeaacaWGWbaaniabggHiLdGccaGGUaaaaa@49F1@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation><para id="id1165176365224">Another approach available to us is to think of a data as a weighted average of some error terms that are assumed to have a mean of zero, have a fixed variance, and be uncorrelated over time<footnote id="id1165179672768"> That is, we assume <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ε</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>~</m:mo><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mn>0</m:mn><m:mo>,</m:mo><m:msup>
+      <m:mi>σ</m:mi>
+      <m:mn>2</m:mn>
+     </m:msup>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqyTdu2aaSbaaSqaaiaadshaaeqaaOGaaiOFamaabmaabaGaaGimaiaacYcacqaHdpWCdaahaaWcbeqaaiaaikdaaaaakiaawIcacaGLPaaaaaa@3F75@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+, where the distribution is not specified, and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>ε</m:mi>
+      <m:mi>i</m:mi>
+     </m:msub>
+     <m:msub>
+      <m:mi>ε</m:mi>
+      <m:mi>j</m:mi>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mn>0</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyramaabmaabaGaeqyTdu2aaSbaaSqaaiaadMgaaeqaaOGaeqyTdu2aaSbaaSqaaiaadQgaaeqaaaGccaGLOaGaayzkaaGaeyypa0JaaGimaaaa@3F9E@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ for all <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>i</m:mi><m:mo>≠</m:mo><m:mi>j</m:mi>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyAaiabgcMi5kaadQgaaaa@3998@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+.
+</footnote>:</para>
+          
+          
+
+          <equation id="eip-159"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>i</m:mi><m:mo>=</m:mo><m:mn>0</m:mn>
+     </m:mrow>
+     <m:mi>q</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:msub>
+      <m:mi>β</m:mi>
+      <m:mi>i</m:mi>
+     </m:msub>
+     <m:msub>
+      <m:mi>ε</m:mi>
+      <m:mrow>
+       <m:mi>t</m:mi><m:mo>−</m:mo><m:mi>i</m:mi>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   </m:mstyle><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWG0baabeaakiabg2da9maaqahabaGaeqOSdi2aaSbaaSqaaiaadMgaaeqaaOGaeqyTdu2aaSbaaSqaaiaadshacqGHsislcaWGPbaabeaaaeaacaWGPbGaeyypa0JaaGimaaqaaiaadghaa0GaeyyeIuoakiaac6caaaa@4729@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</equation><para id="eip-785">A data series exhibiting this pattern is called a moving average process or MA(q). The error tern is known in the literature as white noise. A data series that has both autoregressive and moving average characteristics is call an autoregressive moving average (ARMA) series; an ARMA(p, q) is:</para>
+          <equation id="eip-280"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>α</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   <m:mo>+</m:mo><m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>i</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+     <m:mi>p</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:msub>
+      <m:mi>β</m:mi>
+      <m:mi>i</m:mi>
+     </m:msub>
+     <m:msub>
+      <m:mi>y</m:mi>
+      <m:mrow>
+       <m:mi>t</m:mi><m:mo>−</m:mo><m:mi>i</m:mi>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   </m:mstyle><m:mo>+</m:mo><m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>i</m:mi><m:mo>=</m:mo><m:mn>0</m:mn>
+     </m:mrow>
+     <m:mi>q</m:mi>
+    </m:munderover>
+    <m:mrow>
+     <m:msub>
+      <m:mi>β</m:mi>
+      <m:mi>i</m:mi>
+     </m:msub>
+     <m:msub>
+      <m:mi>ε</m:mi>
+      <m:mrow>
+       <m:mi>t</m:mi><m:mo>−</m:mo><m:mi>i</m:mi>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   </m:mstyle><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWG0baabeaakiabg2da9iabeg7aHnaaBaaaleaacaaIWaaabeaakiabgUcaRmaaqahabaGaeqOSdi2aaSbaaSqaaiaadMgaaeqaaOGaamyEamaaBaaaleaacaWG0bGaeyOeI0IaamyAaaqabaaabaGaamyAaiabg2da9iaaigdaaeaacaWGWbaaniabggHiLdGccqGHRaWkdaaeWbqaaiabek7aInaaBaaaleaacaWGPbaabeaakiabew7aLnaaBaaaleaacaWG0bGaeyOeI0IaamyAaaqabaaabaGaamyAaiabg2da9iaaicdaaeaacaWGXbaaniabggHiLdGccaGGUaaaaa@5824@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</equation><para id="id1165173928323">It may help to show two series constructed to have different ARMA patterns. Figure 7 shows one of the potential time series generated by the ARMA(2,1) process:</para>
+          
+          <equation id="eip-326"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:mn>0.67</m:mn><m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:mn>0.33</m:mn><m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>2</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:mn>0.1</m:mn><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>+</m:mo><m:mn>0.05</m:mn><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWG0baabeaakiabg2da9iaaicdacaGGUaGaaGOnaiaaiEdacaWG5bWaaSbaaSqaaiaadshacqGHsislcaaIXaaabeaakiabgUcaRiaaicdacaGGUaGaaG4maiaaiodacaWG5bWaaSbaaSqaaiaadshacqGHsislcaaIYaaabeaakiabgUcaRiaaicdacaGGUaGaaGymaiabew7aLnaaBaaaleaacaWG0baabeaakiabgUcaRiaaicdacaGGUaGaaGimaiaaiwdacqaH1oqzdaWgaaWcbaGaamiDaiabgkHiTiaaigdaaeqaaOGaaiOlaaaa@565C@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</equation><para id="id1165176397953"><figure id="figure7">
+  <title/>
+  <media id="fig7" alt="Graph of a ARMA(2,1) process.">
+    <image mime-type="image/jpeg" src="../../media/TS Figure 7.jpg"/>
+  </media>
+  <caption>
+     Graph of a ARMA(2,1) process.
+  </caption>
+</figure>
+</para>
+          <para id="id1165181767646">Figure 8 shows one potential time series generated by the ARMA(1,1) process:</para>
+          
+          <equation id="eip-334"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:mn>0.67</m:mn><m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:mn>0.1</m:mn><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>+</m:mo><m:mn>0.05</m:mn><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWG0baabeaakiabg2da9iaaicdacaGGUaGaaGOnaiaaiEdacaWG5bWaaSbaaSqaaiaadshacqGHsislcaaIXaaabeaakiabgUcaRiaaicdacaGGUaGaaGymaiabew7aLnaaBaaaleaacaWG0baabeaakiabgUcaRiaaicdacaGGUaGaaGimaiaaiwdacqaH1oqzdaWgaaWcbaGaamiDaiabgkHiTiaaigdaaeqaaOGaaiOlaaaa@4EBE@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</equation><para id="eip-913"><figure id="figure9"><media id="fig8" alt="Graph of a ARMA(1,1) process.">
+    <image mime-type="image/jpeg" src="../../media/TS Figure 8.jpg"/>
+  </media>
+  
+<caption>Graph of a ARMA(1,1) process.
+  </caption></figure>
+</para>
+        </section>
+        <section id="id1165174053251">
+          <title>Stationarity</title>
+          <para id="id1165179194845">Consider the time-series <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWG0baabeaakiaac6caaaa@38D3@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ We define this stochastic process as <emphasis effect="italics">covariance stationary</emphasis> if</para>
+          
+          <equation id="eip-598"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>y</m:mi>
+      <m:mi>t</m:mi>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mi>E</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>y</m:mi>
+      <m:mrow>
+       <m:mi>t</m:mi><m:mo>−</m:mo><m:mi>s</m:mi>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mi>μ</m:mi><m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyramaabmaabaGaamyEamaaBaaaleaacaWG0baabeaaaOGaayjkaiaawMcaaiabg2da9iaadweadaqadaqaaiaadMhadaWgaaWcbaGaamiDaiabgkHiTiaadohaaeqaaaGccaGLOaGaayzkaaGaeyypa0JaeqiVd0Maaiilaaaa@454A@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</equation>
+          <equation id="eip-343"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>E</m:mi><m:mrow><m:mo>[</m:mo> <m:mrow>
+    <m:msup>
+     <m:mrow>
+      <m:mrow><m:mo>(</m:mo>
+       <m:mrow>
+        <m:msub>
+         <m:mi>y</m:mi>
+         <m:mi>t</m:mi>
+        </m:msub>
+        <m:mo>−</m:mo><m:mi>μ</m:mi>
+       </m:mrow>
+      <m:mo>)</m:mo></m:mrow>
+     </m:mrow>
+     <m:mn>2</m:mn>
+    </m:msup>
+    
+   </m:mrow> <m:mo>]</m:mo></m:mrow><m:mo>=</m:mo><m:mi>E</m:mi><m:mrow><m:mo>[</m:mo> <m:mrow>
+    <m:msup>
+     <m:mrow>
+      <m:mrow><m:mo>(</m:mo>
+       <m:mrow>
+        <m:msub>
+         <m:mi>y</m:mi>
+         <m:mrow>
+          <m:mi>t</m:mi><m:mo>−</m:mo><m:mi>s</m:mi>
+         </m:mrow>
+        </m:msub>
+        <m:mo>−</m:mo><m:mi>μ</m:mi>
+       </m:mrow>
+      <m:mo>)</m:mo></m:mrow>
+     </m:mrow>
+     <m:mn>2</m:mn>
+    </m:msup>
+    
+   </m:mrow> <m:mo>]</m:mo></m:mrow><m:mo>=</m:mo><m:msup>
+    <m:mi>σ</m:mi>
+    <m:mn>2</m:mn>
+   </m:msup>
+   <m:mo>,</m:mo><m:mtext> and</m:mtext>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyramaadmaabaWaaeWaaeaacaWG5bWaaSbaaSqaaiaadshaaeqaaOGaeyOeI0IaeqiVd0gacaGLOaGaayzkaaWaaWbaaSqabeaacaaIYaaaaaGccaGLBbGaayzxaaGaeyypa0JaamyramaadmaabaWaaeWaaeaacaWG5bWaaSbaaSqaaiaadshacqGHsislcaWGZbaabeaakiabgkHiTiabeY7aTbGaayjkaiaawMcaamaaCaaaleqabaGaaGOmaaaaaOGaay5waiaaw2faaiabg2da9iabeo8aZnaaCaaaleqabaGaaGOmaaaakiaacYcacaqGGaGaaeyyaiaab6gacaqGKbaaaa@54B9@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</equation>
+          <equation id="eip-85"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>C</m:mi><m:mi>o</m:mi><m:mi>v</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>y</m:mi>
+      <m:mi>t</m:mi>
+     </m:msub>
+     <m:mo>,</m:mo><m:msub>
+      <m:mi>y</m:mi>
+      <m:mrow>
+       <m:mi>t</m:mi><m:mo>−</m:mo><m:mi>s</m:mi>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>=</m:mo><m:mi>E</m:mi><m:mrow><m:mo>[</m:mo> <m:mrow>
+    <m:mrow><m:mo>(</m:mo>
+     <m:mrow>
+      <m:msub>
+       <m:mi>y</m:mi>
+       <m:mi>t</m:mi>
+      </m:msub>
+      <m:mo>−</m:mo><m:mi>μ</m:mi>
+     </m:mrow>
+    <m:mo>)</m:mo></m:mrow><m:mrow><m:mo>(</m:mo>
+     <m:mrow>
+      <m:msub>
+       <m:mi>y</m:mi>
+       <m:mrow>
+        <m:mi>t</m:mi><m:mo>−</m:mo><m:mi>s</m:mi>
+       </m:mrow>
+      </m:msub>
+      <m:mo>−</m:mo><m:mi>μ</m:mi>
+     </m:mrow>
+    <m:mo>)</m:mo></m:mrow>
+   </m:mrow> <m:mo>]</m:mo></m:mrow><m:mo>=</m:mo><m:mi>E</m:mi><m:mrow><m:mo>[</m:mo> <m:mrow>
+    <m:mrow><m:mo>(</m:mo>
+     <m:mrow>
+      <m:msub>
+       <m:mi>y</m:mi>
+       <m:mrow>
+        <m:mi>t</m:mi><m:mo>−</m:mo><m:mi>j</m:mi>
+       </m:mrow>
+      </m:msub>
+      <m:mo>−</m:mo><m:mi>μ</m:mi>
+     </m:mrow>
+    <m:mo>)</m:mo></m:mrow><m:mrow><m:mo>(</m:mo>
+     <m:mrow>
+      <m:msub>
+       <m:mi>y</m:mi>
+       <m:mrow>
+        <m:mi>t</m:mi><m:mo>−</m:mo><m:mi>j</m:mi><m:mo>−</m:mo><m:mi>s</m:mi>
+       </m:mrow>
+      </m:msub>
+      <m:mo>−</m:mo><m:mi>μ</m:mi>
+     </m:mrow>
+    <m:mo>)</m:mo></m:mrow>
+   </m:mrow> <m:mo>]</m:mo></m:mrow><m:mo>=</m:mo><m:msub>
+    <m:mi>γ</m:mi>
+    <m:mi>s</m:mi>
+   </m:msub>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaam4qaiaad+gacaWG2bWaaeWaaeaacaWG5bWaaSbaaSqaaiaadshaaeqaaOGaaiilaiaadMhadaWgaaWcbaGaamiDaiabgkHiTiaadohaaeqaaaGccaGLOaGaayzkaaGaeyypa0JaamyramaadmaabaWaaeWaaeaacaWG5bWaaSbaaSqaaiaadshaaeqaaOGaeyOeI0IaeqiVd0gacaGLOaGaayzkaaWaaeWaaeaacaWG5bWaaSbaaSqaaiaadshacqGHsislcaWGZbaabeaakiabgkHiTiabeY7aTbGaayjkaiaawMcaaaGaay5waiaaw2faaiabg2da9iaadweadaWadaqaamaabmaabaGaamyEamaaBaaaleaacaWG0bGaeyOeI0IaamOAaaqabaGccqGHsislcqaH8oqBaiaawIcacaGLPaaadaqadaqaaiaadMhadaWgaaWcbaGaamiDaiabgkHiTiaadQgacqGHsislcaWGZbaabeaakiabgkHiTiabeY7aTbGaayjkaiaawMcaaaGaay5waiaaw2faaiabg2da9iabeo7aNnaaBaaaleaacaWGZbaabeaakiaac6caaaa@6E19@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</equation><para id="id1165175659428">The last term, <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>γ</m:mi>
+    <m:mi>s</m:mi>
+   </m:msub>
+   <m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeq4SdC2aaSbaaSqaaiaadohaaeqaaOGaaiilaaaa@3979@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ is known as the autocovariance. A time-series is defined to be covariance stationary if its mean and all its autocovariances are unaffected by a change of time origin. We define the autocorrelation between <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWG0baabeaaaaa@3817@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mi>s</m:mi>
+    </m:mrow>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWG0bGaeyOeI0Iaam4Caaqabaaaaa@39FC@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ as:</para>
+          
+          <equation id="eip-80"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ρ</m:mi>
+    <m:mi>s</m:mi>
+   </m:msub>
+   <m:mo>:</m:mo><m:mo>=</m:mo><m:mfrac>
+    <m:mrow>
+     <m:msub>
+      <m:mi>γ</m:mi>
+      <m:mi>s</m:mi>
+     </m:msub>
+     
+    </m:mrow>
+    <m:mrow>
+     <m:msub>
+      <m:mi>γ</m:mi>
+      <m:mn>0</m:mn>
+     </m:msub>
+     
+    </m:mrow>
+   </m:mfrac>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqyWdi3aaSbaaSqaaiaadohaaeqaaOGaaiOoaiabg2da9maalaaabaGaeq4SdC2aaSbaaSqaaiaadohaaeqaaaGcbaGaeq4SdC2aaSbaaSqaaiaaicdaaeqaaaaakiaac6caaaa@40D3@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation><para id="id1165174112520">Quite often you can create a stationary time-series from a non-stationary time-series by taking the first-differences of the non-stationary series. If the first difference does not produce a stationary series, then one continues to take first differences until you find a stationary series. For instance, the time-series shown in Figure 7 appears to be non-stationary. The first differences of this series is shown in Figure 9. Using the imperfect eye, it would appear that the first differences of (13) is stationary. However, we really cannot tell anything for sure from the graph of a data set. We need to use the restrictions of the parameters derived in advanced texts to determine if a data set is stationary.<footnote id="id1165183411114"> These methods make use of the mathematics of difference equations. See advanced texts like Enders (1995: pp. 68-77) for examples of the derivation of the conditions necessary for an ARMA(<emphasis effect="italics">p</emphasis>,<emphasis effect="italics"> q</emphasis>) time-series to be stationary.</footnote></para>
+          <para id="id1165179331366"><figure id="figure9a">
+  <title/>
+  <media id="fig9a" alt="Graph of the first differences the ARMA(2,1) data">
+    <image mime-type="image/jpeg" src="../../media/TS Figure 9.jpg"/>
+  </media>
+  <caption>
+     First-differences of the time-series of the ARMA(2,1) data.
+  </caption>
+</figure>
+        
+</para>
+        </section>
+        <section id="id1165175704602"><title>The autocorrelation function</title><para id="eip-852">One of the major ways to identify the structure of a time series is to look at the autocorrelation function. The autocorrelation function, <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ρ</m:mi>
+    <m:mi>s</m:mi>
+   </m:msub>
+   <m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqyWdi3aaSbaaSqaaiaadohaaeqaaOGaaiilaaaa@3992@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ is the correlation between <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWG0baabeaaaaa@3817@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mi>s</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWG0bGaeyOeI0Iaam4CaaqabaGccaGGUaaaaa@3AB8@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ Stata uses the following formula to estimate it [StataCorp: p. 60] for a time-series:
+
+</para>
+          <para id="id1165173910612">The researcher then has to compare the actual autocorrelation function with the theoretical autocorrelation for comparable data series. To see to use the autocorrelation function consider the following five time series<footnote id="id1165187485730"> AR(1) is the same as ARMA(1, 0)</footnote>:</para>
+          <equation id="eip-443"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mover accent="true">
+     <m:mi>ρ</m:mi>
+     <m:mo>⌢</m:mo>
+    </m:mover>
+    
+    <m:mi>s</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:mfrac>
+    <m:mrow>
+     <m:mstyle displaystyle="true">
+      <m:munderover>
+       <m:mo>∑</m:mo>
+       <m:mrow>
+        <m:mi>i</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+       </m:mrow>
+       <m:mrow>
+        <m:mi>n</m:mi><m:mo>−</m:mo><m:mi>s</m:mi>
+       </m:mrow>
+      </m:munderover>
+      <m:mrow>
+       <m:mrow><m:mo>(</m:mo>
+        <m:mrow>
+         <m:msub>
+          <m:mi>y</m:mi>
+          <m:mi>t</m:mi>
+         </m:msub>
+         <m:mo>−</m:mo><m:mover accent="true">
+          <m:mi>y</m:mi>
+          <m:mo>¯</m:mo>
+         </m:mover>
+         
+        </m:mrow>
+       <m:mo>)</m:mo></m:mrow><m:mrow><m:mo>(</m:mo>
+        <m:mrow>
+         <m:msub>
+          <m:mi>y</m:mi>
+          <m:mrow>
+           <m:mi>t</m:mi><m:mo>−</m:mo><m:mi>s</m:mi>
+          </m:mrow>
+         </m:msub>
+         <m:mo>−</m:mo><m:mover accent="true">
+          <m:mi>y</m:mi>
+          <m:mo>¯</m:mo>
+         </m:mover>
+         
+        </m:mrow>
+       <m:mo>)</m:mo></m:mrow>
+      </m:mrow>
+     </m:mstyle>
+    </m:mrow>
+    <m:mrow>
+     <m:mstyle displaystyle="true">
+      <m:munderover>
+       <m:mo>∑</m:mo>
+       <m:mrow>
+        <m:mi>i</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+       </m:mrow>
+       <m:mi>n</m:mi>
+      </m:munderover>
+      <m:mrow>
+       <m:msup>
+        <m:mrow>
+         <m:mrow><m:mo>(</m:mo>
+          <m:mrow>
+           <m:msub>
+            <m:mi>y</m:mi>
+            <m:mi>t</m:mi>
+           </m:msub>
+           <m:mo>−</m:mo><m:mover accent="true">
+            <m:mi>y</m:mi>
+            <m:mo>¯</m:mo>
+           </m:mover>
+           
+          </m:mrow>
+         <m:mo>)</m:mo></m:mrow>
+        </m:mrow>
+        <m:mn>2</m:mn>
+       </m:msup>
+       
+      </m:mrow>
+     </m:mstyle>
+    </m:mrow>
+   </m:mfrac>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGafqyWdiNbambadaWgaaWcbaGaam4CaaqabaGccqGH9aqpdaWcaaqaamaaqahabaWaaeWaaeaacaWG5bWaaSbaaSqaaiaadshaaeqaaOGaeyOeI0IabmyEayaaraaacaGLOaGaayzkaaWaaeWaaeaacaWG5bWaaSbaaSqaaiaadshacqGHsislcaWGZbaabeaakiabgkHiTiqadMhagaqeaaGaayjkaiaawMcaaaWcbaGaamyAaiabg2da9iaaigdaaeaacaWGUbGaeyOeI0Iaam4CaaqdcqGHris5aaGcbaWaaabCaeaadaqadaqaaiaadMhadaWgaaWcbaGaamiDaaqabaGccqGHsislceWG5bGbaebaaiaawIcacaGLPaaadaahaaWcbeqaaiaaikdaaaaabaGaamyAaiabg2da9iaaigdaaeaacaWGUbaaniabggHiLdaaaOGaaiOlaaaa@5C72@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation>
+          <equation id="eip-619"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mtext>AR(1): </m:mtext><m:msub>
+    <m:mi>y</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:mn>0.7</m:mn><m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaaeyqaiaabkfacaqGOaGaaeymaiaabMcacaqG6aGaaeiiaiaadMhadaWgaaWcbaGaamiDaaqabaGccqGH9aqpcaaIWaGaaiOlaiaaiEdacaWG5bWaaSbaaSqaaiaadshacqGHsislcaaIXaaabeaakiabgUcaRiabew7aLnaaBaaaleaacaWG0baabeaakiaacYcaaaa@4894@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</equation>
+          <equation id="eip-53"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mtext>AR(1): </m:mtext><m:msub>
+    <m:mi>y</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:mo>−</m:mo><m:mn>0.7</m:mn><m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaaeyqaiaabkfacaqGOaGaaeymaiaabMcacaqG6aGaaeiiaiaadMhadaWgaaWcbaGaamiDaaqabaGccqGH9aqpcqGHsislcaaIWaGaaiOlaiaaiEdacaWG5bWaaSbaaSqaaiaadshacqGHsislcaaIXaaabeaakiabgUcaRiabew7aLnaaBaaaleaacaWG0baabeaakiaacYcaaaa@4981@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</equation>
+          <equation id="eip-765"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mtext>MA(1): </m:mtext><m:msub>
+    <m:mi>y</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>−</m:mo><m:mn>0.7</m:mn><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaaeytaiaabgeacaqGOaGaaeymaiaabMcacaqG6aGaaeiiaiaadMhadaWgaaWcbaGaamiDaaqabaGccqGH9aqpcqaH1oqzdaWgaaWcbaGaamiDaaqabaGccqGHsislcaaIWaGaaiOlaiaaiEdacqaH1oqzdaWgaaWcbaGaamiDaiabgkHiTiaaigdaaeqaaOGaaiilaaaa@4943@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</equation>
+          <equation id="eip-48"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mtext>ARMA</m:mtext><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mtext>2, 1</m:mtext>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mtext>: </m:mtext><m:msub>
+    <m:mi>y</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:mn>0.7</m:mn><m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>−</m:mo><m:mn>0.49</m:mn><m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>2</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>,</m:mo><m:mtext> and</m:mtext>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaaeyqaiaabkfacaqGnbGaaeyqamaabmaabaGaaeOmaiaabYcacaqGGaGaaeymaaGaayjkaiaawMcaaiaabQdacaqGGaGaamyEamaaBaaaleaacaWG0baabeaakiabg2da9iaaicdacaGGUaGaaG4naiaadMhadaWgaaWcbaGaamiDaiabgkHiTiaaigdaaeqaaOGaeyOeI0IaaGimaiaac6cacaaI0aGaaGyoaiaadMhadaWgaaWcbaGaamiDaiabgkHiTiaaikdaaeqaaOGaey4kaSIaeqyTdu2aaSbaaSqaaiaadshaaeqaaOGaaiilaiaabccacaqGHbGaaeOBaiaabsgaaaa@5770@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</equation>
+          <equation id="eip-716"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:mtext>ARMA</m:mtext><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mtext>1, 2</m:mtext>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mtext>: </m:mtext><m:msub>
+    <m:mi>y</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:mo>−</m:mo><m:mn>0.7</m:mn><m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>−</m:mo><m:mn>0.7</m:mn><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaaeyqaiaabkfacaqGnbGaaeyqamaabmaabaGaaeymaiaabYcacaqGGaGaaeOmaaGaayjkaiaawMcaaiaabQdacaqGGaGaamyEamaaBaaaleaacaWG0baabeaakiabg2da9iabgkHiTiaaicdacaGGUaGaaG4naiaadMhadaWgaaWcbaGaamiDaiabgkHiTiaaigdaaeqaaOGaey4kaSIaeqyTdu2aaSbaaSqaaiaadshaaeqaaOGaeyOeI0IaaGimaiaac6cacaaI3aGaeqyTdu2aaSbaaSqaaiaadshacqGHsislcaaIXaaabeaakiaac6caaaa@54E8@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</equation><para id="id1165182607538">Each of these functions has a theoretical autocorrelation function; graphs of these autocorrelation functions are shown in the left column of Figure 10.<footnote id="id1165185336705"> This set of graphs is from Enders (2005: p. 79).</footnote></para>
+          <para id="id1165178933143"><figure id="figure10">
+  <title/>
+  <media id="fig10" alt="Examples of the autocorrelation and partial autocorrelation functions.">
+    <image mime-type="image/jpeg" src="../../media/TS Figure 10.jpg"/>
+  </media>
+  <caption>
+     Examples of autocorrelation and partial autocorrelation functions.
+  </caption>
+</figure>
+        </para>
+          <para id="id1165178776184">There is additional function we can use to help identify the nature of a time-series. Consider the following regressions:</para>
+          
+          <equation id="eip-859"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="inline">
+ <m:semantics>
+  <m:mrow>
+   <m:msubsup>
+    <m:mi>y</m:mi>
+    <m:mi>t</m:mi>
+    <m:mo>∗</m:mo>
+   </m:msubsup>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>ϕ</m:mi>
+    <m:mrow>
+     <m:mn>11</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:msubsup>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+    <m:mo>∗</m:mo>
+   </m:msubsup>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>e</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>,</m:mo><m:mtext> </m:mtext><m:msubsup>
+    <m:mi>y</m:mi>
+    <m:mi>t</m:mi>
+    <m:mo>∗</m:mo>
+   </m:msubsup>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>ϕ</m:mi>
+    <m:mrow>
+     <m:mn>21</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:msubsup>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+    <m:mo>∗</m:mo>
+   </m:msubsup>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>ϕ</m:mi>
+    <m:mrow>
+     <m:mn>22</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:msubsup>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mn>2</m:mn>
+    </m:mrow>
+    <m:mo>∗</m:mo>
+   </m:msubsup>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>e</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>,</m:mo><m:mtext> etc</m:mtext><m:mtext>.,</m:mtext>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaDaaaleaacaWG0baabaGaey4fIOcaaOGaeyypa0Jaeqy1dy2aaSbaaSqaaiaaigdacaaIXaaabeaakiaadMhadaqhaaWcbaGaamiDaiabgkHiTiaaigdaaeaacqGHxiIkaaGccqGHRaWkcaWGLbWaaSbaaSqaaiaadshaaeqaaOGaaiilaiaabccacaWG5bWaa0baaSqaaiaadshaaeaacqGHxiIkaaGccqGH9aqpcqaHvpGzdaWgaaWcbaGaaGOmaiaaigdaaeqaaOGaamyEamaaDaaaleaacaWG0bGaeyOeI0IaaGymaaqaaiabgEHiQaaakiabgUcaRiabew9aMnaaBaaaleaacaaIYaGaaGOmaaqabaGccaWG5bWaa0baaSqaaiaadshacqGHsislcaaIYaaabaGaey4fIOcaaOGaey4kaSIaamyzamaaBaaaleaacaWG0baabeaakiaacYcacaqGGaGaaeyzaiaabshacaqGJbGaaeOlaiaabYcaaaa@648B@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</equation><para id="id1165179675047">where <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msubsup>
+    <m:mi>y</m:mi>
+    <m:mi>t</m:mi>
+    <m:mo>∗</m:mo>
+   </m:msubsup>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>y</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   <m:mo>−</m:mo><m:mover accent="true">
+    <m:mi>y</m:mi>
+    <m:mo>¯</m:mo>
+   </m:mover>
+   <m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaDaaaleaacaWG0baabaGaey4fIOcaaOGaeyypa0JaamyEamaaBaaaleaacaWG0baabeaakiabgkHiTiqadMhagaqeaiaac6caaaa@3EF9@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ --> 
+ </para>
+          <para id="eip-592">Our interpretation of the <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ϕ</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>i</m:mi>
+    </m:mrow>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqy1dy2aaSbaaSqaaiaadMgacaWGPbaabeaaaaa@39C4@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ parameters is that they are the correlation between <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWG0baabeaaaaa@3817@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mi>i</m:mi>
+    </m:mrow>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWG0bGaeyOeI0IaamyAaaqabaaaaa@39F2@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ controlling for all of the <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mi>j</m:mi>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWGQbaabeaaaaa@380D@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ where <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>j</m:mi><m:mo>=</m:mo><m:mn>2</m:mn><m:mo>,</m:mo><m:mo>…</m:mo><m:mo>,</m:mo><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mo>.</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamOAaiabg2da9iaaikdacaGGSaGaeSOjGSKaaiilamaabmaabaGaamyAaiabgkHiTiaaigdaaiaawIcacaGLPaaacaGGUaaaaa@3FF8@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ Because these correlation coefficients control for values of y’s observed between <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mi>t</m:mi>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWG0baabeaaaaa@3817@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>y</m:mi>
+    <m:mrow>
+     <m:mi>t</m:mi><m:mo>−</m:mo><m:mi>i</m:mi>
+    </m:mrow>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaamyEamaaBaaaleaacaWG0bGaeyOeI0IaamyAaaqabaaaaa@39F2@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+, they are known as the partial autocorrelations. The theoretical partial autocorrelations are shown in the right column of Figure 10. Stata uses the command .corrgram varname to calculate the autocorrelations and partial autocorrelations for the time-series varname. Figure 11 shows the output when using this command on the real levels of investment. The autocorrelation function for this data set looks like the theoretical one for an AR(1) process. However, the partial autocorrelation function does not look like any of the partial autocorrelation functions shown in Figure 11. Thus, it would not be safe to assume that real investment follows an AR(1) process. 
+</para><para id="id1165185706147"><figure id="figure11">
+  <title/>
+  <media id="fig11" alt="Graph of the Autocorrelation and partial autocorrelation functions for real investment.">
+    <image mime-type="image/jpeg" src="../../media/TS Figure 11.jpg"/>
+  </media>
+  <caption>
+     Autocorrelation and partial autocorrelation functions for real investment.
+  </caption>
+</figure>
+        </para>
+          <para id="id1165174143847">You can generate prettier graphs of the autocorrelation functions using the <emphasis effect="bold">.ac varname</emphasis> command. For instance, the command <emphasis effect="bold">.ac rinv</emphasis> generates the graph shown in Figure 12. The .pac varname generates a graph for the partial autocorrelations as is shown in Figure 13.</para>
+          <para id="id1165193222394"><figure id="figure12">
+  <title/>
+  <media id="dogpic" alt="Another graph of the autocorrelation function for real investment.">
+    <image mime-type="image/jpeg" src="../../media/TS Figure 12.jpg"/>
+  </media>
+  <caption>
+     Another graph of the autocorrelation function for real investment.
+  </caption>
+</figure>
+      </para>
+          <para id="eip-220"><figure id="figure13">
+  <title/>
+  <media id="fig13" alt="Partial autocorrelations for real investments.">
+    <image mime-type="image/jpeg" src="../../media/TS Figure 13.jpg"/>
+  </media>
+  <caption>
+     Partial autocorrelations for real investments.
+  </caption>
+</figure>
+        
+</para><para id="id1165184234093">There are several generalizations one can use to help identify the process underlying a data series. Table 1 [Enders (2005): p. 85] offers a brief summary of these properties of the autocorrelation and partial autocorrelation functions.</para>
+          
+          
+          <table id="id1165175588049" summary="Summary of the properties of the autocorrelation and partial functions." frame="topbot" colsep="0" rowsep="0"><title>Properties of the autocorrelation and partial functions.</title>
+<tgroup cols="3"><colspec colnum="1" colname="c1"/>
+              <colspec colnum="2" colname="c2"/>
+              <colspec colnum="3" colname="c3"/>
+              <tbody>
+                <row rowsep="1">
+                  <entry>Process</entry>
+                  <entry>Autocorrelation function</entry>
+                  <entry>Partial autocorrelation function</entry>
+                </row>
+                <row>
+                  <entry>White-noise</entry>
+                  <entry>All <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ρ</m:mi>
+    <m:mi>s</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:mn>0</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqyWdi3aaSbaaSqaaiaadohaaeqaaOGaeyypa0JaaGimaaaa@3AA2@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+ </entry>
+                  <entry>All <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ϕ</m:mi>
+    <m:mrow>
+     <m:mi>s</m:mi><m:mi>s</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:mn>0</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqy1dy2aaSbaaSqaaiaadohacaWGZbaabeaakiabg2da9iaaicdaaaa@3BA2@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</entry>
+                </row>
+                <row>
+                  <entry>AR(1): <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>α</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:mo>&gt;</m:mo><m:mn>0</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqySde2aaSbaaSqaaiaaigdaaeqaaOGaeyOpa4JaaGimaaaa@3A46@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</entry>
+                  <entry>Direct exponential decay</entry>
+                  <entry><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ϕ</m:mi>
+    <m:mrow>
+     <m:mn>11</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>ρ</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqy1dy2aaSbaaSqaaiaaigdacaaIXaaabeaakiabg2da9iabeg8aYnaaBaaaleaacaaIXaaabeaaaaa@3D15@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+; <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ϕ</m:mi>
+    <m:mrow>
+     <m:mi>s</m:mi><m:mi>s</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:mn>0</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqy1dy2aaSbaaSqaaiaadohacaWGZbaabeaakiabg2da9iaaicdaaaa@3BA2@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ for <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>s</m:mi><m:mo>≥</m:mo><m:mn>2</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaam4CaiabgwMiZkaaikdaaaa@396E@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</entry>
+                </row>
+                <row>
+                  <entry>AR(1): <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>α</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:mo>&gt;</m:mo><m:mn>0</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqySde2aaSbaaSqaaiaaigdaaeqaaOGaeyOpa4JaaGimaaaa@3A46@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</entry>
+                  <entry>Decays toward zero. Coefficients may oscillate</entry>
+                  <entry><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ϕ</m:mi>
+    <m:mrow>
+     <m:mn>11</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>ρ</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqy1dy2aaSbaaSqaaiaaigdacaaIXaaabeaakiabg2da9iabeg8aYnaaBaaaleaacaaIXaaabeaaaaa@3D15@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+; <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ϕ</m:mi>
+    <m:mrow>
+     <m:mi>s</m:mi><m:mi>s</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:mn>0</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqy1dy2aaSbaaSqaaiaadohacaWGZbaabeaakiabg2da9iaaicdaaaa@3BA2@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ for <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>s</m:mi><m:mo>≥</m:mo><m:mn>2</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaam4CaiabgwMiZkaaikdaaaa@396E@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</entry>
+                </row>
+                <row>
+                  <entry>AR(<emphasis effect="italics">p</emphasis>)</entry>
+                  <entry>Decays toward zero; Coefficients may oscillate</entry>
+                  <entry>Spikes through lag p. All <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ϕ</m:mi>
+    <m:mrow>
+     <m:mi>s</m:mi><m:mi>s</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:mn>0</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqy1dy2aaSbaaSqaaiaadohacaWGZbaabeaakiabg2da9iaaicdaaaa@3BA2@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ for <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>s</m:mi><m:mo>&gt;</m:mo><m:mi>p</m:mi>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaam4Caiabg6da+iaadchaaaa@38E9@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</entry>
+                </row>
+                <row>
+                  <entry>MA(1): <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>β</m:mi><m:mo>&gt;</m:mo><m:mn>0</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqOSdiMaeyOpa4JaaGimaaaa@3957@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</entry>
+                  <entry>Negative spike at lag 1. <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ρ</m:mi>
+    <m:mi>s</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:mn>0</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqyWdi3aaSbaaSqaaiaadohaaeqaaOGaeyypa0JaaGimaaaa@3AA2@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ for <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>s</m:mi><m:mo>≥</m:mo><m:mn>2</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaam4CaiabgwMiZkaaikdaaaa@396E@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</entry>
+                  <entry>Oscillating decay: <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ϕ</m:mi>
+    <m:mrow>
+     <m:mn>11</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>&lt;</m:mo><m:mn>0</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqy1dy2aaSbaaSqaaiaaigdacaaIXaaabeaakiabgYda8iaaicdaaaa@3B26@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</entry>
+                </row>
+                <row>
+                  <entry>MA(1): <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>β</m:mi><m:mo>&lt;</m:mo><m:mn>0</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqOSdiMaeyipaWJaaGimaaaa@3953@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</entry>
+                  <entry>Positive spike at lag 1. <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ρ</m:mi>
+    <m:mi>s</m:mi>
+   </m:msub>
+   <m:mo>=</m:mo><m:mn>0</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqyWdi3aaSbaaSqaaiaadohaaeqaaOGaeyypa0JaaGimaaaa@3AA2@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ for <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>s</m:mi><m:mo>≥</m:mo><m:mn>2</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaam4CaiabgwMiZkaaikdaaaa@396E@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</entry>
+                  <entry>Decay: <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ϕ</m:mi>
+    <m:mrow>
+     <m:mn>11</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>&gt;</m:mo><m:mn>0</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqy1dy2aaSbaaSqaaiaaigdacaaIXaaabeaakiabg6da+iaaicdaaaa@3B2A@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</entry>
+                </row>
+                <row>
+                  <entry>ARMA(1, 1): <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>α</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:mo>&gt;</m:mo><m:mn>0</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqySde2aaSbaaSqaaiaaigdaaeqaaOGaeyOpa4JaaGimaaaa@3A46@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</entry>
+                  <entry>Exponential decay beginning at lag 1. Sign <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ρ</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqyWdi3aaSbaaSqaaiaaigdaaeqaaaaa@389B@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ = sign<!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>α</m:mi>
+      <m:mn>1</m:mn>
+     </m:msub>
+     <m:mo>+</m:mo><m:mi>β</m:mi>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaWaaeWaaeaacqaHXoqydaWgaaWcbaGaaGymaaqabaGccqGHRaWkcqaHYoGyaiaawIcacaGLPaaaaaa@3C90@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</entry>
+                  <entry>Oscillating decay beginning at lag 1. <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ϕ</m:mi>
+    <m:mrow>
+     <m:mn>11</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>ρ</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqy1dy2aaSbaaSqaaiaaigdacaaIXaaabeaakiabg2da9iabeg8aYnaaBaaaleaacaaIXaaabeaaaaa@3D15@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</entry>
+                </row>
+                <row>
+                  <entry>ARMA(1, 1): <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>α</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   <m:mo>&lt;</m:mo><m:mn>0</m:mn>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqySde2aaSbaaSqaaiaaigdaaeqaaOGaeyipaWJaaGimaaaa@3A42@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</entry>
+                  <entry>Oscillating decay beginning at lag 1. Sign <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ρ</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqyWdi3aaSbaaSqaaiaaigdaaeqaaaaa@389B@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ = sign<!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>α</m:mi>
+      <m:mn>1</m:mn>
+     </m:msub>
+     <m:mo>+</m:mo><m:mi>β</m:mi>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaWaaeWaaeaacqaHXoqydaWgaaWcbaGaaGymaaqabaGccqGHRaWkcqaHYoGyaiaawIcacaGLPaaaaaa@3C90@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</entry>
+                  <entry>Exponential decay beginning at lag 1. <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>ϕ</m:mi>
+    <m:mrow>
+     <m:mn>11</m:mn>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>ρ</m:mi>
+    <m:mn>1</m:mn>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaGaeqy1dy2aaSbaaSqaaiaaigdacaaIXaaabeaakiabg2da9iabeg8aYnaaBaaaleaacaaIXaaabeaaaaa@3D15@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and sign<!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>ϕ</m:mi>
+      <m:mrow>
+       <m:mi>s</m:mi><m:mi>s</m:mi>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaWaaeWaaeaacqaHvpGzdaWgaaWcbaGaam4CaiaadohaaeqaaaGccaGLOaGaayzkaaaaaa@3B6B@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ = sign<!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:msub>
+      <m:mi>ϕ</m:mi>
+      <m:mrow>
+       <m:mn>11</m:mn>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0xbbL8F4rqqrFfpeea0xe9Lq=Jc9vqaqpepm0xbba9pwe9Q8fs0=yqaqpepae9pg0FirpepeKkFr0xfr=xfr=xb9adbaqaaeGaciGaaiaabeqaamaabaabaaGcbaWaaeWaaeaacqaHvpGzdaWgaaWcbaGaaGymaiaaigdaaeqaaaGccaGLOaGaayzkaaaaaa@3AF1@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+</entry>
+                </row>
+                <row>
+                  <entry>ARMA(<emphasis effect="italics">p</emphasis>, <emphasis effect="italics">q</emphasis>)</entry>
+                  <entry>Decay (either direct or oscillatory) beginning at lag <emphasis effect="italics">q</emphasis></entry>
+                  <entry>Decay (either direct or oscillatory) beginning at lag <emphasis effect="italics">p</emphasis></entry>
+                </row>
+              </tbody>
+            
+
+
+
+
+
+</tgroup>
+</table>
+        </section>
+        <section id="id1165175532379"><title>Estimation of ARMA models</title><para id="id1165174110374">The estimation of ARMA models are relatively easy in <emphasis effect="italics">Stata</emphasis>. The basic command to estimate an ARMA model is: <emphasis effect="bold">.arima depvar [varlist], ar(</emphasis><emphasis effect="italics">numlist</emphasis><emphasis effect="bold">) ma(</emphasis><emphasis effect="italics">numlist</emphasis><emphasis effect="bold">)</emphasis>.<footnote id="id1165175612573"> ARIMA means <emphasis effect="bold">A</emphasis>uto<emphasis effect="bold">R</emphasis>egressive <emphasis effect="bold">I</emphasis>ntegrated <emphasis effect="bold">M</emphasis>oving <emphasis effect="bold">A</emphasis>verage. See Enders (2005: 67) for a discussion of what integrated means. We can ignore it given our limited purposes.</footnote> The first thing to notice in the command that this command can apply to either to a single variable or to an equation. If [varlist] is omitted, <emphasis effect="italics">Stata</emphasis> will produce an estimate of the ARMA model for that variable; if the list is included, it will estimate the model with the disturbances allowed to have the ARMA structure specified in the command. Figure 14 reports the estimation of an ARMA model for real investment levels. Notice that we write AR(1/2) so that <emphasis effect="italics">Stata</emphasis> knows to include both the first and second autoregressive term. A command of <emphasis effect="bold">AR(2)</emphasis> would include only the second autoregressive term. In Figure 15 we report the ARMA (2, 1) estimation of (1).</para>
+          
+          <para id="id1165178549053"><figure id="figure14">
+  <title/>
+  <media id="fig14" alt="Output from the estimation of an ARMA(2, 2) model of real investment.">
+    <image mime-type="image/jpeg" src="../../media/TS Figure 14.jpg"/>
+  </media>
+  <caption>
+     Estimation of an ARMA(2, 2) model of real investment.
+  </caption>
+</figure>
+        </para>
+          <para id="id1165176535300"><figure id="figure15">
+  <title/>
+  <media id="fig15" alt="Output from the estimation of Equation (1) using an ARMA(2, 1) model.">
+    <image mime-type="image/jpeg" src="../../media/TS Figure 15.jpg"/>
+  </media>
+  <caption>
+     Estimation of Equation (1) using an ARMA(2, 1) model.
+  </caption>
+</figure>
+       </para>
+          
+          
+          <table id="eip-201" summary="Estimation results of various ARMA models of real investment." frame="topbot" colsep="0" rowsep="0"><title>Estimation of various ARMA models of real investment.</title>
+<tgroup cols="6"><tbody>
+  <row rowsep="1">
+    <entry/>
+    <entry align="center">ARMA(1, 1)</entry>
+    <entry align="center">ARMA(2, 1)</entry>
+    <entry align="center">AR(1)</entry>
+    <entry align="center">AR(2)</entry>
+    <entry align="center">MA(1)</entry>
+  </row>
+  <row>
+    <entry>Intercept</entry>
+    <entry align="center">185.307</entry>
+    <entry align="center">185.6556</entry>
+    <entry align="center">184.8208</entry>
+    <entry align="center">185.2092</entry>
+    <entry align="center">189.373</entry>
+  </row>
+  <row>
+    <entry/>
+    <entry align="center">(10.06)</entry>
+    <entry align="center">(10.83)</entry>
+    <entry align="center">(9.27)</entry>
+    <entry align="center">(10.25)</entry>
+    <entry align="center">(18.09)</entry>
+  </row>
+  <row>
+    <entry>AR (L1)</entry>
+    <entry align="center">0.70936</entry>
+    <entry align="center">1.76342</entry>
+    <entry align="center">0.80307</entry>
+    <entry align="center">0.95257</entry>
+    <entry align="center">—</entry>
+  </row>
+  <row>
+    <entry/>
+    <entry align="center">(3.12)</entry>
+    <entry align="center">(5.27)</entry>
+    <entry align="center">(5.51)</entry>
+    <entry align="center">(4.47)</entry>
+    <entry align="center">—</entry>
+  </row>
+  <row>
+    <entry>AR (L2)</entry>
+    <entry align="center">—</entry>
+    <entry align="center">-0.81715</entry>
+    <entry align="center">—</entry>
+    <entry align="center">-0.18963</entry>
+    <entry align="center">—</entry>
+  </row>
+  <row>
+    <entry/>
+    <entry align="center"/>
+    <entry align="center">(-3.21)</entry>
+    <entry align="center"/>
+    <entry align="center">(-0.91)</entry>
+    <entry align="center"/>
+  </row>
+  <row>
+    <entry>MA (L1)</entry>
+    <entry align="center">0.26236</entry>
+    <entry align="center">-0.99998</entry>
+    <entry align="center">—</entry>
+    <entry align="center">—</entry>
+    <entry align="center">0.87262</entry>
+  </row>
+  <row rowsep="1">
+    <entry/>
+    <entry align="center">(0.90)</entry>
+    <entry align="center">(-0.00)</entry>
+    <entry align="center"/>
+    <entry align="center"/>
+    <entry align="center">(2.97)</entry>
+  </row>
+  <row>
+    <entry>Log likelihood</entry>
+    <entry align="center">-86.1791</entry>
+    <entry align="center">-85.8702</entry>
+    <entry align="center">-86.47780</entry>
+    <entry align="center">-86.21224</entry>
+    <entry align="center">-88.48713</entry>
+  </row>
+  <row>
+    <entry>Wald χ2</entry>
+    <entry align="center">26.96</entry>
+    <entry align="center">422.60</entry>
+    <entry align="center">30.36</entry>
+    <entry align="center">31.65</entry>
+    <entry align="center">8.81</entry>
+  </row>
+  <row>
+    <entry>Probability &gt; χ2</entry>
+    <entry align="center">0.0000</entry>
+    <entry align="center">0.0000</entry>
+    <entry align="center">0.0000</entry>
+    <entry align="center">0.0000</entry>
+    <entry align="center">0.0000</entry>
+  </row>
+  <row>
+    <entry>Sample size</entry>
+    <entry align="center">19</entry>
+    <entry align="center">19</entry>
+    <entry align="center">19</entry>
+    <entry align="center">19</entry>
+    <entry align="center">19</entry>
+  </row>
+  <row>
+    <entry>(14,1)</entry>
+    <entry align="center">1964-1982</entry>
+    <entry align="center">1964-1982</entry>
+    <entry align="center">1964-1982</entry>
+    <entry align="center">1964-1982</entry>
+    <entry align="center">1964-1982</entry>
+  </row>
+</tbody>
+
+
+
+
+
+
+
+</tgroup>
+</table>
+          
+          <para id="id1165173469621">The interpretation of these results is not obvious. We check the sensitivity of these results by estimation some other models. The results of these estimations are reported in Table 2 and Table 3. Based purely on ML tests, it would appear that AR(1) model in Table 2 is as good as any of the models describing the ARMA structure of real investments. On the other hand, the results reported in Table 3 suggests that the ARMA(2, 1) appears to be the best model to assume for the disturbance term in the estimates of Equation (1).</para>
+          
+          <table id="id1165176248960" summary="Various ARMA estimates of equation (1)." frame="topbot" colsep="0" rowsep="0"><title>Various ARMA estimates of Equation (1).</title>
+<tgroup cols="4"><colspec colnum="1" colname="c1"/>
+              <colspec colnum="2" colname="c2"/>
+              <colspec colnum="3" colname="c3"/>
+              <colspec colnum="4" colname="c4"/>
+              <tbody>
+                <row rowsep="1">
+                  <entry/>
+                  <entry align="center">AR(1)</entry>
+                  <entry align="center">ARMA(1, 1)</entry>
+                  <entry align="center">ARMA(2, 1)</entry>
+                </row>
+                <row>
+                  <entry>Intercept</entry>
+                  <entry align="center">-14.49489</entry>
+                  <entry align="center">-13.37455</entry>
+                  <entry align="center">-16.89182</entry>
+                </row>
+                <row>
+                  <entry/>
+                  <entry align="center">(-0.26)</entry>
+                  <entry align="center">(-0.23)</entry>
+                  <entry align="center">(-1.68)</entry>
+                </row>
+                <row>
+                  <entry>Real GNP</entry>
+                  <entry align="center">0.17006</entry>
+                  <entry align="center">0.16912</entry>
+                  <entry align="center">0.17253</entry>
+                </row>
+                <row>
+                  <entry/>
+                  <entry align="center">(3.96)</entry>
+                  <entry align="center">(3.78)</entry>
+                  <entry align="center">(20.18)</entry>
+                </row>
+                <row>
+                  <entry>Real interest rate</entry>
+                  <entry align="center">-0.82517</entry>
+                  <entry align="center">-0.92007</entry>
+                  <entry align="center">-0.33692</entry>
+                </row>
+                <row>
+                  <entry/>
+                  <entry align="center">(-0.46)</entry>
+                  <entry align="center">(-0.33)</entry>
+                  <entry align="center">(-0.25)</entry>
+                </row>
+                <row>
+                  <entry>AR (L1)</entry>
+                  <entry align="center">0.27953</entry>
+                  <entry align="center">-0.02028</entry>
+                  <entry align="center">0.85619</entry>
+                </row>
+                <row>
+                  <entry/>
+                  <entry align="center">(0.60)</entry>
+                  <entry align="center">(-0.02)</entry>
+                  <entry align="center">(1.46)</entry>
+                </row>
+                <row>
+                  <entry>AR (L2)</entry>
+                  <entry align="center">—</entry>
+                  <entry align="center">—</entry>
+                  <entry align="center">-0.70702</entry>
+                </row>
+                <row>
+                  <entry/>
+                  <entry/>
+                  <entry/>
+                  <entry align="center">(-2.64)</entry>
+                </row>
+                <row>
+                  <entry>MA (L1)</entry>
+                  <entry align="center">—</entry>
+                  <entry align="center">0.41151</entry>
+                  <entry align="center">-1.00000</entry>
+                </row>
+                <row rowsep="1">
+    <entry/>
+    <entry/>
+    <entry align="center">(0.42)</entry>
+    <entry align="center">(-2.98)</entry>
+  </row>
+  <row>
+    <entry>Log likelihood</entry>
+    <entry align="center">-78.7868</entry>
+    <entry align="center">-78.4279</entry>
+    <entry align="center">-72.94569</entry>
+  </row>
+  <row>
+    <entry>Wald χ<sup>2</sup></entry>
+    <entry align="center">26.30</entry>
+    <entry align="center">31.86</entry>
+    <entry align="center">980.18</entry>
+  </row>
+  <row>
+    <entry>Probability &gt; χ<sup>2</sup></entry>
+    <entry align="center">0.0000</entry>
+    <entry align="center">0.0000</entry>
+    <entry align="center">0.0000</entry>
+  </row>
+  <row>
+    <entry>Sample size</entry>
+    <entry align="center">19</entry>
+    <entry align="center">19</entry>
+    <entry align="center">19</entry>
+  </row>
+  <row>
+    <entry>Sample period</entry>
+    <entry align="center">1964-1982</entry>
+    <entry align="center">1964-1982</entry>
+    <entry align="center">1964-1982</entry>
+  </row>
+</tbody>
+            
+
+
+
+
+
+
+
+
+
+
+</tgroup>
+</table>
+        </section>
+      </section>
+      <section id="id1165175648783">
+        <title>Other time-series concepts</title>
+        <para id="id1165176243921">There are a large number of additional time-series methods and issues that are not discussed in this module. These topics include, among others, ARCH and GARCH estimators, unit roots, the Dickey-Fuller test, and vector autoregression (VAR) models. There is no way to do justice to these topics in notes as short as these are. Moreover, it is necessary to discuss difference equations (the discrete version of differential equations) if one wants to understand many of these topic at anything more than an intuitive level. Those interested in these topics should enroll in the forecasting course (Economics 422) or, if they cannot, plan to read several textbooks on whatever econometric tool they need to understand.</para>
+      </section>
+      <section id="id1165185706358">
+        <title>Exercise</title>
+        <exercise id="id1165185706364">
+          <problem id="oo-id1165185706331">
+            <para id="id1165185706368">This exercise is designed to be sure you know how to use <emphasis effect="italics">Stata</emphasis> in analyzing time-series data sets; there is no economic content in the exercise. The MS Excel file <link resource="Rabun County Temperature Data.xls" window="new">Rabun County Temperature Data</link> reports the morning temperature (MornTemp) observed in Rabun County, Georgia for every day between March 15, 2005 to November 2, 2008. The data set includes a variable “edate” that is the daily date in <emphasis effect="italics">Stata</emphasis> notation. The data set also includes dummy variables for the season, the month, and the year of each observation (with the Winter, the December, and the 2008 dummy variables omitted). </para>
+          </problem>
+        </exercise>
+        <para id="id1165175235959">a. Create a graph of (a) the data set morntemp, (2) the autocorrelations of morntemp, and (3) the partial autocorrelations of morntemp (you will have to set the matrix size to some number greater than 43 using the command <emphasis effect="bold">.set matsize #</emphasis>).</para>
+        <para id="id1165190217135">b. Estimate the following models:</para>
+        <list id="id1165177410931" list-type="enumerated" number-style="lower-roman"><item>ARMA(2,2) for morntemp.</item>
+          <item>ARMA(2,2) for morntemp as a function of the season dummy variables.</item>
+          <item>ARMA(2,2) for morntemp as a function of the monthly dummy variables.</item>
+          <item>ARMA(2,2) for morntemp as a function of the monthly dummy variables and the annual dummy variables.</item>
+          <item>ARMA(1,2) for morntemp as a function of the monthly dummy variables and the annual dummy variables.</item>
+          <item>ARMA(1,1) for morntemp as a function of the monthly dummy variables and the annual dummy variables.</item>
+        </list>
+        <para id="id1165175208078">c. Arrange the parameter estimates in a table and comment on them. Include the results of estimating (6) using OLS; what is the DW-statistic for this regression?</para>
+      </section>
+      <section id="id1165183045601">
+        <title>References</title>
+        <para id="id1165173456839">Cochran, D. and G. Orcutt (1949). Application of Least Squares Regression to Relationships Containing Autocorrelated Error Terms. <emphasis effect="italics">Journal of the American Statistical Association</emphasis> <emphasis effect="bold">44</emphasis>: 32-61.</para>
+        <para id="id1165174123473">Enders, Walter (1995). <emphasis effect="italics">Applied Econometric Time Series</emphasis> (New York: John Wiley &amp; Sons, Inc.).</para>
+        <para id="id1165184368899">Greene, William H. (1990). <emphasis effect="italics">Econometric Analysis</emphasis> (New York: Macmillan Publishing Company).</para>
+        <para id="id1165183810256">StataCorp (2003). <emphasis effect="italics">Stata Statistical Software: Release 8.0: Stata Time-Series Reference Manual</emphasis> (College Station, TX: Stat Corporation). </para>
+      </section>
+      
+    </section>
+  </content>
+</document>

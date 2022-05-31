@@ -1,0 +1,887 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML">
+  <title>A sample Honors paper</title>
+<metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m34830</md:content-id>
+  <md:title>A sample Honors paper</md:title>
+  <md:abstract>This module offers an introduction to how to put together an empirical research paper. The topic is the impact of per se 0.08 BAC laws on automobile fatalities. The module leads the reader through the whole process of putting together the paper and includes a data set for the student to work with.</md:abstract>
+  <md:uuid>1b7ab2b5-d7af-4ddc-813f-687b6a726ad8</md:uuid>
+</metadata>
+
+<content>
+    
+    
+    <para id="id1168199672068">Traditionally, empirical research papers in economics journals have five or more sections. In the first section, unimaginatively known as the introduction, the researcher briefly (1) describes what question he or she is attempting to answers, (2) indicates why the reader should be interested in the answer to the questions, and (3) often summarizes what the paper's conclusions. It is traditional in the second section for authors to discuss the instidutional background to the question and provide a theoretical model to be used in the estimation process. Quite often it makes more sense to refer to the variables in conceptual terms in this section and leave the actual specification of the variables in later parts of the paper. A traditional example of this is the ubiquitous "socioeconomic variables" included in many economic models. The reason for this generality is that perfect measures of the variables conceived in most models are not available and most researchers are forced to use proxies for the variables in the model when completing their empirical work. For this reason it is traditional in the third section of the paper to discuss what variables are used as proxies for the variables mentioned in the model. For instance, many papers use this section to specify what variables will proxy the "socioeconomic variables." It is appropriate to discuss shortcoming of the data set in the third section. </para>
+    <para id="id1168209260933">Economists use the fourth section of the paper to describe the econometric model estimated along with the statistical issues created by the shortcomings of data and the model. The fourth section of the paper also usually includes a presentation of the empirical estimations and a discussion of the implications of the estimations for the central questions of the paper. The fifth section of the paper usually includes a recap of the research, a discussion of the implications of the empirical work, and suggestions for further research.</para>
+    <para id="id1168187341478">Obviously, not all economics journal articles are split into the five sections described above; every author has his or her way of organizing their arguments. Indeed, how a paper is organized will reflect the story the author is trying to tell. It is as James Joyce noted in <emphasis effect="italics">Protrait of an Artist as a Young Man</emphasis>, in art "the whole is related to the parts and the parts are related to the whole." In a well-crafted paper the author's message dictates the organizational structure of the paper and the material in each section must relate back to this message. In what follows we will outline what might go into each of these sections, leaving it to you to fill in the missing parts. </para>
+    <section id="id1168187843130"><title>Section 1. Introduction</title><para id="id1168188340334">In this hypothetical Honors paper we examine the impact of a law change on a desired outcome of the law. In particular, sometime during the years leading up to 2007 all of the states adopted a 0.08 <emphasis effect="italics">per se</emphasis> rule on the blood alcohol content (BAC) of determining if a driver is drunk: after passage of the law any driver with a BAC of 0.08 or higher is presumed to be driving under the influence. Some of the states also have "zero tolerance for underaged drinking and driving" level that applies only to drivers under age 21. Defence of drivers accused of DUI is, not surprisingly, big business for lawyers. Table 1 reports the some of the current DUI laws by state as reported on the website of a law firm specializing in DUI cases.</para>
+	
+	<table id="id1168201717639" summary="This table contains a list of the current DUI laws in each state." frame="topbot" rowsep="0" colsep="0"><title>Table 1. State drunk driving laws. (Source: http://www.totaldui.com/breathalyzers/bac/laws-by-state.aspx)</title>
+<tgroup cols="8"><colspec colnum="1" colname="c1"/>
+	<colspec align="center" colnum="2" colname="c2"/>
+	<colspec align="center" colnum="3" colname="c3"/>
+	<colspec align="center" colsep="1" colnum="4" colname="c4"/>
+	<colspec colnum="5" colname="c5"/>
+	<colspec align="center" colnum="6" colname="c6"/>
+	<colspec align="center" colnum="7" colname="c7"/>
+	<colspec align="center" colnum="8" colname="c8"/>
+	<tbody>
+		<row valign="bottom" rowsep="1">
+			<entry>State</entry>
+			<entry align="center">
+				<emphasis effect="italics">Per se</emphasis>
+				BAC Level
+			</entry>
+			<entry>Zero Tolerance BAC Level</entry>
+			<entry>Enhanced Penalty BAC Level</entry>
+			<entry>State</entry>
+			<entry>
+				<emphasis effect="italics">Per se</emphasis>
+				<emphasis effect="bold"> BAC Level</emphasis>
+			</entry>
+			<entry>Zero Tolerance BAC Level</entry>
+			<entry>Enhanced Penalty BAC Level</entry>
+		</row>
+		<row>
+			<entry>Alabama</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>N/A</entry>
+			<entry>Montana</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.18</entry>
+		</row>
+		<row>
+			<entry>Alaska</entry>
+			<entry>0.08</entry>
+			<entry>0.00</entry>
+			<entry>0.16</entry>
+			<entry>Nebraska</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.15</entry>
+		</row>
+		<row>
+			<entry>Arizona</entry>
+			<entry>0.08</entry>
+			<entry>0.00</entry>
+			<entry>0.15</entry>
+			<entry>Nevada</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.18</entry>
+		</row>
+		<row>
+			<entry>Arkansas</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.15</entry>
+			<entry>New Hampshire</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.16</entry>
+		</row>
+		<row>
+			<entry>California</entry>
+			<entry>0.08</entry>
+			<entry>0.01</entry>
+			<entry>0.15</entry>
+			<entry>New Jersey</entry>
+			<entry>0.08</entry>
+			<entry>0.01</entry>
+			<entry>N/A</entry>
+		</row>
+		<row>
+			<entry>Colorado</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.20</entry>
+			<entry>New Mexico</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.16</entry>
+		</row>
+		<row>
+			<entry>Connecticut</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.16</entry>
+			<entry>New York</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.18</entry>
+		</row>
+		<row>
+			<entry>Delaware</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.15</entry>
+			<entry>North Carolina</entry>
+			<entry>0.08</entry>
+			<entry>0.00</entry>
+			<entry>0.16</entry>
+		</row>
+		<row>
+			<entry>DC</entry>
+			<entry>0.08</entry>
+			<entry>0.00</entry>
+			<entry>0.20</entry>
+			<entry>North Dakota</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.18</entry>
+		</row>
+		<row>
+			<entry>Florida</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.15</entry>
+			<entry>Ohio</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.17</entry>
+		</row>
+		<row>
+			<entry>Georgia</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.15</entry>
+			<entry>Oklahoma</entry>
+			<entry>0.08</entry>
+			<entry>0.00</entry>
+			<entry>0.15</entry>
+		</row>
+		<row>
+			<entry>Hawaii</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.15</entry>
+			<entry>Oregon</entry>
+			<entry>0.08</entry>
+			<entry>0.00</entry>
+			<entry>N/A</entry>
+		</row>
+		<row>
+			<entry>Idaho</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.20</entry>
+			<entry>Pennsylvania</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.16</entry>
+		</row>
+		<row>
+			<entry>Illinois</entry>
+			<entry>0.08</entry>
+			<entry>0.00</entry>
+			<entry>0.16</entry>
+			<entry>Rhode Island</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.15</entry>
+		</row>
+		<row>
+			<entry>Indiana</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.15</entry>
+			<entry>South Carolina</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.15</entry>
+		</row>
+		<row>
+			<entry>Iowa</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.15</entry>
+			<entry>South Dakota</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.17</entry>
+		</row>
+		<row>
+			<entry>Kansas</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.15</entry>
+			<entry>Tennessee</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.20</entry>
+		</row>
+		<row>
+			<entry>Kentucky</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.18</entry>
+			<entry>Texas</entry>
+			<entry>0.08</entry>
+			<entry>0.00</entry>
+			<entry>0.15</entry>
+		</row>
+		<row>
+			<entry>Louisiana</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.15</entry>
+			<entry>Utah</entry>
+			<entry>0.08</entry>
+			<entry>0.00</entry>
+			<entry>0.16</entry>
+		</row>
+		<row>
+			<entry>Maine</entry>
+			<entry>0.08</entry>
+			<entry>0.00</entry>
+			<entry>0.15</entry>
+			<entry>Vermont</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>N/A</entry>
+		</row>
+		<row>
+			<entry>Maryland</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>N/A</entry>
+			<entry>Virginia</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.15</entry>
+		</row>
+		<row>
+			<entry>Massachusetts</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.20</entry>
+			<entry>Washington</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.15</entry>
+		</row>
+		<row>
+			<entry>Michigan</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>N/A</entry>
+			<entry>West Virginia</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>N/A</entry>
+		</row>
+		<row>
+			<entry>Minnesota</entry>
+			<entry>0.08</entry>
+			<entry>0.00</entry>
+			<entry>0.20</entry>
+			<entry>Wisconsin</entry>
+			<entry>0.08</entry>
+			<entry>0.00</entry>
+			<entry>0.17</entry>
+		</row>
+		<row>
+			<entry>Mississippi</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>N/A</entry>
+			<entry>Wyoming</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.15</entry>
+		</row>
+		<row>
+			<entry>Missouri</entry>
+			<entry>0.08</entry>
+			<entry>0.02</entry>
+			<entry>0.15</entry>
+			<entry/>
+			<entry/>
+			<entry/>
+			<entry/>
+		</row>
+	</tbody>
+
+</tgroup>
+</table><para id="id1168203740133">The theoretical justifications for the <emphasis effect="italics">per se</emphasis> BAC level rule is (1) that it will provide a disincentive for individuals to drive after drinking and (2) that it will reduce the cost of prosecuting DUI drivers. In terms of economics the law aims to reduce the negative externalities created by drunk drivers. The question to be examined in this paper is whether the <emphasis effect="italics">per se</emphasis> laws have reduce the number of automobile fatalities. Persumably, if the law is successful in reducing the number of DUI drivers, it will reduce the number of accidents they cause and, thus, reduce the number of DUI fatalities. Whether the <emphasis effect="italics">per se</emphasis> BAC law does reduce the number of automobile fatalities—and, thus, is a useful law—is the empirical issue this paper proposes to investigate.</para><list id="eip-298" list-type="enumerated" number-style="arabic"><title>Exercises</title><item>The introduction or section 2 should include a discussion of the current state of the literature. What, if anything, is written in economics journals about the impact of DUI laws on the automobile fatality rate?</item>
+<item>The introduction presented above is very "thin". How would you fill out this discussion? Is this the appropriate place to introduce a discussion of the institutional history of the adoption of the <emphasis effect="italics">per se</emphasis> BAC law?</item>
+<item>How would your introduction be affected by the results you report later in the paper?</item>
+<item><emphasis effect="italics">A priori</emphasis>, do you think that the <emphasis effect="italics">per se</emphasis> BAC law is an effective way of reduing drunk driving or is it just a placebo for voters upset with drunk drives (like MOM)? Does it "matter" to you as a researcher whether the <emphasis effect="italics">per se</emphasis> BAC law is effective?</item></list>
+	
+</section>
+    <section id="id1168191304768">
+      <title>Theoretical issues</title>
+      <para id="id1168207883723">Any model of automobile fatalities is a function of the unit of observation. Since we are interested in the impact of state laws on automobile fatalities, it seems reasonable that we construct a model to explain the differences in automobile fatalities at the state level (although it is tempting to use county level data). There are interstate differences that potentially explain differences in fatalities. First, people drive more in phyically larger states and states with larger populations than they do in other states. since more driving increases the probability of an accident, we need to standardize our measure of fatalities by the vehicle miles driven in the state. It is traditional in the empirical literature to measure the number of fatalities as fatalities per 100 million vehicle miles driven rather than the number of fatalities; in the interest of simplicity we follow this tradition.</para>
+      <para id="id1168186860173">A second phyical characteristic that affects the fatality rate is the type of road used in a state. In particular, it is well-known that in the United States perhaps the safest roads are rural interestate highways. Thus, in our model we will need to hold constant the type of highway in the state. An additional variable that potentially affects the fatality rate is the mix of drivers. In particular, given the propensity of insurance companies to charge higher rates to individuals under the age of 25, it is reasonable to assume that the more young drivers in the state the higher the fatality rate. Similarly, given the tendency of the elderly to have decreased reaction rates, it is possible that the presence of more elderly drivers would drive up the automobile accident rate.</para>
+      <para id="id1168185191298">There are several behavioral variables that might affect driving habits and, thus, automobile accident rates. First, it seems reasonable to assume that the value of time and cost of death are higher for wealthier people than they are for less wealth drivers. However, the direction of the effect of income on driver behavior is unclear. A person with a higher value of time might be more willing to speed than one with a lower value of time because time spent driving is time not spent earning income or engaging in leisure. Additionally, and here the issue is very uncertain, a wealthier person may be less willing to engage in risky driving or drinking behavior because he or she has more income to lose than a poorer individual.</para>
+      <para id="id1168189716253">A second variable that affects the behavior of individuals is the cost of gasoline. Higher gas prices will cause individuals to drive less and closer to the gas efficient speed. Most often driving closer to the gas efficient speed implies a slower and safer speed. Moreover, since all drivers are driven toward the gas efficient speed, the variance in speeds on the highways should be reduced. In either case, a higher price of gasoline should cause the number of automobile fatalities to fall. Since gasoline is purchased on the world market, the major source of differences in state-level gasoline prices is diffences among the state gasoline taxes. Similarly, we would expect things like state taxes on alcohol consumption and the strictness of the of the DUI laws to reduce both the amount of alcohol comsumption and the amount of driving under the influence.</para>
+      <para id="id1168182329125">In the most general terms the model to be estimated is:</para>
+      
+      <equation id="eip-565"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>F</m:mi><m:mi>P</m:mi><m:mi>V</m:mi><m:mi>M</m:mi><m:mi>D</m:mi><m:mtext> </m:mtext><m:mo>=</m:mo><m:mtext> </m:mtext><m:mi>f</m:mi><m:mrow><m:mo>(</m:mo>
+    <m:mrow>
+     <m:mtext>type of roads, mix of drivers, income, cost of gasoline, state laws</m:mtext>
+    </m:mrow>
+   <m:mo>)</m:mo></m:mrow><m:mtext>,</m:mtext>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAeacaWGqbGaamOvaiaad2eacaWGebGaaeiiaiabg2da9iaabccacaWGMbWaaeWaaeaacaqG0bGaaeyEaiaabchacaqGLbGaaeiiaiaab+gacaqGMbGaaeiiaiaabkhacaqGVbGaaeyyaiaabsgacaqGZbGaaeilaiaabccacaqGTbGaaeyAaiaabIhacaqGGaGaae4BaiaabAgacaqGGaGaaeizaiaabkhacaqGPbGaaeODaiaabwgacaqGYbGaae4CaiaabYcacaqGGaGaaeyAaiaab6gacaqGJbGaae4Baiaab2gacaqGLbGaaeilaiaabccacaqGJbGaae4BaiaabohacaqG0bGaaeiiaiaab+gacaqGMbGaaeiiaiaabEgacaqGHbGaae4Caiaab+gacaqGSbGaaeyAaiaab6gacaqGLbGaaeilaiaabccacaqGZbGaaeiDaiaabggacaqG0bGaaeyzaiaabccacaqGSbGaaeyyaiaabEhacaqGZbaacaGLOaGaayzkaaGaaeilaaaa@79CB@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation><para id="id1168193468289">where <emphasis effect="italics">FPVMD</emphasis> is a measure of the number of automobile fatalities per vehicle mile driven annually in a state. In the next section of the paper we will make this model useable by chosing specific variables to proxy the explanatory variables</para>
+      <list id="eip-226" list-type="enumerated" number-style="arabic"><title>Exercises</title><item>The model described is incomplete (as are almost all useful models). What, if anything, would you add to the model?</item>
+<item>Often the models in economics papers involve constrained optimization models that yield the predictions that are tested in the empirical part of the paper. Are there any optimization models implicit in the description above?</item>
+</list>
+    </section>
+    <section id="id1168188135492"><title>The data</title><para id="id1168208110328">Many of the states adopted the 0.08 BAC <emphasis effect="italics">per se</emphasis> standard between 1994 and 2008. In fact, all states adopted this standard by 2007. Thus, a panel data set of data from all of the 50 states and the District of Columbia should offer enough variance in the this variable to enable us to evaluate the effectiveness of the law. The Department of Transportation and the Census Bureau provide enough data to enable us to construct a reasonable data set for all of the states for this period. What should ensue here is a detailed description of all of the variables in the data set along with the sources used to collect the data. However, we leave the construction of this part of the paper to you and resort to summarizing the variables included in the data set in Table 2. The data are available in the file the "Data set" sheet in <link document="Auto_fatalities_data.xls">Auto_fatalities_data.xls</link>; the definition of the FIPS codes are included in a sheet named "State FIPS codes" in the same file. Table 3 defines the variables included by column in the "Data set" sheet of Auto_fatalities_data.xls.</para><para id="id1168210288160">Care needs to be taken when gathering the data because some sources list the states in alphabetical order by the full name of the state, the way that the FIPS codes orders the states. In this case Deleware preceeds the District of Columbia. In other sources the states are listed in alphabetical order of the each state's abreviated title. In these cases the District of Columbia preceeds Deleware because DC preceeds DE. This sorting of the states causes several states to appear in an order different than they appear in the FIPS codes. A similar problem occurs with working with county level data because some government sources list all county names beginning with Mc ahead of all other county names beginning with M while other sources list county names beginning with Mc after county names beginning with Ma. In both cases order all of the state or county data by their FIPS code prevents confusing the order of the observations.</para><table id="id1168189356487" summary="This table provides the definition and source of each of the variables in the data set." frame="topbot" rowsep="0" colsep="0"><title>Definitions and sources of the variables in the data set.</title>
+<tgroup cols="3"><colspec colwidth="2in" colnum="1" colname="c1"/>
+			<colspec colwidth="3in" colnum="2" colname="c2"/>
+			<colspec colwidth="1.5in" colnum="3" colname="c3"/>
+			<tbody>
+				<row rowsep="1">
+					<entry>Variable</entry>
+					<entry>Source</entry>
+					<entry>Period</entry>
+				</row>
+				<row>
+					<entry>FIPS code identifying each state</entry>
+					<entry><link url="http://www.census.gov/datamap/fipslist/AllSt.txt"/></entry>
+					<entry>1994-2008</entry>
+				</row>
+				<row>
+					<entry>Fatalities from automobile accidents</entry>
+					<entry><link url=" http://www-fars.nhtsa.dot.gov/States/StatesFatalitiesFatalityRates.aspx ">http://www-fars.nhtsa.dot.gov/States/StatesFatalitiesFatalityRates.aspx</link></entry>
+					<entry>1994-2008</entry>
+				</row>
+				<row>
+					<entry>Fatalities per 100 million vehicle miles driven</entry>
+					<entry><link url="http://www-fars.nhtsa.dot.gov/States/StatesFatalitiesFatalityRates.aspx"><emphasis effect="underline">www-fars.nhtsa.dot.gov</emphasis></link></entry>
+					<entry>1994-2008</entry>
+				</row>
+				<row>
+					<entry>State gas tax rate per gallon in dollars</entry>
+					<entry><link url="http://www.fhwa.dot.gov/policyinformation/statistics/2008/mf205.cfm"><emphasis effect="underline">www.fhwa.dot.gov/policyinformation/statistics</emphasis></link></entry>
+					<entry>1994-2008</entry>
+				</row>
+				<row>
+					<entry>Real state gas tax rate per gallon in 2009 dollars</entry>
+					<entry>State gas tax rate per gallon in dollars divided by the CPI with a base year of 2009</entry>
+					<entry>1994-2008</entry>
+				</row>
+				<row>
+					<entry>State cigarette tax per pack in dollars,</entry>
+					<entry><link url="http://www.taxfoundation.org/files/state_various_sales_rates_2000-2010.xls">
+							<emphasis effect="underline">State Sales, Gasoline, Cigarette, and Alcohol Tax Rates by State, 2000-2010</emphasis></link>
+					</entry>
+					<entry>2000-2008</entry>
+				</row>
+				<row>
+					<entry>State tax on spirits</entry>
+					<entry>
+						<link url="http://www.taxfoundation.org/files/state_various_sales_rates_2000-2010.xls">
+							<emphasis effect="underline">State Sales, Gasoline, Cigarette, and Alcohol Tax Rates by State, 2000-2010</emphasis>
+						</link>
+					</entry>
+					<entry>2000-2008</entry>
+				</row>
+				<row>
+					<entry>State tax wine</entry>
+					<entry>
+						<link url="http://www.taxfoundation.org/files/state_various_sales_rates_2000-2010.xls">
+							<emphasis effect="underline">State Sales, Gasoline, Cigarette, and Alcohol Tax Rates by State, 2000-2010</emphasis>
+						</link>
+					</entry>
+					<entry>2000-2008</entry>
+				</row>
+				<row>
+					<entry>State tax on beer</entry>
+					<entry>
+						<link url="http://www.taxfoundation.org/files/state_various_sales_rates_2000-2010.xls">
+							<emphasis effect="underline">State Sales, Gasoline, Cigarette, and Alcohol Tax Rates by State, 2000-2010</emphasis>
+						</link>
+					</entry>
+					<entry>2000-2008</entry>
+				</row>
+				<row>
+					<entry>Vehicle miles driven on state rural interstates</entry>
+					<entry>Table VM-202 for various years on: <link url="http://www.fhwa.dot.gov/policy/ohpi/hss/hsspubs.cfm"><emphasis effect="underline">http://www.fhwa.dot.gov</emphasis></link></entry>
+					<entry>1994-2008</entry>
+				</row>
+				<row>
+					<entry>Total vehicle miles driven on state rural roads</entry>
+					<entry>Table VM-202 for various years on: <link url="http://www.fhwa.dot.gov/policy/ohpi/hss/hsspubs.cfm"><emphasis effect="underline">http://www.fhwa.dot.gov</emphasis></link></entry>
+					<entry>1994-2008</entry>
+				</row>
+				<row>
+					<entry>Vehicle miles driven on state urban interstates</entry>
+					<entry>Table VM-202 for various years on: <link url="http://www.fhwa.dot.gov/policy/ohpi/hss/hsspubs.cfm"><emphasis effect="underline">http://www.fhwa.dot.gov</emphasis></link></entry>
+					<entry>1994-2008</entry>
+				</row>
+				<row>
+					<entry>Total vehicle miles driven on state urban roads</entry>
+					<entry>Table VM-202 for various years on: <link url="http://www.fhwa.dot.gov/policy/ohpi/hss/hsspubs.cfm"><emphasis effect="underline">http://www.fhwa.dot.gov</emphasis></link></entry>
+					<entry>1994-2008</entry>
+				</row>
+				<row>
+					<entry>Percent of the registered drivers under the age of 20</entry>
+					<entry>Table VM-202 for various years on: <link url="http://www.fhwa.dot.gov/policy/ohpi/hss/hsspubs.cfm"><emphasis effect="underline">http://www.fhwa.dot.gov</emphasis></link></entry>
+					<entry>1994-2008</entry>
+				</row>
+				<row>
+					<entry>Percent of the registered drivers under the age of 25</entry>
+					<entry>Table DL-22 for various years on: <link url="http://www.fhwa.dot.gov/policy/ohpi/hss/hsspubs.cfm"><emphasis effect="underline">http://www.fhwa.dot.gov</emphasis></link></entry>
+					<entry>1994-2008</entry>
+				</row>
+				<row>
+					<entry>Percent of the registered drivers over age 70</entry>
+					<entry>Table DL-22 for various years on: <link url="http://www.fhwa.dot.gov/policy/ohpi/hss/hsspubs.cfm"><emphasis effect="underline">http://www.fhwa.dot.gov</emphasis></link></entry>
+					<entry>1994-2008</entry>
+				</row>
+				<row>
+					<entry>Percent of the registered drivers over age 75</entry>
+					<entry>Table DL-22 for various years on: <link url="http://www.fhwa.dot.gov/policy/ohpi/hss/hsspubs.cfm"><emphasis effect="underline">http://www.fhwa.dot.gov</emphasis></link></entry>
+					<entry>1994-2008</entry>
+				</row>
+				<row>
+					<entry>Percent of the registered drivers over age 80</entry>
+					<entry>Table DL-22 for various years on: <link url="http://www.fhwa.dot.gov/policy/ohpi/hss/hsspubs.cfm"><emphasis effect="underline">http://www.fhwa.dot.gov</emphasis></link></entry>
+					<entry>1994-2008</entry>
+				</row>
+				<row>
+					<entry>Percent of the registered drivers over age 85</entry>
+					<entry>Table DL-22 for various years on: <link url="http://www.fhwa.dot.gov/policy/ohpi/hss/hsspubs.cfm"><emphasis effect="underline">http://www.fhwa.dot.gov</emphasis></link></entry>
+					<entry>1994-2008</entry>
+				</row>
+				<row>
+					<entry>State mean family income in 2009 dollars<footnote id="id1168187611595">This variable is the mean family income in a state divided by the Consumer Price Index for 2009. The CPI is from Table B-60 of the <emphasis effect="italics">Economic Report of the President, 2010</emphasis>.</footnote></entry>
+					<entry><link url="http://www.census.gov/did/www/saipe/data/statecounty/data/1989.html"><emphasis effect="underline">http://www.census.gov</emphasis></link></entry>
+					<entry>1994-2008</entry>
+				</row>
+				<row>
+					<entry>Dummy variable = 1 if the state has passed the 0.08 <emphasis effect="italics">per se</emphasis> BAC law; 0 otherwise</entry>
+					<entry>NHTSA, Regional Office. Updated as of December 1, 2008.</entry>
+					<entry>1994-2008</entry>
+				</row>
+			</tbody>
+		
+
+
+
+</tgroup>
+</table><table id="id1168188230123" summary="This table describes the structure of the dataset in the Excel file." frame="topbot" rowsep="0"><title>Data included in dataset.</title>
+<tgroup cols="3"><colspec colsep="0" align="center" colnum="1" colname="c1"/>
+	<colspec colsep="0" colnum="2" colname="c2"/>
+	<colspec colsep="0" colnum="3" colname="c3"/>
+	<tbody>
+		<row rowsep="1">
+			<entry>Column</entry>
+			<entry>Column title</entry>
+			<entry>Variable</entry>
+		</row>
+		<row>
+			<entry>A</entry>
+			<entry>FIPS</entry>
+			<entry>FIPS code identifying each state</entry>
+		</row>
+		<row>
+			<entry>B</entry>
+			<entry>Year</entry>
+			<entry>Variable denoting the year and ranges from1994 to 2008</entry>
+		</row>
+		<row>
+			<entry>C</entry>
+			<entry>Fatalities</entry>
+			<entry>Fatalities from automobile accidents</entry>
+		</row>
+		<row>
+			<entry>D</entry>
+			<entry>DPVM</entry>
+			<entry>Fatalities per 100 million vehicle miles driven</entry>
+		</row>
+		<row>
+			<entry>E</entry>
+			<entry>SGasTax</entry>
+			<entry>State tax on gasoline, $/gallon</entry>
+		</row>
+		<row>
+			<entry>F</entry>
+			<entry>RSGasTax</entry>
+			<entry>Real state tax on gasoline, 2009$/gallon</entry>
+		</row>
+		<row>
+			<entry>G</entry>
+			<entry>CigTax</entry>
+			<entry>State tax on cigarettes, dollars per 20-pack</entry>
+		</row>
+		<row>
+			<entry>H</entry>
+			<entry>SpTax</entry>
+			<entry>State tax on spirits, dollars per gallon</entry>
+		</row>
+		<row>
+			<entry>I</entry>
+			<entry>WineTax</entry>
+			<entry>State tax on wine, dollars per gallon</entry>
+		</row>
+		<row>
+			<entry>J</entry>
+			<entry>BeerTax</entry>
+			<entry>State tax on beer, dollars per gallon</entry>
+		</row>
+		<row>
+			<entry>K</entry>
+			<entry>RuralInterstateVMD</entry>
+			<entry>Vehicle-miles driven in a year on rural interstates, 100 million</entry>
+		</row>
+		<row>
+			<entry>L</entry>
+			<entry>RuralTotalVMD</entry>
+			<entry>Vehicle-miles driven in a year on all rural roadways, 100 million</entry>
+		</row>
+		<row>
+			<entry>M</entry>
+			<entry>UrbanInterstateVMD</entry>
+			<entry>Vehicle-miles driven in a year on urban interstates, 100 million</entry>
+		</row>
+		<row>
+			<entry>N</entry>
+			<entry>UrbanTotalVMD</entry>
+			<entry>Vehicle-miles driven in a year on all urban roadways, 100 million</entry>
+		</row>
+		<row>
+			<entry>O</entry>
+			<entry>PU20</entry>
+			<entry>Percent of licensed under the age of 20</entry>
+		</row>
+		<row>
+			<entry>P</entry>
+			<entry>PU25</entry>
+			<entry>Percent of licensed under the age of 25</entry>
+		</row>
+		<row>
+			<entry>Q</entry>
+			<entry>PO70</entry>
+			<entry>Percent of licensed over the age of 70</entry>
+		</row>
+		<row>
+			<entry>R</entry>
+			<entry>PO75</entry>
+			<entry>Percent of licensed over the age of 75</entry>
+		</row>
+		<row>
+			<entry>S</entry>
+			<entry>PO80</entry>
+			<entry>Percent of licensed over the age of 80</entry>
+		</row>
+		<row>
+			<entry>T</entry>
+			<entry>PO85</entry>
+			<entry>Percent of licensed over the age of 85</entry>
+		</row>
+		<row>
+			<entry>U</entry>
+			<entry>BACPS</entry>
+			<entry>Dummy variable equal to 1 if the state has adopted the 0.08 BAC <emphasis effect="italics">per se</emphasis> law; 0 otherwise</entry>
+		</row>
+		<row>
+			<entry>V</entry>
+			<entry>RMFI09</entry>
+			<entry>Median family income in a state in 2009 dollars</entry>
+		</row>
+	</tbody>
+
+</tgroup>
+</table><list id="eip-318" list-type="enumerated" number-style="arabic"><title>Exercises</title><item>At this point in your thesis you would want to point out that each of the variables in the data set are proxies for the variables discussed in part 2 of your paper. As an exercise explain how each of the explanatory variables in Table 2 are proxies for the explanatory variables mentioned in the theory section.</item>
+<item>It would seem that the "cleanest" variable in the whole data set is "fatalities." Lookup the official definition of how a fatality from an automobile accident is measured. Does this variable still seem to have a clear and unequivocal meaning?</item>
+</list>
+</section>
+    <section id="id1168204243477">
+      <title>Empirical estimation</title>
+      <para id="id1168199291955">Now we are almost ready to present the estimation results from the model. There are a few things we need to cover before we move to presenting the estimation results. First, what, if any, are the econometric issues raised by the model and the data set? In this case we are using a panel data set to estimate the regression:</para>
+      <equation id="eip-518"><!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math display="block">
+ <m:semantics>
+  <m:mrow>
+   <m:mi>f</m:mi><m:mi>p</m:mi><m:mi>v</m:mi><m:mi>m</m:mi><m:msub>
+    <m:mi>d</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>=</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   <m:mo>+</m:mo><m:mstyle displaystyle="true">
+    <m:munderover>
+     <m:mo>∑</m:mo>
+     <m:mrow>
+      <m:mi>j</m:mi><m:mo>=</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+     <m:mrow>
+      <m:mi>k</m:mi><m:mo>−</m:mo><m:mn>1</m:mn>
+     </m:mrow>
+    </m:munderover>
+    <m:mrow>
+     <m:msub>
+      <m:mi>β</m:mi>
+      <m:mi>j</m:mi>
+     </m:msub>
+     <m:msub>
+      <m:mi>x</m:mi>
+      <m:mrow>
+       <m:mi>j</m:mi><m:mi>i</m:mi><m:mi>t</m:mi>
+      </m:mrow>
+     </m:msub>
+     
+    </m:mrow>
+   </m:mstyle><m:mo>+</m:mo><m:msub>
+    <m:mi>β</m:mi>
+    <m:mi>k</m:mi>
+   </m:msub>
+   <m:msubsup>
+    <m:mi>D</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+    <m:mrow>
+     <m:mi>B</m:mi><m:mi>A</m:mi><m:mi>C</m:mi>
+    </m:mrow>
+   </m:msubsup>
+   <m:mo>+</m:mo><m:msub>
+    <m:mi>ε</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+   </m:msub>
+   <m:mo>,</m:mo>
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aaatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadAgacaWGWbGaamODaiaad2gacaWGKbWaaSbaaSqaaiaadMgacaWG0baabeaakiabg2da9iabek7aInaaBaaaleaacaaIWaaabeaakiabgUcaRmaaqahabaGaeqOSdi2aaSbaaSqaaiaadQgaaeqaaOGaamiEamaaBaaaleaacaWGQbGaamyAaiaadshaaeqaaaqaaiaadQgacqGH9aqpcaaIXaaabaGaam4AaiabgkHiTiaaigdaa0GaeyyeIuoakiabgUcaRiabek7aInaaBaaaleaacaWGRbaabeaakiaadseadaqhaaWcbaGaamyAaiaadshaaeaacaWGcbGaamyqaiaadoeaaaGccqGHRaWkcqaH1oqzdaWgaaWcbaGaamyAaiaadshaaeqaaOGaaiilaaaa@5DBD@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+</equation>
+      <para id="id1168193784734">where <emphasis effect="italics">fpvmd</emphasis><sub>it</sub> is the number of fatalities per 100 million vehicle miles driven in state i in year t, the <emphasis effect="italics">x</emphasis><sub>jit</sub> is the j<sup>th</sup> explanatory variable in state i in year t, and <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msubsup>
+    <m:mi>D</m:mi>
+    <m:mrow>
+     <m:mi>i</m:mi><m:mi>t</m:mi>
+    </m:mrow>
+    <m:mrow>
+     <m:mi>B</m:mi><m:mi>A</m:mi><m:mi>C</m:mi>
+    </m:mrow>
+   </m:msubsup>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiaadseadaqhaaWcbaGaamyAaiaadshaaeaacaWGcbGaamyqaiaadoeaaaaaaa@3B1B@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+
+       is the dummy variable equal to 1 if state <emphasis effect="italics">i</emphasis> has a 0.08 <emphasis effect="italics">per se</emphasis> BAC law in year <emphasis effect="italics">t</emphasis>. From a policy point of view what we are interested in is the sign of <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>β</m:mi>
+    <m:mi>k</m:mi>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabek7aInaaBaaaleaacaWGRbaabeaaaaa@38A6@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+ and if <!-- MathType@Translator@5@5@MathML2 (m namespace).tdl@MathML 2.0 (m namespace)@ -->
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>β</m:mi>
+    <m:mi>k</m:mi>
+   </m:msub>
+   
+  </m:mrow>
+  <m:annotation encoding="MathType-MTEF">MathType@MTEF@5@5@+=feaagyart1ev2aqatCvAUfeBSjuyZL2yd9gzLbvyNv2CaerbuLwBLnhiov2DGi1BTfMBaeXatLxBI9gBaerbd9wDYLwzYbItLDharqqtubsr4rNCHbGeaGqiVCI8FfYJH8YrFfeuY=Hhbbf9v8qqaqFr0xc9pk0xbba9q8WqFfeaY=biLkVcLq=JHqpepeea0=as0Fb9pgeaYRXxe9vr0=vr0=vqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaiabek7aInaaBaaaleaacaWGRbaabeaaaaa@38A6@</m:annotation>
+ </m:semantics>
+</m:math>
+<!-- MathType@End@5@5@ -->
+is statistically different from zero. At this point it would be appropriate to discuss whether you intend to use a fixed effects or a random effect model. In the interest is simplicity, we will use a fixed effects model but in your own research you would need to consider using either model.</para>
+      <para id="id1168186528623">A second issue that needs to be considered is if you plan to use a linear model as specified above or if you might use the natural logarithm of the fatality rate. Since we have no <emphasis effect="italics">a priori</emphasis> reason to believe that the relationship between the fatality rate and the explanatory variables are linear, we will estimate both log-linear and a log-log models. In this way we can test if our policy conclusions are sensitive to the mathematical specification of our model.</para>
+      <para id="id1168190275673">Now we are ready to report the results of the estimation. The key here is to avoid writing a travelog of the estimations. Instead, report all of the regressions in one or more tables and then discuss the results presented in each table.</para>
+      <list id="eip-477" list-type="enumerated" number-style="arabic"><title>Exercises</title><item>In our estimations we use (a) a linear model, (b) a log-linear model, and (c) a log-log linear model. What are the economic interpretation of the estimated parameters in each of the models? Be sure to discuss both dummy variables and continuous variables.</item>
+<item>Why does it not make more sense to use an explanatory variable rather than the log of that explanatory variable when that explanatory variable is a percentage?</item></list>
+    </section>
+    <section id="id1168188004796"><title>Notes on the estimation of the model</title><para id="id1168210708794">Since you will find it useful to replicate the estimation of the basic results, this section consists mainly of a set instructions in Table 4 for use with <emphasis effect="italics">Stata</emphasis>.</para>
+      <table id="eip-803" frame="none" rowsep="0" colsep="0" summary="This is a table of instructions for the regression analysis."><title>Instructions for further investigation of the stability of the regression estimates.</title>
+<tgroup cols="3"><colspec colsep="0" align="left" colnum="1" colname="c1"/>
+	<colspec colsep="1" colnum="2" colname="c2"/>
+	<colspec colsep="0" colnum="3" colname="c3"/>
+<tbody>
+  <row rowsep="1" valign="bottom">
+    <entry/>
+    <entry>Instruction</entry>
+    <entry><emphasis effect="italics">Stata</emphasis> commands</entry>
+  </row>
+  <row>
+    <entry>1.</entry>
+    <entry>Open <emphasis effect="italics">Stata</emphasis> and copy the data in Auto_fatalities_data.xls into the data editor. You will have 765 observations of 22 variables.</entry>
+    <entry/>
+  </row>
+  <row>
+    <entry>2.</entry>
+    <entry>Tell <emphasis effect="italics">Stata</emphasis> what variable denotes the state</entry>
+    <entry>.iis</entry>
+  </row>
+  <row>
+    <entry>3.</entry>
+    <entry>Tell <emphasis effect="italics">Stata</emphasis> what variable denotes the year</entry>
+    <entry>.tis</entry>
+  </row>
+  <row>
+    <entry>4.</entry>
+    <entry>Create the new variable the percentage of the total vehicle miles driven that are on rural interstate roads</entry>
+    <entry>.generate privmd =  ruralinterstatevmd/(ruraltotalvmd + urbantotalvmd)</entry>
+  </row>
+  <row>
+    <entry>5.</entry>
+    <entry>Create the new variable the percent of the total vehicle miles driven that are on urban interstate roads</entry>
+    <entry>.generate puivmd= urbaninterstatevmd/(ruraltotalvmd+urbantotalvmd)</entry>
+  </row>
+  <row>
+    <entry>6.</entry>
+    <entry>Create the logarithm transportation of all of the variables that are not percentages</entry>
+    <entry>.generate lz = log(z), where z = dpvmd, sgastax, rsgastax, and rmfi09</entry>
+  </row>
+  <row>
+    <entry>7a.</entry>
+    <entry>Estimate the fixed effects model for the linear model (see output in Figure 1)</entry>
+    <entry>.xtreg dpvm rsgastax pu25 po70 privmd puivmd rmfi09 bacps, fe vce(robust) vsquish</entry>
+  </row>
+  <row>
+    <entry>7b.</entry>
+    <entry>Estimate the fixed effects model for the log-linear model (see output in Figure 2)</entry>
+    <entry>.xtreg ldpvm rsgastax pu25 po70 privmd puivmd rmfi09 bacps, fe vce(robust) vsquish</entry>
+  </row>
+  <row>
+    <entry>7c.</entry>
+    <entry>Estimate the fixed effects model for the log-log model (see output in Figure 3)</entry>
+    <entry>.xtreg ldpvm lrsgastax pu25 po70 privmd puivmd lrmfi09 bacps, fe vce(robust) vsquish</entry>
+  </row>
+  <row>
+    <entry>8.</entry>
+    <entry>Place the results into a table making it easier to compare your results; Table 5 is one such table.</entry>
+    <entry/>
+  </row>
+  <row>
+    <entry>9a.</entry>
+    <entry>The results in Table 5 suggest that the <emphasis effect="italics">per se</emphasis> 0.08 BAC is a successful way to reduce automobile deaths. However the sign on the real gasoline tax rate is the opposite of what we might reasonably expect. Let's check the sensitivity of our results by rerunning the same three regressions with the real gasoline tax replaced by the nominal gasoline tax. See Table 6 for the results of these regressions.</entry>
+    <entry>. xtreg dpvm sgastax pu25 po70 privmd puivmd rmfi09 bacps, re vce(robust) vsquish</entry>
+  </row>
+  <row>
+    <entry>9b.</entry>
+    <entry/>
+    <entry>.xtreg ldpvm sgastax pu25 po70 privmd puivmd rmfi09 bacps, fe vce(robust) vsquis</entry>
+  </row>
+  <row>
+    <entry>9c.</entry>
+    <entry/>
+    <entry>.xtreg ldpvm lsgastax pu25 po70 privmd puivmd lrmfi09 bacps, fe vce(robust) vsquish</entry>
+  </row>
+</tbody>
+</tgroup>
+</table>
+
+
+
+
+
+      <para id="eip-543"><figure id="regression1"><media id="reg1" alt="Linear regression estimates">
+    <image mime-type="image/jpeg" width="500" src="../../media/Figure1.jpg"/>
+  </media>
+<caption>Results of linear regression results. (t-ratios are in parentheses)</caption></figure>
+</para>
+      <para id="eip-900"><figure id="figure2"><media id="reg2" alt="Results of the log-linear regression">
+    <image mime-type="image/jpeg" width="500" src="../../media/Figure2.jpg"/>
+  </media>
+  
+<caption>Results of the log-linear regression. (t-ratios are in parentheses)
+  </caption></figure>
+</para>
+      <para id="eip-709"><figure id="figure3"><media id="dogpic" alt="Results of the log-log regression.">
+    <image mime-type="image/jpeg" width="500" src="../../media/Figure3.jpg"/>
+  </media>
+  
+<caption>Results of the log-log regression. (t-ratios are in parentheses)
+  </caption></figure>
+</para><para id="eip-460">At this point is makes some sense to compare the parameter estimates for 0.08 BAC <emphasis effect="italics">per se</emphasis> law; this comparison, shown in Table 5, suggests that the effect of the <emphasis effect="italics">per se</emphasis> 0.08 BAC law was to reduce fatalities. Moreover, the estimates for each of the models is very stable whether one uses the real price of gasoline or the nominal price of gasoline, thus giving us some more confidence in our conclusions.</para>
+<table id="id1168189445409" frame="topbot" colsep="0" rowsep="0" summary="Comparison of the estimates of the effectiveness of the per se 0.08 BAC law on automobile fatalities."><title>Comparison of the parameter estimates for each model with different measures of the cost of gasoline.</title>
+<tgroup cols="4"><colspec colnum="1" colname="c1"/>
+          <colspec align="center" colnum="2" colname="c2"/>
+          <colspec align="center" colnum="3" colname="c3"/>
+          <colspec align="center" colnum="4" colname="c4"/>
+          <tbody>
+            <row rowsep="1">
+              <entry/>
+              <entry>Linear</entry>
+              <entry>Log-linear</entry>
+              <entry>Log-log</entry>
+            </row>
+            <row>
+              <entry>State tax of gasoline in 2009 dollars</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>State has a 0.08 <emphasis effect="italics">per se</emphasis> BAC law</entry>
+              <entry>-0.1054</entry>
+              <entry>-0.0692</entry>
+              <entry>-0.0594</entry>
+            </row>
+            <row rowsep="1">
+    <entry/>
+    <entry>(-3.88)</entry>
+    <entry>(-3.67)</entry>
+    <entry>(-3.18)</entry>
+  </row>            <row>
+              <entry>State tax of gasoline in current dollars</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>State has a 0.08 <emphasis effect="italics">per se</emphasis> BAC law</entry>
+              <entry>-0.1191</entry>
+              <entry>-0.0778</entry>
+              <entry>-0.0762</entry>
+            </row>
+  <row>
+    <entry/>
+    <entry>(-4.83)</entry>
+    <entry>(-4.54)</entry>
+    <entry>(-4.52)</entry>
+  </row>
+</tbody>
+        
+
+
+</tgroup>
+</table>
+      <para id="eip-707">The balance of this section of the paper would be devoted to further tests of the stability of our results under varying assumptions. Among other tests one would expect to see if the choice of a fixed-effects model affects your policy conclusions.</para><list id="eip-346" list-type="enumerated" number-style="arabic"><title>Exercises</title><item>Complete the Lagrange test for random effects for each of the three models, using the nominal price of gasoline. Organize the results of this test into a table.</item>
+<item>Re-estimate the three models replacing the percent of registered drivers under the age of 25 with the percent of drivers under 20. Make the same same kind of replacement for the number of drivers over age 70 (i.e., experiment with the alternative age cutoffs—over 75, over 80, and over 85). Do any of your major conclusions change?</item>
+<item>What, if any, explanation can you give for the differences in the parameter estimates for the price of gasoline generated when the real price of gasoline is replaced by the nominal price of gasoline?</item></list>
+    </section>
+    <section id="id1168184181546">
+      <title>Conclusions and further research</title>
+      <para id="id1168189418025">This section of your paper should be devoted to a careful recapping of your results and providing suggestions for further research. Such a discussion might include some cautious guesses at why the 0.08 BAC <emphasis effect="italics">per se</emphasis> standard appears to affect driver behavior. The discussion could also include some estimates of the number of lifes saved by the introduction of a <emphasis effect="italics">per se</emphasis> standard.</para>
+    </section>
+  </content>
+</document>
